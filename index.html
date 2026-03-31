@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.3</title>
+  <title>CapyLove V2.3.1</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -49,7 +49,7 @@
     .filter-btn{font-size:10px;padding:4px 11px;border-radius:20px;cursor:pointer;border:1px solid var(--s4);background:transparent;color:var(--t3);transition:all .15s;font-family:'Sora',sans-serif;font-weight:500;-webkit-tap-highlight-color:transparent;}
     .filter-btn.active{border-color:var(--orange);background:rgba(232,103,42,.1);color:var(--orange);}
     #card-stack{position:relative;width:min(100%,520px);height:clamp(540px,78vh,820px);flex-shrink:0;}
-    .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:pan-y;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;}
+    .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:pan-y;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;isolation:isolate;}
     .capy-card:active{cursor:grabbing;}
     .card-img{width:100%;height:46%;object-fit:cover;display:block;background:var(--s3);pointer-events:none;flex-shrink:0;}
     .card-img-placeholder{width:100%;height:46%;flex-shrink:0;display:none;background:linear-gradient(135deg,var(--s3),var(--s4));align-items:center;justify-content:center;}
@@ -67,7 +67,7 @@
     .card-location-row{display:flex;align-items:center;gap:6px;}
     .card-location{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:.3px;}
     .card-distance{font-size:10px;font-family:'DM Mono',monospace;color:var(--blue);letter-spacing:.2px;}
-    .card-bio{font-size:12.5px;color:var(--t2);line-height:1.65;}
+    .card-bio{font-size:13px;color:var(--t2);line-height:1.72;}
     .card-grade-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
     .grade-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;letter-spacing:.5px;}
     .grade-S{background:rgba(212,168,67,.18);color:var(--gold);border:1px solid rgba(212,168,67,.35);}
@@ -354,7 +354,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.1 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -793,7 +793,22 @@ function renderCards(){
     const card=buildCard(capy);
     const ri=toRender.length-1-i;
     card.style.zIndex=ri+1;
-    if(ri>0){card.style.transform=`scale(${1-ri*0.025}) translateY(${ri*8}px)`;card.style.pointerEvents='none';card.style.opacity=String(1-ri*0.1);}
+    if(ri>0){
+      // Back cards: fully opaque solid block, no content visible through them
+      card.style.transform=`scale(${1-ri*0.03}) translateY(${ri*10}px)`;
+      card.style.pointerEvents='none';
+      card.style.opacity='1';
+      // Hide content on back cards — they are just decorative depth indicators
+      const info=card.querySelector('.card-info');
+      const img=card.querySelector('.card-img');
+      const ph=card.querySelector('.card-img-placeholder');
+      if(info) info.style.visibility='hidden';
+      if(img)  img.style.visibility='hidden';
+      if(ph)   ph.style.visibility='hidden';
+      card.style.background='var(--s2)';
+      card.style.boxShadow='none';
+      card.style.border='1px solid var(--s3)';
+    }
     stack.insertBefore(card,empty);
   });
   setupSwipe();updateStats();
