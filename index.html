@@ -286,6 +286,37 @@
     @keyframes flyOut{to{transform:translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot));opacity:0}}
     @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     button{font-family:'Sora',sans-serif;}
+
+    /* ── Full Match Screen ───────────────────────────────────── */
+    #match-screen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:rgba(0,0,0,0);pointer-events:none;transition:background .4s ease;}
+    #match-screen.active{background:rgba(0,0,0,.82);pointer-events:all;}
+    #match-screen-inner{display:flex;flex-direction:column;align-items:center;gap:0;
+      opacity:0;transform:translateY(40px) scale(.92);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1);}
+    #match-screen.active #match-screen-inner{opacity:1;transform:translateY(0) scale(1);}
+    #ms-sparkle{font-size:28px;letter-spacing:6px;margin-bottom:8px;animation:none;}
+    #match-screen.active #ms-sparkle{animation:msPulse 1.8s ease-in-out infinite;}
+    @keyframes msPulse{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.12);}}
+    #ms-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.5px;text-align:center;line-height:1.1;margin-bottom:4px;}
+    #ms-subtitle{font-size:12px;color:rgba(255,255,255,.55);font-family:'DM Mono',monospace;letter-spacing:.5px;margin-bottom:20px;}
+    #ms-photo-wrap{position:relative;width:160px;height:160px;margin-bottom:18px;}
+    #ms-photo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.15);display:block;}
+    #ms-grade-ring{position:absolute;inset:-6px;border-radius:50%;border:2.5px solid transparent;pointer-events:none;}
+    #ms-name-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+    #ms-name{font-size:22px;font-weight:700;color:#fff;}
+    #ms-grade{font-size:12px;font-family:'DM Mono',monospace;font-weight:700;padding:2px 9px;border-radius:8px;border:1.5px solid;}
+    #ms-persona-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;
+      padding:12px 20px;text-align:center;margin-bottom:20px;max-width:280px;}
+    #ms-persona-name{font-size:13px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.3px;}
+    #ms-persona-potency{font-size:10px;color:rgba(255,255,255,.45);margin-top:3px;font-family:'DM Mono',monospace;}
+    #ms-persona-desc{font-size:11px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.5;}
+    #ms-btns{display:flex;gap:10px;}
+    .ms-btn{padding:13px 28px;border-radius:14px;border:none;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:opacity .15s,transform .1s;}
+    .ms-btn:active{transform:scale(.96);}
+    #ms-btn-message{background:var(--green);color:#000;}
+    #ms-btn-swipe{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);}
+    #ms-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:50%;}
+
   </style>
 </head>
 <body>
@@ -574,11 +605,56 @@ const USA_CITIES = [{"name":"Birmingham","state":"AL","zip":"352","lat":33.5186,
 
 // ── Scoring constants ──────────────────────────────────────────────
 const BIOME_SCORES={
-  "Amazon Rainforest, Brazil":88,"Pantanal Wetlands, Brazil":96,"Llanos Savanna, Venezuela":92,
-  "Orinoco Delta, Venezuela":85,"Rio Paraná, Argentina":82,"Gran Chaco, Paraguay":75,
-  "Atlantic Forest, Brazil":80,"Cerrado, Brazil":78,"Pampas, Uruguay":72,
-  "Chiquitano Forest, Bolivia":74,"Magdalena Valley, Colombia":83,"Darién Gap, Panama":70,
-  "Cloud Forest, Ecuador":91,"Caatinga Scrubland, Brazil":65,"Esteros del Iberá, Argentina":87,
+  "Pantanal Wetlands, Brazil":96,
+  "Pantanal Norte, Mato Grosso":94,
+  "Pantanal Sul, Mato Grosso do Sul":95,
+  "Rio Cuiab\u00e1 Floodplain, Brazil":92,
+  "Llanos, Venezuela":91,
+  "Orinoco Delta, Venezuela":86,
+  "Apure River Basin, Venezuela":89,
+  "Arauca Wetlands, Colombia":87,
+  "Magdalena Valley, Colombia":83,
+  "Cauca Valley, Colombia":81,
+  "Amazon Basin, Peru":90,
+  "Amazon Rainforest, Brazil":88,
+  "Tapaj\u00f3s River, Brazil":85,
+  "Araguaia River, Brazil":84,
+  "Tocantins Floodplain, Brazil":83,
+  "Rio Negro Margins, Brazil":86,
+  "Mamor\u00e9 River, Bolivia":87,
+  "Beni Savannas, Bolivia":85,
+  "Iber\u00e1 Wetlands, Argentina":87,
+  "Esteros del Iber\u00e1, Corrientes":89,
+  "Rio de la Plata, Argentina":82,
+  "Pampas, Argentina":72,
+  "Pilcomayo River, Paraguay":78,
+  "Gran Chaco, Paraguay":75,
+  "Bermejo Wetlands, Argentina":77,
+  "Chaco Oriental, Argentina":76,
+  "Atlantic Forest, Brazil":80,
+  "Cerrado Savanna, Brazil":78,
+  "S\u00e3o Francisco River, Brazil":74,
+  "Rio Paran\u00e1, Argentina":82,
+  "Rupununi Savannas, Guyana":84,
+  "Guiana Highlands, Suriname":82,
+  "Berbice River, Guyana":83,
+  "Essequibo Basin, Guyana":85,
+  "Wildlife Sanctuary, Buenos Aires":65,
+  "Ecological Park, Bras\u00edlia":68,
+  "Capybara Reserve, S\u00e3o Paulo":62,
+  "Aquatic Habitat, Lima Zoo":55,
+  "Wetland Conservation Centre, Bogot\u00e1":60,
+  "Nature Reserve, Caracas":58,
+  "The Good Mud Patch":99,
+  "Undisclosed Wetland":91,
+  "That One River Bend":88,
+  "Prime Real Estate, Floodplain District":97,
+  "Somewhere Warm and Wet":90,
+  "The Reeds (you know the ones)":94,
+  "A River Near You":80,
+  "Cloud Forest Fringe, Ecuador":88,
+  "Lake Titicaca Shores, Peru":71,
+  "Caatinga Scrubland, Brazil":63
 };
 const TAX_BRACKETS=["No Income","Forager Class","Working Grass","Middle Marsh","Upper Swamp","Riverfront Elite","Capybara 1%"];
 
@@ -628,6 +704,51 @@ const FEMALE_PERSONAS=[
   {potency:19,name:"Untouchable Matron",   traits:{humor:6,sensual:8,flirty:5,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:7},color:"var(--gold)"},
   {potency:20,name:"Apex Capybara Queen",  traits:{humor:7,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8},color:"var(--gold)"},
 ];
+
+
+// ── Persona descriptions for match reveal ─────────────────────────
+const PERSONA_DESCS={
+  "Muddy Nervous Guy":     "Sweet and genuine. Will overthink your first message for forty minutes.",
+  "Damp Overthinker":      "Thoughtful to a fault. Cares deeply. Types and deletes. Types again.",
+  "Eager Swamp Simp":      "Enthusiastic, warm, entirely willing. Will like everything you say.",
+  "Gentle Loafer":         "Calm and kind. No urgency. Happy just to be near you.",
+  "Cheerful Puddle Bro":   "Easygoing and funny. The vibe is good. The grass is also good.",
+  "Steady River Dude":     "Reliable, grounded, low drama. Will always know where the water is.",
+  "Warm Grassland Type":   "Caring and present. The kind you stay up talking to.",
+  "Chill Reed Lounger":    "Unbothered but interested. Responds at his own pace.",
+  "Confident Wader":       "Self-assured. Says what he means. Slightly hard to read.",
+  "Smooth Grazer":         "Easy charm. Hard to fully know. Worth the effort.",
+  "Witty Mudflat King":    "Sharp, funny, lightly unpredictable. Keeps you on your toes.",
+  "Smoldering Herbivore":  "Quiet intensity. Doesn't say much. What he says lands.",
+  "Sardonic Wetlander":    "Dry humor, mild hostility, oddly attractive. Don't ask why.",
+  "Cool Dominant Bull":    "Commands the herd. Replies rarely. You feel lucky when he does.",
+  "Laconic Alpha":         "One word. Two at most. Somehow enough.",
+  "Ice-Cold Riverine":     "Distant. Perfect. Aware of both.",
+  "Dry Cruel Wit":         "Funny in ways that sting slightly. You'll like it anyway.",
+  "Magnetic Brute":        "Overwhelming presence. Low empathy. Extremely compelling.",
+  "Untouchable Elder":     "Ancient energy. Has seen everything. Replies on his schedule.",
+  "Apex Swamp Sovereign":  "The top. Knows it. You knew it before you matched.",
+  "Puddle Sweetheart":     "Pure warmth. Will be excited to hear from you every time.",
+  "Shy Riverbank Girl":    "Quiet and careful. Takes time. Entirely worth it.",
+  "Hopeful Marsh Maid":    "Open-hearted and genuine. Looking for something real.",
+  "Warm Reed Hugger":      "Affectionate and consistent. Shows up, every time.",
+  "Bubbly Grass Nibbler":  "Bright energy. Makes everything feel lighter.",
+  "Flirty Shallow Wader":  "Bold and playful. Knows what she's doing. So do you.",
+  "Teasing Savanna Girl":  "Will make you work just enough. You won't mind.",
+  "Clever Wetland Type":   "Smart and observant. Noticed something about you already.",
+  "Bold Mud Princess":     "Confident and fun. Doesn't wait for permission.",
+  "Charismatic Grazette":  "Lights up any floodplain she's in. Knows it, owns it.",
+  "Witty River Queen":     "Funny, sharp, occasionally devastating. Perfect.",
+  "Beguiling Herbivore":   "Something about her. You can't fully explain it.",
+  "Sharp Wetland Wit":     "Cuts through nonsense. Appreciates directness. Be direct.",
+  "Cool Dominant Doe":     "Selective and aware. You're here because she allowed it.",
+  "Laconic Alpha Cow":     "Economy of words. Maximum impact. Rare messages hit hard.",
+  "Frost River Matriarch": "Cold exterior. You'll spend time wondering what's beneath it.",
+  "Cruel Dry Humor":       "Roasts you gently and frequently. You're into it.",
+  "Seductive Dominatrix":  "In control. Always. You'll thank her for it.",
+  "Untouchable Matron":    "The apex of the wetland. Replies once if you're worthy.",
+  "Apex Capybara Queen":   "Absolute. Final. Unmatched in every sense of the word.",
+};
 
 // ── Persona response generator ────────────────────────────────────
 function genReply(persona, t, isFirst) {
@@ -698,11 +819,56 @@ function haversine(lat1,lng1,lat2,lng2){
 // Assign each capy a simulated distance: seeded by capy.id + user city
 // Capys get a "virtual location" — a random US city from their biome lat offset
 const CAPY_BASE_LATS={
-  "Amazon Rainforest, Brazil":-3,"Pantanal Wetlands, Brazil":-17,"Llanos Savanna, Venezuela":7,
-  "Orinoco Delta, Venezuela":9,"Rio Paraná, Argentina":-27,"Gran Chaco, Paraguay":-22,
-  "Atlantic Forest, Brazil":-23,"Cerrado, Brazil":-15,"Pampas, Uruguay":-33,
-  "Chiquitano Forest, Bolivia":-16,"Magdalena Valley, Colombia":6,"Darién Gap, Panama":8,
-  "Cloud Forest, Ecuador":-1,"Caatinga Scrubland, Brazil":-7,"Esteros del Iberá, Argentina":-29,
+  "Pantanal Wetlands, Brazil":-17.0,
+  "Pantanal Norte, Mato Grosso":-15.5,
+  "Pantanal Sul, Mato Grosso do Sul":-19.2,
+  "Rio Cuiab\u00e1 Floodplain, Brazil":-15.8,
+  "Llanos, Venezuela":7.8,
+  "Orinoco Delta, Venezuela":9.0,
+  "Apure River Basin, Venezuela":7.2,
+  "Arauca Wetlands, Colombia":6.8,
+  "Magdalena Valley, Colombia":5.8,
+  "Cauca Valley, Colombia":3.4,
+  "Amazon Basin, Peru":-4.5,
+  "Amazon Rainforest, Brazil":-3.0,
+  "Tapaj\u00f3s River, Brazil":-4.2,
+  "Araguaia River, Brazil":-12.5,
+  "Tocantins Floodplain, Brazil":-9.0,
+  "Rio Negro Margins, Brazil":-1.8,
+  "Mamor\u00e9 River, Bolivia":-13.5,
+  "Beni Savannas, Bolivia":-13.0,
+  "Iber\u00e1 Wetlands, Argentina":-28.5,
+  "Esteros del Iber\u00e1, Corrientes":-29.2,
+  "Rio de la Plata, Argentina":-34.5,
+  "Pampas, Argentina":-35.0,
+  "Pilcomayo River, Paraguay":-23.5,
+  "Gran Chaco, Paraguay":-22.0,
+  "Bermejo Wetlands, Argentina":-25.5,
+  "Chaco Oriental, Argentina":-27.0,
+  "Atlantic Forest, Brazil":-23.0,
+  "Cerrado Savanna, Brazil":-15.0,
+  "S\u00e3o Francisco River, Brazil":-10.5,
+  "Rio Paran\u00e1, Argentina":-27.5,
+  "Rupununi Savannas, Guyana":3.5,
+  "Guiana Highlands, Suriname":4.0,
+  "Berbice River, Guyana":5.2,
+  "Essequibo Basin, Guyana":4.8,
+  "Wildlife Sanctuary, Buenos Aires":-34.6,
+  "Ecological Park, Bras\u00edlia":-15.8,
+  "Capybara Reserve, S\u00e3o Paulo":-23.5,
+  "Aquatic Habitat, Lima Zoo":-12.1,
+  "Wetland Conservation Centre, Bogot\u00e1":4.6,
+  "Nature Reserve, Caracas":10.5,
+  "The Good Mud Patch":-18.0,
+  "Undisclosed Wetland":-5.0,
+  "That One River Bend":-20.0,
+  "Prime Real Estate, Floodplain District":-15.0,
+  "Somewhere Warm and Wet":-10.0,
+  "The Reeds (you know the ones)":-17.5,
+  "A River Near You":-12.0,
+  "Cloud Forest Fringe, Ecuador":-1.5,
+  "Lake Titicaca Shores, Peru":-15.9,
+  "Caatinga Scrubland, Brazil":-7.5
 };
 function capySimLat(c){ return (CAPY_BASE_LATS[c.location]||0) + (sr(c.id*7)*4-2); }
 function capySimLng(c){ return -60 + sr(c.id*13)*20 - 10; }
@@ -797,7 +963,36 @@ function burstKana(){
   animate();
 }
 
-// ── Passive match toast ────────────────────────────────────────────
+// ── Full Match Screen ─────────────────────────────────────────────
+function showMatchScreen(capy, matchIdx){
+  const v=computeV2(capy),g=grade(v),gc=gradeColor(g);
+  const persona=getPersona(capy);
+  const screen=document.getElementById('match-screen');
+  // Photo + grade ring
+  document.getElementById('ms-photo').src=capy.url;
+  document.getElementById('ms-grade-ring').style.borderColor=gc;
+  // Name + grade badge
+  document.getElementById('ms-name-inline').textContent=capy.name;
+  document.getElementById('ms-name').textContent=capy.name;
+  const gb=document.getElementById('ms-grade');
+  gb.textContent='Grade '+g;gb.style.color=gc;gb.style.borderColor=gc+'66';gb.style.background=gc+'18';
+  // Persona reveal card
+  if(persona){
+    document.getElementById('ms-persona-name').textContent=persona.name;
+    document.getElementById('ms-persona-name').style.color=persona.color;
+    document.getElementById('ms-persona-potency').textContent='Potency '+persona.potency+' · '+capy.energy_type;
+    document.getElementById('ms-persona-desc').textContent=PERSONA_DESCS[persona.name]||'A capybara of distinction.';
+  }
+  // Buttons
+  document.getElementById('ms-btn-message').onclick=()=>{hideMatchScreen();openChat(matchIdx);switchView('matches');};
+  document.getElementById('ms-btn-swipe').onclick=()=>hideMatchScreen();
+  screen.classList.add('active');
+  burstKana();
+}
+function hideMatchScreen(){
+  document.getElementById('match-screen').classList.remove('active');
+}
+// ── Passive match toast (kept for passive/background matches) ──────
 function showMatchToast(capy, matchIdx){
   const toast=document.getElementById('match-toast');
   document.getElementById('match-toast-img').src=capy.url;
@@ -812,13 +1007,11 @@ function showMatchToast(capy, matchIdx){
     switchView('matches');
   };
   toast.classList.add('show');
-  burstKana();
   if(toastTimer) clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>hideMatchToast(), 9600);
 }
 function hideMatchToast(){
-  const toast=document.getElementById('match-toast');
-  toast.classList.remove('show');
+  document.getElementById('match-toast').classList.remove('show');
 }
 
 // ── Load ───────────────────────────────────────────────────────────
@@ -1046,7 +1239,7 @@ function triggerMatch(capy){
   matches.push(m);
   const idx=matches.length-1;
   pendingMatchCapy={capy,matchIdx:idx};
-  showMatchToast(capy,idx);
+  showMatchScreen(capy,idx);
   updateMatchesBadge();
   if(tier==='low'||(tier==='mid'&&Math.random()<0.35)){
     const delay=tier==='low'?180000+Math.random()*300000:480000+Math.random()*720000;
