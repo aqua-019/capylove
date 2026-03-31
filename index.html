@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.3.2</title>
+  <title>CapyLove V2.3.3</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -107,7 +107,7 @@
     /* ══ PASSIVE MATCH TOAST ══════════════════════════════════════ */
     #match-toast{
       position:fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-20px);
-      z-index:800; pointer-events:auto;
+      z-index:800; pointer-events:none;
       display:flex; align-items:center; gap:10px;
       background:rgba(15,15,15,.96); border:1px solid rgba(46,194,126,.3);
       border-radius:40px; padding:8px 16px 8px 8px;
@@ -293,11 +293,13 @@
 
 <!-- PASSIVE MATCH TOAST -->
 <div id="match-toast">
-  <img id="match-toast-img" src="" alt=""/>
-  <div id="match-toast-text">
-    <div id="match-toast-title">It's a Match</div>
-    <div id="match-toast-sub"></div>
-    <div id="match-toast-action">Tap to message</div>
+  <div id="match-toast-inner" style="display:flex;align-items:center;gap:10px;pointer-events:auto;">
+    <img id="match-toast-img" src="" alt=""/>
+    <div id="match-toast-text">
+      <div id="match-toast-title">It's a Match</div>
+      <div id="match-toast-sub"></div>
+      <div id="match-toast-action">Tap to message</div>
+    </div>
   </div>
 </div>
 
@@ -354,7 +356,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.2 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.3 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -377,7 +379,12 @@
       <button class="filter-btn" data-filter="5star">Elite (S)</button>
       <button class="filter-btn" data-filter="chonk">Chonks</button>
       <button class="filter-btn" data-filter="zen">Zen</button>
-      <button class="filter-btn" id="distance-filter-btn" data-filter="distance" style="display:none">Nearby</button>
+      <button class="filter-btn" id="distance-filter-btn" data-filter="distance" style="display:none">&#128205; Nearby (&le;50mi)</button>
+    </div>
+    <div id="location-bar" style="display:none;align-items:center;gap:6px;font-size:9px;font-family:'DM Mono',monospace;color:var(--t3);">
+      <span>&#128205;</span><span id="location-bar-city"></span>
+      <span style="color:var(--s5);">·</span>
+      <span id="location-bar-change" style="color:var(--orange);cursor:pointer;text-decoration:underline;">change</span>
     </div>
     <div id="card-stack">
       <div id="empty-state">
@@ -431,24 +438,124 @@
 
   <!-- ABOUT -->
   <div id="about-view" class="view">
-    <div class="about-section"><h3>About CapyLove V2.3</h3>
-      <p>1,006 capybaras. 40 personas (20M/20F). Passive match toasts with hiragana burst. Simulated distance from your location.</p>
-      <p>503 males. 503 females. 6-dimension scoring. Persona potency 1–20. Distance toggle for filtering nearby capys.</p>
+    <div class="about-section">
+      <h3>About CapyLove V2.3.3</h3>
+      <p>The world's only capybara dating platform. <strong>1,006 real capybara images</strong> from the capy.lol image pool, scored across a 6-dimension V2.3 attraction algorithm with letter-grade classification (S through D).</p>
+      <p><strong>503 males, 503 females.</strong> Each assigned a unique energy type, tax bracket, biome of origin, 2–4 hobbies, a simulated distance from your location, and a persona from a pool of 40 (20 per gender) ranked by potency 1–20.</p>
+      <p>Higher-grade capybaras are rarer matches, reply slower, and carry higher-potency personas. Lower-grade capybaras match often, message first, and are enthusiastically available.</p>
     </div>
-    <div class="about-section"><h3>Distance System</h3>
-      <p>Each capybara is assigned a simulated distance from your city on first load. Distances are seeded to each capy's ID so they stay consistent. The Nearby filter shows capys within 50 miles.</p>
+
+    <div class="about-section">
+      <h3>Attraction Grade System</h3>
+      <p>Every capybara receives a composite V2.3 score (1–99) from 6 weighted dimensions. That score maps to a letter grade displayed on their card and woven into their bio.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;">
+        <span class="grade-badge grade-S">S &nbsp;88+</span>
+        <span class="grade-badge grade-A">A &nbsp;74+</span>
+        <span class="grade-badge grade-B">B &nbsp;58+</span>
+        <span class="grade-badge grade-C">C &nbsp;42+</span>
+        <span class="grade-badge grade-D">D &nbsp;&lt;42</span>
+      </div>
+      <p style="font-size:11px;color:var(--t3);">Grade S capybaras match ~4% of the time. Grade D match ~93%. This reflects authentic capybara social dynamics.</p>
     </div>
-    <div class="about-section"><h3>Persona System</h3>
-      <p>Potency 1–20. Higher grade = higher potency skew. 8 behavioral axes: Humor, Sensual, Flirty, Reserved, Awkward, Mean, Nice, Kind, Rude.</p>
-    </div>
-    <div class="about-section"><h3>V2.3 Scoring Dimensions</h3>
+
+    <div class="about-section">
+      <h3>V2.3.3 Scoring Dimensions</h3>
+      <p style="font-size:11px;color:var(--t3);margin-bottom:10px;">Six metrics combine to produce the composite score. Each card shows all six as live bars.</p>
       <div class="score-legend">
-        <div class="score-row"><div class="score-tag">FUR</div><div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff, wetness tolerance.</div></div><div class="score-weight">22%</div></div>
-        <div class="score-row"><div class="score-tag">WGT</div><div class="score-info"><div class="score-name">Weight Score</div><div class="score-desc">35–65 kg range. Chonk is virtue.</div></div><div class="score-weight">18%</div></div>
-        <div class="score-row"><div class="score-tag">SZE</div><div class="score-info"><div class="score-name">Body Size</div><div class="score-desc">Length-to-snout proportions.</div></div><div class="score-weight">14%</div></div>
-        <div class="score-row"><div class="score-tag">VBE</div><div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance.</div></div><div class="score-weight">12%</div></div>
-        <div class="score-row"><div class="score-tag">NRG</div><div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Peak compatibility at 6–7.</div></div><div class="score-weight">20%</div></div>
-        <div class="score-row"><div class="score-tag">BIO</div><div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal highest. Cloud Forest rare.</div></div><div class="score-weight">14%</div></div>
+        <div class="score-row">
+          <div class="score-tag">FUR</div>
+          <div class="score-info">
+            <div class="score-name">Fur Density <span style="font-size:9px;color:var(--t3);">22%</span></div>
+            <div class="score-desc">Coat thickness, fluff rating, and wetness tolerance index. Dense fur signals robust genetics and superior thermoregulation.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:78%;height:100%;background:var(--orange);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="score-row">
+          <div class="score-tag">WGT</div>
+          <div class="score-info">
+            <div class="score-name">Weight Score <span style="font-size:9px;color:var(--t3);">18%</span></div>
+            <div class="score-desc">Optimal range 35–65 kg. Larger specimens signal better resource access and territory security. Chonk is virtue, within limits.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:62%;height:100%;background:var(--peach);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="score-row">
+          <div class="score-tag">SZE</div>
+          <div class="score-info">
+            <div class="score-name">Body Size <span style="font-size:9px;color:var(--t3);">14%</span></div>
+            <div class="score-desc">Length-to-snout proportions and muzzle width. A broader muzzle indicates superior grazing capacity and social dominance potential.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:55%;height:100%;background:var(--blue);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="score-row">
+          <div class="score-tag">VBE</div>
+          <div class="score-info">
+            <div class="score-name">Vibe / Friendliness <span style="font-size:9px;color:var(--t3);">12%</span></div>
+            <div class="score-desc">Inter-species tolerance score. Willingness to permit terrapin cohabitation, bird perching, and capybara group formation. Heavily weighted toward warmth.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:84%;height:100%;background:var(--green);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="score-row">
+          <div class="score-tag">NRG</div>
+          <div class="score-info">
+            <div class="score-name">Energy Level <span style="font-size:9px;color:var(--t3);">20%</span></div>
+            <div class="score-desc">Rated 1–10. Peak compatibility at 6–7. Below 4 reads as inert; above 8 reads as overwhelming. Both extremes reduce long-term pairing probability.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:68%;height:100%;background:var(--gold);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="score-row">
+          <div class="score-tag">BIO</div>
+          <div class="score-info">
+            <div class="score-name">Biome of Origin <span style="font-size:9px;color:var(--t3);">14%</span></div>
+            <div class="score-desc">Pantanal Wetlands (96) and Llanos Savanna (92) score highest. Cloud Forest Ecuador (91) is rare and therefore valued. Caatinga Scrubland (65) scores lowest.</div>
+            <div style="margin-top:6px;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:91%;height:100%;background:var(--peach);border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h3>Persona System</h3>
+      <p>40 unique personas — 20 male, 20 female — each with a potency rating 1–20. Higher-grade capybaras are weighted toward higher potency. Potency governs intensity across 9 behavioral axes:</p>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin:8px 0;">
+        <span class="card-tag">Humor</span><span class="card-tag">Sensual</span><span class="card-tag">Flirty</span><span class="card-tag">Reserved</span><span class="card-tag">Awkward</span><span class="card-tag">Mean</span><span class="card-tag">Nice</span><span class="card-tag">Kind</span><span class="card-tag">Rude</span>
+      </div>
+      <p style="font-size:11px;color:var(--t3);">P1 personas are warm and nervous. P20 personas are intense, magnetic, and cold. A Grade S capy with P20 will rarely reply. A Grade D with P2 will message you first within minutes.</p>
+    </div>
+
+    <div class="about-section">
+      <h3>Distance System</h3>
+      <p>Set your city on first load and every capybara gets a simulated distance from you — seeded by their ID so it stays consistent. The <strong>Nearby filter</strong> (Discover tab) shows only capybaras within 50 miles.</p>
+      <p style="font-size:11px;color:var(--t3);">Distances are simulated. Real capybaras do not own phones. Most are in South America. We are aware.</p>
+    </div>
+
+    <div class="about-section">
+      <h3>Match Probability by Grade</h3>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="grade-badge grade-S" style="min-width:28px;text-align:center;">S</span>
+          <div style="flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:4%;height:100%;background:var(--gold);border-radius:2px;"></div></div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);width:28px;">~4%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="grade-badge grade-A" style="min-width:28px;text-align:center;">A</span>
+          <div style="flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:18%;height:100%;background:var(--green);border-radius:2px;"></div></div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);width:28px;">~18%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="grade-badge grade-B" style="min-width:28px;text-align:center;">B</span>
+          <div style="flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:42%;height:100%;background:var(--blue);border-radius:2px;"></div></div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);width:28px;">~42%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="grade-badge grade-C" style="min-width:28px;text-align:center;">C</span>
+          <div style="flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:70%;height:100%;background:var(--orange);border-radius:2px;"></div></div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);width:28px;">~70%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="grade-badge grade-D" style="min-width:28px;text-align:center;">D</span>
+          <div style="flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;"><div style="width:93%;height:100%;background:var(--t3);border-radius:2px;"></div></div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);width:28px;">~93%</span>
+        </div>
       </div>
     </div>
   </div>
@@ -456,7 +563,7 @@
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-//  CapyLove V2.3
+//  CapyLove V2.3.3
 // ════════════════════════════════════════════════════════════════════
 
 // ── USA Cities dataset (city, state, approx lat/lng, pop weight) ──
@@ -689,10 +796,10 @@ function burstKana(){
   const ox=W/2, oy=80;
   const particles=[];
   const colors=['#E05252','#D4A843','#4A9EFF','#2EC27E','#F4A261'];
-  for(let i=0;i<26;i++){
+  for(let i=0;i<40;i++){
     const ch=KANA[Math.floor(Math.random()*KANA.length)];
     const angle=-Math.PI/2 + (Math.random()-0.5)*Math.PI*1.4;
-    const speed=2+Math.random()*5;
+    const speed=3+Math.random()*7;
     particles.push({
       ch,x:ox,y:oy,
       vx:Math.cos(angle)*speed,
@@ -711,7 +818,7 @@ function burstKana(){
     let alive=false;
     for(const p of particles){
       p.x+=p.vx; p.y+=p.vy; p.vy+=p.grav; p.rot+=p.vrot;
-      p.alpha-=0.018;
+      p.alpha-=0.003;
       if(p.alpha<=0) continue;
       alive=true;
       ctx.save();
@@ -723,7 +830,7 @@ function burstKana(){
       ctx.fillText(p.ch,0,0);
       ctx.restore();
     }
-    if(alive&&frame<120){frame++;requestAnimationFrame(animate);}
+    if(alive&&frame<700){frame++;requestAnimationFrame(animate);}
     else ctx.clearRect(0,0,W,H);
   }
   animate();
@@ -737,7 +844,7 @@ function showMatchToast(capy, matchIdx){
   const persona=getPersona(capy);
   document.getElementById('match-toast-title').textContent='It\'s a Match';
   document.getElementById('match-toast-sub').textContent=`${capy.name} · Grade ${g}${persona?' · '+persona.name:''}`;
-  toast.onclick=()=>{
+  document.getElementById('match-toast-inner').onclick=()=>{
     clearTimeout(toastTimer);
     hideMatchToast();
     openChat(matchIdx);
@@ -854,12 +961,13 @@ function buildCard(c){
           <span class="card-location">${c.location}</span>
           ${distEl}
         </div>
+        ${dist!==null?`<div style="font-size:9px;color:var(--t4);font-family:'DM Mono',monospace;margin-top:2px;">Approx. ${fmtDist(dist)} from you</div>`:''}
       </div>
       <div class="card-grade-row">
         <span class="grade-badge grade-${g}">${g}</span>
         <span class="grade-label">${gradeCtx(g,c.name)}</span>
       </div>
-      <div class="card-bio">${c.bio}</div>
+      <div class="card-bio">${c.bio.split('\n\n').map(p=>`<p style="margin-bottom:10px">${p}</p>`).join('')}</div>
       <div class="card-metrics">${bars}</div>
       <div class="card-tags">
         <span class="card-tag">${c.energy_type||''}</span>
@@ -975,7 +1083,7 @@ function triggerMatch(capy){
   showMatchToast(capy,idx);
   updateMatchesBadge();
   if(tier==='low'||(tier==='mid'&&Math.random()<0.35)){
-    const delay=tier==='low'?7000+Math.random()*5000:18000+Math.random()*14000;
+    const delay=tier==='low'?180000+Math.random()*300000:480000+Math.random()*720000;
     setTimeout(()=>sendCapyFirst(idx),delay);
   }
 }
@@ -1037,7 +1145,7 @@ function sendMessage(){
   input.value='';input.style.height='auto';
   const rc=m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
   if(Math.random()<rc){
-    const delay=m.tier==='high'?14000+Math.random()*20000:m.tier==='mid'?4000+Math.random()*7000:800+Math.random()*1800;
+    const delay=m.tier==='high'?300000+Math.random()*600000:m.tier==='mid'?60000+Math.random()*180000:20000+Math.random()*40000;
     const si=currentChat;
     setTimeout(()=>{
       showTyping();
@@ -1172,6 +1280,8 @@ function initLocationGate(){
       document.getElementById('location-gate').classList.add('hidden');
       document.getElementById('gender-gate').classList.remove('hidden');
       document.getElementById('distance-filter-btn').style.display='';
+      const bar=document.getElementById('location-bar');
+      if(bar){ bar.style.display='flex'; document.getElementById('location-bar-city').textContent=userCity.name+', '+userCity.state; }
       return;
     }catch(e){}
   }
@@ -1216,6 +1326,8 @@ function commitCity(city){
   document.getElementById('location-gate').classList.add('hidden');
   document.getElementById('gender-gate').classList.remove('hidden');
   document.getElementById('distance-filter-btn').style.display='';
+  const bar=document.getElementById('location-bar');
+  if(bar){ bar.style.display='flex'; document.getElementById('location-bar-city').textContent=city.name+', '+city.state; }
 }
 function skipLocation(){
   document.getElementById('location-gate').classList.add('hidden');
@@ -1283,7 +1395,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('reset-deck-btn').addEventListener('click',resetDeck);
 
   // Tabs
-  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
+  document.querySelectorAll('.tab').forEach(t=>{
+    const go=()=>switchView(t.dataset.view);
+    t.addEventListener('click', go);
+    t.addEventListener('touchend', e=>{ e.preventDefault(); go(); }, {passive:false});
+  });
 
   // Filters
   document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
@@ -1295,6 +1411,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   restoreSession();
   initLocationGate();
   loadCapys();
+  const changeBtn=document.getElementById('location-bar-change');
+  if(changeBtn) changeBtn.addEventListener('click',()=>{
+    localStorage.removeItem('cl_city'); userCity=null;
+    document.getElementById('location-bar').style.display='none';
+    document.getElementById('distance-filter-btn').style.display='none';
+    document.getElementById('location-gate').classList.remove('hidden');
+    // reset distance filter if active
+    if(activeFilter==='distance'){ activeFilter='all'; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all')); }
+  });
 });
 </script>
 </body>
