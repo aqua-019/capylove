@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><!-- build: 2026-03-31T14:30 v2.4.4 -->
+<html lang="en"><!-- build: 2026-03-31T15:30 v2.4.5 -->
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"/>
-  <title>CapyLove V2.4.4</title>
+  <title>CapyLove V2.4.5</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -357,7 +357,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.4.4 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.4.5 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -391,7 +391,7 @@
     <div id="card-stack">
       <div id="empty-state">
         <h2>You've seen every capybara.</h2>
-        <p>All 1,006 of them. That level of commitment is statistically unprecedented.</p>
+        <p>All 747 of them. That level of commitment is statistically unprecedented.</p>
         <button id="reset-deck-btn">Start Over</button>
       </div>
     </div>
@@ -442,8 +442,8 @@
   <div id="about-view" class="view">
     <div class="about-section">
       <h3>About CapyLove V2.4.0</h3>
-      <p>The world's only capybara dating platform. <strong>1,006 real capybara images</strong> from the capy.lol image pool, scored across a 6-dimension V2.3 attraction algorithm with letter-grade classification (S through D).</p>
-      <p><strong>503 males, 503 females.</strong> Each assigned a unique energy type, tax bracket, biome of origin, 2–4 hobbies, a simulated distance from your location, and a persona from a pool of 40 (20 per gender) ranked by potency 1–20.</p>
+      <p>The world's only capybara dating platform. <strong>747 real capybara images</strong> from the capy.lol image pool, scored across a 6-dimension V2.3 attraction algorithm with letter-grade classification (S through D).</p>
+      <p><strong>374 males, 373 females.</strong> Each assigned a unique energy type, tax bracket, biome of origin, 2–4 hobbies, a simulated distance from your location, and a persona from a pool of 40 (20 per gender) ranked by potency 1–20.</p>
       <p>Higher-grade capybaras are rarer matches, reply slower, and carry higher-potency personas. Lower-grade capybaras match often, message first, and are enthusiastically available.</p>
     </div>
 
@@ -896,7 +896,7 @@ function buildCard(c){
   const hobbies=(c.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
   const distEl=dist!==null?`<span class="card-distance">&#128205; ${fmtDist(dist)}</span>`:'';
   card.innerHTML=`
-    <img class="card-img" src="${c.image_url}" alt="${c.name}" loading="eager" decoding="async" onerror="this.onerror=null;this.src=c.image_url+'?retry=1';this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex';}"/>
+    <img class="card-img" src="${c.image_url}" alt="${c.name}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='https://api.capy.lol/v1/capybara/'+c.id;this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex';}"/>
     <div class="card-img-placeholder"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg></div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
