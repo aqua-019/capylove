@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><!-- build: 2026-03-31T13:00 v2.4.2 -->
+<html lang="en"><!-- build: 2026-03-31T14:00 v2.4.3 -->
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"/>
-  <title>CapyLove V2.4.2</title>
+  <title>CapyLove V2.4.3</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -127,7 +127,7 @@
     #kana-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:799;}
 
     /* ══ MATCHES ══ */
-    #matches-view{display:flex;flex-direction:column;overflow:hidden;}
+    #matches-view{flex-direction:column;overflow:hidden;}
     #matches-header-bar{padding:12px 16px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--s3);}
     #matches-header-bar h2{font-size:14px;font-weight:700;}
     #matches-count-badge{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);}
@@ -154,7 +154,7 @@
     .no-matches p{font-size:12px;color:var(--t3);line-height:1.65;max-width:220px;}
 
     /* ══ CHAT ══ */
-    #chat-view{display:flex;flex-direction:column;overflow:hidden;max-height:100dvh;}
+    #chat-view{flex-direction:column;overflow:hidden;max-height:100dvh;}
     #chat-header{padding:9px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--s3);flex-shrink:0;background:var(--s1);}
     #chat-back{background:none;border:none;color:var(--t2);cursor:pointer;font-size:18px;padding:2px 7px 2px 0;-webkit-tap-highlight-color:transparent;}
     #chat-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--s3);flex-shrink:0;}
@@ -188,7 +188,7 @@
     #chat-send:hover{transform:scale(1.08);}
 
     /* ══ LEADERBOARD ══ */
-    #leaderboard-view{display:flex;flex-direction:column;overflow:hidden;}
+    #leaderboard-view{flex-direction:column;overflow:hidden;}
     #lb-header{padding:12px 16px 8px;border-bottom:1px solid var(--s3);flex-shrink:0;}
     #lb-header h2{font-size:14px;font-weight:700;}
     #lb-header p{font-size:9.5px;color:var(--t3);margin-top:2px;font-family:'DM Mono',monospace;}
@@ -357,7 +357,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.4.2 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.4.3 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
