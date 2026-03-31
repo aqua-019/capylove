@@ -136,12 +136,12 @@
     #new-matches-strip h3{font-size:8.5px;font-weight:600;color:var(--t3);letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:8px;}
     #new-matches-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;}
     .new-match-bubble{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;}
-    .new-match-bubble img{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);background:var(--s3);}
+    .new-match-bubble img{width:58px;height:58px;border-radius:14px;object-fit:cover;background:var(--s3);}
     .new-match-bubble span{font-size:9px;color:var(--t2);font-family:'DM Mono',monospace;}
     #convo-list{overflow-y:auto;flex:1;}
     .convo-item{display:flex;align-items:center;gap:11px;padding:9px 16px;border-bottom:1px solid var(--s3);cursor:pointer;transition:background .12s;}
     .convo-item:hover{background:var(--s2);}
-    .convo-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--s3);}
+    .convo-avatar{width:52px;height:52px;border-radius:13px;object-fit:cover;flex-shrink:0;background:var(--s3);}
     .convo-info{flex:1;min-width:0;}
     .convo-name{font-size:13px;font-weight:600;letter-spacing:-.2px;margin-bottom:2px;}
     .convo-preview{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -156,23 +156,43 @@
 
     /* ══ CHAT ══ */
     #chat-view{flex-direction:column;overflow:hidden;max-height:100dvh;}
-    #chat-header{padding:9px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--s3);flex-shrink:0;background:var(--s1);}
-    #chat-back{background:none;border:none;color:var(--t2);cursor:pointer;font-size:18px;padding:2px 7px 2px 0;-webkit-tap-highlight-color:transparent;}
-    #chat-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--s3);flex-shrink:0;}
-    #chat-name{font-size:13px;font-weight:700;letter-spacing:-.3px;}
-    #chat-sub{font-size:9.5px;color:var(--t3);font-family:'DM Mono',monospace;}
-    #chat-persona-line{font-size:8.5px;color:var(--t4);font-family:'DM Mono',monospace;margin-top:1px;}
-    #chat-header-actions{margin-left:auto;display:flex;gap:5px;}
-    .chat-header-btn{padding:3px 9px;border-radius:8px;border:1px solid var(--s5);background:transparent;color:var(--t4);font-size:9px;cursor:pointer;font-family:'DM Mono',monospace;transition:all .12s;}
-    .chat-header-btn.remove:hover{border-color:var(--red);color:var(--red);}
-    .chat-header-btn.report:hover{border-color:var(--gold);color:var(--gold);}
-    #chat-messages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px 6px;display:flex;flex-direction:column;gap:7px;min-height:0;}
-    .msg{display:flex;flex-direction:column;max-width:74%;}
+    #chat-header{padding:10px 12px 0;display:flex;flex-direction:column;border-bottom:1px solid var(--s3);flex-shrink:0;background:var(--s1);}
+    #chat-header-top{display:flex;align-items:center;gap:10px;padding-bottom:9px;}
+    #chat-back{background:none;border:none;color:var(--t2);cursor:pointer;font-size:22px;padding:2px 6px 2px 0;-webkit-tap-highlight-color:transparent;flex-shrink:0;line-height:1;}
+    #chat-avatar-wrap{position:relative;flex-shrink:0;cursor:pointer;}
+    #chat-avatar{width:52px;height:52px;border-radius:13px;object-fit:cover;background:var(--s3);display:block;transition:transform .15s;}
+    #chat-avatar-wrap:hover #chat-avatar{transform:scale(1.04);}
+    #chat-avatar-grade{position:absolute;bottom:-5px;right:-5px;font-size:7px;font-family:'DM Mono',monospace;font-weight:700;padding:2px 5px;border-radius:5px;border:1.5px solid var(--bg);}
+    #chat-header-info{flex:1;min-width:0;}
+    #chat-name{font-size:14px;font-weight:700;letter-spacing:-.3px;line-height:1.2;}
+    #chat-sub{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    #chat-persona-line{font-size:8px;color:var(--t4);font-family:'DM Mono',monospace;margin-top:2px;}
+    #chat-hdr-actions{display:flex;gap:5px;flex-shrink:0;align-items:center;}
+    .chat-hdr-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--s4);background:transparent;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .12s;-webkit-tap-highlight-color:transparent;color:var(--t3);}
+    .chat-hdr-btn.report:hover,.chat-hdr-btn.report:active{border-color:var(--gold);background:rgba(212,168,67,.12);color:var(--gold);}
+    .chat-hdr-btn.remove:hover,.chat-hdr-btn.remove:active{border-color:var(--red);background:rgba(224,82,82,.12);color:var(--red);}
+    /* Match cycle nav strip */
+    #chat-nav-row{display:flex;align-items:center;gap:4px;padding:5px 0 7px;}
+    .chat-nav-btn{flex:1;display:flex;align-items:center;gap:5px;padding:5px 7px;border-radius:9px;border:1px solid var(--s4);background:transparent;cursor:pointer;transition:background .12s;overflow:hidden;min-width:0;-webkit-tap-highlight-color:transparent;}
+    .chat-nav-btn:hover{background:var(--s3);}
+    #chat-nav-prev{justify-content:flex-start;}
+    #chat-nav-next{justify-content:flex-end;}
+    .chat-nav-avatar{width:20px;height:20px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--s4);}
+    .chat-nav-name{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:65px;}
+    .chat-nav-arrow{font-size:11px;color:var(--t4);flex-shrink:0;}
+    #chat-nav-dots{display:flex;gap:3px;align-items:center;padding:0 6px;}
+    .chat-nav-dot{width:5px;height:5px;border-radius:50%;background:var(--s5);transition:background .15s;}
+    .chat-nav-dot.active{background:var(--orange);}
+    /* Messages */
+    #chat-messages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px 6px;display:flex;flex-direction:column;gap:8px;min-height:0;}
+    .msg{display:flex;flex-direction:column;max-width:78%;}
     .msg.from-capy{align-self:flex-start;}
     .msg.from-me{align-self:flex-end;}
-    .msg-bubble{padding:8px 12px;border-radius:16px;font-size:12.5px;line-height:1.55;}
+    .msg-bubble{padding:9px 13px;border-radius:18px;font-size:13px;line-height:1.55;word-break:break-word;}
     .msg.from-capy .msg-bubble{background:var(--s3);color:var(--t1);border-bottom-left-radius:4px;}
     .msg.from-me .msg-bubble{background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;border-bottom-right-radius:4px;}
+    .msg-photo-wrap{border-radius:14px;overflow:hidden;cursor:pointer;max-width:200px;}
+    .msg-photo-wrap img{width:100%;display:block;}
     .msg-time{font-family:'DM Mono',monospace;font-size:8px;color:var(--t4);margin-top:3px;}
     .msg.from-capy .msg-time{align-self:flex-start;}
     .msg.from-me .msg-time{align-self:flex-end;}
@@ -181,12 +201,20 @@
     .typing-dot:nth-child(2){animation-delay:.15s;}
     .typing-dot:nth-child(3){animation-delay:.3s;}
     @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-    #chat-input-bar{padding:9px 12px env(safe-area-inset-bottom, 0px);border-top:1px solid var(--s3);display:flex;gap:7px;align-items:flex-end;flex-shrink:0;background:var(--s1);position:sticky;bottom:0;z-index:10;}
-    #chat-input{flex:1;background:var(--s3);border:1px solid var(--s4);border-radius:18px;padding:8px 13px;color:var(--t1);font-family:'Sora',sans-serif;font-size:16px;outline:none;resize:none;max-height:120px;transition:border-color .15s;line-height:1.4;-webkit-appearance:none;appearance:none;transform:translateZ(0);}
+    /* Input bar */
+    #chat-input-bar{padding:8px 10px env(safe-area-inset-bottom,0px);border-top:1px solid var(--s3);display:flex;gap:6px;align-items:flex-end;flex-shrink:0;background:var(--s1);position:sticky;bottom:0;z-index:10;}
+    #chat-photo-btn{width:36px;height:36px;min-width:36px;border-radius:10px;border:1px solid var(--s4);background:transparent;color:var(--t3);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;align-self:flex-end;transition:all .12s;-webkit-tap-highlight-color:transparent;}
+    #chat-photo-btn:hover{border-color:var(--orange);color:var(--orange);}
+    #chat-photo-input{display:none;}
+    #chat-input{flex:1;background:var(--s3);border:1px solid var(--s4);border-radius:18px;padding:9px 13px;color:var(--t1);font-family:'Sora',sans-serif;font-size:16px;outline:none;resize:none;max-height:120px;transition:border-color .15s;line-height:1.4;-webkit-appearance:none;appearance:none;transform:translateZ(0);}
     #chat-input:focus{border-color:var(--orange);}
     #chat-input::placeholder{font-size:16px;color:var(--t4);}
     #chat-send{width:40px;height:40px;min-width:40px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s;align-self:flex-end;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
     #chat-send:hover{transform:scale(1.08);}
+    /* Photo lightbox */
+    #img-lightbox{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;cursor:pointer;}
+    #img-lightbox.open{display:flex;}
+    #img-lightbox img{max-width:92vw;max-height:88vh;border-radius:16px;object-fit:contain;}
 
     /* ══ LEADERBOARD ══ */
     #leaderboard-view{flex-direction:column;overflow:hidden;}
@@ -445,24 +473,46 @@
   <!-- CHAT -->
   <div id="chat-view" class="view">
     <div id="chat-header">
-      <button id="chat-back">&#8592;</button>
-      <img id="chat-avatar" src="" alt=""/>
-      <div>
-        <div id="chat-name"></div>
-        <div id="chat-sub"></div>
-        <div id="chat-persona-line"></div>
+      <div id="chat-header-top">
+        <button id="chat-back" title="Back to matches">&#8592;</button>
+        <div id="chat-avatar-wrap" onclick="openChatAvatarLightbox()">
+          <img id="chat-avatar" src="" alt=""/>
+          <span id="chat-avatar-grade"></span>
+        </div>
+        <div id="chat-header-info">
+          <div id="chat-name"></div>
+          <div id="chat-sub"></div>
+          <div id="chat-persona-line"></div>
+        </div>
+        <div id="chat-hdr-actions">
+          <button class="chat-hdr-btn report" id="chat-report-btn" title="Report" onclick="reportCurrentMatch()">&#9873;</button>
+          <button class="chat-hdr-btn remove" id="chat-remove-btn" title="Remove match" onclick="removeCurrentMatch()">&#128465;</button>
+        </div>
       </div>
-      <div id="chat-header-actions">
-        <button class="chat-header-btn remove" id="chat-remove-btn">Remove</button>
-        <button class="chat-header-btn report" id="chat-report-btn">Report</button>
+      <div id="chat-nav-row">
+        <button class="chat-nav-btn" id="chat-nav-prev" onclick="cycleChat(-1)">
+          <span class="chat-nav-arrow">&#8592;</span>
+          <img class="chat-nav-avatar" id="chat-nav-prev-img" src="" alt=""/>
+          <span class="chat-nav-name" id="chat-nav-prev-name"></span>
+        </button>
+        <div id="chat-nav-dots"></div>
+        <button class="chat-nav-btn" id="chat-nav-next" onclick="cycleChat(1)">
+          <span class="chat-nav-name" id="chat-nav-next-name"></span>
+          <img class="chat-nav-avatar" id="chat-nav-next-img" src="" alt=""/>
+          <span class="chat-nav-arrow">&#8594;</span>
+        </button>
       </div>
     </div>
     <div id="chat-messages"></div>
     <div id="chat-input-bar">
-      <textarea id="chat-input" placeholder="Message..." rows="1"></textarea>
-      <button id="chat-send">&#10148;</button>
+      <button id="chat-photo-btn" title="Send photo" onclick="document.getElementById('chat-photo-input').click()">&#128247;</button>
+      <input id="chat-photo-input" type="file" accept="image/*" onchange="handlePhotoUpload(this)"/>
+      <textarea id="chat-input" placeholder="Message..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event)"></textarea>
+      <button id="chat-send" onclick="sendMessage()">&#10148;</button>
     </div>
   </div>
+  <!-- Image lightbox -->
+  <div id="img-lightbox" onclick="this.classList.remove('open')"><img id="img-lightbox-src" src="" alt=""/></div>
 
   <!-- LEADERBOARD -->
   <div id="leaderboard-view" class="view">
@@ -751,27 +801,155 @@ const PERSONA_DESCS={
 };
 
 // ── Persona response generator ────────────────────────────────────
-function genReply(persona, t, isFirst) {
-  const dom = Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
-  const pools={
-    humor:["I saw a bird try to land on a capybara today and miss. That is your energy.","You type like you're in a hurry. The grass is not running.","This message took longer than it should have. I respect the effort.","I've met stagnant pools with more direction than this. But I'm here.","You're funny. Not intentionally, but still.","The marsh doesn't ask this many questions. I'll make an exception."],
-    sensual:["The water is warm today. Just thought you should know.","I've been sitting in the sun for three hours. Peak temperature. You're welcome.","There's a quality to late afternoon light on the water. I thought of you then.","My fur is particularly dense today. I'm not explaining further.","I don't say things like this often. Sit with that.","The reeds are very close here. Very private."],
-    flirty:["You reached out first. That tells me things.","I notice you noticed me. I'll allow it.","You're doing a medium job of impressing me. Better than most.","Tell me something true. Not interesting. True.","You're bolder than your profile suggested. I like that.","Most don't follow up. You did. Point to you."],
-    reserved:["I don't respond to most messages.","I read this twice before replying. You have my attention for now.","I'm not going to say a lot. This is a lot for me.","The marsh is quiet. So am I. This is an exception.","I don't know you. I'm aware of you. Different.","Fine."],
-    awkward:["I wanted to say something cool and then I said this instead.","Hi. I wasn't expecting a reply. I'm not sure what to do now.","I've been staring at the water. Not for any reason.","Sorry if I'm weird. The reeds know.","I typed six things and deleted them. This is the seventh. Hello.","This is going well I think? How do you feel. Ignore that."],
-    mean:["You're persistent. I haven't decided if that's good yet.","Low-effort message. I'm responding out of boredom.","I've seen better openers from herons and they can't type.","Sure. If this is the level we're operating at.","Not bad. Not good. Somewhere in the water between.","I have standards. You are testing them."],
-    rude:["I read it.","Interesting that you'd say that.","I'll respond when I feel like it.","I'm talking to multiple capybaras right now.","Fine for someone with your score.","Try again."],
-    nice:["That actually made me happy. Thank you.","You're good at this. I hope you know that.","I wasn't expecting to feel this comfortable this quickly.","You're easy to talk to. Rare in the wetlands.","This is a good conversation. I'd like to continue it.","You're genuinely kind. The marsh doesn't make many like you."],
-    kind:["I hope your day is going well. Genuinely.","I like that you take your time with words.","There's something warm about how you write. It comes through.","You seem like a good one.","The water is calm today. I think about what makes it calm.","I'm glad we matched. I don't say that often."],
+function genReply(persona, t, isFirst, attractionScore) {
+  // attraction 0-99: controls warmth/emoji density/response richness
+  const att = attractionScore || 50;
+  const warm = att >= 75;    // high attraction → warmer, more emoji
+  const cold = att < 35;     // low attraction → terse, minimal emoji
+  const dom  = Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+  const p    = persona?.potency || 5;
+
+  // ── Emoji sets by vibe ────────────────────────────────────────────
+  const E = {
+    warm:   ["🌿","💛","🌊","✨","🐾","☀️","🌱","💚","🌸","🫂"],
+    flirt:  ["👀","😏","🫦","✨","🌶️","💫","😌","🌊","💭","🫧"],
+    awkward:["😅","🫣","😬","🌿","😶","🙈","🌊","😳","💀","🐾"],
+    cold:   ["","",".",".","","",""],
+    food:   ["🌱","🌿","🍃","🌾","🥬","🌻","🐾"],
+    water:  ["🌊","💧","🫧","🌿","☁️"],
+    think:  ["🤔","💭","🌿","✦","...","🌊"],
   };
-  if(isFirst){
-    if(t.awkward>=6) return pick(pools.awkward);
-    if(t.nice>=7)    return pick(pools.kind);
-    if(t.reserved>=7) return pick(pools.reserved);
-    if(t.flirty>=6)  return pick(pools.flirty);
+  function emoji(set){ return warm||(!cold)? E[set][Math.floor(Math.random()*E[set].length)] : ''; }
+
+  const pools = {
+    humor: warm ? [
+      `Okay that made me genuinely laugh. ${emoji('warm')} Don't let it go to your head.`,
+      `That's actually funny. I was not expecting that. ${emoji('warm')}`,
+      `You're better at this than I thought. ${emoji('flirt')} Keep going.`,
+      `I snorted. The birds noticed. This is your fault. ${emoji('awkward')}`,
+      `Didn't expect to laugh but here we are. ${emoji('warm')} Points to you.`,
+    ] : cold ? [
+      "Okay.",
+      "Sure that's funny.",
+      "I've heard funnier from a heron.",
+      "Fine.",
+    ] : [
+      `That's actually funny. ${emoji('think')}`,
+      `Okay, I'll give you that. ${emoji('warm')}`,
+      `You're making this easier than I expected. ${emoji('flirt')}`,
+      `That landed. ${emoji('warm')} Surprising.`,
+    ],
+    sensual: warm ? [
+      `The water is warm today. ${emoji('water')} Just thought you should know.`,
+      `There's something about late afternoon light on the river. ${emoji('warm')} I think about it.`,
+      `I've been sitting in the sun for hours. Peak condition. You're welcome. ${emoji('flirt')}`,
+      `My fur is particularly dense today. ${emoji('flirt')} I'm not explaining further.`,
+      `The reeds are very close here. Very private. ${emoji('water')}`,
+    ] : cold ? [
+      "The water is fine.",
+      "I'm sitting in the sun.",
+      "Yes.",
+      "It's warm today.",
+    ] : [
+      `The water is warm today. ${emoji('water')}`,
+      `Something about this evening. ${emoji('warm')}`,
+      `Good conditions out here. ${emoji('food')}`,
+    ],
+    flirty: warm ? [
+      `You reached out first. ${emoji('flirt')} That tells me things.`,
+      `You're doing a medium job of impressing me. ${emoji('flirt')} Better than most.`,
+      `Tell me something true. Not interesting. True. ${emoji('think')}`,
+      `I notice you noticed me. ${emoji('flirt')} I'll allow it.`,
+      `You're bolder than your profile suggested. ${emoji('warm')} I like that.`,
+    ] : cold ? [
+      "Sure.",
+      "I noticed.",
+      "Interesting.",
+      "Keep going.",
+    ] : [
+      `You reached out first. ${emoji('flirt')} Noted.`,
+      `You're not bad at this. ${emoji('warm')}`,
+      `Tell me something real. ${emoji('think')}`,
+    ],
+    reserved: [
+      `I don't respond to most messages. ${emoji('cold')}`,
+      `I read this twice before replying. You have my attention. ${emoji('think')}`,
+      `I'm not going to say a lot. This is already a lot for me.`,
+      `The marsh is quiet. So am I. This is an exception. ${emoji('water')}`,
+      `Fine.`,
+    ],
+    awkward: warm ? [
+      `I wanted to say something cool and said this instead. ${emoji('awkward')}`,
+      `Hi. I wasn't expecting a reply. I'm not sure what to do now. ${emoji('awkward')}`,
+      `I typed six things and deleted them. This is the seventh. Hello. ${emoji('awkward')}`,
+      `Is this going well? I think this is going well. ${emoji('awkward')} Ignore me.`,
+      `Sorry if I'm a lot. The reeds know. ${emoji('awkward')}`,
+    ] : [
+      `Uh. Hi. ${emoji('awkward')}`,
+      `I wasn't ready for that. ${emoji('awkward')}`,
+      `Cool. I mean. ${emoji('awkward')}`,
+    ],
+    mean: p >= 15 ? [
+      "You're persistent. I haven't decided if that's good yet.",
+      "Low-effort message. I'm here out of mild curiosity.",
+      "I've had more engaging conversations with a caiman.",
+      "Try harder.",
+      "Fine for someone with your score.",
+    ] : [
+      `You're persistent. ${emoji('think')} I respect it somewhat.`,
+      `Not bad. Not good. Somewhere in the water between. ${emoji('water')}`,
+      `My standards are high. You're testing them. ${emoji('cold')}`,
+    ],
+    rude: [
+      "I read it.",
+      "Interesting that you'd say that.",
+      "I'll respond when I feel like it.",
+      "Fine.",
+      "Next.",
+    ],
+    nice: warm ? [
+      `That actually made me happy. ${emoji('warm')} Thank you.`,
+      `You're good at this. ${emoji('warm')} I hope you know that.`,
+      `I wasn't expecting to feel this comfortable this quickly. ${emoji('warm')}`,
+      `You're easy to talk to. ${emoji('warm')} Rare in the wetlands.`,
+      `This is a good conversation. ${emoji('warm')} I'd like to continue it.`,
+    ] : [
+      `That was nice. ${emoji('warm')}`,
+      `You're easy to talk to. ${emoji('warm')}`,
+      `This is going well. ${emoji('warm')}`,
+    ],
+    kind: warm ? [
+      `I hope your day is going well. ${emoji('warm')} Genuinely.`,
+      `There's something warm about how you write. ${emoji('warm')} It comes through.`,
+      `You seem like a good one. ${emoji('warm')}`,
+      `I'm glad we matched. ${emoji('warm')} I don't say that often.`,
+      `The water is calm today. ${emoji('water')} I thought of you when I noticed.`,
+    ] : [
+      `You seem kind. ${emoji('warm')}`,
+      `This is nice. ${emoji('warm')}`,
+      `I'm glad we matched. ${emoji('warm')}`,
+    ],
+  };
+
+  // First message logic
+  if (isFirst) {
+    if (t.awkward >= 6) return pick(pools.awkward);
+    if (t.nice >= 7 || warm) return pick(pools.kind);
+    if (t.reserved >= 7 || cold) return pick(pools.reserved);
+    if (t.flirty >= 6) return pick(pools.flirty);
+    return pick(pools.nice);
   }
-  const key = dom[Math.floor(Math.random()*Math.min(2,dom.length))];
-  return pick(pools[key]||pools.nice);
+
+  // Subsequent: pick from top dominant trait, biased by attraction
+  let key;
+  if (cold && p >= 14) {
+    key = pick(['reserved','rude','mean']);
+  } else if (warm && p <= 6) {
+    key = pick(['nice','kind','flirty']);
+  } else {
+    key = dom[Math.floor(Math.random() * Math.min(2, dom.length))];
+  }
+  return pick(pools[key] || pools.nice);
 }
 function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
@@ -968,26 +1146,114 @@ function showMatchScreen(capy, matchIdx){
   const v=computeV2(capy),g=grade(v),gc=gradeColor(g);
   const persona=getPersona(capy);
   const screen=document.getElementById('match-screen');
-  // Photo + grade ring
   document.getElementById('ms-photo').src=capy.url;
   document.getElementById('ms-grade-ring').style.borderColor=gc;
-  // Name + grade badge
   document.getElementById('ms-name-inline').textContent=capy.name;
   document.getElementById('ms-name').textContent=capy.name;
   const gb=document.getElementById('ms-grade');
   gb.textContent='Grade '+g;gb.style.color=gc;gb.style.borderColor=gc+'66';gb.style.background=gc+'18';
-  // Persona reveal card
   if(persona){
     document.getElementById('ms-persona-name').textContent=persona.name;
     document.getElementById('ms-persona-name').style.color=persona.color;
     document.getElementById('ms-persona-potency').textContent='Potency '+persona.potency+' · '+capy.energy_type;
     document.getElementById('ms-persona-desc').textContent=PERSONA_DESCS[persona.name]||'A capybara of distinction.';
   }
-  // Buttons
   document.getElementById('ms-btn-message').onclick=()=>{hideMatchScreen();openChat(matchIdx);switchView('matches');};
   document.getElementById('ms-btn-swipe').onclick=()=>hideMatchScreen();
   screen.classList.add('active');
   burstKana();
+  matchParticles(gc);
+}
+
+// ── Match screen particle burst ────────────────────────────────────
+function matchParticles(accentColor){
+  const existing=document.getElementById('ms-canvas');
+  if(existing) existing.remove();
+  const cvs=document.createElement('canvas');
+  cvs.id='ms-canvas';
+  cvs.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:10001;';
+  document.body.appendChild(cvs);
+  const W=cvs.width=window.innerWidth, H=cvs.height=window.innerHeight;
+  const ctx=cvs.getContext('2d');
+  // Parse accent color for particles
+  const COLORS=[accentColor,'#E8672A','#F4A261','#2EC27E','#D4A843','#fff','#4A9EFF'];
+  const SHAPES=['circle','star','heart','drop'];
+  const N=72;
+  const cx=W/2, cy=H*0.38; // burst from photo area
+  const particles=Array.from({length:N},(_,i)=>{
+    const angle=(Math.PI*2*i/N)+(Math.random()-0.5)*0.4;
+    const speed=3.5+Math.random()*6.5;
+    const size=4+Math.random()*8;
+    return{
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed - (2+Math.random()*3),
+      ax:0, ay:0.18+Math.random()*0.1,
+      color:COLORS[Math.floor(Math.random()*COLORS.length)],
+      shape:SHAPES[Math.floor(Math.random()*SHAPES.length)],
+      size, alpha:1,
+      rot:Math.random()*Math.PI*2,
+      rotV:(Math.random()-0.5)*0.2,
+      life:1,
+      decay:0.008+Math.random()*0.012,
+    };
+  });
+  // Second burst: slow floaters upward
+  Array.from({length:24}).forEach(()=>{
+    particles.push({
+      x:cx+(Math.random()-0.5)*160, y:cy+(Math.random()-0.5)*80,
+      vx:(Math.random()-0.5)*1.2, vy:-1.5-Math.random()*2.5,
+      ax:0, ay:0.04,
+      color:COLORS[Math.floor(Math.random()*COLORS.length)],
+      shape:'circle', size:3+Math.random()*5,
+      alpha:0.8, rot:0, rotV:0.05,
+      life:1, decay:0.006+Math.random()*0.008,
+    });
+  });
+  function drawStar(ctx,x,y,r,rot){
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);
+    ctx.beginPath();
+    for(let i=0;i<5;i++){
+      const a=i*Math.PI*2/5-Math.PI/2;
+      const a2=a+Math.PI/5;
+      i===0?ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r):ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+      ctx.lineTo(Math.cos(a2)*(r*0.4),Math.sin(a2)*(r*0.4));
+    }
+    ctx.closePath();ctx.fill();ctx.restore();
+  }
+  function drawHeart(ctx,x,y,r,rot){
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.scale(r*0.08,r*0.08);
+    ctx.beginPath();ctx.moveTo(0,5);
+    ctx.bezierCurveTo(-14,-2,-14,-14,0,-14);
+    ctx.bezierCurveTo(14,-14,14,-2,0,5);
+    ctx.closePath();ctx.fill();ctx.restore();
+  }
+  let frame=0;
+  (function animate(){
+    ctx.clearRect(0,0,W,H);
+    let alive=false;
+    particles.forEach(p=>{
+      p.vx+=p.ax;p.vy+=p.ay;p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
+      p.life-=p.decay;p.alpha=Math.max(0,p.life);
+      if(p.life<=0) return;
+      alive=true;
+      ctx.globalAlpha=p.alpha;
+      ctx.fillStyle=p.color;
+      if(p.shape==='star') drawStar(ctx,p.x,p.y,p.size,p.rot);
+      else if(p.shape==='heart') drawHeart(ctx,p.x,p.y,p.size,p.rot);
+      else if(p.shape==='drop'){
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+        ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill();
+        ctx.beginPath();ctx.moveTo(-p.size/2,0);ctx.lineTo(0,-p.size*1.2);ctx.lineTo(p.size/2,0);ctx.closePath();ctx.fill();
+        ctx.restore();
+      }else{
+        ctx.beginPath();ctx.arc(p.x,p.y,p.size/2,0,Math.PI*2);ctx.fill();
+      }
+    });
+    ctx.globalAlpha=1;
+    if(alive&&frame++<200) requestAnimationFrame(animate);
+    else cvs.remove();
+  })();
 }
 function hideMatchScreen(){
   document.getElementById('match-screen').classList.remove('active');
@@ -1250,7 +1516,7 @@ function triggerMatch(capy){
 function sendCapyFirst(idx){
   const m=matches[idx];if(!m||m.firstMsgSent) return;
   const t=m.persona?.traits||{};
-  const text=genReply(m.persona,t,true);
+  const text=genReply(m.persona,t,true,m.capy.attraction);
   const msg={from:'capy',text,ts:Date.now()};
   m.messages.push(msg);m.firstMsgSent=true;m.unread=true;
   updateMatchesBadge();
@@ -1260,32 +1526,128 @@ function sendCapyFirst(idx){
 
 // ── Chat ───────────────────────────────────────────────────────────
 function openChat(idx){
+  // find idx within conversations that have messages OR all matches
   currentChat=idx;
   const m=matches[idx];m.unread=false;
   const c=m.capy,persona=m.persona;
+  const gc=gradeColor(m.grade);
+  // Avatar + grade badge
   document.getElementById('chat-avatar').src=c.url;
+  const gb=document.getElementById('chat-avatar-grade');
+  gb.textContent=m.grade;gb.style.color=gc;gb.style.background=gc+'22';gb.style.borderColor=gc+'44';
   document.getElementById('chat-name').textContent=c.name;
-  document.getElementById('chat-sub').textContent=`Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax]||''} · ${c.location}`;
-  document.getElementById('chat-persona-line').textContent=persona?`${persona.name} · Potency ${persona.potency}`:'';
+  document.getElementById('chat-sub').textContent=`${c.energy_type} · ${TAX_BRACKETS[c.tax]||''} · ${c.location}`;
+  document.getElementById('chat-persona-line').textContent=persona?`${persona.name} · P${persona.potency}`:'';
+  // Nav cycling arrows
+  renderChatNav(idx);
+  // Messages
   const msgs=document.getElementById('chat-messages');
   msgs.innerHTML='';
   if(!m.messages.length){
     const h=document.createElement('div');
-    h.style.cssText='text-align:center;padding:20px 0;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;';
-    h.textContent=`You matched with ${c.name}. Say something.`;
+    h.style.cssText='text-align:center;padding:24px 0 10px;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;line-height:1.8;';
+    h.innerHTML=`Matched with <strong style="color:${gc}">${c.name}</strong>.<br>Say something.`;
     msgs.appendChild(h);
   }else m.messages.forEach(appendMessage);
   switchView('chat');updateMatchesBadge();
 }
+
+function renderChatNav(idx){
+  const convos=matches.filter(m=>m.messages.length>0);
+  const allChatIdx=matches.map((_,i)=>i); // all matches are navigable
+  const pos=allChatIdx.indexOf(idx);
+  const prevIdx=pos>0?allChatIdx[pos-1]:null;
+  const nextIdx=pos<allChatIdx.length-1?allChatIdx[pos+1]:null;
+  // Prev
+  const pb=document.getElementById('chat-nav-prev');
+  if(prevIdx!==null){
+    pb.style.visibility='visible';
+    document.getElementById('chat-nav-prev-img').src=matches[prevIdx].capy.url;
+    document.getElementById('chat-nav-prev-name').textContent=matches[prevIdx].capy.name;
+  }else pb.style.visibility='hidden';
+  // Next
+  const nb=document.getElementById('chat-nav-next');
+  if(nextIdx!==null){
+    nb.style.visibility='visible';
+    document.getElementById('chat-nav-next-img').src=matches[nextIdx].capy.url;
+    document.getElementById('chat-nav-next-name').textContent=matches[nextIdx].capy.name;
+  }else nb.style.visibility='hidden';
+  // Dots (max 7 shown)
+  const dotsEl=document.getElementById('chat-nav-dots');
+  const total=allChatIdx.length;
+  if(total<=1){dotsEl.innerHTML='';return;}
+  const maxDots=Math.min(total,7);
+  let html='';
+  const half=Math.floor(maxDots/2);
+  let start=Math.max(0,Math.min(pos-half,total-maxDots));
+  for(let i=start;i<start+maxDots;i++){
+    html+=`<div class="chat-nav-dot${i===pos?' active':''}"></div>`;
+  }
+  dotsEl.innerHTML=html;
+}
+
+function cycleChat(dir){
+  const all=matches.map((_,i)=>i);
+  const pos=all.indexOf(currentChat);
+  const next=pos+dir;
+  if(next>=0&&next<all.length) openChat(all[next]);
+}
+
 function closeChat(){currentChat=null;switchView('matches');}
+
+function openChatAvatarLightbox(){
+  if(currentChat===null) return;
+  const c=matches[currentChat].capy;
+  const lb=document.getElementById('img-lightbox');
+  document.getElementById('img-lightbox-src').src=c.url;
+  lb.classList.add('open');
+}
+
+function handlePhotoUpload(input){
+  if(!input.files||!input.files[0]||currentChat===null) return;
+  const file=input.files[0];
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const m=matches[currentChat];
+    const msg={from:'me',photo:e.target.result,ts:Date.now()};
+    m.messages.push(msg);
+    appendMessage(msg);
+    input.value='';
+    // Capybara might react to photo
+    const rc=m.tier==='high'?0.55:m.tier==='mid'?0.82:0.97;
+    if(Math.random()<rc){
+      const photoReactions=[
+        `Oh. ${pick(['👀','✨','🌿','💛','😌'])}`,
+        `You look nice. ${pick(['✨','💛','🌿','🫧'])}`,
+        `The water looks good there. ${pick(['🌊','🌿','💧'])}`,
+        `I see you. ${pick(['👀','✨','😏','🫦'])}`,
+        `That's a good photo. ${pick(['✨','💛','🌿'])}`,
+        `Oh. Hi. ${pick(['😌','🌿','✨','🫧'])}`,
+      ];
+      const si=currentChat;
+      const delay=m.tier==='high'?8000+Math.random()*12000:m.tier==='mid'?3000+Math.random()*5000:1500+Math.random()*2000;
+      setTimeout(()=>{showTyping();setTimeout(()=>{hideTyping();const mi=matches[si];if(!mi)return;const reply={from:'capy',text:pick(photoReactions),ts:Date.now()};mi.messages.push(reply);if(currentChat===si)appendMessage(reply);else{mi.unread=true;updateMatchesBadge();updateMatchesView();}},1200);},delay);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
 function appendMessage(msg){
   const msgs=document.getElementById('chat-messages');
   const div=document.createElement('div');
   div.className=`msg ${msg.from==='capy'?'from-capy':'from-me'}`;
-  div.style.animation='fadeSlideIn .2s ease';
+  div.style.animation='fadeSlideIn .22s ease';
   const time=new Date(msg.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  div.innerHTML=`<div class="msg-bubble">${esc(msg.text)}</div><div class="msg-time">${time}</div>`;
+  if(msg.photo){
+    div.innerHTML=`<div class="msg-photo-wrap" onclick="openLightbox('${msg.photo.replace(/'/g,"\'")}')"><img src="${msg.photo}" alt="photo"/></div><div class="msg-time">${time}</div>`;
+  }else{
+    div.innerHTML=`<div class="msg-bubble">${esc(msg.text)}</div><div class="msg-time">${time}</div>`;
+  }
   msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+}
+function openLightbox(src){
+  document.getElementById('img-lightbox-src').src=src;
+  document.getElementById('img-lightbox').classList.add('open');
 }
 function showTyping(){
   const msgs=document.getElementById('chat-messages');
@@ -1294,6 +1656,7 @@ function showTyping(){
   msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;
 }
 function hideTyping(){document.getElementById('typing-indicator')?.remove();}
+
 function sendMessage(){
   const input=document.getElementById('chat-input');
   const text=input.value.trim();
@@ -1302,21 +1665,26 @@ function sendMessage(){
   m.messages.push({from:'me',text,ts:Date.now()});
   appendMessage(m.messages[m.messages.length-1]);
   input.value='';input.style.height='auto';
-  const rc=m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
+  // Reply probability scales with attraction
+  const att=m.capy.attraction||50;
+  const baseRc=m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
+  const rc=Math.min(0.98,baseRc*(1+(att-50)/200));
   if(Math.random()<rc){
-    const delay=m.tier==='high'?300000+Math.random()*600000:m.tier==='mid'?60000+Math.random()*180000:20000+Math.random()*40000;
+    const baseDelay=m.tier==='high'?300000+Math.random()*600000:m.tier==='mid'?60000+Math.random()*180000:20000+Math.random()*40000;
+    // High attraction = slightly faster replies
+    const delay=baseDelay*(1-(att-50)/300);
     const si=currentChat;
     setTimeout(()=>{
       showTyping();
       setTimeout(()=>{
         hideTyping();
         const mi=matches[si];if(!mi) return;
-        const reply={from:'capy',text:genReply(mi.persona,mi.persona?.traits||{},false),ts:Date.now()};
+        const reply={from:'capy',text:genReply(mi.persona,mi.persona?.traits||{},false,mi.capy.attraction),ts:Date.now()};
         mi.messages.push(reply);
         if(currentChat===si) appendMessage(reply);
         else{mi.unread=true;updateMatchesBadge();updateMatchesView();}
       },1200+Math.random()*900);
-    },delay-1200);
+    },Math.max(1500,delay-1200));
   }
 }
 function handleChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
@@ -1326,12 +1694,23 @@ function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrol
 function removeCurrentMatch(){
   if(currentChat===null) return;
   if(!confirm(`Remove match with ${matches[currentChat].capy.name}?`)) return;
-  matches.splice(currentChat,1);currentChat=null;switchView('matches');updateMatchesView();updateMatchesBadge();
+  const wasIdx=currentChat;
+  matches.splice(wasIdx,1);
+  if(matches.length>0){
+    currentChat=Math.min(wasIdx,matches.length-1);
+    openChat(currentChat);
+  }else{currentChat=null;switchView('matches');}
+  updateMatchesView();updateMatchesBadge();
 }
-function reportCurrentMatch(){if(currentChat===null) return;reportTargetIdx=currentChat;document.getElementById('report-modal').classList.add('show');}
+function reportCurrentMatch(){
+  if(currentChat===null) return;
+  reportTargetIdx=currentChat;
+  document.getElementById('report-modal').classList.add('show');
+}
 function removeMatchFromList(idx){
   if(!confirm(`Remove ${matches[idx].capy.name}?`)) return;
   if(currentChat===idx) currentChat=null;
+  else if(currentChat!==null&&currentChat>idx) currentChat--;
   matches.splice(idx,1);updateMatchesView();updateMatchesBadge();
 }
 function reportMatchFromList(idx){reportTargetIdx=idx;document.getElementById('report-modal').classList.add('show');}
@@ -1611,7 +1990,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('chat-remove-btn').addEventListener('click',removeCurrentMatch);
   document.getElementById('chat-report-btn').addEventListener('click',reportCurrentMatch);
   document.getElementById('chat-send').addEventListener('click',sendMessage);
-  document.getElementById('chat-input').addEventListener('keydown',handleChatKey);
+
   document.getElementById('chat-input').addEventListener('input',function(){autoResize(this);});
   document.getElementById('chat-input').addEventListener('focus',function(){
     // Scroll messages to bottom when keyboard opens so latest message stays visible
