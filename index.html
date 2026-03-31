@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>C</text></svg>"/>
+  <title>CapyLove V2.1</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -34,427 +34,360 @@
     }
 
     html, body { height: 100%; overflow: hidden; background: var(--bg); }
-
     body {
       font-family: 'Sora', sans-serif;
       color: var(--t1);
       display: flex; flex-direction: column; height: 100dvh;
     }
 
-    /* ── Noise overlay ─────────────────────────────────── */
+    /* noise */
     body::before {
-      content: "";
-      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
       opacity: .35;
     }
 
-    /* ── Scrollbar ─────────────────────────────────────── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--s5); border-radius: 3px; }
 
-    /* ── Header ────────────────────────────────────────── */
+    /* ── Header ── */
     #header {
-      padding: 10px 18px;
-      display: flex; align-items: center; gap: 12px;
-      border-bottom: 1px solid var(--s3);
-      flex-shrink: 0;
-      background: rgba(8,8,8,.95);
-      backdrop-filter: blur(10px);
+      padding: 9px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--s3); flex-shrink: 0;
+      background: rgba(8,8,8,.97); backdrop-filter: blur(10px);
     }
-    #logo {
-      font-size: 17px; font-weight: 800; letter-spacing: -.6px;
-      background: linear-gradient(135deg, var(--orange), var(--peach));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    #logo-sub { font-family: 'DM Mono', monospace; font-size: 8px; color: var(--t4); letter-spacing: 2px; margin-top: 1px; }
+    #logo { font-size: 16px; font-weight: 800; letter-spacing: -.6px; background: linear-gradient(135deg, var(--orange), var(--peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    #logo-sub { font-family: 'DM Mono', monospace; font-size: 7.5px; color: var(--t4); letter-spacing: 2px; margin-top: 1px; }
     #header-spacer { flex: 1; }
     #header-stats { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t3); line-height: 1.7; text-align: right; }
-
-    /* login button */
-    #login-btn {
-      padding: 6px 14px; border-radius: 20px; border: 1px solid var(--s5);
-      background: transparent; color: var(--t2); font-family: 'Sora', sans-serif;
-      font-size: 11px; font-weight: 500; cursor: pointer; transition: all .15s; white-space: nowrap;
-    }
+    #login-btn { padding: 5px 13px; border-radius: 20px; border: 1px solid var(--s5); background: transparent; color: var(--t2); font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 500; cursor: pointer; transition: all .15s; white-space: nowrap; }
     #login-btn:hover { border-color: var(--orange); color: var(--orange); }
     #login-btn.logged-in { border-color: var(--green); color: var(--green); }
 
-    /* ── Tabs ──────────────────────────────────────────── */
-    #tabs {
-      display: flex; gap: 2px; padding: 8px 14px 0;
-      border-bottom: 1px solid var(--s3); flex-shrink: 0;
-      background: rgba(8,8,8,.9);
-    }
-    .tab {
-      padding: 7px 14px; border-radius: 10px 10px 0 0;
-      font-size: 11px; font-weight: 500; cursor: pointer;
-      background: transparent; color: var(--t3); border: none;
-      transition: all .15s; user-select: none; letter-spacing: -.1px;
-    }
+    /* ── Tabs ── */
+    #tabs { display: flex; gap: 2px; padding: 7px 12px 0; border-bottom: 1px solid var(--s3); flex-shrink: 0; background: rgba(8,8,8,.95); }
+    .tab { padding: 6px 13px; border-radius: 10px 10px 0 0; font-size: 11px; font-weight: 500; cursor: pointer; background: transparent; color: var(--t3); border: none; transition: all .15s; user-select: none; letter-spacing: -.1px; }
     .tab.active { background: var(--s2); color: var(--t1); }
     .tab:hover:not(.active) { color: var(--t2); }
 
-    /* ── Main ──────────────────────────────────────────── */
-    #main { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
-    .view { display: none; flex: 1; overflow: hidden; }
+    /* ── Main ── */
+    #main { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+    .view { display: none; flex: 1; overflow: hidden; min-height: 0; }
     .view.active { display: flex; flex-direction: column; }
 
-    /* ── SWIPE VIEW ────────────────────────────────────── */
-    #swipe-view { align-items: center; justify-content: center; padding: 10px 12px; gap: 10px; position: relative; }
-
-    /* Filter bar */
-    #filter-bar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; flex-shrink: 0; }
-    .filter-btn {
-      font-size: 10px; padding: 4px 12px; border-radius: 20px;
-      cursor: pointer; border: 1px solid var(--s4);
-      background: transparent; color: var(--t3);
-      transition: all .15s; font-family: 'Sora', sans-serif; font-weight: 500; letter-spacing: -.1px;
+    /* ══════════════════════════════════════════
+       SWIPE VIEW — large card canvas
+    ══════════════════════════════════════════ */
+    #swipe-view {
+      align-items: center;
+      overflow-y: auto;
+      padding: 10px 12px 14px;
+      gap: 10px;
     }
+
+    #filter-bar { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; flex-shrink: 0; }
+    .filter-btn { font-size: 10px; padding: 4px 11px; border-radius: 20px; cursor: pointer; border: 1px solid var(--s4); background: transparent; color: var(--t3); transition: all .15s; font-family: 'Sora', sans-serif; font-weight: 500; }
     .filter-btn.active { border-color: var(--orange); background: rgba(232,103,42,.1); color: var(--orange); }
 
-    /* Card */
-    #card-stack { position: relative; width: 100%; max-width: 340px; height: 460px; flex-shrink: 0; }
+    /* Card stack — large & dynamic */
+    #card-stack {
+      position: relative;
+      /* Fills available width up to 520px, taller on desktop */
+      width: min(100%, 520px);
+      /* Fluid height: tall on desktop, slightly shorter on small phones */
+      height: clamp(540px, 78vh, 820px);
+      flex-shrink: 0;
+    }
 
     .capy-card {
       position: absolute; inset: 0;
-      background: var(--s1); border-radius: 22px; overflow: hidden;
+      background: var(--s1); border-radius: 26px; overflow: hidden;
       cursor: grab; user-select: none; touch-action: none;
-      box-shadow: 0 16px 48px rgba(0,0,0,.7), 0 0 0 1px var(--s3);
+      box-shadow: 0 20px 60px rgba(0,0,0,.75), 0 0 0 1px var(--s3);
       will-change: transform; transition: box-shadow .2s;
+      display: flex; flex-direction: column;
     }
     .capy-card:active { cursor: grabbing; }
 
+    /* Image — 46% of card height */
     .card-img {
-      width: 100%; height: 62%; object-fit: cover; display: block;
+      width: 100%;
+      height: 46%;
+      object-fit: cover; display: block;
       background: var(--s3); pointer-events: none;
+      flex-shrink: 0;
     }
+    /* Placeholder — no "C", just a gradient */
     .card-img-placeholder {
-      width: 100%; height: 62%; display: flex; align-items: center;
-      justify-content: center; background: var(--s3); font-size: 56px;
+      width: 100%; height: 46%; flex-shrink: 0;
+      display: none;
+      background: linear-gradient(135deg, var(--s3), var(--s4));
+      align-items: center; justify-content: center;
     }
+    .card-img-placeholder svg { opacity: .15; }
 
     .card-gradient {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 65%;
-      background: linear-gradient(transparent, rgba(8,8,8,.95) 55%);
+      position: absolute; top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
       pointer-events: none;
     }
 
-    .card-info { padding: 12px 14px 10px; position: absolute; bottom: 0; left: 0; right: 0; }
-    .card-name-row { display: flex; align-items: baseline; gap: 7px; margin-bottom: 3px; }
-    .card-name { font-size: 21px; font-weight: 700; letter-spacing: -.5px; }
-    .card-age  { font-size: 15px; color: var(--t2); font-weight: 400; }
-    .card-gender-badge {
-      font-size: 9px; padding: 2px 7px; border-radius: 8px; font-weight: 600; letter-spacing: .5px;
+    /* Scrollable info area */
+    .card-info {
+      flex: 1; overflow-y: auto; padding: 14px 16px 16px;
+      display: flex; flex-direction: column; gap: 10px;
     }
+    .card-info::-webkit-scrollbar { width: 2px; }
+    .card-info::-webkit-scrollbar-thumb { background: var(--s5); }
+
+    .card-name-row { display: flex; align-items: baseline; gap: 7px; }
+    .card-name { font-size: 23px; font-weight: 800; letter-spacing: -.6px; }
+    .card-age  { font-size: 16px; color: var(--t2); font-weight: 400; }
+    .card-gender-badge { font-size: 9px; padding: 2px 7px; border-radius: 7px; font-weight: 600; letter-spacing: .5px; }
     .card-gender-badge.male   { background: rgba(74,158,255,.12); color: var(--blue); }
-    .card-gender-badge.female { background: rgba(244,162,97,.12); color: var(--peach); }
+    .card-gender-badge.female { background: rgba(244,162,97,.12);  color: var(--peach); }
 
-    .card-location { font-size: 10px; color: var(--t3); margin-bottom: 6px; font-family: 'DM Mono', monospace; letter-spacing: .3px; }
-    .card-bio { font-size: 11.5px; color: var(--t2); line-height: 1.55;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-location { font-size: 10px; color: var(--t3); font-family: 'DM Mono', monospace; letter-spacing: .3px; }
 
-    /* Attraction bar */
-    .card-attr-row { display: flex; align-items: center; gap: 7px; margin-top: 8px; }
-    .attr-label { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t4); width: 52px; flex-shrink: 0; }
-    .attr-track { flex: 1; height: 3px; background: var(--s4); border-radius: 2px; overflow: hidden; }
-    .attr-fill  { height: 100%; border-radius: 2px; transition: width .4s; }
-    .attr-val   { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t3); width: 28px; text-align: right; flex-shrink: 0; }
+    /* Bio — full, no clamp */
+    .card-bio { font-size: 12.5px; color: var(--t2); line-height: 1.65; }
 
-    /* Tags row */
-    .card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
-    .card-tag {
-      font-size: 9px; padding: 2px 7px; border-radius: 6px;
-      border: 1px solid var(--s5); color: var(--t3); font-family: 'DM Mono', monospace; letter-spacing: .3px;
+    /* Attraction grade badge */
+    .card-grade-row { display: flex; align-items: center; gap: 8px; }
+    .grade-badge {
+      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 8px; letter-spacing: .5px;
     }
+    .grade-S  { background: rgba(212,168,67,.18); color: var(--gold);   border: 1px solid rgba(212,168,67,.35); }
+    .grade-A  { background: rgba(46,194,126,.15); color: var(--green);  border: 1px solid rgba(46,194,126,.3); }
+    .grade-B  { background: rgba(74,158,255,.12); color: var(--blue);   border: 1px solid rgba(74,158,255,.25); }
+    .grade-C  { background: rgba(232,103,42,.12); color: var(--orange); border: 1px solid rgba(232,103,42,.25); }
+    .grade-D  { background: rgba(160,160,160,.1); color: var(--t3);     border: 1px solid var(--s5); }
+    .grade-label { font-size: 10px; color: var(--t3); }
 
-    /* Swipe stamps */
-    .stamp {
-      position: absolute; top: 22px; font-size: 20px; font-weight: 800;
-      border: 3px solid; border-radius: 6px; padding: 3px 12px;
-      opacity: 0; pointer-events: none; letter-spacing: 2px; text-transform: uppercase;
-      font-family: 'DM Mono', monospace;
-    }
+    /* 6 metric bars */
+    .card-metrics { display: flex; flex-direction: column; gap: 5px; }
+    .card-metric-row { display: flex; align-items: center; gap: 7px; }
+    .metric-label { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t4); width: 56px; flex-shrink: 0; letter-spacing: .3px; }
+    .metric-track { flex: 1; height: 4px; background: var(--s4); border-radius: 2px; overflow: hidden; }
+    .metric-fill  { height: 100%; border-radius: 2px; transition: width .5s; }
+    .metric-val   { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t3); width: 30px; text-align: right; flex-shrink: 0; }
+
+    /* Tags */
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .card-tag  { font-size: 9px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--s5); color: var(--t3); font-family: 'DM Mono', monospace; letter-spacing: .2px; }
+    .card-tag.hobby { border-color: rgba(232,103,42,.25); color: rgba(232,103,42,.7); }
+
+    /* Stamps */
+    .stamp { position: absolute; top: 20px; font-size: 18px; font-weight: 800; border: 3px solid; border-radius: 6px; padding: 3px 12px; opacity: 0; pointer-events: none; letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
     .stamp-like { left: 14px; color: var(--green); border-color: var(--green); transform: rotate(-18deg); }
     .stamp-pass { right: 14px; color: var(--red);   border-color: var(--red);   transform: rotate(18deg); }
 
     /* Action buttons */
-    #action-btns { display: flex; gap: 14px; align-items: center; flex-shrink: 0; }
-    .action-btn {
-      border: none; cursor: pointer; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform .15s, box-shadow .15s; font-size: 18px;
-      font-family: 'Sora', sans-serif; font-weight: 700;
-    }
+    #action-btns { display: flex; gap: 16px; align-items: center; flex-shrink: 0; padding-bottom: 2px; }
+    .action-btn { border: none; cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform .15s, box-shadow .15s; font-size: 18px; font-family: 'Sora', sans-serif; font-weight: 700; }
     .action-btn:active { transform: scale(.88); }
-    .btn-pass  { width: 52px; height: 52px; background: var(--s2); border: 1px solid var(--s5); color: var(--red); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-    .btn-like  { width: 62px; height: 62px; background: linear-gradient(135deg, var(--green), #2ec27ecc); box-shadow: 0 6px 22px rgba(46,194,126,.3); color: #fff; }
-    .btn-super { width: 44px; height: 44px; background: var(--s2); border: 1px solid rgba(212,168,67,.4); color: var(--gold); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+    .btn-pass  { width: 54px; height: 54px; background: var(--s2); border: 1px solid var(--s5); color: var(--red);   box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+    .btn-like  { width: 64px; height: 64px; background: linear-gradient(135deg, var(--green), #2ec27ecc); box-shadow: 0 6px 22px rgba(46,194,126,.3); color: #fff; }
+    .btn-super { width: 46px; height: 46px; background: var(--s2); border: 1px solid rgba(212,168,67,.4); color: var(--gold); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
     .btn-pass:hover  { box-shadow: 0 6px 20px rgba(224,82,82,.25); }
     .btn-like:hover  { box-shadow: 0 8px 30px rgba(46,194,126,.45); transform: scale(1.05); }
     .btn-super:hover { box-shadow: 0 6px 20px rgba(212,168,67,.3); }
-
     .capy-count { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t4); text-align: center; }
 
     /* Empty state */
     #empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; height: 100%; padding: 24px; }
     #empty-state.show { display: flex; }
     #empty-state h2 { font-size: 20px; font-weight: 700; }
-    #empty-state p { color: var(--t3); font-size: 12px; max-width: 240px; line-height: 1.65; }
+    #empty-state p  { color: var(--t3); font-size: 12px; max-width: 240px; line-height: 1.65; }
     #empty-state button { margin-top: 6px; padding: 10px 26px; border-radius: 22px; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Sora', sans-serif; }
 
-    /* ── MATCHES VIEW ──────────────────────────────────── */
+    /* ══ MATCHES VIEW ══ */
     #matches-view { flex-direction: column; overflow: hidden; }
-    #matches-header-bar { padding: 14px 18px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; border-bottom: 1px solid var(--s3); }
-    #matches-header-bar h2 { font-size: 15px; font-weight: 700; letter-spacing: -.3px; }
+    #matches-header-bar { padding: 12px 16px 8px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; border-bottom: 1px solid var(--s3); }
+    #matches-header-bar h2 { font-size: 14px; font-weight: 700; }
     #matches-count-badge { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t3); }
-
-    /* New matches horizontal strip */
-    #new-matches-strip { padding: 12px 16px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
-    #new-matches-strip h3 { font-size: 9px; font-weight: 600; color: var(--t3); letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; margin-bottom: 10px; }
-    #new-matches-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
-    .new-match-bubble {
-      flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;
-    }
-    .new-match-bubble img {
-      width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
-      border: 2px solid var(--orange); background: var(--s3);
-    }
+    #new-matches-strip { padding: 10px 14px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
+    #new-matches-strip h3 { font-size: 8.5px; font-weight: 600; color: var(--t3); letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
+    #new-matches-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 2px; }
+    .new-match-bubble { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+    .new-match-bubble img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); background: var(--s3); }
     .new-match-bubble span { font-size: 9px; color: var(--t2); font-family: 'DM Mono', monospace; }
-
-    /* Conversation list */
     #convo-list { overflow-y: auto; flex: 1; }
-    .convo-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 18px; border-bottom: 1px solid var(--s3);
-      cursor: pointer; transition: background .12s; position: relative;
-    }
+    .convo-item { display: flex; align-items: center; gap: 11px; padding: 9px 16px; border-bottom: 1px solid var(--s3); cursor: pointer; transition: background .12s; }
     .convo-item:hover { background: var(--s2); }
-    .convo-item:active { background: var(--s3); }
-    .convo-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
+    .convo-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
     .convo-info { flex: 1; min-width: 0; }
-    .convo-name { font-size: 13px; font-weight: 600; letter-spacing: -.2px; margin-bottom: 3px; }
+    .convo-name { font-size: 13px; font-weight: 600; letter-spacing: -.2px; margin-bottom: 2px; }
     .convo-preview { font-size: 11px; color: var(--t3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .convo-time { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t4); }
     .convo-unread { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
-    .convo-actions { display: flex; gap: 5px; flex-shrink: 0; }
-    .convo-action-btn { padding: 3px 8px; border-radius: 8px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
-    .convo-action-btn.remove:hover { border-color: var(--red); color: var(--red); }
+    .convo-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .convo-action-btn { padding: 3px 7px; border-radius: 7px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
+    .convo-action-btn.remove:hover { border-color: var(--red);  color: var(--red); }
     .convo-action-btn.report:hover { border-color: var(--gold); color: var(--gold); }
-
     .no-matches { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--t4); gap: 10px; text-align: center; padding: 24px; }
-    .no-matches .nm-icon { font-size: 48px; font-family: 'DM Mono', monospace; color: var(--s5); }
     .no-matches p { font-size: 12px; color: var(--t3); line-height: 1.65; max-width: 220px; }
 
-    /* ── CHAT VIEW ─────────────────────────────────────── */
+    /* ══ CHAT VIEW ══ */
     #chat-view { flex-direction: column; overflow: hidden; }
-    #chat-header { padding: 10px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--s3); flex-shrink: 0; background: var(--s1); }
-    #chat-back { background: none; border: none; color: var(--t2); cursor: pointer; font-size: 18px; padding: 2px 8px 2px 0; }
-    #chat-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--s3); flex-shrink: 0; }
-    #chat-name { font-size: 14px; font-weight: 700; letter-spacing: -.3px; }
-    #chat-sub  { font-size: 10px; color: var(--t3); font-family: 'DM Mono', monospace; }
-    #chat-header-actions { margin-left: auto; display: flex; gap: 6px; }
-    .chat-header-btn { padding: 4px 10px; border-radius: 10px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
-    .chat-header-btn.remove:hover { border-color: var(--red); color: var(--red); }
+    #chat-header { padding: 9px 14px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--s3); flex-shrink: 0; background: var(--s1); }
+    #chat-back { background: none; border: none; color: var(--t2); cursor: pointer; font-size: 18px; padding: 2px 7px 2px 0; }
+    #chat-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--s3); flex-shrink: 0; }
+    #chat-name { font-size: 13px; font-weight: 700; letter-spacing: -.3px; }
+    #chat-sub  { font-size: 9.5px; color: var(--t3); font-family: 'DM Mono', monospace; }
+    #chat-header-actions { margin-left: auto; display: flex; gap: 5px; }
+    .chat-header-btn { padding: 3px 9px; border-radius: 8px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
+    .chat-header-btn.remove:hover { border-color: var(--red);  color: var(--red); }
     .chat-header-btn.report:hover { border-color: var(--gold); color: var(--gold); }
-
-    #chat-messages { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
-    .msg { display: flex; flex-direction: column; max-width: 72%; }
+    #chat-messages { flex: 1; overflow-y: auto; padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; }
+    .msg { display: flex; flex-direction: column; max-width: 74%; }
     .msg.from-capy { align-self: flex-start; }
     .msg.from-me   { align-self: flex-end; }
-    .msg-bubble { padding: 9px 12px; border-radius: 16px; font-size: 12.5px; line-height: 1.55; }
+    .msg-bubble { padding: 8px 12px; border-radius: 16px; font-size: 12.5px; line-height: 1.55; }
     .msg.from-capy .msg-bubble { background: var(--s3); color: var(--t1); border-bottom-left-radius: 4px; }
     .msg.from-me   .msg-bubble { background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; border-bottom-right-radius: 4px; }
     .msg-time { font-family: 'DM Mono', monospace; font-size: 8px; color: var(--t4); margin-top: 3px; }
     .msg.from-capy .msg-time { align-self: flex-start; }
     .msg.from-me   .msg-time { align-self: flex-end; }
-    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 10px 14px; background: var(--s3); border-radius: 16px; border-bottom-left-radius: 4px; align-self: flex-start; }
+    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 9px 13px; background: var(--s3); border-radius: 16px; border-bottom-left-radius: 4px; align-self: flex-start; }
     .typing-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--t3); animation: typingBounce .8s infinite; }
     .typing-dot:nth-child(2) { animation-delay: .15s; }
     .typing-dot:nth-child(3) { animation-delay: .3s; }
-    @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
-
-    #chat-input-bar { padding: 10px 14px; border-top: 1px solid var(--s3); display: flex; gap: 8px; flex-shrink: 0; background: var(--s1); }
-    #chat-input { flex: 1; background: var(--s3); border: 1px solid var(--s4); border-radius: 20px; padding: 9px 14px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px; outline: none; resize: none; max-height: 100px; transition: border-color .15s; }
+    @keyframes typingBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+    #chat-input-bar { padding: 9px 12px; border-top: 1px solid var(--s3); display: flex; gap: 7px; flex-shrink: 0; background: var(--s1); }
+    #chat-input { flex: 1; background: var(--s3); border: 1px solid var(--s4); border-radius: 18px; padding: 8px 13px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px; outline: none; resize: none; max-height: 90px; transition: border-color .15s; }
     #chat-input:focus { border-color: var(--orange); }
-    #chat-send { width: 36px; height: 36px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .15s; align-self: flex-end; }
+    #chat-send { width: 34px; height: 34px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .15s; align-self: flex-end; }
     #chat-send:hover { transform: scale(1.08); }
     #chat-send:disabled { background: var(--s4); cursor: default; transform: none; }
 
-    /* ── LEADERBOARD ───────────────────────────────────── */
+    /* ══ LEADERBOARD ══ */
     #leaderboard-view { flex-direction: column; overflow: hidden; }
-    #lb-header { padding: 14px 18px 10px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
-    #lb-header h2 { font-size: 15px; font-weight: 700; letter-spacing: -.3px; }
-    #lb-header p  { font-size: 10px; color: var(--t3); margin-top: 3px; font-family: 'DM Mono', monospace; }
-    #leaderboard-list { overflow-y: auto; flex: 1; padding: 8px 14px 14px; }
-    .lb-item { display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: var(--r); margin-bottom: 5px; background: var(--s1); border: 1px solid var(--s3); transition: background .12s; }
+    #lb-header { padding: 12px 16px 8px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
+    #lb-header h2 { font-size: 14px; font-weight: 700; }
+    #lb-header p  { font-size: 9.5px; color: var(--t3); margin-top: 2px; font-family: 'DM Mono', monospace; }
+    #leaderboard-list { overflow-y: auto; flex: 1; padding: 7px 12px 12px; }
+    .lb-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: var(--r); margin-bottom: 5px; background: var(--s1); border: 1px solid var(--s3); transition: background .12s; }
     .lb-item:hover { background: var(--s2); }
-    .lb-rank { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; min-width: 26px; text-align: center; }
+    .lb-rank { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; min-width: 24px; text-align: center; }
     .lb-rank.gold   { color: #D4A843; }
     .lb-rank.silver { color: #9E9E9E; }
     .lb-rank.bronze { color: #9C6E3A; }
-    .lb-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
+    .lb-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
     .lb-info { flex: 1; min-width: 0; }
-    .lb-name { font-size: 13px; font-weight: 600; }
+    .lb-name { font-size: 12px; font-weight: 600; }
     .lb-sub  { font-size: 9px; color: var(--t3); font-family: 'DM Mono', monospace; margin-top: 2px; }
     .lb-right { text-align: right; }
-    .lb-score { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 700; color: var(--orange); }
-    .lb-score-sub { font-size: 8.5px; color: var(--t4); font-family: 'DM Mono', monospace; }
-    .lb-mini-bars { display: flex; flex-direction: column; gap: 3px; min-width: 80px; }
+    .lb-score { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 700; color: var(--orange); }
+    .lb-score-sub { font-size: 8px; color: var(--t4); font-family: 'DM Mono', monospace; }
+    .lb-mini-bars { display: flex; flex-direction: column; gap: 3px; min-width: 78px; }
     .lb-mini-row { display: flex; align-items: center; gap: 4px; }
     .lb-mini-label { font-size: 8px; color: var(--t4); width: 18px; font-family: 'DM Mono', monospace; }
     .lb-mini-track { flex: 1; height: 3px; background: var(--s4); border-radius: 2px; }
     .lb-mini-fill  { height: 100%; border-radius: 2px; }
 
-    /* ── ABOUT VIEW ────────────────────────────────────── */
-    #about-view { overflow-y: auto; padding: 18px; }
-    .about-section { margin-bottom: 20px; }
-    .about-section h3 { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--t3); margin-bottom: 10px; font-family: 'DM Mono', monospace; }
-    .about-section p  { font-size: 12px; color: var(--t2); line-height: 1.7; margin-bottom: 7px; }
-    .score-legend { display: flex; flex-direction: column; gap: 7px; }
-    .score-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--s1); border-radius: 12px; border: 1px solid var(--s3); }
-    .score-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--s5); color: var(--t4); flex-shrink: 0; }
+    /* ══ ABOUT ══ */
+    #about-view { overflow-y: auto; padding: 16px; }
+    .about-section { margin-bottom: 18px; }
+    .about-section h3 { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--t3); margin-bottom: 9px; font-family: 'DM Mono', monospace; }
+    .about-section p  { font-size: 12px; color: var(--t2); line-height: 1.7; margin-bottom: 6px; }
+    .score-legend { display: flex; flex-direction: column; gap: 6px; }
+    .score-row { display: flex; align-items: center; gap: 10px; padding: 9px 11px; background: var(--s1); border-radius: 12px; border: 1px solid var(--s3); }
+    .score-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--s5); color: var(--t4); flex-shrink: 0; }
     .score-info { flex: 1; }
     .score-name { font-size: 12px; font-weight: 600; }
     .score-desc { font-size: 10px; color: var(--t3); margin-top: 2px; line-height: 1.5; }
     .score-weight { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; color: var(--orange); flex-shrink: 0; }
 
-    /* ── GENDER GATE ───────────────────────────────────── */
-    #gender-gate {
-      position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 300;
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(12px);
-    }
+    /* ══ GENDER GATE ══ */
+    #gender-gate { position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 300; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(14px); }
     #gender-gate.hidden { display: none; }
-    #gender-gate-inner {
-      background: var(--s1); border-radius: var(--rl); padding: 36px 32px;
-      max-width: 320px; width: 90%; text-align: center;
-      border: 1px solid var(--s3);
-      box-shadow: 0 32px 80px rgba(0,0,0,.8);
-      animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    #gender-gate-inner h2 { font-size: 22px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 6px; }
-    #gender-gate-inner p  { font-size: 12px; color: var(--t3); line-height: 1.65; margin-bottom: 24px; }
-    .gender-option {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 14px; border-radius: var(--r); border: 1px solid var(--s4);
-      cursor: pointer; margin-bottom: 8px; transition: all .15s; font-size: 14px; font-weight: 600;
-    }
+    #gender-gate-inner { background: var(--s1); border-radius: var(--rl); padding: 34px 28px; max-width: 310px; width: 90%; text-align: center; border: 1px solid var(--s3); box-shadow: 0 32px 80px rgba(0,0,0,.8); animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1); }
+    #gender-gate-inner h2 { font-size: 21px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 6px; }
+    #gender-gate-inner p  { font-size: 11.5px; color: var(--t3); line-height: 1.65; margin-bottom: 22px; }
+    .gender-option { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px; border-radius: var(--r); border: 1px solid var(--s4); cursor: pointer; margin-bottom: 7px; transition: all .15s; }
     .gender-option:hover { border-color: var(--orange); background: rgba(232,103,42,.07); }
-    .gender-option .g-icon { font-size: 28px; }
-    .gender-option .g-label { font-size: 14px; font-weight: 600; }
-    .gender-option .g-sub { font-size: 10px; color: var(--t3); font-weight: 400; margin-top: 2px; }
+    .gender-option .g-icon  { font-size: 24px; }
+    .gender-option .g-label { font-size: 13px; font-weight: 600; }
+    .gender-option .g-sub   { font-size: 10px; color: var(--t3); font-weight: 400; margin-top: 1px; }
     #gender-skip { margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; text-decoration: underline; }
 
-    /* ── LOGIN MODAL ───────────────────────────────────── */
-    #login-modal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 300;
-      align-items: center; justify-content: center; backdrop-filter: blur(10px);
-    }
+    /* ══ LOGIN MODAL ══ */
+    #login-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 300; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
     #login-modal.show { display: flex; }
-    #login-modal-inner {
-      background: var(--s1); border-radius: var(--rl); padding: 32px 28px;
-      max-width: 340px; width: 90%; border: 1px solid var(--s3);
-      box-shadow: 0 24px 70px rgba(0,0,0,.8);
-      animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    #login-modal-inner h2 { font-size: 20px; font-weight: 800; letter-spacing: -.4px; margin-bottom: 4px; }
-    #login-modal-inner p  { font-size: 11px; color: var(--t3); line-height: 1.6; margin-bottom: 22px; }
-    .login-form-row { margin-bottom: 12px; }
-    .login-form-row label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--t3); letter-spacing: 1.5px; display: block; margin-bottom: 5px; }
-    .login-form-row input {
-      width: 100%; background: var(--s3); border: 1px solid var(--s4); border-radius: 10px;
-      padding: 9px 12px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px;
-      outline: none; transition: border-color .15s;
-    }
-    .login-form-row input:focus { border-color: var(--orange); }
-    .login-submit {
-      width: 100%; padding: 11px; border-radius: 22px; border: none;
-      background: linear-gradient(135deg, var(--orange), var(--peach));
-      color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
-      font-family: 'Sora', sans-serif; margin-top: 4px; transition: opacity .15s;
-    }
+    #login-modal-inner { background: var(--s1); border-radius: var(--rl); padding: 28px 24px; max-width: 330px; width: 90%; border: 1px solid var(--s3); box-shadow: 0 24px 70px rgba(0,0,0,.8); animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1); }
+    #login-modal-inner h2 { font-size: 19px; font-weight: 800; letter-spacing: -.4px; margin-bottom: 4px; }
+    #login-modal-inner p  { font-size: 11px; color: var(--t3); line-height: 1.6; margin-bottom: 20px; }
+    .login-form-row { margin-bottom: 11px; }
+    .login-form-row label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--t3); letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
+    .login-form-row input, .login-form-row select { width: 100%; background: var(--s3); border: 1px solid var(--s4); border-radius: 10px; padding: 8px 11px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px; outline: none; transition: border-color .15s; cursor: pointer; }
+    .login-form-row input:focus, .login-form-row select:focus { border-color: var(--orange); }
+    .login-submit { width: 100%; padding: 10px; border-radius: 22px; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; margin-top: 4px; transition: opacity .15s; }
     .login-submit:hover { opacity: .9; }
-    .login-close { display: block; text-align: center; margin-top: 12px; font-size: 10px; color: var(--t4); cursor: pointer; }
+    .login-close { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; }
 
-    /* ── MATCH POPUP ───────────────────────────────────── */
-    #match-popup { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+    /* ══ MATCH POPUP ══ */
+    #match-popup { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
     #match-popup.show { display: flex; }
-    #match-popup-inner {
-      background: var(--s1); border-radius: var(--rl); padding: 28px 24px;
-      text-align: center; max-width: 300px; width: 88%;
-      border: 1px solid rgba(232,103,42,.25);
-      box-shadow: 0 24px 60px rgba(0,0,0,.75), 0 0 60px rgba(232,103,42,.08);
-      animation: popIn .35s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    #match-popup-inner img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 14px; }
-    #match-popup-inner h2 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, var(--orange), var(--peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -.5px; }
-    #match-popup-inner p  { color: var(--t2); font-size: 12px; margin: 8px 0 18px; line-height: 1.6; }
-    .popup-btn { padding: 11px 28px; border-radius: 22px; border: none; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; transition: opacity .15s; }
-    .popup-btn.primary { background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; }
-    .popup-btn.secondary { background: transparent; border: 1px solid var(--s5); color: var(--t3); margin-top: 8px; width: 100%; }
+    #match-popup-inner { background: var(--s1); border-radius: var(--rl); padding: 26px 22px; text-align: center; max-width: 295px; width: 88%; border: 1px solid rgba(232,103,42,.25); box-shadow: 0 24px 60px rgba(0,0,0,.75), 0 0 60px rgba(232,103,42,.08); animation: popIn .35s cubic-bezier(0.34,1.56,0.64,1); }
+    #match-popup-inner img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 12px; background: var(--s3); }
+    #match-popup-inner h2 { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, var(--orange), var(--peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -.4px; }
+    #match-popup-inner p  { color: var(--t2); font-size: 11.5px; margin: 7px 0 16px; line-height: 1.6; }
+    .popup-btn { padding: 10px 26px; border-radius: 22px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; transition: opacity .15s; }
+    .popup-btn.primary   { background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; }
+    .popup-btn.secondary { background: transparent; border: 1px solid var(--s5); color: var(--t3); margin-top: 7px; width: 100%; }
     .popup-btn:hover { opacity: .88; }
 
-    /* ── REPORT MODAL ──────────────────────────────────── */
-    #report-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 400; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+    /* ══ REPORT MODAL ══ */
+    #report-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 400; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
     #report-modal.show { display: flex; }
-    #report-modal-inner { background: var(--s1); border-radius: var(--rm); padding: 24px; max-width: 300px; width: 88%; border: 1px solid var(--s3); animation: popIn .25s cubic-bezier(0.34,1.56,0.64,1); }
-    #report-modal-inner h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
-    .report-option { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--s4); margin-bottom: 6px; cursor: pointer; font-size: 12px; color: var(--t2); transition: all .12s; }
+    #report-modal-inner { background: var(--s1); border-radius: var(--rm); padding: 22px; max-width: 290px; width: 88%; border: 1px solid var(--s3); animation: popIn .25s cubic-bezier(0.34,1.56,0.64,1); }
+    #report-modal-inner h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .report-option { padding: 9px 11px; border-radius: 10px; border: 1px solid var(--s4); margin-bottom: 5px; cursor: pointer; font-size: 12px; color: var(--t2); transition: all .12s; }
     .report-option:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,.07); }
-    .report-cancel { display: block; text-align: center; margin-top: 12px; font-size: 10px; color: var(--t4); cursor: pointer; }
+    .report-cancel { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; }
 
-    /* ── Animations ────────────────────────────────────── */
-    @keyframes popIn  { from { transform: scale(.75); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    @keyframes flyOut { to   { transform: translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot)); opacity: 0; } }
-    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-    @keyframes fadeSlideIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    /* ══ Animations ══ */
+    @keyframes popIn     { from{transform:scale(.75);opacity:0} to{transform:scale(1);opacity:1} }
+    @keyframes flyOut    { to{transform:translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot));opacity:0} }
+    @keyframes shimmer   { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    @keyframes fadeSlideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
     .shimmer { background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 50%, var(--s2) 75%); background-size:200% 100%; animation: shimmer 1.6s infinite; }
-
-    /* ── Utility ───────────────────────────────────────── */
-    a { color: inherit; text-decoration: none; }
     button { font-family: 'Sora', sans-serif; }
   </style>
 </head>
 <body>
 
-<!-- ── GENDER GATE ────────────────────────────────────────── -->
+<!-- GENDER GATE -->
 <div id="gender-gate">
   <div id="gender-gate-inner">
     <h2>Who are you here for?</h2>
-    <p>Set your preference to see the right capybaras. You can change this anytime from the filter bar.</p>
+    <p>Set your preference before swiping. You can change this anytime from the filter bar.</p>
     <div class="gender-option" onclick="setGenderPref('female')">
       <span class="g-icon">&#9792;</span>
-      <div>
-        <div class="g-label">Female Capybaras</div>
-        <div class="g-sub">503 available</div>
-      </div>
+      <div><div class="g-label">Female Capybaras</div><div class="g-sub">503 available</div></div>
     </div>
     <div class="gender-option" onclick="setGenderPref('male')">
       <span class="g-icon">&#9794;</span>
-      <div>
-        <div class="g-label">Male Capybaras</div>
-        <div class="g-sub">503 available</div>
-      </div>
+      <div><div class="g-label">Male Capybaras</div><div class="g-sub">503 available</div></div>
     </div>
     <div class="gender-option" onclick="setGenderPref('all')">
       <span class="g-icon">&#9898;</span>
-      <div>
-        <div class="g-label">All Capybaras</div>
-        <div class="g-sub">1,006 available</div>
-      </div>
+      <div><div class="g-label">All Capybaras</div><div class="g-sub">1,006 available</div></div>
     </div>
     <div id="gender-skip" onclick="setGenderPref('all')">Skip — show me everyone</div>
   </div>
 </div>
 
-<!-- ── LOGIN MODAL ────────────────────────────────────────── -->
+<!-- LOGIN MODAL -->
 <div id="login-modal">
   <div id="login-modal-inner">
     <h2>Sign In</h2>
-    <p>Save your matches, set your gender preference, and unlock the full CapyLove experience.</p>
+    <p>Save your matches and unlock the full CapyLove experience.</p>
     <div class="login-form-row">
       <label>NAME</label>
       <input id="login-name" type="text" placeholder="How should the capys call you?"/>
@@ -465,7 +398,7 @@
     </div>
     <div class="login-form-row">
       <label>I AM A</label>
-      <select id="login-gender" style="width:100%;background:var(--s3);border:1px solid var(--s4);border-radius:10px;padding:9px 12px;color:var(--t1);font-family:'Sora',sans-serif;font-size:12px;outline:none;cursor:pointer;">
+      <select id="login-gender">
         <option value="">Prefer not to say</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
@@ -477,7 +410,7 @@
   </div>
 </div>
 
-<!-- ── MATCH POPUP ────────────────────────────────────────── -->
+<!-- MATCH POPUP -->
 <div id="match-popup">
   <div id="match-popup-inner">
     <img id="match-popup-img" src="" alt="Match"/>
@@ -488,33 +421,32 @@
   </div>
 </div>
 
-<!-- ── REPORT MODAL ───────────────────────────────────────── -->
+<!-- REPORT MODAL -->
 <div id="report-modal">
   <div id="report-modal-inner">
     <h3>Report this Capybara</h3>
     <div class="report-option" onclick="submitReport('Suspicious behavior')">Suspicious behavior</div>
     <div class="report-option" onclick="submitReport('Fake profile')">Fake profile</div>
     <div class="report-option" onclick="submitReport('Inappropriate content')">Inappropriate content</div>
-    <div class="report-option" onclick="submitReport('Too dry')">Too dry (fur quality concerns)</div>
+    <div class="report-option" onclick="submitReport('Too dry — fur quality concerns')">Too dry (fur quality concerns)</div>
     <span class="report-cancel" onclick="closeReport()">Cancel</span>
   </div>
 </div>
 
-<!-- ── HEADER ─────────────────────────────────────────────── -->
+<!-- HEADER -->
 <div id="header">
   <div>
     <div id="logo">CapyLove</div>
-    <div id="logo-sub">V2 &nbsp;&middot;&nbsp; CAPYBARA DATING</div>
+    <div id="logo-sub">V2.1 &nbsp;&middot;&nbsp; CAPYBARA DATING</div>
   </div>
   <div id="header-spacer"></div>
   <div id="header-stats">
-    <span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp;
-    <span id="stat-matches">0</span> matches
+    <span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches
   </div>
   <button id="login-btn" onclick="openLogin()">Sign In</button>
 </div>
 
-<!-- ── TABS ───────────────────────────────────────────────── -->
+<!-- TABS -->
 <div id="tabs">
   <button class="tab active" data-view="swipe">Discover</button>
   <button class="tab" data-view="matches">Matches <span id="matches-badge" style="display:none;background:var(--orange);color:#fff;font-size:8px;padding:1px 5px;border-radius:8px;margin-left:3px;font-family:'DM Mono',monospace;"></span></button>
@@ -522,21 +454,21 @@
   <button class="tab" data-view="about">Science</button>
 </div>
 
-<!-- ── MAIN ───────────────────────────────────────────────── -->
+<!-- MAIN -->
 <div id="main">
 
-  <!-- ── SWIPE ──────────────────────────────────────────── -->
+  <!-- SWIPE -->
   <div id="swipe-view" class="view active">
     <div id="filter-bar">
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="5star">Elite (5-star)</button>
+      <button class="filter-btn" data-filter="5star">Elite (S-Grade)</button>
       <button class="filter-btn" data-filter="chonk">Chonks</button>
       <button class="filter-btn" data-filter="zen">Zen Energy</button>
     </div>
     <div id="card-stack">
       <div id="empty-state">
         <h2>You've seen every capybara.</h2>
-        <p>All 1,006 of them. That's a level of commitment that deserves acknowledgment.</p>
+        <p>All 1,006 of them. That level of commitment is statistically unprecedented.</p>
         <button onclick="resetDeck()">Start Over</button>
       </div>
     </div>
@@ -548,7 +480,7 @@
     </div>
   </div>
 
-  <!-- ── MATCHES ────────────────────────────────────────── -->
+  <!-- MATCHES -->
   <div id="matches-view" class="view">
     <div id="matches-header-bar">
       <h2>Matches</h2>
@@ -561,7 +493,7 @@
     <div id="convo-list"></div>
   </div>
 
-  <!-- ── CHAT ───────────────────────────────────────────── -->
+  <!-- CHAT -->
   <div id="chat-view" class="view">
     <div id="chat-header">
       <button id="chat-back" onclick="closeChat()">&#8592;</button>
@@ -582,275 +514,217 @@
     </div>
   </div>
 
-  <!-- ── LEADERBOARD ────────────────────────────────────── -->
+  <!-- LEADERBOARD -->
   <div id="leaderboard-view" class="view">
     <div id="lb-header">
       <h2>Most Attractive Capybaras</h2>
-      <p>Ranked by composite attraction score across all 7 dimensions</p>
+      <p>Ranked by V2.1 composite attraction score — 6 dimensions</p>
     </div>
     <div id="leaderboard-list"></div>
   </div>
 
-  <!-- ── ABOUT ──────────────────────────────────────────── -->
+  <!-- ABOUT -->
   <div id="about-view" class="view">
     <div class="about-section">
-      <h3>About CapyLove V2</h3>
-      <p>The world's only capybara dating platform. 1,006 real capybara images from the <strong>capy.lol API</strong>, scored across a 7-dimension attraction algorithm.</p>
-      <p>503 males. 503 females. All searching for connection in the wetlands and beyond.</p>
+      <h3>About CapyLove V2.1</h3>
+      <p>The world's only capybara dating platform. 1,006 real capybara images from the <strong>capy.lol API</strong>, scored across a 6-dimension attraction algorithm with letter-grade classification.</p>
+      <p>503 males. 503 females. Each assigned a unique energy type, tax bracket, biome, and hobby profile.</p>
     </div>
     <div class="about-section">
-      <h3>V2 Attraction Score System</h3>
+      <h3>Attraction Grade System</h3>
+      <p>Each capybara receives a letter grade based on their composite V2.1 score. The grade is displayed on their card and reinforced throughout their profile.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+        <span class="grade-badge grade-S">S</span>
+        <span class="grade-badge grade-A">A</span>
+        <span class="grade-badge grade-B">B</span>
+        <span class="grade-badge grade-C">C</span>
+        <span class="grade-badge grade-D">D</span>
+      </div>
+      <p style="margin-top:8px;">S = 88+ &nbsp;&middot;&nbsp; A = 74+ &nbsp;&middot;&nbsp; B = 58+ &nbsp;&middot;&nbsp; C = 42+ &nbsp;&middot;&nbsp; D = below 42</p>
+    </div>
+    <div class="about-section">
+      <h3>V2.1 Scoring Dimensions</h3>
       <div class="score-legend">
         <div class="score-row">
           <div class="score-tag">FUR</div>
-          <div class="score-info">
-            <div class="score-name">Fur Density</div>
-            <div class="score-desc">Coat thickness, fluff rating, wetness tolerance. Dense fur signals robust genetics.</div>
-          </div>
+          <div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff rating, and wetness tolerance. Dense fur signals robust genetics.</div></div>
           <div class="score-weight">22%</div>
         </div>
         <div class="score-row">
           <div class="score-tag">WGT</div>
-          <div class="score-info">
-            <div class="score-name">Weight Score</div>
-            <div class="score-desc">Capybaras range 35&#8211;65 kg. Larger specimens signal better resource access. Chonk is virtue.</div>
-          </div>
+          <div class="score-info"><div class="score-name">Weight Score</div><div class="score-desc">35&#8211;65 kg range. Larger specimens signal better resource access. Chonk is virtue.</div></div>
           <div class="score-weight">18%</div>
         </div>
         <div class="score-row">
           <div class="score-tag">SZE</div>
-          <div class="score-info">
-            <div class="score-name">Body Size</div>
-            <div class="score-desc">Length-to-snout proportions. A wider muzzle indicates superior grazing capability.</div>
-          </div>
+          <div class="score-info"><div class="score-name">Body Size</div><div class="score-desc">Length-to-snout proportions. A wider muzzle indicates superior grazing capability.</div></div>
           <div class="score-weight">14%</div>
         </div>
         <div class="score-row">
           <div class="score-tag">VBE</div>
-          <div class="score-info">
-            <div class="score-name">Vibe / Friendliness</div>
-            <div class="score-desc">Measured by inter-species tolerance and willingness to allow terrapin cohabitation.</div>
-          </div>
+          <div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance. Willingness to allow terrapin cohabitation is heavily weighted.</div></div>
           <div class="score-weight">12%</div>
         </div>
         <div class="score-row">
           <div class="score-tag">NRG</div>
-          <div class="score-info">
-            <div class="score-name">Energy Level</div>
-            <div class="score-desc">Scale of 1&#8211;10. Neither extreme is ideal. The 6&#8211;7 range has historically produced the best long-term partnerships.</div>
-          </div>
-          <div class="score-weight">16%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">TAX</div>
-          <div class="score-info">
-            <div class="score-name">Tax Bracket</div>
-            <div class="score-desc">Economic standing within the capybara wetland economy. Upper Swamp and above demonstrate territory-holding capability.</div>
-          </div>
-          <div class="score-weight">10%</div>
+          <div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Scale 1&#8211;10. Peak compatibility at 6&#8211;7. Both extremes reduce long-term pairing probability.</div></div>
+          <div class="score-weight">20%</div>
         </div>
         <div class="score-row">
           <div class="score-tag">BIO</div>
-          <div class="score-info">
-            <div class="score-name">Biome of Origin</div>
-            <div class="score-desc">Pantanal and Llanos specimens score highest. Cloud Forest capybaras are rare and therefore sought after.</div>
-          </div>
-          <div class="score-weight">8%</div>
+          <div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal and Llanos score highest. Cloud Forest specimens are rare and therefore valued.</div></div>
+          <div class="score-weight">14%</div>
         </div>
       </div>
     </div>
     <div class="about-section">
-      <h3>Match Algorithm</h3>
-      <p>High-attraction capybaras (4&#8211;5 stars) match rarely. When they do, they respond slowly. Low-attraction capybaras match more frequently and are more likely to message first. This reflects natural capybara social dynamics.</p>
-      <p>The algorithm uses a probability curve weighted against attraction score, with randomness added to prevent predictability.</p>
+      <h3>Match Probability</h3>
+      <p>High-grade capybaras (S/A) match rarely and respond slowly. Low-grade capybaras (C/D) match frequently and often message first. This reflects authentic capybara social dynamics.</p>
     </div>
   </div>
 
 </div>
 
 <script>
-// ════════════════════════════════════════════════════════════
-//  CapyLove V2 — Runtime
-// ════════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
+//  CapyLove V2.1
+// ════════════════════════════════════════════════════════
 
-// ── State ──────────────────────────────────────────────────
-let CAPYS        = [];
-let deck         = [];
-let currentIdx   = 0;
-let matches      = []; // {capy, messages:[], firstMessageSent: bool, unread: bool}
-let genderPref   = null; // 'male'|'female'|'all'
-let activeFilter = 'all';
-let currentChat  = null; // index into matches
-let pendingMatchCapy = null;
-let reportTargetIdx  = null;
-let user = null; // {name, email, gender}
+let CAPYS = [], deck = [], matches = [];
+let genderPref = null, activeFilter = 'all';
+let currentChat = null, pendingMatchCapy = null, reportTargetIdx = null;
+let user = null;
 
-// Tax bracket data
 const TAX_BRACKETS = [
-  {label:"No Income",      range:"$0",         biome_bonus: 0},
-  {label:"Forager Class",  range:"$1–$9k",     biome_bonus: 0},
-  {label:"Working Grass",  range:"$10k–$40k",  biome_bonus: 0},
-  {label:"Middle Marsh",   range:"$40k–$80k",  biome_bonus: 1},
-  {label:"Upper Swamp",    range:"$80k–$180k", biome_bonus: 2},
-  {label:"Riverfront Elite",range:"$180k–$400k",biome_bonus: 3},
-  {label:"Capybara 1%",    range:"$400k+",     biome_bonus: 4},
+  {label:"No Income"},
+  {label:"Forager Class"},
+  {label:"Working Grass"},
+  {label:"Middle Marsh"},
+  {label:"Upper Swamp"},
+  {label:"Riverfront Elite"},
+  {label:"Capybara 1%"},
 ];
 
 const BIOME_SCORES = {
-  "Amazon Rainforest, Brazil":    88,
-  "Pantanal Wetlands, Brazil":    96,
-  "Llanos Savanna, Venezuela":    92,
-  "Orinoco Delta, Venezuela":     85,
-  "Rio Paraná, Argentina":        82,
-  "Gran Chaco, Paraguay":         75,
-  "Atlantic Forest, Brazil":      80,
-  "Cerrado, Brazil":              78,
-  "Pampas, Uruguay":              72,
-  "Chiquitano Forest, Bolivia":   74,
-  "Magdalena Valley, Colombia":   83,
-  "Darién Gap, Panama":           70,
-  "Cloud Forest, Ecuador":        91,
-  "Caatinga Scrubland, Brazil":   65,
-  "Esteros del Iberá, Argentina": 87,
+  "Amazon Rainforest, Brazil":      88,
+  "Pantanal Wetlands, Brazil":      96,
+  "Llanos Savanna, Venezuela":      92,
+  "Orinoco Delta, Venezuela":       85,
+  "Rio Paraná, Argentina":          82,
+  "Gran Chaco, Paraguay":           75,
+  "Atlantic Forest, Brazil":        80,
+  "Cerrado, Brazil":                78,
+  "Pampas, Uruguay":                72,
+  "Chiquitano Forest, Bolivia":     74,
+  "Magdalena Valley, Colombia":     83,
+  "Darién Gap, Panama":             70,
+  "Cloud Forest, Ecuador":          91,
+  "Caatinga Scrubland, Brazil":     65,
+  "Esteros del Iberá, Argentina":   87,
 };
 
-// Capy AI responses by attraction tier
-const CAPY_REPLIES = {
-  high: [
-    "I appreciate the message. I'm selective about where I direct my energy.",
-    "You're not wrong to try. I'll give you that.",
-    "I've received quite a few of these. Stand out.",
-    "The marsh is quiet today. I'm choosing to share that with you.",
-    "My schedule is full most days. Today is unusual.",
-  ],
-  mid: [
-    "Hello. The water is warm today. It's a good sign.",
-    "I was just thinking about the east bank. Tell me something.",
-    "You reached out. I respect the directness.",
-    "This is unexpected, but not unwelcome.",
-    "I had a quiet morning. This is a reasonable way to end it.",
-  ],
-  low: [
-    "I have been hoping someone would message me today.",
-    "You found me. I am so glad.",
-    "I was just sitting here by the reeds, thinking about connection. And here you are.",
-    "Tell me everything. I have nowhere to be.",
-    "I've been watching the others get messages all morning. You came to me first.",
-    "This is the best part of my day and we just started.",
-  ],
-};
+// ── V2.1 Attraction formula (6 dims) ──────────────────
+function computeV2Attraction(capy) {
+  const s = capy.scores;
+  const biomeScore  = BIOME_SCORES[capy.location] || 70;
+  const energyScore = 100 - Math.abs((capy.energy || 5) - 6.5) * 12;
+  return Math.min(99, Math.max(1,
+    s.fur_density  * 0.22 +
+    s.weight_score * 0.18 +
+    s.size_score   * 0.14 +
+    s.friendliness * 0.12 +
+    energyScore    * 0.20 +
+    biomeScore     * 0.14
+  ));
+}
 
-const CAPY_FIRST_MESSAGES = {
-  high: [], // high-attraction capys don't message first
-  mid: [
-    "You liked my profile. I noticed.",
-    "I don't usually do this first. Today is different.",
-  ],
-  low: [
-    "Hi. I saw that we matched and I didn't want to wait.",
-    "I've been looking at your profile for a little while. I like you.",
-    "You matched with me. That means something. I wanted you to know.",
-    "Hello. I'm nervous but I'm sending this anyway.",
-    "I was going to wait but I decided life is too short and the reeds are too tall and here I am.",
-  ],
-};
+function gradeFromScore(v) {
+  if (v >= 88) return 'S';
+  if (v >= 74) return 'A';
+  if (v >= 58) return 'B';
+  if (v >= 42) return 'C';
+  return 'D';
+}
 
-// ── Load data ──────────────────────────────────────────────
+function gradeColor(g) {
+  return {S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g];
+}
+
+// Grade descriptions woven into bio context
+function gradeContext(grade, name) {
+  const map = {
+    S: `${name} is a Grade S capybara — the top tier. Rare, unhurried, selective. They are not looking. They are being found.`,
+    A: `${name} holds a Grade A rating. High attraction, clear presence. Most capybaras in the wetland know who they are.`,
+    B: `${name} is Grade B — solid, genuine, steady. The kind of capybara you trust immediately and for good reason.`,
+    C: `${name} carries a Grade C rating. Approachable, honest, reliably present. Not the top of the ranking — and completely fine with that.`,
+    D: `${name} is a Grade D capybara. Eager, warm, and consistently available. The reeds are never empty when they're around.`,
+  };
+  return map[grade] || '';
+}
+
+// ── Load ───────────────────────────────────────────────
 async function loadCapys() {
   try {
     const res = await fetch('./src/data/capybaras.json');
     CAPYS = await res.json();
-    console.log(`Loaded ${CAPYS.length} capybaras`);
-    buildDeck();
-    renderCards();
-    renderLeaderboard();
-  } catch(e) {
-    console.error('Failed to load capybaras.json', e);
-  }
+    buildDeck(); renderCards(); renderLeaderboard();
+  } catch(e) { console.error('Load failed', e); }
 }
 
-// ── Gender gate ────────────────────────────────────────────
+// ── Gender gate ────────────────────────────────────────
 function setGenderPref(pref) {
   genderPref = pref;
   document.getElementById('gender-gate').classList.add('hidden');
-  // set filter button to match preference
-  if (pref !== 'all') {
-    activeFilter = 'all'; // will be filtered by genderPref at deck level
-    updateFilterBtns();
-  }
-  buildDeck();
-  renderCards();
+  buildDeck(); renderCards();
 }
 
-// ── Build deck ─────────────────────────────────────────────
+// ── Build deck ─────────────────────────────────────────
 function buildDeck() {
   let pool = [...CAPYS];
-
-  // Gender filter
-  if (genderPref && genderPref !== 'all') {
-    pool = pool.filter(c => c.gender === genderPref);
-  }
-
-  // Remove already swiped
-  const swipedIds = new Set(JSON.parse(localStorage.getItem('cl_swiped') || '[]'));
-  pool = pool.filter(c => !swipedIds.has(c.id));
-
-  // Sub-filter
-  if (activeFilter === '5star') pool = pool.filter(c => c.stars >= 5);
-  else if (activeFilter === 'chonk') pool = pool.filter(c => c.scores.weight_score >= 75);
-  else if (activeFilter === 'zen') pool = pool.filter(c => c.energy_type === 'Zen' || c.energy_type === 'Unbothered');
-
-  // Sort: mix attraction levels — shuffle with bias toward mid-tier first
-  pool.sort((a, b) => {
-    const ai = Math.abs(a.attraction - 50);
-    const bi = Math.abs(b.attraction - 50);
-    return ai - bi + (Math.random() - 0.5) * 20;
+  if (genderPref && genderPref !== 'all') pool = pool.filter(c => c.gender === genderPref);
+  const swiped = new Set(JSON.parse(localStorage.getItem('cl_swiped') || '[]'));
+  pool = pool.filter(c => !swiped.has(c.id));
+  if (activeFilter === '5star') pool = pool.filter(c => {
+    const g = gradeFromScore(computeV2Attraction(c)); return g === 'S' || g === 'A';
   });
-
-  deck = pool;
-  currentIdx = 0;
-  updateStats();
+  else if (activeFilter === 'chonk') pool = pool.filter(c => c.scores.weight_score >= 75);
+  else if (activeFilter === 'zen')   pool = pool.filter(c => c.energy_type === 'Zen' || c.energy_type === 'Unbothered');
+  // Mix attraction levels — shuffle with mid-tier bias first
+  pool.sort((a,b) => {
+    const ai = Math.abs(computeV2Attraction(a) - 55);
+    const bi = Math.abs(computeV2Attraction(b) - 55);
+    return ai - bi + (Math.random() - 0.5) * 22;
+  });
+  deck = pool; updateStats();
 }
 
-// ── Render cards ───────────────────────────────────────────
+// ── Render cards ───────────────────────────────────────
 function renderCards() {
   const stack = document.getElementById('card-stack');
-  // Remove old cards (keep empty-state)
   stack.querySelectorAll('.capy-card').forEach(el => el.remove());
-
-  const emptyState = document.getElementById('empty-state');
-
-  if (deck.length === 0) {
-    emptyState.classList.add('show');
-    document.getElementById('capy-count').textContent = '';
-    return;
-  }
-  emptyState.classList.remove('show');
-
-  const toRender = deck.slice(currentIdx, currentIdx + 3);
+  const empty = document.getElementById('empty-state');
+  if (deck.length === 0) { empty.classList.add('show'); document.getElementById('capy-count').textContent = ''; return; }
+  empty.classList.remove('show');
+  const toRender = deck.slice(0, 3);
   [...toRender].reverse().forEach((capy, i) => {
     const card = buildCard(capy);
     const realIdx = toRender.length - 1 - i;
     card.style.zIndex = realIdx + 1;
     if (realIdx > 0) {
-      const scale = 1 - realIdx * 0.03;
-      const ty    = realIdx * 6;
-      card.style.transform = `scale(${scale}) translateY(${ty}px)`;
+      card.style.transform = `scale(${1 - realIdx * 0.025}) translateY(${realIdx * 8}px)`;
       card.style.pointerEvents = 'none';
-      card.style.opacity = 1 - realIdx * 0.12;
+      card.style.opacity = String(1 - realIdx * 0.1);
     }
-    stack.insertBefore(card, emptyState);
+    stack.insertBefore(card, empty);
   });
-
-  setupSwipe();
-  updateStats();
+  setupSwipe(); updateStats();
 }
 
-// ── Build card DOM ─────────────────────────────────────────
-function attrColor(v) {
-  if (v >= 75) return '#2EC27E';
-  if (v >= 50) return '#E8672A';
-  return '#666';
+// ── Build card ─────────────────────────────────────────
+function metricColor(v) {
+  if (v >= 75) return 'var(--green)';
+  if (v >= 50) return 'var(--orange)';
+  return 'var(--t3)';
 }
 
 function buildCard(capy) {
@@ -858,275 +732,235 @@ function buildCard(capy) {
   card.className = 'capy-card';
   card.dataset.id = capy.id;
 
+  const v2       = computeV2Attraction(capy);
+  const grade    = gradeFromScore(v2);
   const biomeScore = BIOME_SCORES[capy.location] || 70;
-  const v2attr = computeV2Attraction(capy);
-  const taxBracket = TAX_BRACKETS[capy.tax_bracket] || TAX_BRACKETS[0];
+  const energyScore = Math.min(100, Math.max(0, 100 - Math.abs((capy.energy || 5) - 6.5) * 12));
+  const tax      = TAX_BRACKETS[capy.tax_bracket] || TAX_BRACKETS[0];
+  const hobbies  = capy.hobbies || [];
+  const gradeCtx = gradeContext(grade, capy.name);
+
+  const metrics = [
+    { label: 'FUR',    val: capy.scores.fur_density,  color: metricColor(capy.scores.fur_density) },
+    { label: 'WEIGHT', val: capy.scores.weight_score, color: metricColor(capy.scores.weight_score) },
+    { label: 'SIZE',   val: capy.scores.size_score,   color: metricColor(capy.scores.size_score) },
+    { label: 'VIBE',   val: capy.scores.friendliness, color: metricColor(capy.scores.friendliness) },
+    { label: 'ENERGY', val: energyScore,              color: metricColor(energyScore) },
+    { label: 'BIOME',  val: biomeScore,               color: metricColor(biomeScore) },
+  ];
+
+  const metricBars = metrics.map(m =>
+    `<div class="card-metric-row">
+      <span class="metric-label">${m.label}</span>
+      <div class="metric-track"><div class="metric-fill" style="width:${m.val.toFixed(0)}%;background:${m.color}"></div></div>
+      <span class="metric-val" style="color:${m.color}">${m.val.toFixed(0)}</span>
+    </div>`
+  ).join('');
+
+  const hobbyTags = hobbies.map(h => `<span class="card-tag hobby">${h}</span>`).join('');
 
   card.innerHTML = `
     <img class="card-img" src="${capy.image_url}" alt="${capy.name}"
       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-    <div class="card-img-placeholder" style="display:none">C</div>
+    <div class="card-img-placeholder">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/>
+        <ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/>
+        <ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/>
+        <ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/>
+        <circle cx="24" cy="30" r="3" fill="#555"/>
+        <circle cx="36" cy="30" r="3" fill="#555"/>
+        <ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/>
+      </svg>
+    </div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
     <div class="stamp stamp-pass">PASS</div>
     <div class="card-info">
-      <div class="card-name-row">
-        <span class="card-name">${capy.name}</span>
-        <span class="card-age">${capy.age}</span>
-        <span class="card-gender-badge ${capy.gender}">${capy.gender === 'female' ? 'F' : 'M'}</span>
+      <div>
+        <div class="card-name-row">
+          <span class="card-name">${capy.name}</span>
+          <span class="card-age">${capy.age}</span>
+          <span class="card-gender-badge ${capy.gender}">${capy.gender === 'female' ? 'F' : 'M'}</span>
+        </div>
+        <div class="card-location">${capy.location}</div>
       </div>
-      <div class="card-location">${capy.location}</div>
+      <div class="card-grade-row">
+        <span class="grade-badge grade-${grade}">${grade}</span>
+        <span class="grade-label">${gradeCtx}</span>
+      </div>
       <div class="card-bio">${capy.bio}</div>
-      <div style="margin-top:9px;display:flex;flex-direction:column;gap:3px;">
-        <div class="card-attr-row">
-          <span class="attr-label">ATTRACTION</span>
-          <div class="attr-track"><div class="attr-fill" style="width:${v2attr}%;background:${attrColor(v2attr)}"></div></div>
-          <span class="attr-val" style="color:${attrColor(v2attr)}">${v2attr.toFixed(0)}</span>
-        </div>
-        <div class="card-attr-row">
-          <span class="attr-label">ENERGY</span>
-          <div class="attr-track"><div class="attr-fill" style="width:${capy.energy*10}%;background:#4A9EFF"></div></div>
-          <span class="attr-val">${capy.energy.toFixed(1)}</span>
-        </div>
-        <div class="card-attr-row">
-          <span class="attr-label">BIOME</span>
-          <div class="attr-track"><div class="attr-fill" style="width:${biomeScore}%;background:#D4A843"></div></div>
-          <span class="attr-val">${biomeScore}</span>
-        </div>
-      </div>
+      <div class="card-metrics">${metricBars}</div>
       <div class="card-tags">
-        <span class="card-tag">${capy.energy_type}</span>
-        <span class="card-tag">${taxBracket.label}</span>
-        <span class="card-tag">${capy.stars}&#9733;</span>
+        <span class="card-tag">${capy.energy_type || ''}</span>
+        <span class="card-tag">${tax.label}</span>
+        ${hobbyTags}
       </div>
     </div>
   `;
   return card;
 }
 
-// ── V2 attraction formula ──────────────────────────────────
-function computeV2Attraction(capy) {
-  const s = capy.scores;
-  const biomeScore  = BIOME_SCORES[capy.location] || 70;
-  const taxScore    = (capy.tax_bracket / 6) * 100;
-  const energyScore = 100 - Math.abs(capy.energy - 6.5) * 12; // peak at 6.5
-  return Math.min(99, Math.max(1,
-    s.fur_density   * 0.22 +
-    s.weight_score  * 0.18 +
-    s.size_score    * 0.14 +
-    s.friendliness  * 0.12 +
-    energyScore     * 0.16 +
-    taxScore        * 0.10 +
-    biomeScore      * 0.08
-  ));
-}
-
-// ── Swipe logic ────────────────────────────────────────────
-let dragStartX = 0, dragStartY = 0, isDragging = false, currentCard = null;
+// ── Swipe ──────────────────────────────────────────────
+let dragStartX = 0, dragStartY = 0, isDragging = false;
 
 function setupSwipe() {
   const stack = document.getElementById('card-stack');
   const card  = stack.querySelector('.capy-card');
   if (!card) return;
-  currentCard = card;
 
-  const onStart = (e) => {
+  const onStart = e => {
     isDragging = true;
     const pt = e.touches ? e.touches[0] : e;
-    dragStartX = pt.clientX;
-    dragStartY = pt.clientY;
+    dragStartX = pt.clientX; dragStartY = pt.clientY;
     card.style.transition = 'none';
   };
-  const onMove = (e) => {
+  const onMove = e => {
     if (!isDragging) return;
     e.preventDefault();
     const pt = e.touches ? e.touches[0] : e;
-    const dx = pt.clientX - dragStartX;
-    const dy = pt.clientY - dragStartY;
-    const rot = dx * 0.06;
-    card.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-
-    const likestamp = card.querySelector('.stamp-like');
-    const passtamp  = card.querySelector('.stamp-pass');
+    const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
+    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx * 0.055}deg)`;
     const pct = Math.min(1, Math.abs(dx) / 80);
-    if (dx > 20)  { likestamp.style.opacity = pct; passtamp.style.opacity = 0; }
-    else if (dx < -20) { passtamp.style.opacity = pct; likestamp.style.opacity = 0; }
-    else { likestamp.style.opacity = 0; passtamp.style.opacity = 0; }
+    card.querySelector('.stamp-like').style.opacity = dx > 20 ? pct : 0;
+    card.querySelector('.stamp-pass').style.opacity = dx < -20 ? pct : 0;
   };
-  const onEnd = (e) => {
+  const onEnd = e => {
     if (!isDragging) return;
     isDragging = false;
     const pt = e.changedTouches ? e.changedTouches[0] : e;
-    const dx = pt.clientX - dragStartX;
-    const dy = pt.clientY - dragStartY;
-
-    if (Math.abs(dx) > 80) {
-      flyCard(card, dx > 0 ? 'like' : 'pass', dx, dy);
-    } else {
+    const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
+    if (Math.abs(dx) > 80) flyCard(card, dx > 0 ? 'like' : 'pass', dx, dy);
+    else {
       card.style.transition = 'transform .3s cubic-bezier(0.34,1.56,0.64,1)';
-      card.style.transform  = '';
+      card.style.transform = '';
       card.querySelector('.stamp-like').style.opacity = 0;
       card.querySelector('.stamp-pass').style.opacity = 0;
     }
   };
 
-  card.addEventListener('mousedown',  onStart);
+  card.addEventListener('mousedown', onStart);
   card.addEventListener('touchstart', onStart, { passive: true });
-  window.addEventListener('mousemove',  onMove);
-  window.addEventListener('touchmove',  onMove, { passive: false });
-  window.addEventListener('mouseup',    onEnd);
-  window.addEventListener('touchend',   onEnd);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('touchmove', onMove, { passive: false });
+  window.addEventListener('mouseup', onEnd);
+  window.addEventListener('touchend', onEnd);
 }
 
 function swipe(dir) {
-  const stack = document.getElementById('card-stack');
-  const card  = stack.querySelector('.capy-card');
+  const card = document.getElementById('card-stack').querySelector('.capy-card');
   if (!card) return;
   flyCard(card, dir, dir === 'like' ? 500 : -500, -80);
 }
 
 function flyCard(card, dir, dx, dy) {
-  const capyId  = parseInt(card.dataset.id);
-  const capy    = CAPYS.find(c => c.id === capyId);
-
-  const rot = dx > 0 ? 30 : -30;
-  card.style.setProperty('--dx', (dx > 0 ? 600 : -600) + 'px');
+  const capyId = parseInt(card.dataset.id);
+  const capy   = CAPYS.find(c => c.id === capyId);
+  card.style.setProperty('--dx', (dx > 0 ? 650 : -650) + 'px');
   card.style.setProperty('--dy', (dy - 120) + 'px');
-  card.style.setProperty('--rot', rot + 'deg');
+  card.style.setProperty('--rot', (dx > 0 ? 32 : -32) + 'deg');
   card.style.animation = 'flyOut .38s ease-in forwards';
   card.style.pointerEvents = 'none';
-
-  // Track swiped
   const swiped = JSON.parse(localStorage.getItem('cl_swiped') || '[]');
-  swiped.push(capyId);
-  localStorage.setItem('cl_swiped', JSON.stringify(swiped));
-
-  if (dir === 'like' || dir === 'super') {
-    checkMatch(capy, dir === 'super');
-  }
-
+  swiped.push(capyId); localStorage.setItem('cl_swiped', JSON.stringify(swiped));
+  if (dir === 'like' || dir === 'super') checkMatch(capy, dir === 'super');
   deck.splice(deck.findIndex(c => c.id === capyId), 1);
-
-  setTimeout(() => {
-    card.remove();
-    renderCards();
-  }, 380);
+  setTimeout(() => { card.remove(); renderCards(); }, 380);
 }
 
-// ── Match logic ────────────────────────────────────────────
+// ── Match logic ────────────────────────────────────────
 function matchProbability(capy) {
-  const v2  = computeV2Attraction(capy);
-  // Inverse curve: low attraction = high match rate
-  // 90% match at attraction=10, 8% match at attraction=95
-  const base = 0.90 - (v2 / 100) * 0.82;
-  return Math.max(0.05, Math.min(0.92, base + (Math.random() - 0.5) * 0.08));
+  const v2   = computeV2Attraction(capy);
+  const base = 0.92 - (v2 / 100) * 0.84;
+  return Math.max(0.04, Math.min(0.93, base + (Math.random() - 0.5) * 0.07));
 }
 
 function checkMatch(capy, isSuper) {
-  const prob = isSuper ? Math.min(0.95, matchProbability(capy) * 1.8) : matchProbability(capy);
-  if (Math.random() < prob) {
-    triggerMatch(capy);
-  }
+  const prob = isSuper ? Math.min(0.96, matchProbability(capy) * 1.8) : matchProbability(capy);
+  if (Math.random() < prob) triggerMatch(capy);
+}
+
+function tierFromGrade(grade) {
+  return (grade === 'S' || grade === 'A') ? 'high' : grade === 'B' ? 'mid' : 'low';
 }
 
 function triggerMatch(capy) {
-  const v2 = computeV2Attraction(capy);
-  const tier = v2 >= 70 ? 'high' : v2 >= 42 ? 'mid' : 'low';
-
-  const matchObj = {
-    capy,
-    messages: [],
-    tier,
-    firstMessageSent: false,
-    unread: false,
-    matchedAt: Date.now(),
-  };
-  matches.push(matchObj);
-  const matchIdx = matches.length - 1;
-
-  pendingMatchCapy = { capy, matchIdx };
-
+  const v2    = computeV2Attraction(capy);
+  const grade = gradeFromScore(v2);
+  const tier  = tierFromGrade(grade);
+  const m = { capy, messages:[], tier, grade, firstMessageSent:false, unread:false, matchedAt:Date.now() };
+  matches.push(m);
+  const idx = matches.length - 1;
+  pendingMatchCapy = { capy, matchIdx: idx };
   document.getElementById('match-popup-img').src = capy.image_url;
   document.getElementById('match-popup-text').textContent =
-    `${capy.name} (${capy.age}) from ${capy.location} matched with you. ${tier === 'high' ? 'They rarely match. This is notable.' : tier === 'mid' ? 'Reach out and see where it goes.' : 'They seem very happy about this.'}`;
+    `${capy.name} (Grade ${grade}) from ${capy.location} matched with you. ${
+      tier === 'high' ? 'Rare. They almost never match.' :
+      tier === 'mid'  ? 'Reach out and see where it goes.' :
+                        'They seem very happy about this.'}`;
   document.getElementById('match-popup').classList.add('show');
-
   updateMatchesBadge();
-
-  // Low/mid tier capys may message first
   if (tier === 'low' || (tier === 'mid' && Math.random() < 0.35)) {
-    const delay = tier === 'low' ? (8000 + Math.random() * 6000) : (20000 + Math.random() * 15000);
-    setTimeout(() => sendCapyFirstMessage(matchIdx), delay);
+    const delay = tier === 'low' ? 7000 + Math.random() * 5000 : 18000 + Math.random() * 14000;
+    setTimeout(() => sendCapyFirstMessage(idx), delay);
   }
 }
 
-function closeMatchPopup() {
-  document.getElementById('match-popup').classList.remove('show');
-  pendingMatchCapy = null;
-  updateMatchesView();
-}
-
+function closeMatchPopup() { document.getElementById('match-popup').classList.remove('show'); pendingMatchCapy = null; updateMatchesView(); }
 function openChatFromMatch() {
   document.getElementById('match-popup').classList.remove('show');
-  if (pendingMatchCapy) {
-    openChat(pendingMatchCapy.matchIdx);
-    pendingMatchCapy = null;
-    switchView('matches');
-  }
+  if (pendingMatchCapy) { openChat(pendingMatchCapy.matchIdx); pendingMatchCapy = null; switchView('matches'); }
 }
 
-// ── Auto first message from capy ───────────────────────────
-function sendCapyFirstMessage(matchIdx) {
-  const m = matches[matchIdx];
+// ── Capy first message ─────────────────────────────────
+const FIRST_MSGS = {
+  high: [],
+  mid:  ["You liked my profile. I noticed.", "I don't usually do this first. Today is different."],
+  low:  [
+    "Hi. I saw that we matched and I didn't want to wait.",
+    "I've been looking at your profile. I like you.",
+    "You matched with me. That means something. I wanted you to know.",
+    "I'm nervous but I'm sending this anyway.",
+    "I was going to wait but life is too short and the reeds are too tall and here I am.",
+  ]
+};
+const REPLIES = {
+  high: ["I appreciate the message. I'm selective about where I direct my energy.", "You're not wrong to try.", "My schedule is full most days. Today is unusual.", "The marsh is quiet. I'm choosing to share that with you."],
+  mid:  ["Hello. The water is warm today. It's a good sign.", "You reached out. I respect the directness.", "This is unexpected, but not unwelcome.", "I had a quiet morning. This is a reasonable way to end it."],
+  low:  ["I have been hoping someone would message me today.", "You found me. I am so glad.", "Tell me everything. I have nowhere to be.", "This is the best part of my day and we just started.", "I've been watching others get messages all morning. You came to me first."],
+};
+
+function sendCapyFirstMessage(idx) {
+  const m = matches[idx];
   if (!m || m.firstMessageSent) return;
-
-  const pool = CAPY_FIRST_MESSAGES[m.tier] || CAPY_FIRST_MESSAGES.low;
-  const msg  = pool[Math.floor(Math.random() * pool.length)];
-
-  m.messages.push({ from: 'capy', text: msg, ts: Date.now() });
-  m.firstMessageSent = true;
-  m.unread = true;
-
+  const pool = FIRST_MSGS[m.tier] || FIRST_MSGS.low;
+  if (!pool.length) return;
+  const msg = { from: 'capy', text: pool[Math.floor(Math.random() * pool.length)], ts: Date.now() };
+  m.messages.push(msg); m.firstMessageSent = true; m.unread = true;
   updateMatchesBadge();
-  if (currentChat === matchIdx) {
-    appendMessage({ from: 'capy', text: msg, ts: Date.now() });
-    m.unread = false;
-  } else {
-    updateMatchesView();
-  }
+  if (currentChat === idx) { appendMessage(msg); m.unread = false; } else updateMatchesView();
 }
 
-// ── Chat ───────────────────────────────────────────────────
-function openChat(matchIdx) {
-  currentChat = matchIdx;
-  const m = matches[matchIdx];
-  m.unread = false;
-  const capy = m.capy;
-
-  document.getElementById('chat-avatar').src  = capy.image_url;
-  document.getElementById('chat-name').textContent = capy.name;
-  document.getElementById('chat-sub').textContent  = `${capy.energy_type} · ${TAX_BRACKETS[capy.tax_bracket]?.label || ''} · ${capy.location}`;
-
+// ── Chat ───────────────────────────────────────────────
+function openChat(idx) {
+  currentChat = idx;
+  const m = matches[idx]; m.unread = false;
+  const c = m.capy;
+  document.getElementById('chat-avatar').src = c.image_url;
+  document.getElementById('chat-name').textContent = c.name;
+  document.getElementById('chat-sub').textContent  = `Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]?.label || ''} · ${c.location}`;
   const msgs = document.getElementById('chat-messages');
   msgs.innerHTML = '';
-
   if (m.messages.length === 0) {
     const hint = document.createElement('div');
     hint.style.cssText = 'text-align:center;padding:20px 0;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;';
-    hint.textContent = `You matched with ${capy.name}. Say something.`;
+    hint.textContent = `You matched with ${c.name}. Say something.`;
     msgs.appendChild(hint);
-  } else {
-    m.messages.forEach(msg => appendMessage(msg));
-  }
-
-  switchView('chat');
-  updateMatchesBadge();
+  } else { m.messages.forEach(appendMessage); }
+  switchView('chat'); updateMatchesBadge();
 }
 
-function closeChat() {
-  currentChat = null;
-  switchView('matches');
-}
+function closeChat() { currentChat = null; switchView('matches'); }
 
 function appendMessage(msg) {
   const msgs = document.getElementById('chat-messages');
@@ -1135,321 +969,196 @@ function appendMessage(msg) {
   div.style.animation = 'fadeSlideIn .2s ease';
   const time = new Date(msg.ts).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
   div.innerHTML = `<div class="msg-bubble">${escHtml(msg.text)}</div><div class="msg-time">${time}</div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
 }
 
 function showTyping() {
   const msgs = document.getElementById('chat-messages');
-  const el   = document.createElement('div');
-  el.id      = 'typing-indicator';
-  el.className = 'typing-indicator';
+  const el = document.createElement('div'); el.id = 'typing-indicator'; el.className = 'typing-indicator';
   el.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-  msgs.appendChild(el);
-  msgs.scrollTop = msgs.scrollHeight;
+  msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight;
 }
-
-function hideTyping() {
-  document.getElementById('typing-indicator')?.remove();
-}
+function hideTyping() { document.getElementById('typing-indicator')?.remove(); }
 
 function sendMessage() {
   const input = document.getElementById('chat-input');
   const text  = input.value.trim();
   if (!text || currentChat === null) return;
-
-  const m   = matches[currentChat];
+  const m = matches[currentChat];
   const msg = { from: 'me', text, ts: Date.now() };
-  m.messages.push(msg);
-  appendMessage(msg);
-  input.value = '';
-  input.style.height = 'auto';
-
-  // Capy replies based on tier
+  m.messages.push(msg); appendMessage(msg);
+  input.value = ''; input.style.height = 'auto';
   const tier = m.tier;
-  const replyChance = tier === 'high' ? 0.45 : tier === 'mid' ? 0.75 : 0.95;
-
+  const replyChance = tier === 'high' ? 0.42 : tier === 'mid' ? 0.76 : 0.95;
   if (Math.random() < replyChance) {
-    const delay = tier === 'high'
-      ? 12000 + Math.random() * 18000
-      : tier === 'mid'
-        ? 4000 + Math.random() * 8000
-        : 1200 + Math.random() * 2000;
-
+    const delay = tier === 'high' ? 14000 + Math.random() * 20000 : tier === 'mid' ? 4000 + Math.random() * 7000 : 1000 + Math.random() * 2000;
     setTimeout(() => {
       if (currentChat === null) return;
       showTyping();
       setTimeout(() => {
         hideTyping();
-        const pool    = CAPY_REPLIES[tier];
-        const replyTx = pool[Math.floor(Math.random() * pool.length)];
-        const reply   = { from: 'capy', text: replyTx, ts: Date.now() };
+        const pool   = REPLIES[tier];
+        const reply  = { from: 'capy', text: pool[Math.floor(Math.random() * pool.length)], ts: Date.now() };
         m.messages.push(reply);
-        if (currentChat !== null) {
-          appendMessage(reply);
-        } else {
-          m.unread = true;
-          updateMatchesBadge();
-          updateMatchesView();
-        }
-      }, 1500 + Math.random() * 1200);
-    }, delay - 1500);
+        if (currentChat !== null) appendMessage(reply);
+        else { m.unread = true; updateMatchesBadge(); updateMatchesView(); }
+      }, 1400 + Math.random() * 1000);
+    }, delay - 1400);
   }
 }
 
-function handleChatKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-}
+function handleChatKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+function autoResize(el)   { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
 
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
-}
-
-// ── Remove / Report ────────────────────────────────────────
+// ── Remove / Report ────────────────────────────────────
 function removeCurrentMatch() {
   if (currentChat === null) return;
   if (!confirm(`Remove match with ${matches[currentChat].capy.name}?`)) return;
-  matches.splice(currentChat, 1);
-  currentChat = null;
-  switchView('matches');
-  updateMatchesView();
-  updateMatchesBadge();
+  matches.splice(currentChat, 1); currentChat = null; switchView('matches'); updateMatchesView(); updateMatchesBadge();
 }
-
-function reportCurrentMatch() {
-  if (currentChat === null) return;
-  reportTargetIdx = currentChat;
-  document.getElementById('report-modal').classList.add('show');
-}
-
+function reportCurrentMatch() { if (currentChat === null) return; reportTargetIdx = currentChat; document.getElementById('report-modal').classList.add('show'); }
 function removeMatchFromList(idx) {
   if (!confirm(`Remove match with ${matches[idx].capy.name}?`)) return;
   if (currentChat === idx) currentChat = null;
-  matches.splice(idx, 1);
-  updateMatchesView();
-  updateMatchesBadge();
+  matches.splice(idx, 1); updateMatchesView(); updateMatchesBadge();
 }
-
-function reportMatchFromList(idx) {
-  reportTargetIdx = idx;
-  document.getElementById('report-modal').classList.add('show');
-}
-
+function reportMatchFromList(idx) { reportTargetIdx = idx; document.getElementById('report-modal').classList.add('show'); }
 function submitReport(reason) {
   const m = matches[reportTargetIdx];
   if (m) alert(`Report submitted for ${m.capy.name}: "${reason}". Thank you.`);
-  document.getElementById('report-modal').classList.remove('show');
-  reportTargetIdx = null;
+  document.getElementById('report-modal').classList.remove('show'); reportTargetIdx = null;
 }
+function closeReport() { document.getElementById('report-modal').classList.remove('show'); reportTargetIdx = null; }
 
-function closeReport() {
-  document.getElementById('report-modal').classList.remove('show');
-  reportTargetIdx = null;
-}
-
-// ── Matches view ───────────────────────────────────────────
+// ── Matches view ───────────────────────────────────────
 function updateMatchesView() {
   const strip   = document.getElementById('new-matches-row');
   const convoList = document.getElementById('convo-list');
-  const badge   = document.getElementById('matches-count-badge');
-
-  badge.textContent = `${matches.length} conversation${matches.length !== 1 ? 's' : ''}`;
-
-  // New matches strip (no messages yet)
-  const newMatches = matches.filter(m => m.messages.length === 0);
-  if (newMatches.length > 0) {
-    strip.innerHTML = newMatches.map((m, i) => {
+  document.getElementById('matches-count-badge').textContent = `${matches.length} conversation${matches.length !== 1 ? 's' : ''}`;
+  const newM = matches.filter(m => m.messages.length === 0);
+  if (newM.length > 0) {
+    strip.innerHTML = newM.map(m => {
       const idx = matches.indexOf(m);
-      return `<div class="new-match-bubble" onclick="openChat(${idx})">
-        <img src="${m.capy.image_url}" alt="${m.capy.name}" onerror="this.style.background='var(--s4)'"/>
-        <span>${m.capy.name}</span>
-      </div>`;
+      return `<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;
     }).join('');
     document.getElementById('new-matches-strip').style.display = '';
-  } else {
-    document.getElementById('new-matches-strip').style.display = 'none';
-  }
-
-  // Conversation list (matches with messages)
+  } else { document.getElementById('new-matches-strip').style.display = 'none'; }
   const convos = matches.filter(m => m.messages.length > 0);
-  if (matches.length === 0) {
-    convoList.innerHTML = `<div class="no-matches"><div class="nm-icon">C</div><p>No matches yet. Keep swiping — the right capybara is out there.</p></div>`;
-    return;
-  }
-  if (convos.length === 0) {
-    convoList.innerHTML = `<div style="padding:20px 18px;font-size:12px;color:var(--t3);font-family:'DM Mono',monospace;">Matched capybaras are waiting above. Send a message.</div>`;
-    return;
-  }
-
+  if (matches.length === 0) { convoList.innerHTML = `<div class="no-matches"><p>No matches yet. Keep swiping.</p></div>`; return; }
+  if (convos.length === 0) { convoList.innerHTML = `<div style="padding:18px;font-size:11px;color:var(--t3);font-family:'DM Mono',monospace;">Matched capybaras waiting above. Send a message.</div>`; return; }
   convoList.innerHTML = convos.map(m => {
-    const idx     = matches.indexOf(m);
-    const last    = m.messages[m.messages.length - 1];
-    const preview = last.from === 'me' ? 'You: ' + last.text : last.text;
-    const time    = new Date(last.ts).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
-    return `
-      <div class="convo-item" onclick="openChat(${idx})">
-        <img class="convo-avatar" src="${m.capy.image_url}" alt="${m.capy.name}" onerror="this.style.background='var(--s4)'"/>
-        <div class="convo-info">
-          <div class="convo-name">${m.capy.name}</div>
-          <div class="convo-preview">${escHtml(preview)}</div>
-        </div>
-        <div class="convo-time">${time}</div>
-        ${m.unread ? '<div class="convo-unread"></div>' : ''}
-        <div class="convo-actions" onclick="event.stopPropagation()">
-          <button class="convo-action-btn remove" onclick="removeMatchFromList(${idx})">Remove</button>
-          <button class="convo-action-btn report" onclick="reportMatchFromList(${idx})">Report</button>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function updateMatchesBadge() {
-  const unread = matches.filter(m => m.unread).length;
-  const badge  = document.getElementById('matches-badge');
-  if (unread > 0) {
-    badge.textContent = unread;
-    badge.style.display = 'inline';
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
-// ── Leaderboard ────────────────────────────────────────────
-function renderLeaderboard() {
-  if (!CAPYS.length) return;
-  const sorted = [...CAPYS].map(c => ({ c, v2: computeV2Attraction(c) }))
-    .sort((a, b) => b.v2 - a.v2)
-    .slice(0, 50);
-
-  const list = document.getElementById('leaderboard-list');
-  list.innerHTML = sorted.map(({ c, v2 }, i) => {
-    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-    const rankText  = i < 3 ? ['01','02','03'][i] : String(i+1).padStart(2,'0');
-    const biomeScore = BIOME_SCORES[c.location] || 70;
-    const taxScore   = Math.round((c.tax_bracket / 6) * 100);
-    return `<div class="lb-item">
-      <div class="lb-rank ${rankClass}">${rankText}</div>
-      <img class="lb-img" src="${c.image_url}" alt="${c.name}" onerror="this.style.background='var(--s4)'"/>
-      <div class="lb-info">
-        <div class="lb-name">${c.name}, ${c.age}</div>
-        <div class="lb-sub">${c.energy_type} &middot; ${TAX_BRACKETS[c.tax_bracket]?.label || ''}</div>
+    const idx  = matches.indexOf(m);
+    const last = m.messages[m.messages.length - 1];
+    const time = new Date(last.ts).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+    return `<div class="convo-item" onclick="openChat(${idx})">
+      <img class="convo-avatar" src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/>
+      <div class="convo-info">
+        <div class="convo-name">${m.capy.name} <span style="font-size:9px;color:${gradeColor(m.grade)};font-family:'DM Mono',monospace;">Grade ${m.grade}</span></div>
+        <div class="convo-preview">${escHtml(last.from === 'me' ? 'You: ' + last.text : last.text)}</div>
       </div>
-      <div class="lb-mini-bars">
-        <div class="lb-mini-row">
-          <span class="lb-mini-label">FUR</span>
-          <div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur_density}%;background:var(--orange)"></div></div>
-        </div>
-        <div class="lb-mini-row">
-          <span class="lb-mini-label">NRG</span>
-          <div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.energy*10}%;background:var(--blue)"></div></div>
-        </div>
-        <div class="lb-mini-row">
-          <span class="lb-mini-label">BIO</span>
-          <div class="lb-mini-track"><div class="lb-mini-fill" style="width:${biomeScore}%;background:var(--gold)"></div></div>
-        </div>
-      </div>
-      <div class="lb-right">
-        <div class="lb-score">${v2.toFixed(1)}</div>
-        <div class="lb-score-sub">V2 ATTR</div>
+      <div class="convo-time">${time}</div>
+      ${m.unread ? '<div class="convo-unread"></div>' : ''}
+      <div class="convo-actions" onclick="event.stopPropagation()">
+        <button class="convo-action-btn remove" onclick="removeMatchFromList(${idx})">Remove</button>
+        <button class="convo-action-btn report" onclick="reportMatchFromList(${idx})">Report</button>
       </div>
     </div>`;
   }).join('');
 }
 
-// ── Stats ──────────────────────────────────────────────────
+function updateMatchesBadge() {
+  const unread = matches.filter(m => m.unread).length;
+  const b = document.getElementById('matches-badge');
+  if (unread > 0) { b.textContent = unread; b.style.display = 'inline'; } else { b.style.display = 'none'; }
+}
+
+// ── Leaderboard ────────────────────────────────────────
+function renderLeaderboard() {
+  if (!CAPYS.length) return;
+  const sorted = [...CAPYS].map(c => ({ c, v2: computeV2Attraction(c) })).sort((a,b) => b.v2 - a.v2).slice(0, 50);
+  const list = document.getElementById('leaderboard-list');
+  list.innerHTML = sorted.map(({ c, v2 }, i) => {
+    const rc  = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    const rt  = i < 3 ? ['01','02','03'][i] : String(i+1).padStart(2,'0');
+    const grade = gradeFromScore(v2);
+    const biomeScore = BIOME_SCORES[c.location] || 70;
+    const es   = Math.min(100, Math.max(0, 100 - Math.abs((c.energy||5) - 6.5) * 12));
+    return `<div class="lb-item">
+      <div class="lb-rank ${rc}">${rt}</div>
+      <img class="lb-img" src="${c.image_url}" onerror="this.style.background='var(--s4)'"/>
+      <div class="lb-info">
+        <div class="lb-name">${c.name}, ${c.age}</div>
+        <div class="lb-sub">${c.energy_type} &middot; ${TAX_BRACKETS[c.tax_bracket]?.label || ''}</div>
+      </div>
+      <div class="lb-mini-bars">
+        <div class="lb-mini-row"><span class="lb-mini-label">FUR</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur_density}%;background:var(--orange)"></div></div></div>
+        <div class="lb-mini-row"><span class="lb-mini-label">NRG</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${es}%;background:var(--blue)"></div></div></div>
+        <div class="lb-mini-row"><span class="lb-mini-label">BIO</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${biomeScore}%;background:var(--gold)"></div></div></div>
+      </div>
+      <div class="lb-right">
+        <div class="lb-score">${v2.toFixed(1)}</div>
+        <div class="lb-score-sub"><span class="grade-badge grade-${grade}" style="font-size:8px;padding:1px 6px;">${grade}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Stats ──────────────────────────────────────────────
 function updateStats() {
   document.getElementById('stat-queue').textContent   = deck.length;
   document.getElementById('stat-matches').textContent = matches.length;
-  document.getElementById('capy-count').textContent   =
-    deck.length > 0 ? `${deck.length} capybaras remaining` : '';
+  document.getElementById('capy-count').textContent   = deck.length > 0 ? `${deck.length} capybaras remaining` : '';
 }
 
-// ── Login ──────────────────────────────────────────────────
+// ── Login ──────────────────────────────────────────────
 function openLogin()  { document.getElementById('login-modal').classList.add('show'); }
 function closeLogin() { document.getElementById('login-modal').classList.remove('show'); }
-
 function doLogin() {
-  const name   = document.getElementById('login-name').value.trim();
-  const email  = document.getElementById('login-email').value.trim();
-  const gender = document.getElementById('login-gender').value;
+  const name = document.getElementById('login-name').value.trim();
   if (!name) { alert('Please enter your name.'); return; }
-  user = { name, email, gender };
+  user = { name, email: document.getElementById('login-email').value.trim(), gender: document.getElementById('login-gender').value };
   localStorage.setItem('cl_user', JSON.stringify(user));
   closeLogin();
   const btn = document.getElementById('login-btn');
-  btn.textContent = name;
-  btn.classList.add('logged-in');
-  btn.onclick = () => {
-    if (confirm(`Sign out, ${name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); }
-  };
+  btn.textContent = name; btn.classList.add('logged-in');
+  btn.onclick = () => { if (confirm(`Sign out, ${user.name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); } };
 }
 
-// ── Tab / view switching ───────────────────────────────────
+// ── Tab switching ──────────────────────────────────────
 function switchView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id + '-view').classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.view === id);
-  });
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === id));
   if (id === 'matches') updateMatchesView();
 }
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchView(t.dataset.view)));
 
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => switchView(t.dataset.view));
-});
+// ── Filters ────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => {
+  activeFilter = b.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(x => x.classList.toggle('active', x === b));
+  buildDeck(); renderCards();
+}));
 
-// ── Filter ─────────────────────────────────────────────────
-function updateFilterBtns() {
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === activeFilter);
-  });
-}
+// ── Reset ──────────────────────────────────────────────
+function resetDeck() { localStorage.removeItem('cl_swiped'); buildDeck(); renderCards(); }
 
-document.querySelectorAll('.filter-btn').forEach(b => {
-  b.addEventListener('click', () => {
-    activeFilter = b.dataset.filter;
-    updateFilterBtns();
-    buildDeck();
-    renderCards();
-  });
-});
-
-// ── Reset ──────────────────────────────────────────────────
-function resetDeck() {
-  localStorage.removeItem('cl_swiped');
-  buildDeck();
-  renderCards();
-}
-
-// ── Utility ────────────────────────────────────────────────
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ── Restore user session ───────────────────────────────────
+// ── Restore session ────────────────────────────────────
 function restoreSession() {
   const saved = localStorage.getItem('cl_user');
-  if (saved) {
-    try {
-      user = JSON.parse(saved);
-      const btn = document.getElementById('login-btn');
-      btn.textContent = user.name;
-      btn.classList.add('logged-in');
-      btn.onclick = () => {
-        if (confirm(`Sign out, ${user.name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); }
-      };
-    } catch(e) {}
-  }
+  if (!saved) return;
+  try {
+    user = JSON.parse(saved);
+    const btn = document.getElementById('login-btn');
+    btn.textContent = user.name; btn.classList.add('logged-in');
+    btn.onclick = () => { if (confirm(`Sign out, ${user.name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); } };
+  } catch(e) {}
 }
 
-// ── Splash hide helper ─────────────────────────────────────
-// (no splash in this version)
+// ── Utility ────────────────────────────────────────────
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// ── Boot ───────────────────────────────────────────────────
+// ── Boot ───────────────────────────────────────────────
 restoreSession();
 loadCapys();
 </script>
