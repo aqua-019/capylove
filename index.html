@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><!-- build: 2026-03-31T19:00 v3.5.0 -->
+<html lang="en"><!-- build: 2026-03-31T19:00 v3.5.1 -->
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"/>
-  <title>CapyLove V3.5.0</title>
+  <title>CapyLove V3.5.1</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preload" href="./src/data/capybaras.json" as="fetch" crossorigin="anonymous"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -52,7 +52,10 @@
     #card-stack{position:relative;width:min(100%,480px);flex:1;min-height:300px;max-height:680px;}
     .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:none;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;}
     .capy-card:active{cursor:grabbing;}
-    .card-img{width:100%;height:44%;min-height:180px;object-fit:contain;object-position:center center;display:block;background:#0a0a0a;pointer-events:none;flex-shrink:0;}
+    .card-img{width:100%;height:44%;min-height:180px;object-fit:contain;object-position:center center;display:block;background:#0a0a0a;pointer-events:none;flex-shrink:0;transition:opacity .25s ease;}
+    .card-img.loading{opacity:0;}
+    .card-img-shimmer{position:absolute;top:0;left:0;right:0;height:44%;min-height:180px;background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:26px 26px 0 0;pointer-events:none;z-index:2;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
     .card-img-placeholder{width:100%;height:44%;min-height:180px;flex-shrink:0;display:none;background:#0a0a0a;align-items:center;justify-content:center;border-bottom:1px solid var(--s4);}
     .card-img-placeholder svg{opacity:.15;}
     .card-gradient{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent);pointer-events:none;}
@@ -1287,6 +1290,7 @@ async function loadCapys(){
     CAPYS=await res.json();
     _swipedSet=new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
     buildDeck();renderCards();renderLeaderboard();_lbBuilt=true;
+    preloadImages(0, 8); // warm up first 8 images on load
   }catch(e){console.error('Load failed',e);}
 }
 
@@ -1331,6 +1335,9 @@ function renderCards(){
   stack.insertBefore(front, empty);
 
   setupSwipe();updateStats();
+  // Preload next 5 images so they're ready before user swipes
+  preloadImages(1, 5);
+  prunePreloadCache();
 }
 
 function mc(v){return v>=75?'var(--green)':v>=50?'var(--orange)':'var(--t3)';}
@@ -1356,7 +1363,11 @@ function buildCard(c){
   const hobbies=(c.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
   const distEl=dist!==null?`<span class="card-distance">&#128205; ${fmtDist(dist)}</span>`:'';
   card.innerHTML=`
-    <img class="card-img" src="${c.url}" alt="${c.name}" loading="eager" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+    <div class="card-img-shimmer" id="shimmer-${c.id}"></div>
+    <img class="card-img loading" src="${c.url}" alt="${c.name}" loading="eager" decoding="async"
+      onload="this.classList.remove('loading');const s=document.getElementById('shimmer-${c.id}');if(s)s.remove();"
+      onerror="this.onerror=null;this.style.display='none';const s=document.getElementById('shimmer-${c.id}');if(s)s.remove();this.nextElementSibling.style.display='flex';"
+      style="opacity:0;transition:opacity .3s ease;"/>
     <div class="card-img-placeholder"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg></div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
@@ -1388,10 +1399,37 @@ function buildCard(c){
         ${hobbies}
       </div>
     </div>`;
+  // If image already cached, it may fire onload before DOM insertion — handle it
+  const imgEl = card.querySelector('.card-img');
+  if (imgEl && imgEl.complete && imgEl.naturalWidth > 0) {
+    imgEl.style.opacity = '1';
+    imgEl.classList.remove('loading');
+    const s = card.querySelector('.card-img-shimmer');
+    if (s) s.remove();
+  }
   return card;
 }
 
 // ── Swipe ──────────────────────────────────────────────────────────
+
+// ── Image preload queue ────────────────────────────────────────────
+const _preloadCache = new Map(); // url → Image object
+function preloadImages(startIdx, count = 4) {
+  for (let i = startIdx; i < Math.min(startIdx + count, deck.length); i++) {
+    const url = deck[i]?.url;
+    if (!url || _preloadCache.has(url)) continue;
+    const img = new Image();
+    img.src = url;
+    _preloadCache.set(url, img);
+  }
+}
+function prunePreloadCache() {
+  if (_preloadCache.size > 20) {
+    const keys = [..._preloadCache.keys()];
+    keys.slice(0, 10).forEach(k => _preloadCache.delete(k));
+  }
+}
+
 // ── Swipe system — single card instance, clean handler lifecycle ──────────
 let dragState = null; // { card, startX, startY, moved }
 let _swipeMoveHandler = null;
