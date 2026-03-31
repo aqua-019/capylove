@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.3.4</title>
+  <title>CapyLove V2.3.5</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -49,13 +49,13 @@
     .filter-btn{font-size:10px;padding:4px 11px;border-radius:20px;cursor:pointer;border:1px solid var(--s4);background:transparent;color:var(--t3);transition:all .15s;font-family:'Sora',sans-serif;font-weight:500;-webkit-tap-highlight-color:transparent;}
     .filter-btn.active{border-color:var(--orange);background:rgba(232,103,42,.1);color:var(--orange);}
     #card-stack{position:relative;width:min(100%,520px);height:clamp(540px,78vh,820px);flex-shrink:0;}
-    .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:none;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;isolation:isolate;}
+    .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:none;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;}
     .capy-card:active{cursor:grabbing;}
     .card-img{width:100%;height:46%;object-fit:cover;display:block;background:var(--s3);pointer-events:none;flex-shrink:0;}
     .card-img-placeholder{width:100%;height:46%;flex-shrink:0;display:none;background:linear-gradient(135deg,var(--s3),var(--s4));align-items:center;justify-content:center;}
     .card-img-placeholder svg{opacity:.15;}
     .card-gradient{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent);pointer-events:none;}
-    .card-info{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;background:var(--s1);}
+    .card-info{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;background:var(--s1);color:var(--t1);position:relative;z-index:1;}
     .card-info::-webkit-scrollbar{width:2px;}.card-info::-webkit-scrollbar-thumb{background:var(--s5);}
     .card-name-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
     .card-name{font-size:23px;font-weight:800;letter-spacing:-.6px;}
@@ -67,7 +67,7 @@
     .card-location-row{display:flex;align-items:center;gap:6px;}
     .card-location{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:.3px;}
     .card-distance{font-size:10px;font-family:'DM Mono',monospace;color:var(--blue);letter-spacing:.2px;}
-    .card-bio{font-size:13px;color:var(--t2);line-height:1.72;}
+    .card-bio{font-size:13px;color:var(--t2);line-height:1.72;word-break:break-word;}
     .card-grade-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
     .grade-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;letter-spacing:.5px;}
     .grade-S{background:rgba(212,168,67,.18);color:var(--gold);border:1px solid rgba(212,168,67,.35);}
@@ -356,7 +356,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.4 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.5 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -830,33 +830,25 @@ function buildDeck(){
 // ── Render cards ───────────────────────────────────────────────────
 function renderCards(){
   const stack=document.getElementById('card-stack');
-  stack.querySelectorAll('.capy-card').forEach(el=>el.remove());
+  stack.querySelectorAll('.capy-card,.capy-card-ghost').forEach(el=>el.remove());
   const empty=document.getElementById('empty-state');
   if(!deck.length){empty.classList.add('show');document.getElementById('capy-count').textContent='';return;}
   empty.classList.remove('show');
-  const toRender=deck.slice(0,3);
-  [...toRender].reverse().forEach((capy,i)=>{
-    const card=buildCard(capy);
-    const ri=toRender.length-1-i;
-    card.style.zIndex=ri+1;
-    if(ri>0){
-      // Back cards: fully opaque solid block, no content visible through them
-      card.style.transform=`scale(${1-ri*0.03}) translateY(${ri*10}px)`;
-      card.style.pointerEvents='none';
-      card.style.opacity='1';
-      // Hide content on back cards — they are just decorative depth indicators
-      const info=card.querySelector('.card-info');
-      const img=card.querySelector('.card-img');
-      const ph=card.querySelector('.card-img-placeholder');
-      if(info) info.style.visibility='hidden';
-      if(img)  img.style.visibility='hidden';
-      if(ph)   ph.style.visibility='hidden';
-      card.style.background='var(--s2)';
-      card.style.boxShadow='none';
-      card.style.border='1px solid var(--s3)';
-    }
-    stack.insertBefore(card,empty);
-  });
+
+  // Ghost cards behind (pure decorative — no content, no bleed)
+  const ghostCount=Math.min(2, deck.length-1);
+  for(let g=ghostCount;g>=1;g--){
+    const ghost=document.createElement('div');
+    ghost.className='capy-card-ghost';
+    ghost.style.cssText=`position:absolute;inset:0;border-radius:26px;background:var(--s2);border:1px solid var(--s3);z-index:${g};transform:scale(${1-g*0.03}) translateY(${g*10}px);pointer-events:none;`;
+    stack.insertBefore(ghost, empty);
+  }
+
+  // Front card only — full build
+  const front=buildCard(deck[0]);
+  front.style.zIndex='3';
+  stack.insertBefore(front, empty);
+
   setupSwipe();updateStats();
 }
 
@@ -933,7 +925,7 @@ function teardownSwipeHandlers() {
 function setupSwipe() {
   teardownSwipeHandlers();
   const stack = document.getElementById('card-stack');
-  const card  = stack.querySelector('.capy-card');
+  const card  = stack.querySelector('.capy-card:not(.capy-card-ghost)');
   if (!card) return;
 
   const getXY = e => e.touches ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
@@ -988,7 +980,7 @@ function setupSwipe() {
   window.addEventListener('touchend',  _swipeEndHandler,  { passive: true });
 }
 function swipe(dir){
-  const card=document.getElementById('card-stack').querySelector('.capy-card');
+  const card=document.getElementById('card-stack').querySelector('.capy-card:not(.capy-card-ghost)');
   if(!card) return;
   flyCard(card,dir,dir==='like'?500:-500,-80);
 }
