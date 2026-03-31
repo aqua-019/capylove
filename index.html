@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.3.3</title>
+  <title>CapyLove V2.3.4</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -356,7 +356,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.3 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3.4 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -567,68 +567,7 @@
 // ════════════════════════════════════════════════════════════════════
 
 // ── USA Cities dataset (city, state, approx lat/lng, pop weight) ──
-const USA_CITIES = [
-  {name:"New York",state:"NY",lat:40.7128,lng:-74.0060},
-  {name:"Los Angeles",state:"CA",lat:34.0522,lng:-118.2437},
-  {name:"Chicago",state:"IL",lat:41.8781,lng:-87.6298},
-  {name:"Houston",state:"TX",lat:29.7604,lng:-95.3698},
-  {name:"Phoenix",state:"AZ",lat:33.4484,lng:-112.0740},
-  {name:"Philadelphia",state:"PA",lat:39.9526,lng:-75.1652},
-  {name:"San Antonio",state:"TX",lat:29.4241,lng:-98.4936},
-  {name:"San Diego",state:"CA",lat:32.7157,lng:-117.1611},
-  {name:"Dallas",state:"TX",lat:32.7767,lng:-96.7970},
-  {name:"San Jose",state:"CA",lat:37.3382,lng:-121.8863},
-  {name:"Austin",state:"TX",lat:30.2672,lng:-97.7431},
-  {name:"Jacksonville",state:"FL",lat:30.3322,lng:-81.6557},
-  {name:"Fort Worth",state:"TX",lat:32.7555,lng:-97.3308},
-  {name:"Columbus",state:"OH",lat:39.9612,lng:-82.9988},
-  {name:"Charlotte",state:"NC",lat:35.2271,lng:-80.8431},
-  {name:"Indianapolis",state:"IN",lat:39.7684,lng:-86.1581},
-  {name:"San Francisco",state:"CA",lat:37.7749,lng:-122.4194},
-  {name:"Seattle",state:"WA",lat:47.6062,lng:-122.3321},
-  {name:"Denver",state:"CO",lat:39.7392,lng:-104.9903},
-  {name:"Nashville",state:"TN",lat:36.1627,lng:-86.7816},
-  {name:"Oklahoma City",state:"OK",lat:35.4676,lng:-97.5164},
-  {name:"El Paso",state:"TX",lat:31.7619,lng:-106.4850},
-  {name:"Washington",state:"DC",lat:38.9072,lng:-77.0369},
-  {name:"Boston",state:"MA",lat:42.3601,lng:-71.0589},
-  {name:"Las Vegas",state:"NV",lat:36.1699,lng:-115.1398},
-  {name:"Memphis",state:"TN",lat:35.1495,lng:-90.0490},
-  {name:"Louisville",state:"KY",lat:38.2527,lng:-85.7585},
-  {name:"Portland",state:"OR",lat:45.5051,lng:-122.6750},
-  {name:"Baltimore",state:"MD",lat:39.2904,lng:-76.6122},
-  {name:"Milwaukee",state:"WI",lat:43.0389,lng:-87.9065},
-  {name:"Albuquerque",state:"NM",lat:35.0844,lng:-106.6504},
-  {name:"Tucson",state:"AZ",lat:32.2226,lng:-110.9747},
-  {name:"Fresno",state:"CA",lat:36.7378,lng:-119.7871},
-  {name:"Sacramento",state:"CA",lat:38.5816,lng:-121.4944},
-  {name:"Kansas City",state:"MO",lat:39.0997,lng:-94.5786},
-  {name:"Mesa",state:"AZ",lat:33.4152,lng:-111.8315},
-  {name:"Atlanta",state:"GA",lat:33.7490,lng:-84.3880},
-  {name:"Omaha",state:"NE",lat:41.2565,lng:-95.9345},
-  {name:"Colorado Springs",state:"CO",lat:38.8339,lng:-104.8214},
-  {name:"Raleigh",state:"NC",lat:35.7796,lng:-78.6382},
-  {name:"Long Beach",state:"CA",lat:33.7701,lng:-118.1937},
-  {name:"Virginia Beach",state:"VA",lat:36.8529,lng:-75.9780},
-  {name:"Minneapolis",state:"MN",lat:44.9778,lng:-93.2650},
-  {name:"Tampa",state:"FL",lat:27.9506,lng:-82.4572},
-  {name:"New Orleans",state:"LA",lat:29.9511,lng:-90.0715},
-  {name:"Arlington",state:"TX",lat:32.7357,lng:-97.1081},
-  {name:"Wichita",state:"KS",lat:37.6872,lng:-97.3301},
-  {name:"Bakersfield",state:"CA",lat:35.3733,lng:-119.0187},
-  {name:"Aurora",state:"CO",lat:39.7294,lng:-104.8319},
-  {name:"Cleveland",state:"OH",lat:41.4993,lng:-81.6944},
-  {name:"Honolulu",state:"HI",lat:21.3069,lng:-157.8583},
-  {name:"Anchorage",state:"AK",lat:61.2181,lng:-149.9003},
-  {name:"Miami",state:"FL",lat:25.7617,lng:-80.1918},
-  {name:"Pittsburgh",state:"PA",lat:40.4406,lng:-79.9959},
-  {name:"Cincinnati",state:"OH",lat:39.1031,lng:-84.5120},
-  {name:"St. Louis",state:"MO",lat:38.6270,lng:-90.1994},
-  {name:"Salt Lake City",state:"UT",lat:40.7608,lng:-111.8910},
-  {name:"Orlando",state:"FL",lat:28.5383,lng:-81.3792},
-  {name:"Detroit",state:"MI",lat:42.3314,lng:-83.0458},
-  {name:"Richmond",state:"VA",lat:37.5407,lng:-77.4360},
-];
+const USA_CITIES = [{"name":"Birmingham","state":"AL","zip":"352","lat":33.5186,"lng":-86.8104},{"name":"Montgomery","state":"AL","zip":"361","lat":32.3668,"lng":-86.3},{"name":"Huntsville","state":"AL","zip":"358","lat":34.7304,"lng":-86.5861},{"name":"Mobile","state":"AL","zip":"366","lat":30.6954,"lng":-88.0399},{"name":"Anchorage","state":"AK","zip":"995","lat":61.2181,"lng":-149.9003},{"name":"Fairbanks","state":"AK","zip":"997","lat":64.8378,"lng":-147.7164},{"name":"Phoenix","state":"AZ","zip":"850","lat":33.4484,"lng":-112.074},{"name":"Tucson","state":"AZ","zip":"857","lat":32.2226,"lng":-110.9747},{"name":"Mesa","state":"AZ","zip":"852","lat":33.4152,"lng":-111.8315},{"name":"Scottsdale","state":"AZ","zip":"852","lat":33.4942,"lng":-111.9261},{"name":"Tempe","state":"AZ","zip":"852","lat":33.4255,"lng":-111.94},{"name":"Chandler","state":"AZ","zip":"852","lat":33.3062,"lng":-111.8413},{"name":"Little Rock","state":"AR","zip":"722","lat":34.7465,"lng":-92.2896},{"name":"Fort Smith","state":"AR","zip":"729","lat":35.3859,"lng":-94.3985},{"name":"Los Angeles","state":"CA","zip":"900","lat":34.0522,"lng":-118.2437},{"name":"San Francisco","state":"CA","zip":"941","lat":37.7749,"lng":-122.4194},{"name":"San Diego","state":"CA","zip":"921","lat":32.7157,"lng":-117.1611},{"name":"San Jose","state":"CA","zip":"951","lat":37.3382,"lng":-121.8863},{"name":"Sacramento","state":"CA","zip":"958","lat":38.5816,"lng":-121.4944},{"name":"Fresno","state":"CA","zip":"937","lat":36.7378,"lng":-119.7871},{"name":"Long Beach","state":"CA","zip":"908","lat":33.7701,"lng":-118.1937},{"name":"Oakland","state":"CA","zip":"946","lat":37.8044,"lng":-122.2712},{"name":"Bakersfield","state":"CA","zip":"933","lat":35.3733,"lng":-119.0187},{"name":"Anaheim","state":"CA","zip":"928","lat":33.8366,"lng":-117.9143},{"name":"Santa Ana","state":"CA","zip":"927","lat":33.7455,"lng":-117.8677},{"name":"Riverside","state":"CA","zip":"925","lat":33.9533,"lng":-117.3962},{"name":"Irvine","state":"CA","zip":"926","lat":33.6846,"lng":-117.8265},{"name":"Berkeley","state":"CA","zip":"947","lat":37.8716,"lng":-122.2727},{"name":"Santa Monica","state":"CA","zip":"904","lat":34.0195,"lng":-118.4912},{"name":"Pasadena","state":"CA","zip":"911","lat":34.1478,"lng":-118.1445},{"name":"Compton","state":"CA","zip":"902","lat":33.8958,"lng":-118.2201},{"name":"Inglewood","state":"CA","zip":"903","lat":33.9617,"lng":-118.3531},{"name":"Stockton","state":"CA","zip":"952","lat":37.9577,"lng":-121.2908},{"name":"Chula Vista","state":"CA","zip":"919","lat":32.6401,"lng":-117.0842},{"name":"Modesto","state":"CA","zip":"953","lat":37.6391,"lng":-120.9969},{"name":"Fontana","state":"CA","zip":"923","lat":34.0922,"lng":-117.435},{"name":"Denver","state":"CO","zip":"802","lat":39.7392,"lng":-104.9903},{"name":"Colorado Springs","state":"CO","zip":"809","lat":38.8339,"lng":-104.8214},{"name":"Aurora","state":"CO","zip":"800","lat":39.7294,"lng":-104.8319},{"name":"Boulder","state":"CO","zip":"803","lat":40.015,"lng":-105.2705},{"name":"Fort Collins","state":"CO","zip":"805","lat":40.5853,"lng":-105.0844},{"name":"Bridgeport","state":"CT","zip":"066","lat":41.1865,"lng":-73.1952},{"name":"New Haven","state":"CT","zip":"065","lat":41.3082,"lng":-72.9282},{"name":"Hartford","state":"CT","zip":"061","lat":41.7658,"lng":-72.6851},{"name":"Stamford","state":"CT","zip":"069","lat":41.0534,"lng":-73.5387},{"name":"Wilmington","state":"DE","zip":"198","lat":39.7447,"lng":-75.5484},{"name":"Dover","state":"DE","zip":"199","lat":39.1582,"lng":-75.5244},{"name":"Jacksonville","state":"FL","zip":"322","lat":30.3322,"lng":-81.6557},{"name":"Miami","state":"FL","zip":"331","lat":25.7617,"lng":-80.1918},{"name":"Tampa","state":"FL","zip":"336","lat":27.9506,"lng":-82.4572},{"name":"Orlando","state":"FL","zip":"328","lat":28.5383,"lng":-81.3792},{"name":"St. Petersburg","state":"FL","zip":"337","lat":27.7676,"lng":-82.6403},{"name":"Hialeah","state":"FL","zip":"330","lat":25.8576,"lng":-80.2781},{"name":"Fort Lauderdale","state":"FL","zip":"333","lat":26.1224,"lng":-80.1373},{"name":"Tallahassee","state":"FL","zip":"323","lat":30.4518,"lng":-84.2807},{"name":"Cape Coral","state":"FL","zip":"339","lat":26.5629,"lng":-81.9495},{"name":"Boca Raton","state":"FL","zip":"334","lat":26.3683,"lng":-80.1289},{"name":"West Palm Beach","state":"FL","zip":"334","lat":26.7153,"lng":-80.0534},{"name":"Gainesville","state":"FL","zip":"326","lat":29.6516,"lng":-82.3248},{"name":"Atlanta","state":"GA","zip":"303","lat":33.749,"lng":-84.388},{"name":"Augusta","state":"GA","zip":"309","lat":33.4735,"lng":-82.0105},{"name":"Columbus","state":"GA","zip":"319","lat":32.461,"lng":-84.9877},{"name":"Savannah","state":"GA","zip":"314","lat":32.0835,"lng":-81.0998},{"name":"Honolulu","state":"HI","zip":"968","lat":21.3069,"lng":-157.8583},{"name":"Hilo","state":"HI","zip":"967","lat":19.7074,"lng":-155.0885},{"name":"Boise","state":"ID","zip":"837","lat":43.615,"lng":-116.2023},{"name":"Nampa","state":"ID","zip":"836","lat":43.5407,"lng":-116.5635},{"name":"Chicago","state":"IL","zip":"606","lat":41.8781,"lng":-87.6298},{"name":"Aurora","state":"IL","zip":"605","lat":41.7606,"lng":-88.3201},{"name":"Rockford","state":"IL","zip":"611","lat":42.2711,"lng":-89.094},{"name":"Joliet","state":"IL","zip":"604","lat":41.525,"lng":-88.0817},{"name":"Naperville","state":"IL","zip":"605","lat":41.7508,"lng":-88.1535},{"name":"Springfield","state":"IL","zip":"627","lat":39.7817,"lng":-89.6501},{"name":"Evanston","state":"IL","zip":"602","lat":42.045,"lng":-87.6877},{"name":"Indianapolis","state":"IN","zip":"462","lat":39.7684,"lng":-86.1581},{"name":"Fort Wayne","state":"IN","zip":"468","lat":41.0793,"lng":-85.1394},{"name":"Evansville","state":"IN","zip":"477","lat":37.9748,"lng":-87.5558},{"name":"Des Moines","state":"IA","zip":"503","lat":41.5868,"lng":-93.625},{"name":"Cedar Rapids","state":"IA","zip":"524","lat":41.9779,"lng":-91.6656},{"name":"Wichita","state":"KS","zip":"672","lat":37.6872,"lng":-97.3301},{"name":"Overland Park","state":"KS","zip":"662","lat":38.9822,"lng":-94.6708},{"name":"Kansas City","state":"KS","zip":"661","lat":39.1155,"lng":-94.6268},{"name":"Louisville","state":"KY","zip":"402","lat":38.2527,"lng":-85.7585},{"name":"Lexington","state":"KY","zip":"405","lat":38.0406,"lng":-84.5037},{"name":"New Orleans","state":"LA","zip":"701","lat":29.9511,"lng":-90.0715},{"name":"Baton Rouge","state":"LA","zip":"708","lat":30.4515,"lng":-91.1871},{"name":"Shreveport","state":"LA","zip":"711","lat":32.5252,"lng":-93.7502},{"name":"Portland","state":"ME","zip":"041","lat":43.6591,"lng":-70.2568},{"name":"Bangor","state":"ME","zip":"044","lat":44.8016,"lng":-68.7712},{"name":"Baltimore","state":"MD","zip":"212","lat":39.2904,"lng":-76.6122},{"name":"Frederick","state":"MD","zip":"217","lat":39.4143,"lng":-77.4105},{"name":"Rockville","state":"MD","zip":"208","lat":39.084,"lng":-77.1528},{"name":"Boston","state":"MA","zip":"021","lat":42.3601,"lng":-71.0589},{"name":"Worcester","state":"MA","zip":"016","lat":42.2626,"lng":-71.8023},{"name":"Springfield","state":"MA","zip":"011","lat":42.1015,"lng":-72.5898},{"name":"Cambridge","state":"MA","zip":"021","lat":42.3736,"lng":-71.1097},{"name":"Lowell","state":"MA","zip":"018","lat":42.6334,"lng":-71.3162},{"name":"Detroit","state":"MI","zip":"482","lat":42.3314,"lng":-83.0458},{"name":"Grand Rapids","state":"MI","zip":"495","lat":42.9634,"lng":-85.6681},{"name":"Warren","state":"MI","zip":"480","lat":42.4775,"lng":-83.0277},{"name":"Ann Arbor","state":"MI","zip":"481","lat":42.2808,"lng":-83.743},{"name":"Flint","state":"MI","zip":"485","lat":43.0125,"lng":-83.6875},{"name":"Lansing","state":"MI","zip":"489","lat":42.7325,"lng":-84.5555},{"name":"Minneapolis","state":"MN","zip":"554","lat":44.9778,"lng":-93.265},{"name":"St. Paul","state":"MN","zip":"551","lat":44.9537,"lng":-93.09},{"name":"Rochester","state":"MN","zip":"559","lat":44.0121,"lng":-92.4802},{"name":"Jackson","state":"MS","zip":"392","lat":32.2988,"lng":-90.1848},{"name":"Gulfport","state":"MS","zip":"395","lat":30.3674,"lng":-89.0928},{"name":"Kansas City","state":"MO","zip":"641","lat":39.0997,"lng":-94.5786},{"name":"St. Louis","state":"MO","zip":"631","lat":38.627,"lng":-90.1994},{"name":"Springfield","state":"MO","zip":"658","lat":37.209,"lng":-93.2923},{"name":"Columbia","state":"MO","zip":"652","lat":38.9517,"lng":-92.3341},{"name":"Billings","state":"MT","zip":"591","lat":45.7833,"lng":-108.5007},{"name":"Missoula","state":"MT","zip":"598","lat":46.8721,"lng":-113.994},{"name":"Omaha","state":"NE","zip":"681","lat":41.2565,"lng":-95.9345},{"name":"Lincoln","state":"NE","zip":"685","lat":40.8136,"lng":-96.7026},{"name":"Las Vegas","state":"NV","zip":"891","lat":36.1699,"lng":-115.1398},{"name":"Henderson","state":"NV","zip":"890","lat":36.0397,"lng":-114.9817},{"name":"Reno","state":"NV","zip":"895","lat":39.5296,"lng":-119.8138},{"name":"North Las Vegas","state":"NV","zip":"890","lat":36.1989,"lng":-115.1175},{"name":"Manchester","state":"NH","zip":"031","lat":42.9956,"lng":-71.4548},{"name":"Nashua","state":"NH","zip":"030","lat":42.7654,"lng":-71.4676},{"name":"Newark","state":"NJ","zip":"071","lat":40.7357,"lng":-74.1724},{"name":"Jersey City","state":"NJ","zip":"073","lat":40.7178,"lng":-74.0431},{"name":"Paterson","state":"NJ","zip":"075","lat":40.9168,"lng":-74.1719},{"name":"Elizabeth","state":"NJ","zip":"072","lat":40.664,"lng":-74.2107},{"name":"Trenton","state":"NJ","zip":"086","lat":40.217,"lng":-74.7429},{"name":"Atlantic City","state":"NJ","zip":"084","lat":39.3643,"lng":-74.4229},{"name":"Albuquerque","state":"NM","zip":"871","lat":35.0844,"lng":-106.6504},{"name":"Las Cruces","state":"NM","zip":"880","lat":32.3199,"lng":-106.7637},{"name":"Santa Fe","state":"NM","zip":"875","lat":35.687,"lng":-105.9378},{"name":"New York City","state":"NY","zip":"100","lat":40.7128,"lng":-74.006},{"name":"Brooklyn","state":"NY","zip":"112","lat":40.6782,"lng":-73.9442},{"name":"Queens","state":"NY","zip":"113","lat":40.7282,"lng":-73.7949},{"name":"Bronx","state":"NY","zip":"104","lat":40.8448,"lng":-73.8648},{"name":"Staten Island","state":"NY","zip":"103","lat":40.5795,"lng":-74.1502},{"name":"Buffalo","state":"NY","zip":"142","lat":42.8864,"lng":-78.8784},{"name":"Rochester","state":"NY","zip":"146","lat":43.1566,"lng":-77.6088},{"name":"Yonkers","state":"NY","zip":"107","lat":40.9312,"lng":-73.8988},{"name":"Syracuse","state":"NY","zip":"132","lat":43.0481,"lng":-76.1474},{"name":"Albany","state":"NY","zip":"122","lat":42.6526,"lng":-73.7562},{"name":"Williamsburg","state":"NY","zip":"112","lat":40.7081,"lng":-73.9571},{"name":"Bushwick","state":"NY","zip":"112","lat":40.6944,"lng":-73.9213},{"name":"Bed-Stuy","state":"NY","zip":"112","lat":40.6872,"lng":-73.9418},{"name":"East New York","state":"NY","zip":"112","lat":40.6501,"lng":-73.8836},{"name":"Flushing","state":"NY","zip":"113","lat":40.7675,"lng":-73.833},{"name":"Astoria","state":"NY","zip":"111","lat":40.7721,"lng":-73.9302},{"name":"Jamaica","state":"NY","zip":"114","lat":40.6943,"lng":-73.8062},{"name":"Harlem","state":"NY","zip":"100","lat":40.8116,"lng":-73.9465},{"name":"Upper East Side","state":"NY","zip":"100","lat":40.7736,"lng":-73.9566},{"name":"Upper West Side","state":"NY","zip":"100","lat":40.787,"lng":-73.9754},{"name":"Chelsea","state":"NY","zip":"100","lat":40.7465,"lng":-74.0014},{"name":"Bushwick","state":"NY","zip":"11206","lat":40.7009,"lng":-73.9384},{"name":"Brooklyn","state":"NY","zip":"11201","lat":40.6921,"lng":-73.9897},{"name":"Brooklyn","state":"NY","zip":"11206","lat":40.7009,"lng":-73.9384},{"name":"Brooklyn","state":"NY","zip":"11207","lat":40.6736,"lng":-73.8974},{"name":"Brooklyn","state":"NY","zip":"11208","lat":40.6681,"lng":-73.8688},{"name":"Brooklyn","state":"NY","zip":"11209","lat":40.6215,"lng":-74.0302},{"name":"Brooklyn","state":"NY","zip":"11210","lat":40.628,"lng":-73.9482},{"name":"Brooklyn","state":"NY","zip":"11211","lat":40.7145,"lng":-73.9425},{"name":"Brooklyn","state":"NY","zip":"11212","lat":40.6601,"lng":-73.9175},{"name":"Brooklyn","state":"NY","zip":"11213","lat":40.6714,"lng":-73.9396},{"name":"Brooklyn","state":"NY","zip":"11214","lat":40.599,"lng":-73.9959},{"name":"Brooklyn","state":"NY","zip":"11215","lat":40.6594,"lng":-73.9893},{"name":"Brooklyn","state":"NY","zip":"11216","lat":40.6794,"lng":-73.9486},{"name":"Brooklyn","state":"NY","zip":"11217","lat":40.6832,"lng":-73.9797},{"name":"Brooklyn","state":"NY","zip":"11218","lat":40.645,"lng":-73.9742},{"name":"Brooklyn","state":"NY","zip":"11219","lat":40.634,"lng":-73.9984},{"name":"Brooklyn","state":"NY","zip":"11220","lat":40.6377,"lng":-74.0181},{"name":"Brooklyn","state":"NY","zip":"11221","lat":40.6908,"lng":-73.928},{"name":"Brooklyn","state":"NY","zip":"11222","lat":40.7252,"lng":-73.9513},{"name":"Brooklyn","state":"NY","zip":"11223","lat":40.5997,"lng":-73.9721},{"name":"Brooklyn","state":"NY","zip":"11224","lat":40.5756,"lng":-73.996},{"name":"Brooklyn","state":"NY","zip":"11225","lat":40.6645,"lng":-73.9528},{"name":"Brooklyn","state":"NY","zip":"11226","lat":40.6469,"lng":-73.9537},{"name":"Brooklyn","state":"NY","zip":"11228","lat":40.6196,"lng":-74.0131},{"name":"Brooklyn","state":"NY","zip":"11229","lat":40.6012,"lng":-73.9457},{"name":"Brooklyn","state":"NY","zip":"11230","lat":40.6228,"lng":-73.9618},{"name":"Brooklyn","state":"NY","zip":"11231","lat":40.6748,"lng":-74.0004},{"name":"Brooklyn","state":"NY","zip":"11232","lat":40.6581,"lng":-74.0024},{"name":"Brooklyn","state":"NY","zip":"11233","lat":40.6792,"lng":-73.9223},{"name":"Brooklyn","state":"NY","zip":"11234","lat":40.6117,"lng":-73.9228},{"name":"Brooklyn","state":"NY","zip":"11235","lat":40.5792,"lng":-73.9506},{"name":"Brooklyn","state":"NY","zip":"11236","lat":40.6338,"lng":-73.9042},{"name":"Brooklyn","state":"NY","zip":"11237","lat":40.7038,"lng":-73.9219},{"name":"Brooklyn","state":"NY","zip":"11238","lat":40.677,"lng":-73.9634},{"name":"Brooklyn","state":"NY","zip":"11239","lat":40.6434,"lng":-73.8779},{"name":"New York","state":"NY","zip":"10001","lat":40.7484,"lng":-73.9967},{"name":"New York","state":"NY","zip":"10002","lat":40.7157,"lng":-73.9863},{"name":"New York","state":"NY","zip":"10003","lat":40.7317,"lng":-73.9892},{"name":"New York","state":"NY","zip":"10004","lat":40.7004,"lng":-74.0398},{"name":"New York","state":"NY","zip":"10005","lat":40.7074,"lng":-74.0113},{"name":"New York","state":"NY","zip":"10006","lat":40.7089,"lng":-74.0133},{"name":"New York","state":"NY","zip":"10007","lat":40.7135,"lng":-74.0076},{"name":"New York","state":"NY","zip":"10009","lat":40.7264,"lng":-73.9773},{"name":"New York","state":"NY","zip":"10010","lat":40.7394,"lng":-73.9832},{"name":"New York","state":"NY","zip":"10011","lat":40.7422,"lng":-74.0003},{"name":"New York","state":"NY","zip":"10012","lat":40.7258,"lng":-74.0015},{"name":"New York","state":"NY","zip":"10013","lat":40.7198,"lng":-74.0064},{"name":"New York","state":"NY","zip":"10014","lat":40.7337,"lng":-74.0063},{"name":"New York","state":"NY","zip":"10016","lat":40.7455,"lng":-73.9793},{"name":"New York","state":"NY","zip":"10017","lat":40.752,"lng":-73.9737},{"name":"New York","state":"NY","zip":"10018","lat":40.7554,"lng":-73.9927},{"name":"New York","state":"NY","zip":"10019","lat":40.7659,"lng":-73.9837},{"name":"New York","state":"NY","zip":"10021","lat":40.7693,"lng":-73.9576},{"name":"New York","state":"NY","zip":"10022","lat":40.7581,"lng":-73.9661},{"name":"New York","state":"NY","zip":"10023","lat":40.7784,"lng":-73.9828},{"name":"New York","state":"NY","zip":"10024","lat":40.7854,"lng":-73.9751},{"name":"New York","state":"NY","zip":"10025","lat":40.7984,"lng":-73.9667},{"name":"New York","state":"NY","zip":"10026","lat":40.8023,"lng":-73.9528},{"name":"New York","state":"NY","zip":"10027","lat":40.8116,"lng":-73.9523},{"name":"New York","state":"NY","zip":"10028","lat":40.7767,"lng":-73.9534},{"name":"New York","state":"NY","zip":"10029","lat":40.7955,"lng":-73.9454},{"name":"New York","state":"NY","zip":"10030","lat":40.8188,"lng":-73.9434},{"name":"New York","state":"NY","zip":"10031","lat":40.8235,"lng":-73.9502},{"name":"New York","state":"NY","zip":"10032","lat":40.8376,"lng":-73.9397},{"name":"New York","state":"NY","zip":"10033","lat":40.8491,"lng":-73.9348},{"name":"New York","state":"NY","zip":"10034","lat":40.8672,"lng":-73.9245},{"name":"New York","state":"NY","zip":"10035","lat":40.7976,"lng":-73.9343},{"name":"New York","state":"NY","zip":"10036","lat":40.7593,"lng":-73.9937},{"name":"New York","state":"NY","zip":"10037","lat":40.8139,"lng":-73.9374},{"name":"New York","state":"NY","zip":"10038","lat":40.7083,"lng":-74.0026},{"name":"New York","state":"NY","zip":"10039","lat":40.8289,"lng":-73.9353},{"name":"New York","state":"NY","zip":"10040","lat":40.858,"lng":-73.9296},{"name":"Charlotte","state":"NC","zip":"282","lat":35.2271,"lng":-80.8431},{"name":"Raleigh","state":"NC","zip":"276","lat":35.7796,"lng":-78.6382},{"name":"Greensboro","state":"NC","zip":"274","lat":36.0726,"lng":-79.792},{"name":"Durham","state":"NC","zip":"277","lat":35.994,"lng":-78.8986},{"name":"Winston-Salem","state":"NC","zip":"271","lat":36.0999,"lng":-80.2442},{"name":"Fargo","state":"ND","zip":"581","lat":46.8772,"lng":-96.7898},{"name":"Bismarck","state":"ND","zip":"585","lat":46.8083,"lng":-100.7837},{"name":"Columbus","state":"OH","zip":"432","lat":39.9612,"lng":-82.9988},{"name":"Cleveland","state":"OH","zip":"441","lat":41.4993,"lng":-81.6944},{"name":"Cincinnati","state":"OH","zip":"452","lat":39.1031,"lng":-84.512},{"name":"Toledo","state":"OH","zip":"436","lat":41.6639,"lng":-83.5552},{"name":"Akron","state":"OH","zip":"443","lat":41.0814,"lng":-81.519},{"name":"Dayton","state":"OH","zip":"454","lat":39.7589,"lng":-84.1916},{"name":"Oklahoma City","state":"OK","zip":"731","lat":35.4676,"lng":-97.5164},{"name":"Tulsa","state":"OK","zip":"741","lat":36.154,"lng":-95.9928},{"name":"Portland","state":"OR","zip":"972","lat":45.5051,"lng":-122.675},{"name":"Eugene","state":"OR","zip":"974","lat":44.0521,"lng":-123.0868},{"name":"Salem","state":"OR","zip":"973","lat":44.9429,"lng":-123.0351},{"name":"Philadelphia","state":"PA","zip":"191","lat":39.9526,"lng":-75.1652},{"name":"Pittsburgh","state":"PA","zip":"152","lat":40.4406,"lng":-79.9959},{"name":"Allentown","state":"PA","zip":"181","lat":40.6084,"lng":-75.4902},{"name":"Erie","state":"PA","zip":"165","lat":42.1292,"lng":-80.0851},{"name":"Reading","state":"PA","zip":"196","lat":40.3356,"lng":-75.9269},{"name":"Providence","state":"RI","zip":"029","lat":41.824,"lng":-71.4128},{"name":"Columbia","state":"SC","zip":"292","lat":34.0007,"lng":-81.0348},{"name":"Charleston","state":"SC","zip":"294","lat":32.7765,"lng":-79.9311},{"name":"Greenville","state":"SC","zip":"296","lat":34.8526,"lng":-82.394},{"name":"Sioux Falls","state":"SD","zip":"571","lat":43.5446,"lng":-96.7311},{"name":"Nashville","state":"TN","zip":"372","lat":36.1627,"lng":-86.7816},{"name":"Memphis","state":"TN","zip":"381","lat":35.1495,"lng":-90.049},{"name":"Knoxville","state":"TN","zip":"379","lat":35.9606,"lng":-83.9207},{"name":"Chattanooga","state":"TN","zip":"374","lat":35.0456,"lng":-85.3097},{"name":"Houston","state":"TX","zip":"770","lat":29.7604,"lng":-95.3698},{"name":"San Antonio","state":"TX","zip":"782","lat":29.4241,"lng":-98.4936},{"name":"Dallas","state":"TX","zip":"752","lat":32.7767,"lng":-96.797},{"name":"Austin","state":"TX","zip":"787","lat":30.2672,"lng":-97.7431},{"name":"Fort Worth","state":"TX","zip":"761","lat":32.7555,"lng":-97.3308},{"name":"El Paso","state":"TX","zip":"799","lat":31.7619,"lng":-106.485},{"name":"Arlington","state":"TX","zip":"760","lat":32.7357,"lng":-97.1081},{"name":"Corpus Christi","state":"TX","zip":"784","lat":27.8006,"lng":-97.3964},{"name":"Plano","state":"TX","zip":"750","lat":33.0198,"lng":-96.6989},{"name":"Lubbock","state":"TX","zip":"794","lat":33.5779,"lng":-101.8552},{"name":"Laredo","state":"TX","zip":"780","lat":27.5306,"lng":-99.4803},{"name":"Irving","state":"TX","zip":"750","lat":32.814,"lng":-96.9489},{"name":"Salt Lake City","state":"UT","zip":"841","lat":40.7608,"lng":-111.891},{"name":"West Valley City","state":"UT","zip":"840","lat":40.6916,"lng":-112.0011},{"name":"Provo","state":"UT","zip":"846","lat":40.2338,"lng":-111.6585},{"name":"Burlington","state":"VT","zip":"054","lat":44.4759,"lng":-73.2121},{"name":"Virginia Beach","state":"VA","zip":"234","lat":36.8529,"lng":-75.978},{"name":"Norfolk","state":"VA","zip":"235","lat":36.8508,"lng":-76.2859},{"name":"Chesapeake","state":"VA","zip":"233","lat":36.7682,"lng":-76.2875},{"name":"Richmond","state":"VA","zip":"232","lat":37.5407,"lng":-77.436},{"name":"Arlington","state":"VA","zip":"222","lat":38.8816,"lng":-77.091},{"name":"Alexandria","state":"VA","zip":"223","lat":38.8048,"lng":-77.0469},{"name":"Seattle","state":"WA","zip":"981","lat":47.6062,"lng":-122.3321},{"name":"Spokane","state":"WA","zip":"992","lat":47.6588,"lng":-117.426},{"name":"Tacoma","state":"WA","zip":"984","lat":47.2529,"lng":-122.4443},{"name":"Bellevue","state":"WA","zip":"980","lat":47.6101,"lng":-122.2015},{"name":"Kirkland","state":"WA","zip":"980","lat":47.6815,"lng":-122.2087},{"name":"Washington","state":"DC","zip":"200","lat":38.9072,"lng":-77.0369},{"name":"Washington","state":"DC","zip":"20001","lat":38.9101,"lng":-77.0147},{"name":"Washington","state":"DC","zip":"20002","lat":38.9001,"lng":-76.9897},{"name":"Washington","state":"DC","zip":"20003","lat":38.8816,"lng":-76.9944},{"name":"Washington","state":"DC","zip":"20005","lat":38.9042,"lng":-77.0279},{"name":"Washington","state":"DC","zip":"20009","lat":38.9226,"lng":-77.0407},{"name":"Washington","state":"DC","zip":"20010","lat":38.9325,"lng":-77.0306},{"name":"Charleston","state":"WV","zip":"253","lat":38.3498,"lng":-81.6326},{"name":"Huntington","state":"WV","zip":"257","lat":38.4192,"lng":-82.4452},{"name":"Milwaukee","state":"WI","zip":"532","lat":43.0389,"lng":-87.9065},{"name":"Madison","state":"WI","zip":"537","lat":43.0731,"lng":-89.4012},{"name":"Green Bay","state":"WI","zip":"543","lat":44.5133,"lng":-88.0133},{"name":"Cheyenne","state":"WY","zip":"820","lat":41.14,"lng":-104.8202},{"name":"Casper","state":"WY","zip":"826","lat":42.8501,"lng":-106.3252}];
 
 // ── Scoring constants ──────────────────────────────────────────────
 const BIOME_SCORES={
@@ -1281,45 +1220,122 @@ function initLocationGate(){
       document.getElementById('gender-gate').classList.remove('hidden');
       document.getElementById('distance-filter-btn').style.display='';
       const bar=document.getElementById('location-bar');
-      if(bar){ bar.style.display='flex'; document.getElementById('location-bar-city').textContent=userCity.name+', '+userCity.state; }
+      if(bar){ bar.style.display='flex'; document.getElementById('location-bar-city').textContent=userCity.name+(userCity.zip&&userCity.zip.length===5?' '+userCity.zip:', '+userCity.state); }
       return;
     }catch(e){}
   }
-  // Show location gate first
-  const input=document.getElementById('location-input');
-  const sugg=document.getElementById('location-suggestions');
 
-  input.addEventListener('input',()=>{
-    const q=input.value.trim().toLowerCase();
-    if(q.length<2){sugg.style.display='none';return;}
-    const matches=USA_CITIES.filter(c=>
-      c.name.toLowerCase().includes(q)||
-      c.state.toLowerCase().includes(q)||
-      (c.name+', '+c.state).toLowerCase().startsWith(q)
-    ).slice(0,8);
-    if(!matches.length){sugg.style.display='none';return;}
-    sugg.innerHTML=matches.map((c,i)=>`<div class="loc-suggestion" data-i="${i}" data-name="${c.name}" data-state="${c.state}" data-lat="${c.lat}" data-lng="${c.lng}"><div class="loc-name">${c.name}</div><div class="loc-state">${c.state}</div></div>`).join('');
-    sugg.style.display='block';
-    sugg.querySelectorAll('.loc-suggestion').forEach(el=>{
-      const pick=()=>{
-        selectedCity={name:el.dataset.name,state:el.dataset.state,lat:parseFloat(el.dataset.lat),lng:parseFloat(el.dataset.lng)};
-        input.value=`${selectedCity.name}, ${selectedCity.state}`;
+  const input = document.getElementById('location-input');
+  const sugg  = document.getElementById('location-suggestions');
+  const btn   = document.getElementById('location-submit');
+
+  // Search function — matches city name, state abbr, state name, OR zip
+  function doSearch(){
+    const raw = input.value.trim();
+    const q   = raw.toLowerCase();
+    if(q.length < 2){ sugg.style.display='none'; return; }
+
+    const isZip = /^\d+$/.test(raw);
+    let results;
+
+    if(isZip){
+      // Match exact zip first, then zip prefix
+      results = USA_CITIES.filter(c => c.zip === raw)
+        .concat(USA_CITIES.filter(c => c.zip !== raw && c.zip.startsWith(raw)))
+        .slice(0, 10);
+      // If user typed a full 5-digit zip we don't have, synthesize a fallback
+      if(!results.length && raw.length === 5){
+        // Accept it as freeform — enable button with generic location
+        selectedCity = { name:'ZIP '+raw, state:'USA', zip:raw, lat:39.5, lng:-98.35 };
+        input.style.borderColor='var(--green)';
+        btn.disabled = false;
         sugg.style.display='none';
-        document.getElementById('location-submit').disabled=false;
+        return;
+      }
+    } else {
+      const STATE_NAMES = {
+        'alabama':'AL','alaska':'AK','arizona':'AZ','arkansas':'AR','california':'CA',
+        'colorado':'CO','connecticut':'CT','delaware':'DE','florida':'FL','georgia':'GA',
+        'hawaii':'HI','idaho':'ID','illinois':'IL','indiana':'IN','iowa':'IA','kansas':'KS',
+        'kentucky':'KY','louisiana':'LA','maine':'ME','maryland':'MD','massachusetts':'MA',
+        'michigan':'MI','minnesota':'MN','mississippi':'MS','missouri':'MO','montana':'MT',
+        'nebraska':'NE','nevada':'NV','new hampshire':'NH','new jersey':'NJ','new mexico':'NM',
+        'new york':'NY','north carolina':'NC','north dakota':'ND','ohio':'OH','oklahoma':'OK',
+        'oregon':'OR','pennsylvania':'PA','rhode island':'RI','south carolina':'SC',
+        'south dakota':'SD','tennessee':'TN','texas':'TX','utah':'UT','vermont':'VT',
+        'virginia':'VA','washington':'WA','west virginia':'WV','wisconsin':'WI','wyoming':'WY',
+        'district of columbia':'DC','washington dc':'DC','dc':'DC',
       };
-      el.addEventListener('click',pick);
-      el.addEventListener('touchend',e=>{e.preventDefault();pick();},{passive:false});
+      const stateAbbr = STATE_NAMES[q] || null;
+      results = USA_CITIES.filter(c=>{
+        const full = (c.name+' '+c.state).toLowerCase();
+        const fullComma = (c.name+', '+c.state).toLowerCase();
+        return full.startsWith(q) || fullComma.startsWith(q) ||
+               c.name.toLowerCase().includes(q) ||
+               c.state.toLowerCase() === q ||
+               (stateAbbr && c.state === stateAbbr);
+      });
+      // Deduplicate by name+state for display
+      const seen = new Set();
+      results = results.filter(c=>{
+        const key = c.name+'|'+c.state+(c.zip&&c.zip.length===5?'|'+c.zip:'');
+        if(seen.has(key)) return false; seen.add(key); return true;
+      }).slice(0, 10);
+    }
+
+    if(!results.length){ sugg.style.display='none'; return; }
+
+    sugg.innerHTML = results.map((c,i)=>{
+      const label = c.zip && c.zip.length===5 ? c.zip+' — '+c.name+', '+c.state : c.name+', '+c.state;
+      const sub   = c.zip && c.zip.length===5 ? c.name+', '+c.state : '';
+      return `<div class="loc-suggestion" data-idx="${i}">
+        <div class="loc-name">${label}</div>
+        ${sub?`<div class="loc-state">${sub}</div>`:''}
+      </div>`;
+    }).join('');
+    sugg.style.display = 'block';
+
+    sugg.querySelectorAll('.loc-suggestion').forEach((el,i)=>{
+      const c = results[i];
+      const pick = ()=>{
+        selectedCity = {name:c.name, state:c.state, zip:c.zip||'', lat:c.lat, lng:c.lng};
+        const label = c.zip && c.zip.length===5 ? c.zip+' — '+c.name+', '+c.state : c.name+', '+c.state;
+        input.value = label;
+        input.style.borderColor='var(--green)';
+        sugg.style.display='none';
+        btn.disabled = false;
+      };
+      el.addEventListener('click', pick);
+      el.addEventListener('touchend', e=>{ e.preventDefault(); pick(); }, {passive:false});
     });
+  }
+
+  input.addEventListener('input', doSearch);
+
+  // Also allow pressing Enter to accept first result or freeform 5-digit ZIP
+  input.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      const firstSugg = sugg.querySelector('.loc-suggestion');
+      if(firstSugg) firstSugg.click();
+      else if(/^\d{5}$/.test(input.value.trim())){
+        selectedCity={name:'ZIP '+input.value.trim(),state:'USA',zip:input.value.trim(),lat:39.5,lng:-98.35};
+        btn.disabled=false; input.style.borderColor='var(--green)'; sugg.style.display='none';
+      }
+    }
   });
 
-  document.getElementById('location-submit').addEventListener('click',()=>{
+  btn.addEventListener('click', ()=>{
     if(!selectedCity) return;
     commitCity(selectedCity);
   });
-  document.getElementById('location-skip').addEventListener('click',()=>skipLocation());
-  document.getElementById('location-skip').addEventListener('touchend',e=>{e.preventDefault();skipLocation();},{passive:false});
-}
+  // Also touchend on button for mobile
+  btn.addEventListener('touchend', e=>{ e.preventDefault(); if(selectedCity) commitCity(selectedCity); }, {passive:false});
 
+  const skipFn = ()=>skipLocation();
+  document.getElementById('location-skip').addEventListener('click', skipFn);
+  document.getElementById('location-skip').addEventListener('touchend', e=>{ e.preventDefault(); skipFn(); }, {passive:false});
+}
 function commitCity(city){
   userCity=city;
   localStorage.setItem('cl_city',JSON.stringify(city));
