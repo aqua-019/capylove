@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.2</title>
+  <title>CapyLove V2.3</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#080808; --s1:#0F0F0F; --s2:#161616; --s3:#1E1E1E; --s4:#272727; --s5:#323232;
-      --t1:#F0F0F0; --t2:#A8A8A8; --t3:#666; --t4:#3A3A3A;
-      --orange:#E8672A; --peach:#F4A261; --green:#2EC27E; --red:#E05252; --blue:#4A9EFF; --gold:#D4A843;
-      --r:14px; --rm:20px; --rl:28px;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#080808;--s1:#0F0F0F;--s2:#161616;--s3:#1E1E1E;--s4:#272727;--s5:#323232;
+      --t1:#F0F0F0;--t2:#A8A8A8;--t3:#666;--t4:#3A3A3A;
+      --orange:#E8672A;--peach:#F4A261;--green:#2EC27E;--red:#E05252;--blue:#4A9EFF;--gold:#D4A843;
+      --r:14px;--rm:20px;--rl:28px;
     }
     html,body{height:100%;overflow:hidden;background:var(--bg);}
     body{font-family:'Sora',sans-serif;color:var(--t1);display:flex;flex-direction:column;height:100dvh;}
     body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-      opacity:.35;}
-    ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:var(--s5);border-radius:3px;}
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");opacity:.35;}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--s5);border-radius:3px;}
 
     /* ── Header ── */
     #header{padding:9px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--s3);flex-shrink:0;background:rgba(8,8,8,.97);backdrop-filter:blur(10px);}
@@ -57,7 +56,7 @@
     .card-img-placeholder svg{opacity:.15;}
     .card-gradient{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent);pointer-events:none;}
     .card-info{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;}
-    .card-info::-webkit-scrollbar{width:2px;} .card-info::-webkit-scrollbar-thumb{background:var(--s5);}
+    .card-info::-webkit-scrollbar{width:2px;}.card-info::-webkit-scrollbar-thumb{background:var(--s5);}
     .card-name-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
     .card-name{font-size:23px;font-weight:800;letter-spacing:-.6px;}
     .card-age{font-size:16px;color:var(--t2);font-weight:400;}
@@ -65,7 +64,9 @@
     .card-gender-badge.male{background:rgba(74,158,255,.12);color:var(--blue);}
     .card-gender-badge.female{background:rgba(244,162,97,.12);color:var(--peach);}
     .card-persona-badge{font-size:8px;padding:2px 8px;border-radius:7px;font-weight:600;letter-spacing:.4px;font-family:'DM Mono',monospace;border:1px solid;}
+    .card-location-row{display:flex;align-items:center;gap:6px;}
     .card-location{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:.3px;}
+    .card-distance{font-size:10px;font-family:'DM Mono',monospace;color:var(--blue);letter-spacing:.2px;}
     .card-bio{font-size:12.5px;color:var(--t2);line-height:1.65;}
     .card-grade-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
     .grade-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;letter-spacing:.5px;}
@@ -103,7 +104,29 @@
     #empty-state p{color:var(--t3);font-size:12px;max-width:240px;line-height:1.65;}
     #empty-state button{margin-top:6px;padding:10px 26px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;font-weight:600;font-size:12px;cursor:pointer;font-family:'Sora',sans-serif;}
 
-    /* ── Matches ── */
+    /* ══ PASSIVE MATCH TOAST ══════════════════════════════════════ */
+    #match-toast{
+      position:fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-20px);
+      z-index:800; pointer-events:auto;
+      display:flex; align-items:center; gap:10px;
+      background:rgba(15,15,15,.96); border:1px solid rgba(46,194,126,.3);
+      border-radius:40px; padding:8px 16px 8px 8px;
+      box-shadow:0 8px 32px rgba(0,0,0,.7), 0 0 0 1px rgba(46,194,126,.1);
+      backdrop-filter:blur(14px);
+      opacity:0; transition:opacity .3s, transform .3s;
+      cursor:pointer;
+    }
+    #match-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    #match-toast-img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--green);background:var(--s3);flex-shrink:0;}
+    #match-toast-text{line-height:1.3;}
+    #match-toast-title{font-size:11px;font-weight:700;color:var(--green);}
+    #match-toast-sub{font-size:10px;color:var(--t3);}
+    #match-toast-action{font-size:9px;font-family:'DM Mono',monospace;color:var(--t4);margin-top:2px;}
+
+    /* Hiragana burst particles */
+    #kana-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:799;}
+
+    /* ══ MATCHES ══ */
     #matches-view{flex-direction:column;overflow:hidden;}
     #matches-header-bar{padding:12px 16px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--s3);}
     #matches-header-bar h2{font-size:14px;font-weight:700;}
@@ -130,7 +153,7 @@
     .no-matches{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t4);gap:10px;text-align:center;padding:24px;}
     .no-matches p{font-size:12px;color:var(--t3);line-height:1.65;max-width:220px;}
 
-    /* ── Chat ── */
+    /* ══ CHAT ══ */
     #chat-view{flex-direction:column;overflow:hidden;}
     #chat-header{padding:9px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--s3);flex-shrink:0;background:var(--s1);}
     #chat-back{background:none;border:none;color:var(--t2);cursor:pointer;font-size:18px;padding:2px 7px 2px 0;-webkit-tap-highlight-color:transparent;}
@@ -162,32 +185,29 @@
     #chat-input:focus{border-color:var(--orange);}
     #chat-send{width:34px;height:34px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s;align-self:flex-end;}
     #chat-send:hover{transform:scale(1.08);}
-    #chat-send:disabled{background:var(--s4);cursor:default;transform:none;}
 
-    /* ── Leaderboard ── */
+    /* ══ LEADERBOARD ══ */
     #leaderboard-view{flex-direction:column;overflow:hidden;}
     #lb-header{padding:12px 16px 8px;border-bottom:1px solid var(--s3);flex-shrink:0;}
     #lb-header h2{font-size:14px;font-weight:700;}
     #lb-header p{font-size:9.5px;color:var(--t3);margin-top:2px;font-family:'DM Mono',monospace;}
     #leaderboard-list{overflow-y:auto;flex:1;padding:7px 12px 12px;}
-    .lb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r);margin-bottom:5px;background:var(--s1);border:1px solid var(--s3);transition:background .12s;}
-    .lb-item:hover{background:var(--s2);}
+    .lb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r);margin-bottom:5px;background:var(--s1);border:1px solid var(--s3);}
     .lb-rank{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;min-width:24px;text-align:center;}
-    .lb-rank.gold{color:#D4A843;} .lb-rank.silver{color:#9E9E9E;} .lb-rank.bronze{color:#9C6E3A;}
+    .lb-rank.gold{color:#D4A843;}.lb-rank.silver{color:#9E9E9E;}.lb-rank.bronze{color:#9C6E3A;}
     .lb-img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--s3);}
     .lb-info{flex:1;min-width:0;}
     .lb-name{font-size:12px;font-weight:600;}
     .lb-sub{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:2px;}
     .lb-right{text-align:right;}
     .lb-score{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--orange);}
-    .lb-score-sub{font-size:8px;color:var(--t4);font-family:'DM Mono',monospace;}
     .lb-mini-bars{display:flex;flex-direction:column;gap:3px;min-width:78px;}
     .lb-mini-row{display:flex;align-items:center;gap:4px;}
     .lb-mini-label{font-size:8px;color:var(--t4);width:18px;font-family:'DM Mono',monospace;}
     .lb-mini-track{flex:1;height:3px;background:var(--s4);border-radius:2px;}
     .lb-mini-fill{height:100%;border-radius:2px;}
 
-    /* ── About ── */
+    /* ══ ABOUT ══ */
     #about-view{overflow-y:auto;padding:16px;}
     .about-section{margin-bottom:18px;}
     .about-section h3{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);margin-bottom:9px;font-family:'DM Mono',monospace;}
@@ -200,7 +220,31 @@
     .score-desc{font-size:10px;color:var(--t3);margin-top:2px;line-height:1.5;}
     .score-weight{margin-left:auto;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--orange);flex-shrink:0;}
 
-    /* ── Gender Gate ── */
+    /* ══ LOCATION GATE (first load) ══ */
+    #location-gate{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:600;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(16px);}
+    #location-gate.hidden{display:none;}
+    #location-gate-inner{background:var(--s1);border-radius:var(--rl);padding:32px 26px;max-width:340px;width:92%;text-align:center;border:1px solid var(--s3);box-shadow:0 32px 80px rgba(0,0,0,.8);animation:popIn .3s cubic-bezier(0.34,1.56,0.64,1);}
+    #location-gate-inner h2{font-size:20px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+    #location-gate-inner p{font-size:11px;color:var(--t3);line-height:1.65;margin-bottom:18px;}
+    #location-search-wrap{position:relative;margin-bottom:10px;}
+    #location-input{width:100%;background:var(--s3);border:1px solid var(--s4);border-radius:12px;padding:11px 14px;color:var(--t1);font-family:'Sora',sans-serif;font-size:14px;outline:none;transition:border-color .15s;-webkit-appearance:none;}
+    #location-input:focus{border-color:var(--orange);}
+    #location-suggestions{position:absolute;top:100%;left:0;right:0;background:var(--s2);border:1px solid var(--s4);border-radius:10px;margin-top:4px;max-height:200px;overflow-y:auto;z-index:10;display:none;}
+    .loc-suggestion{padding:9px 14px;font-size:12px;cursor:pointer;transition:background .1s;text-align:left;border-bottom:1px solid var(--s3);}
+    .loc-suggestion:last-child{border-bottom:none;}
+    .loc-suggestion:hover,.loc-suggestion.active{background:var(--s3);}
+    .loc-suggestion .loc-name{font-weight:600;}
+    .loc-suggestion .loc-state{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:1px;}
+    #location-submit{width:100%;padding:12px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-top:6px;transition:opacity .15s;min-height:44px;}
+    #location-submit:hover{opacity:.9;}
+    #location-submit:disabled{opacity:.4;cursor:default;}
+    #location-skip{display:block;margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;padding:8px;text-decoration:underline;-webkit-tap-highlight-color:transparent;}
+
+    /* Distance toggle in filter bar */
+    #distance-filter-wrap{display:flex;align-items:center;gap:5px;}
+    #distance-badge{font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);padding:3px 8px;border-radius:20px;border:1px solid rgba(74,158,255,.3);background:rgba(74,158,255,.07);white-space:nowrap;}
+
+    /* ══ GENDER GATE ══ */
     #gender-gate{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(14px);}
     #gender-gate.hidden{display:none;}
     #gender-gate-inner{background:var(--s1);border-radius:var(--rl);padding:34px 28px;max-width:310px;width:90%;text-align:center;border:1px solid var(--s3);box-shadow:0 32px 80px rgba(0,0,0,.8);animation:popIn .3s cubic-bezier(0.34,1.56,0.64,1);}
@@ -213,8 +257,8 @@
     .gender-option .g-sub{font-size:10px;color:var(--t3);font-weight:400;margin-top:1px;}
     #gender-skip{margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;text-decoration:underline;padding:8px;display:block;-webkit-tap-highlight-color:transparent;}
 
-    /* ── Login Modal ── */
-    #login-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+    /* ══ LOGIN ══ */
+    #login-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:700;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
     #login-modal.show{display:flex;}
     #login-modal-inner{background:var(--s1);border-radius:var(--rl);padding:28px 24px;max-width:330px;width:90%;border:1px solid var(--s3);box-shadow:0 24px 70px rgba(0,0,0,.8);animation:popIn .3s cubic-bezier(0.34,1.56,0.64,1);}
     #login-modal-inner h2{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px;}
@@ -224,23 +268,10 @@
     .login-form-row input,.login-form-row select{width:100%;background:var(--s3);border:1px solid var(--s4);border-radius:10px;padding:10px 11px;color:var(--t1);font-family:'Sora',sans-serif;font-size:16px;outline:none;transition:border-color .15s;cursor:pointer;-webkit-appearance:none;appearance:none;}
     .login-form-row input:focus,.login-form-row select:focus{border-color:var(--orange);}
     .login-submit{width:100%;padding:12px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-top:4px;transition:opacity .15s;min-height:44px;}
-    .login-submit:hover{opacity:.9;}
     .login-close{display:block;text-align:center;margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;padding:8px;-webkit-tap-highlight-color:transparent;}
 
-    /* ── Match Popup ── */
-    #match-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
-    #match-popup.show{display:flex;}
-    #match-popup-inner{background:var(--s1);border-radius:var(--rl);padding:26px 22px;text-align:center;max-width:295px;width:88%;border:1px solid rgba(232,103,42,.25);box-shadow:0 24px 60px rgba(0,0,0,.75),0 0 60px rgba(232,103,42,.08);animation:popIn .35s cubic-bezier(0.34,1.56,0.64,1);}
-    #match-popup-inner img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);margin-bottom:12px;background:var(--s3);}
-    #match-popup-inner h2{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--peach));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.4px;}
-    #match-popup-inner p{color:var(--t2);font-size:11.5px;margin:7px 0 16px;line-height:1.6;}
-    .popup-btn{padding:10px 26px;border-radius:22px;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:opacity .15s;-webkit-tap-highlight-color:transparent;}
-    .popup-btn.primary{background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;}
-    .popup-btn.secondary{background:transparent;border:1px solid var(--s5);color:var(--t3);margin-top:7px;width:100%;}
-    .popup-btn:hover{opacity:.88;}
-
-    /* ── Report Modal ── */
-    #report-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+    /* ══ REPORT ══ */
+    #report-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:900;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
     #report-modal.show{display:flex;}
     #report-modal-inner{background:var(--s1);border-radius:var(--rm);padding:22px;max-width:290px;width:88%;border:1px solid var(--s3);animation:popIn .25s cubic-bezier(0.34,1.56,0.64,1);}
     #report-modal-inner h3{font-size:15px;font-weight:700;margin-bottom:12px;}
@@ -248,34 +279,50 @@
     .report-option:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,.07);}
     .report-cancel{display:block;text-align:center;margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;padding:8px;}
 
-    /* ── Animations ── */
+    /* ══ Animations ══ */
     @keyframes popIn{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
     @keyframes flyOut{to{transform:translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot));opacity:0}}
     @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .shimmer{background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;}
-    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
     button{font-family:'Sora',sans-serif;}
   </style>
 </head>
 <body>
 
+<!-- KANA CANVAS (behind toast) -->
+<canvas id="kana-canvas"></canvas>
+
+<!-- PASSIVE MATCH TOAST -->
+<div id="match-toast">
+  <img id="match-toast-img" src="" alt=""/>
+  <div id="match-toast-text">
+    <div id="match-toast-title">It's a Match</div>
+    <div id="match-toast-sub"></div>
+    <div id="match-toast-action">Tap to message</div>
+  </div>
+</div>
+
+<!-- LOCATION GATE -->
+<div id="location-gate">
+  <div id="location-gate-inner">
+    <h2>Where are you from?</h2>
+    <p>We'll show you how far each capybara is from you. Distance is simulated — capybaras don't own phones yet.</p>
+    <div id="location-search-wrap">
+      <input id="location-input" type="text" placeholder="City, state or ZIP code..." autocomplete="off" spellcheck="false"/>
+      <div id="location-suggestions"></div>
+    </div>
+    <button id="location-submit" disabled>Set My Location</button>
+    <span id="location-skip">Skip — I prefer mystery</span>
+  </div>
+</div>
+
 <!-- GENDER GATE -->
-<div id="gender-gate">
+<div id="gender-gate" class="hidden">
   <div id="gender-gate-inner">
     <h2>Who are you here for?</h2>
-    <p>Set your preference before swiping. You can change this anytime from the filter bar.</p>
-    <div class="gender-option" id="gg-female">
-      <span class="g-icon">&#9792;</span>
-      <div><div class="g-label">Female Capybaras</div><div class="g-sub">503 available</div></div>
-    </div>
-    <div class="gender-option" id="gg-male">
-      <span class="g-icon">&#9794;</span>
-      <div><div class="g-label">Male Capybaras</div><div class="g-sub">503 available</div></div>
-    </div>
-    <div class="gender-option" id="gg-all">
-      <span class="g-icon">&#9898;</span>
-      <div><div class="g-label">All Capybaras</div><div class="g-sub">1,006 available</div></div>
-    </div>
+    <p>Set your preference before swiping.</p>
+    <div class="gender-option" id="gg-female"><span class="g-icon">&#9792;</span><div><div class="g-label">Female Capybaras</div><div class="g-sub">503 available</div></div></div>
+    <div class="gender-option" id="gg-male"><span class="g-icon">&#9794;</span><div><div class="g-label">Male Capybaras</div><div class="g-sub">503 available</div></div></div>
+    <div class="gender-option" id="gg-all"><span class="g-icon">&#9898;</span><div><div class="g-label">All Capybaras</div><div class="g-sub">1,006 available</div></div></div>
     <span id="gender-skip">Skip — show me everyone</span>
   </div>
 </div>
@@ -285,36 +332,11 @@
   <div id="login-modal-inner">
     <h2>Sign In</h2>
     <p>Save your matches and unlock the full CapyLove experience.</p>
-    <div class="login-form-row">
-      <label>NAME</label>
-      <input id="login-name" type="text" placeholder="How should the capys call you?" autocomplete="off"/>
-    </div>
-    <div class="login-form-row">
-      <label>EMAIL</label>
-      <input id="login-email" type="email" placeholder="your@email.com" autocomplete="email"/>
-    </div>
-    <div class="login-form-row">
-      <label>I AM A</label>
-      <select id="login-gender">
-        <option value="">Prefer not to say</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-        <option value="other">Other / Non-binary</option>
-      </select>
-    </div>
+    <div class="login-form-row"><label>NAME</label><input id="login-name" type="text" placeholder="How should the capys call you?" autocomplete="off"/></div>
+    <div class="login-form-row"><label>EMAIL</label><input id="login-email" type="email" placeholder="your@email.com" autocomplete="email"/></div>
+    <div class="login-form-row"><label>I AM A</label><select id="login-gender"><option value="">Prefer not to say</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other / Non-binary</option></select></div>
     <button class="login-submit" id="login-submit-btn">Create My Profile</button>
     <span class="login-close" id="login-close-btn">Cancel</span>
-  </div>
-</div>
-
-<!-- MATCH POPUP -->
-<div id="match-popup">
-  <div id="match-popup-inner">
-    <img id="match-popup-img" src="" alt="Match"/>
-    <h2>It's a Match</h2>
-    <p id="match-popup-text"></p>
-    <button class="popup-btn primary" id="match-chat-btn">Send a Message</button>
-    <button class="popup-btn secondary" id="match-skip-btn">Keep Swiping</button>
   </div>
 </div>
 
@@ -332,7 +354,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.2 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.3 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -348,14 +370,14 @@
 
 <!-- MAIN -->
 <div id="main">
-
   <!-- SWIPE -->
   <div id="swipe-view" class="view active">
     <div id="filter-bar">
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="5star">Elite (S-Grade)</button>
+      <button class="filter-btn" data-filter="5star">Elite (S)</button>
       <button class="filter-btn" data-filter="chonk">Chonks</button>
-      <button class="filter-btn" data-filter="zen">Zen Energy</button>
+      <button class="filter-btn" data-filter="zen">Zen</button>
+      <button class="filter-btn" id="distance-filter-btn" data-filter="distance" style="display:none">Nearby</button>
     </div>
     <div id="card-stack">
       <div id="empty-state">
@@ -403,597 +425,623 @@
 
   <!-- LEADERBOARD -->
   <div id="leaderboard-view" class="view">
-    <div id="lb-header"><h2>Most Attractive Capybaras</h2><p>Ranked by V2.2 composite attraction score — 6 dimensions</p></div>
+    <div id="lb-header"><h2>Most Attractive Capybaras</h2><p>Ranked by V2.3 composite score — 6 dimensions</p></div>
     <div id="leaderboard-list"></div>
   </div>
 
   <!-- ABOUT -->
   <div id="about-view" class="view">
-    <div class="about-section"><h3>About CapyLove V2.2</h3>
-      <p>1,006 capybaras. 40 unique personas (20 male, 20 female) assigned by attraction grade with weighted randomization — higher grade capys get higher-potency personas.</p>
-      <p>503 males. 503 females. 6-dimension V2.2 scoring. Persona potency 1–20 governs chat response style across 8 behavioral axes.</p>
+    <div class="about-section"><h3>About CapyLove V2.3</h3>
+      <p>1,006 capybaras. 40 personas (20M/20F). Passive match toasts with hiragana burst. Simulated distance from your location.</p>
+      <p>503 males. 503 females. 6-dimension scoring. Persona potency 1–20. Distance toggle for filtering nearby capys.</p>
+    </div>
+    <div class="about-section"><h3>Distance System</h3>
+      <p>Each capybara is assigned a simulated distance from your city on first load. Distances are seeded to each capy's ID so they stay consistent. The Nearby filter shows capys within 50 miles.</p>
     </div>
     <div class="about-section"><h3>Persona System</h3>
-      <p>Each capybara has a persona from 1 (lowest potency) to 20 (highest). Higher-grade capys skew toward higher potency. Potency governs intensity across: <strong>Humor, Sensual, Flirty, Reserved, Awkward, Mean, Nice, Kind, Rude</strong>.</p>
-      <p>A Grade S capybara with potency 20 may be intensely reserved or highly sensual. A Grade D with potency 3 is likely awkward and eager.</p>
+      <p>Potency 1–20. Higher grade = higher potency skew. 8 behavioral axes: Humor, Sensual, Flirty, Reserved, Awkward, Mean, Nice, Kind, Rude.</p>
     </div>
-    <div class="about-section"><h3>V2.2 Scoring Dimensions</h3>
+    <div class="about-section"><h3>V2.3 Scoring Dimensions</h3>
       <div class="score-legend">
-        <div class="score-row"><div class="score-tag">FUR</div><div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff rating, wetness tolerance.</div></div><div class="score-weight">22%</div></div>
+        <div class="score-row"><div class="score-tag">FUR</div><div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff, wetness tolerance.</div></div><div class="score-weight">22%</div></div>
         <div class="score-row"><div class="score-tag">WGT</div><div class="score-info"><div class="score-name">Weight Score</div><div class="score-desc">35–65 kg range. Chonk is virtue.</div></div><div class="score-weight">18%</div></div>
         <div class="score-row"><div class="score-tag">SZE</div><div class="score-info"><div class="score-name">Body Size</div><div class="score-desc">Length-to-snout proportions.</div></div><div class="score-weight">14%</div></div>
-        <div class="score-row"><div class="score-tag">VBE</div><div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance and terrapin cohabitation score.</div></div><div class="score-weight">12%</div></div>
-        <div class="score-row"><div class="score-tag">NRG</div><div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Peak compatibility at 6–7. Both extremes reduce pairing probability.</div></div><div class="score-weight">20%</div></div>
-        <div class="score-row"><div class="score-tag">BIO</div><div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal and Llanos highest. Cloud Forest rare and valued.</div></div><div class="score-weight">14%</div></div>
+        <div class="score-row"><div class="score-tag">VBE</div><div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance.</div></div><div class="score-weight">12%</div></div>
+        <div class="score-row"><div class="score-tag">NRG</div><div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Peak compatibility at 6–7.</div></div><div class="score-weight">20%</div></div>
+        <div class="score-row"><div class="score-tag">BIO</div><div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal highest. Cloud Forest rare.</div></div><div class="score-weight">14%</div></div>
       </div>
     </div>
-    <div class="about-section"><h3>Grade System</h3>
-      <p>S = 88+ &nbsp;&middot;&nbsp; A = 74+ &nbsp;&middot;&nbsp; B = 58+ &nbsp;&middot;&nbsp; C = 42+ &nbsp;&middot;&nbsp; D = below 42</p>
-      <p>S/A capys match rarely, reply slowly. C/D capys match often, message first.</p>
-    </div>
   </div>
-
 </div>
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-//  CapyLove V2.2 — Persona Chat System
+//  CapyLove V2.3
 // ════════════════════════════════════════════════════════════════════
 
-// ── Constants ──────────────────────────────────────────────────────
-const BIOME_SCORES = {
+// ── USA Cities dataset (city, state, approx lat/lng, pop weight) ──
+const USA_CITIES = [
+  {name:"New York",state:"NY",lat:40.7128,lng:-74.0060},
+  {name:"Los Angeles",state:"CA",lat:34.0522,lng:-118.2437},
+  {name:"Chicago",state:"IL",lat:41.8781,lng:-87.6298},
+  {name:"Houston",state:"TX",lat:29.7604,lng:-95.3698},
+  {name:"Phoenix",state:"AZ",lat:33.4484,lng:-112.0740},
+  {name:"Philadelphia",state:"PA",lat:39.9526,lng:-75.1652},
+  {name:"San Antonio",state:"TX",lat:29.4241,lng:-98.4936},
+  {name:"San Diego",state:"CA",lat:32.7157,lng:-117.1611},
+  {name:"Dallas",state:"TX",lat:32.7767,lng:-96.7970},
+  {name:"San Jose",state:"CA",lat:37.3382,lng:-121.8863},
+  {name:"Austin",state:"TX",lat:30.2672,lng:-97.7431},
+  {name:"Jacksonville",state:"FL",lat:30.3322,lng:-81.6557},
+  {name:"Fort Worth",state:"TX",lat:32.7555,lng:-97.3308},
+  {name:"Columbus",state:"OH",lat:39.9612,lng:-82.9988},
+  {name:"Charlotte",state:"NC",lat:35.2271,lng:-80.8431},
+  {name:"Indianapolis",state:"IN",lat:39.7684,lng:-86.1581},
+  {name:"San Francisco",state:"CA",lat:37.7749,lng:-122.4194},
+  {name:"Seattle",state:"WA",lat:47.6062,lng:-122.3321},
+  {name:"Denver",state:"CO",lat:39.7392,lng:-104.9903},
+  {name:"Nashville",state:"TN",lat:36.1627,lng:-86.7816},
+  {name:"Oklahoma City",state:"OK",lat:35.4676,lng:-97.5164},
+  {name:"El Paso",state:"TX",lat:31.7619,lng:-106.4850},
+  {name:"Washington",state:"DC",lat:38.9072,lng:-77.0369},
+  {name:"Boston",state:"MA",lat:42.3601,lng:-71.0589},
+  {name:"Las Vegas",state:"NV",lat:36.1699,lng:-115.1398},
+  {name:"Memphis",state:"TN",lat:35.1495,lng:-90.0490},
+  {name:"Louisville",state:"KY",lat:38.2527,lng:-85.7585},
+  {name:"Portland",state:"OR",lat:45.5051,lng:-122.6750},
+  {name:"Baltimore",state:"MD",lat:39.2904,lng:-76.6122},
+  {name:"Milwaukee",state:"WI",lat:43.0389,lng:-87.9065},
+  {name:"Albuquerque",state:"NM",lat:35.0844,lng:-106.6504},
+  {name:"Tucson",state:"AZ",lat:32.2226,lng:-110.9747},
+  {name:"Fresno",state:"CA",lat:36.7378,lng:-119.7871},
+  {name:"Sacramento",state:"CA",lat:38.5816,lng:-121.4944},
+  {name:"Kansas City",state:"MO",lat:39.0997,lng:-94.5786},
+  {name:"Mesa",state:"AZ",lat:33.4152,lng:-111.8315},
+  {name:"Atlanta",state:"GA",lat:33.7490,lng:-84.3880},
+  {name:"Omaha",state:"NE",lat:41.2565,lng:-95.9345},
+  {name:"Colorado Springs",state:"CO",lat:38.8339,lng:-104.8214},
+  {name:"Raleigh",state:"NC",lat:35.7796,lng:-78.6382},
+  {name:"Long Beach",state:"CA",lat:33.7701,lng:-118.1937},
+  {name:"Virginia Beach",state:"VA",lat:36.8529,lng:-75.9780},
+  {name:"Minneapolis",state:"MN",lat:44.9778,lng:-93.2650},
+  {name:"Tampa",state:"FL",lat:27.9506,lng:-82.4572},
+  {name:"New Orleans",state:"LA",lat:29.9511,lng:-90.0715},
+  {name:"Arlington",state:"TX",lat:32.7357,lng:-97.1081},
+  {name:"Wichita",state:"KS",lat:37.6872,lng:-97.3301},
+  {name:"Bakersfield",state:"CA",lat:35.3733,lng:-119.0187},
+  {name:"Aurora",state:"CO",lat:39.7294,lng:-104.8319},
+  {name:"Cleveland",state:"OH",lat:41.4993,lng:-81.6944},
+  {name:"Honolulu",state:"HI",lat:21.3069,lng:-157.8583},
+  {name:"Anchorage",state:"AK",lat:61.2181,lng:-149.9003},
+  {name:"Miami",state:"FL",lat:25.7617,lng:-80.1918},
+  {name:"Pittsburgh",state:"PA",lat:40.4406,lng:-79.9959},
+  {name:"Cincinnati",state:"OH",lat:39.1031,lng:-84.5120},
+  {name:"St. Louis",state:"MO",lat:38.6270,lng:-90.1994},
+  {name:"Salt Lake City",state:"UT",lat:40.7608,lng:-111.8910},
+  {name:"Orlando",state:"FL",lat:28.5383,lng:-81.3792},
+  {name:"Detroit",state:"MI",lat:42.3314,lng:-83.0458},
+  {name:"Richmond",state:"VA",lat:37.5407,lng:-77.4360},
+];
+
+// ── Scoring constants ──────────────────────────────────────────────
+const BIOME_SCORES={
   "Amazon Rainforest, Brazil":88,"Pantanal Wetlands, Brazil":96,"Llanos Savanna, Venezuela":92,
   "Orinoco Delta, Venezuela":85,"Rio Paraná, Argentina":82,"Gran Chaco, Paraguay":75,
   "Atlantic Forest, Brazil":80,"Cerrado, Brazil":78,"Pampas, Uruguay":72,
   "Chiquitano Forest, Bolivia":74,"Magdalena Valley, Colombia":83,"Darién Gap, Panama":70,
   "Cloud Forest, Ecuador":91,"Caatinga Scrubland, Brazil":65,"Esteros del Iberá, Argentina":87,
 };
+const TAX_BRACKETS=["No Income","Forager Class","Working Grass","Middle Marsh","Upper Swamp","Riverfront Elite","Capybara 1%"];
 
-const TAX_BRACKETS = [
-  "No Income","Forager Class","Working Grass","Middle Marsh",
-  "Upper Swamp","Riverfront Elite","Capybara 1%"
+// ── 20 Male Personas ───────────────────────────────────────────────
+const MALE_PERSONAS=[
+  {potency:1, name:"Muddy Nervous Guy",    traits:{humor:1,sensual:0,flirty:1,reserved:3,awkward:9,mean:0,nice:6,kind:7,rude:0},color:"var(--t3)"},
+  {potency:2, name:"Damp Overthinker",     traits:{humor:2,sensual:0,flirty:2,reserved:4,awkward:8,mean:0,nice:7,kind:7,rude:0},color:"var(--t3)"},
+  {potency:3, name:"Eager Swamp Simp",     traits:{humor:3,sensual:1,flirty:5,reserved:1,awkward:7,mean:0,nice:9,kind:8,rude:0},color:"var(--t3)"},
+  {potency:4, name:"Gentle Loafer",        traits:{humor:3,sensual:1,flirty:3,reserved:5,awkward:5,mean:0,nice:8,kind:9,rude:0},color:"var(--t2)"},
+  {potency:5, name:"Cheerful Puddle Bro",  traits:{humor:6,sensual:1,flirty:4,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0},color:"var(--t2)"},
+  {potency:6, name:"Steady River Dude",    traits:{humor:5,sensual:2,flirty:5,reserved:4,awkward:3,mean:1,nice:7,kind:6,rude:1},color:"var(--blue)"},
+  {potency:7, name:"Warm Grassland Type",  traits:{humor:6,sensual:3,flirty:6,reserved:3,awkward:2,mean:1,nice:7,kind:6,rude:1},color:"var(--blue)"},
+  {potency:8, name:"Chill Reed Lounger",   traits:{humor:7,sensual:3,flirty:5,reserved:5,awkward:2,mean:1,nice:6,kind:5,rude:1},color:"var(--blue)"},
+  {potency:9, name:"Confident Wader",      traits:{humor:6,sensual:4,flirty:7,reserved:3,awkward:1,mean:2,nice:6,kind:5,rude:2},color:"var(--blue)"},
+  {potency:10,name:"Smooth Grazer",        traits:{humor:7,sensual:5,flirty:7,reserved:4,awkward:1,mean:2,nice:5,kind:4,rude:2},color:"var(--peach)"},
+  {potency:11,name:"Witty Mudflat King",   traits:{humor:8,sensual:5,flirty:8,reserved:4,awkward:1,mean:3,nice:5,kind:4,rude:3},color:"var(--peach)"},
+  {potency:12,name:"Smoldering Herbivore", traits:{humor:5,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3},color:"var(--peach)"},
+  {potency:13,name:"Sardonic Wetlander",   traits:{humor:9,sensual:4,flirty:6,reserved:7,awkward:0,mean:4,nice:4,kind:3,rude:4},color:"var(--orange)"},
+  {potency:14,name:"Cool Dominant Bull",   traits:{humor:6,sensual:6,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4},color:"var(--orange)"},
+  {potency:15,name:"Laconic Alpha",        traits:{humor:5,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:3,kind:2,rude:4},color:"var(--orange)"},
+  {potency:16,name:"Ice-Cold Riverine",    traits:{humor:4,sensual:7,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:2,rude:6},color:"var(--gold)"},
+  {potency:17,name:"Dry Cruel Wit",        traits:{humor:9,sensual:5,flirty:5,reserved:8,awkward:0,mean:7,nice:2,kind:2,rude:7},color:"var(--gold)"},
+  {potency:18,name:"Magnetic Brute",       traits:{humor:6,sensual:8,flirty:8,reserved:7,awkward:0,mean:6,nice:2,kind:2,rude:7},color:"var(--gold)"},
+  {potency:19,name:"Untouchable Elder",    traits:{humor:7,sensual:8,flirty:6,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:6},color:"var(--gold)"},
+  {potency:20,name:"Apex Swamp Sovereign", traits:{humor:8,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8},color:"var(--gold)"},
+];
+// ── 20 Female Personas ─────────────────────────────────────────────
+const FEMALE_PERSONAS=[
+  {potency:1, name:"Puddle Sweetheart",    traits:{humor:2,sensual:0,flirty:2,reserved:2,awkward:8,mean:0,nice:9,kind:9,rude:0},color:"var(--t3)"},
+  {potency:2, name:"Shy Riverbank Girl",   traits:{humor:2,sensual:0,flirty:3,reserved:4,awkward:8,mean:0,nice:8,kind:9,rude:0},color:"var(--t3)"},
+  {potency:3, name:"Hopeful Marsh Maid",   traits:{humor:3,sensual:1,flirty:4,reserved:3,awkward:6,mean:0,nice:9,kind:8,rude:0},color:"var(--t3)"},
+  {potency:4, name:"Warm Reed Hugger",     traits:{humor:4,sensual:1,flirty:4,reserved:3,awkward:5,mean:0,nice:9,kind:8,rude:0},color:"var(--t2)"},
+  {potency:5, name:"Bubbly Grass Nibbler", traits:{humor:6,sensual:2,flirty:5,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0},color:"var(--t2)"},
+  {potency:6, name:"Flirty Shallow Wader", traits:{humor:5,sensual:3,flirty:7,reserved:2,awkward:3,mean:1,nice:7,kind:7,rude:1},color:"var(--blue)"},
+  {potency:7, name:"Teasing Savanna Girl", traits:{humor:7,sensual:3,flirty:7,reserved:3,awkward:2,mean:1,nice:6,kind:6,rude:1},color:"var(--blue)"},
+  {potency:8, name:"Clever Wetland Type",  traits:{humor:7,sensual:4,flirty:6,reserved:4,awkward:1,mean:1,nice:6,kind:6,rude:1},color:"var(--blue)"},
+  {potency:9, name:"Bold Mud Princess",    traits:{humor:6,sensual:5,flirty:7,reserved:3,awkward:1,mean:2,nice:5,kind:5,rude:2},color:"var(--blue)"},
+  {potency:10,name:"Charismatic Grazette", traits:{humor:7,sensual:5,flirty:8,reserved:4,awkward:0,mean:2,nice:5,kind:4,rude:2},color:"var(--peach)"},
+  {potency:11,name:"Witty River Queen",    traits:{humor:8,sensual:6,flirty:8,reserved:4,awkward:0,mean:3,nice:4,kind:3,rude:3},color:"var(--peach)"},
+  {potency:12,name:"Beguiling Herbivore",  traits:{humor:6,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3},color:"var(--peach)"},
+  {potency:13,name:"Sharp Wetland Wit",    traits:{humor:8,sensual:5,flirty:7,reserved:6,awkward:0,mean:4,nice:3,kind:3,rude:4},color:"var(--orange)"},
+  {potency:14,name:"Cool Dominant Doe",    traits:{humor:5,sensual:7,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4},color:"var(--orange)"},
+  {potency:15,name:"Laconic Alpha Cow",    traits:{humor:4,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:2,kind:2,rude:4},color:"var(--orange)"},
+  {potency:16,name:"Frost River Matriarch",traits:{humor:3,sensual:8,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:1,rude:6},color:"var(--gold)"},
+  {potency:17,name:"Cruel Dry Humor",      traits:{humor:9,sensual:6,flirty:4,reserved:8,awkward:0,mean:7,nice:1,kind:2,rude:7},color:"var(--gold)"},
+  {potency:18,name:"Seductive Dominatrix", traits:{humor:5,sensual:9,flirty:9,reserved:7,awkward:0,mean:6,nice:2,kind:1,rude:6},color:"var(--gold)"},
+  {potency:19,name:"Untouchable Matron",   traits:{humor:6,sensual:8,flirty:5,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:7},color:"var(--gold)"},
+  {potency:20,name:"Apex Capybara Queen",  traits:{humor:7,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8},color:"var(--gold)"},
 ];
 
-// ── 20 Male Personas (potency 1-20) ───────────────────────────────
-// Each has a name, dominant traits, and response flavor by context
-const MALE_PERSONAS = [
-  // 1-5: low potency — awkward, timid, eager
-  { potency:1,  name:"Muddy Nervous Guy",    traits:{humor:1,sensual:0,flirty:1,reserved:3,awkward:9,mean:0,nice:6,kind:7,rude:0}, color:"var(--t3)" },
-  { potency:2,  name:"Damp Overthinker",     traits:{humor:2,sensual:0,flirty:2,reserved:4,awkward:8,mean:0,nice:7,kind:7,rude:0}, color:"var(--t3)" },
-  { potency:3,  name:"Eager Swamp Simp",     traits:{humor:3,sensual:1,flirty:5,reserved:1,awkward:7,mean:0,nice:9,kind:8,rude:0}, color:"var(--t3)" },
-  { potency:4,  name:"Gentle Loafer",        traits:{humor:3,sensual:1,flirty:3,reserved:5,awkward:5,mean:0,nice:8,kind:9,rude:0}, color:"var(--t2)" },
-  { potency:5,  name:"Cheerful Puddle Bro",  traits:{humor:6,sensual:1,flirty:4,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0}, color:"var(--t2)" },
-  // 6-10: mid-low — friendly, slightly confident
-  { potency:6,  name:"Steady River Dude",    traits:{humor:5,sensual:2,flirty:5,reserved:4,awkward:3,mean:1,nice:7,kind:6,rude:1}, color:"var(--blue)" },
-  { potency:7,  name:"Warm Grassland Type",  traits:{humor:6,sensual:3,flirty:6,reserved:3,awkward:2,mean:1,nice:7,kind:6,rude:1}, color:"var(--blue)" },
-  { potency:8,  name:"Chill Reed Lounger",   traits:{humor:7,sensual:3,flirty:5,reserved:5,awkward:2,mean:1,nice:6,kind:5,rude:1}, color:"var(--blue)" },
-  { potency:9,  name:"Confident Wader",      traits:{humor:6,sensual:4,flirty:7,reserved:3,awkward:1,mean:2,nice:6,kind:5,rude:2}, color:"var(--blue)" },
-  { potency:10, name:"Smooth Grazer",        traits:{humor:7,sensual:5,flirty:7,reserved:4,awkward:1,mean:2,nice:5,kind:4,rude:2}, color:"var(--peach)" },
-  // 11-15: mid-high — charming, a little edge
-  { potency:11, name:"Witty Mudflat King",   traits:{humor:8,sensual:5,flirty:8,reserved:4,awkward:1,mean:3,nice:5,kind:4,rude:3}, color:"var(--peach)" },
-  { potency:12, name:"Smoldering Herbivore", traits:{humor:5,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
-  { potency:13, name:"Sardonic Wetlander",   traits:{humor:9,sensual:4,flirty:6,reserved:7,awkward:0,mean:4,nice:4,kind:3,rude:4}, color:"var(--orange)" },
-  { potency:14, name:"Cool Dominant Bull",   traits:{humor:6,sensual:6,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
-  { potency:15, name:"Laconic Alpha",        traits:{humor:5,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:3,kind:2,rude:4}, color:"var(--orange)" },
-  // 16-20: high potency — intense, unpredictable, magnetic
-  { potency:16, name:"Ice-Cold Riverine",    traits:{humor:4,sensual:7,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:2,rude:6}, color:"var(--gold)" },
-  { potency:17, name:"Dry Cruel Wit",        traits:{humor:9,sensual:5,flirty:5,reserved:8,awkward:0,mean:7,nice:2,kind:2,rude:7}, color:"var(--gold)" },
-  { potency:18, name:"Magnetic Brute",       traits:{humor:6,sensual:8,flirty:8,reserved:7,awkward:0,mean:6,nice:2,kind:2,rude:7}, color:"var(--gold)" },
-  { potency:19, name:"Untouchable Elder",    traits:{humor:7,sensual:8,flirty:6,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:6}, color:"var(--gold)" },
-  { potency:20, name:"Apex Swamp Sovereign", traits:{humor:8,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8}, color:"var(--gold)" },
-];
-
-// ── 20 Female Personas (potency 1-20) ─────────────────────────────
-const FEMALE_PERSONAS = [
-  // 1-5: low potency — sweet, nervous, open
-  { potency:1,  name:"Puddle Sweetheart",    traits:{humor:2,sensual:0,flirty:2,reserved:2,awkward:8,mean:0,nice:9,kind:9,rude:0}, color:"var(--t3)" },
-  { potency:2,  name:"Shy Riverbank Girl",   traits:{humor:2,sensual:0,flirty:3,reserved:4,awkward:8,mean:0,nice:8,kind:9,rude:0}, color:"var(--t3)" },
-  { potency:3,  name:"Hopeful Marsh Maid",   traits:{humor:3,sensual:1,flirty:4,reserved:3,awkward:6,mean:0,nice:9,kind:8,rude:0}, color:"var(--t3)" },
-  { potency:4,  name:"Warm Reed Hugger",     traits:{humor:4,sensual:1,flirty:4,reserved:3,awkward:5,mean:0,nice:9,kind:8,rude:0}, color:"var(--t2)" },
-  { potency:5,  name:"Bubbly Grass Nibbler", traits:{humor:6,sensual:2,flirty:5,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0}, color:"var(--t2)" },
-  // 6-10: mid-low — playful, warm, flirtatious
-  { potency:6,  name:"Flirty Shallow Wader", traits:{humor:5,sensual:3,flirty:7,reserved:2,awkward:3,mean:1,nice:7,kind:7,rude:1}, color:"var(--blue)" },
-  { potency:7,  name:"Teasing Savanna Girl", traits:{humor:7,sensual:3,flirty:7,reserved:3,awkward:2,mean:1,nice:6,kind:6,rude:1}, color:"var(--blue)" },
-  { potency:8,  name:"Clever Wetland Type",  traits:{humor:7,sensual:4,flirty:6,reserved:4,awkward:1,mean:1,nice:6,kind:6,rude:1}, color:"var(--blue)" },
-  { potency:9,  name:"Bold Mud Princess",    traits:{humor:6,sensual:5,flirty:7,reserved:3,awkward:1,mean:2,nice:5,kind:5,rude:2}, color:"var(--blue)" },
-  { potency:10, name:"Charismatic Grazette", traits:{humor:7,sensual:5,flirty:8,reserved:4,awkward:0,mean:2,nice:5,kind:4,rude:2}, color:"var(--peach)" },
-  // 11-15: mid-high — confident, edged, alluring
-  { potency:11, name:"Witty River Queen",    traits:{humor:8,sensual:6,flirty:8,reserved:4,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
-  { potency:12, name:"Beguiling Herbivore",  traits:{humor:6,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
-  { potency:13, name:"Sharp Wetland Wit",    traits:{humor:8,sensual:5,flirty:7,reserved:6,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
-  { potency:14, name:"Cool Dominant Doe",    traits:{humor:5,sensual:7,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
-  { potency:15, name:"Laconic Alpha Cow",    traits:{humor:4,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:2,kind:2,rude:4}, color:"var(--orange)" },
-  // 16-20: high potency — intense, magnetic, dangerous
-  { potency:16, name:"Frost River Matriarch",traits:{humor:3,sensual:8,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:1,rude:6}, color:"var(--gold)" },
-  { potency:17, name:"Cruel Dry Humor",      traits:{humor:9,sensual:6,flirty:4,reserved:8,awkward:0,mean:7,nice:1,kind:2,rude:7}, color:"var(--gold)" },
-  { potency:18, name:"Seductive Dominatrix", traits:{humor:5,sensual:9,flirty:9,reserved:7,awkward:0,mean:6,nice:2,kind:1,rude:6}, color:"var(--gold)" },
-  { potency:19, name:"Untouchable Matron",   traits:{humor:6,sensual:8,flirty:5,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:7}, color:"var(--gold)" },
-  { potency:20, name:"Apex Capybara Queen",  traits:{humor:7,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8}, color:"var(--gold)" },
-];
-
-// ── Weighted persona picker (higher grade → higher potency) ─────────
-function pickPersona(grade, gender) {
-  const pool = gender === 'male' ? MALE_PERSONAS : FEMALE_PERSONAS;
-  // Grade weight: S→16-20, A→12-18, B→7-14, C→3-10, D→1-6
-  const ranges = { S:[16,20], A:[12,18], B:[7,14], C:[3,10], D:[1,6] };
-  const [lo, hi] = ranges[grade] || [1,10];
-  // Weighted: items closer to hi get more weight
-  const eligible = pool.filter(p => p.potency >= lo && p.potency <= hi);
-  const weights  = eligible.map(p => (p.potency - lo + 1) ** 1.6);
-  const total    = weights.reduce((a,b) => a+b, 0);
-  let r = Math.random() * total;
-  for (let i = 0; i < eligible.length; i++) { r -= weights[i]; if (r <= 0) return eligible[i]; }
-  return eligible[eligible.length - 1];
-}
-
-// ── Persona-driven response generator ─────────────────────────────
-function generatePersonaReply(persona, traits, msgText, isFirstMsg) {
-  const t = traits;
-  const dominant = Object.entries(t).sort((a,b) => b[1]-a[1]).slice(0,3).map(e=>e[0]);
-
-  const pools = {
-    humor: [
-      "I saw a bird try to land on a capybara today and miss. That is your energy right now.",
-      "You type like you're in a hurry. Where are you going. The grass is not running.",
-      "This message took you longer than it should have. I respect the effort, not the result.",
-      "I've met stagnant pools with more direction than this conversation. But I'm here.",
-      "You're funny. Not intentionally, but still.",
-      "The marsh doesn't ask this many questions. I'll make an exception.",
-    ],
-    sensual: [
-      "The water is warm today. Just thought you should know.",
-      "I've been sitting in the sun for three hours. I'm at peak temperature. You're welcome to know that.",
-      "There's a certain quality to late afternoon light on the water. I thought about you then.",
-      "My fur is particularly dense today. I'm not explaining further.",
-      "I don't say things like this often. You should sit with that.",
-      "The reeds are very close here. Very private.",
-    ],
-    flirty: [
-      "You reached out first. That tells me things.",
-      "I notice you noticed me. I'll allow it.",
-      "If you're trying to impress me, you're doing a medium job. That's better than most.",
-      "Tell me something true. Not interesting. True.",
-      "You're bolder than your profile suggested. I like that.",
-      "Most capybaras don't follow up. You did. Point to you.",
-    ],
-    reserved: [
-      "I don't respond to most messages. You should know that.",
-      "I read this twice before replying. You have my attention for now.",
-      "I'm not going to say a lot. This is a lot for me.",
-      "The marsh is quiet. So am I. This is an exception.",
-      "I don't know you. I'm aware of you. That's different.",
-      "Fine.",
-    ],
-    awkward: [
-      "I wanted to say something cool and then I just said this instead, which is this.",
-      "Hi. I wasn't expecting you to reply. I'm not sure what to do now.",
-      "I've been staring at the water for a while. Not for any reason. Just doing that.",
-      "Sorry if I'm weird. I am a little weird. The reeds know.",
-      "I typed six things and deleted them. This is the seventh. Hello.",
-      "This is going well I think? I'm not sure. How do you feel. Ignore that.",
-    ],
-    mean: [
-      "You're persistent. I haven't decided if that's good yet.",
-      "This is a low-effort message. I'm responding out of boredom.",
-      "I've seen better openers from herons and they can't even type.",
-      "Sure. If this is the level we're operating at.",
-      "Not bad. Not good. Somewhere in the water between.",
-      "I have standards. You are testing them.",
-    ],
-    rude: [
-      "I read it.",
-      "Interesting that you'd say that.",
-      "I'll respond when I feel like it.",
-      "You should know I'm talking to multiple capybaras right now.",
-      "This is a fine message for someone with your score.",
-      "Try again.",
-    ],
-    nice: [
-      "That actually made me happy. Thank you.",
-      "You're good at this. I hope you know that.",
-      "I wasn't expecting to feel this comfortable this quickly.",
-      "You're easy to talk to. That's rare in the wetlands.",
-      "This is a good conversation. I'd like to continue it.",
-      "You're genuinely kind. The marsh doesn't make many like you.",
-    ],
-    kind: [
-      "I hope your day is going well. Genuinely.",
-      "I like that you take your time with words.",
-      "There's something warm about how you write. It comes through.",
-      "I wanted to say — you seem like a good one.",
-      "The water is calm today. I think about the things that make the water calm.",
-      "I'm glad we matched. I don't say that often.",
-    ],
+// ── Persona response generator ────────────────────────────────────
+function genReply(persona, t, isFirst) {
+  const dom = Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+  const pools={
+    humor:["I saw a bird try to land on a capybara today and miss. That is your energy.","You type like you're in a hurry. The grass is not running.","This message took longer than it should have. I respect the effort.","I've met stagnant pools with more direction than this. But I'm here.","You're funny. Not intentionally, but still.","The marsh doesn't ask this many questions. I'll make an exception."],
+    sensual:["The water is warm today. Just thought you should know.","I've been sitting in the sun for three hours. Peak temperature. You're welcome.","There's a quality to late afternoon light on the water. I thought of you then.","My fur is particularly dense today. I'm not explaining further.","I don't say things like this often. Sit with that.","The reeds are very close here. Very private."],
+    flirty:["You reached out first. That tells me things.","I notice you noticed me. I'll allow it.","You're doing a medium job of impressing me. Better than most.","Tell me something true. Not interesting. True.","You're bolder than your profile suggested. I like that.","Most don't follow up. You did. Point to you."],
+    reserved:["I don't respond to most messages.","I read this twice before replying. You have my attention for now.","I'm not going to say a lot. This is a lot for me.","The marsh is quiet. So am I. This is an exception.","I don't know you. I'm aware of you. Different.","Fine."],
+    awkward:["I wanted to say something cool and then I said this instead.","Hi. I wasn't expecting a reply. I'm not sure what to do now.","I've been staring at the water. Not for any reason.","Sorry if I'm weird. The reeds know.","I typed six things and deleted them. This is the seventh. Hello.","This is going well I think? How do you feel. Ignore that."],
+    mean:["You're persistent. I haven't decided if that's good yet.","Low-effort message. I'm responding out of boredom.","I've seen better openers from herons and they can't type.","Sure. If this is the level we're operating at.","Not bad. Not good. Somewhere in the water between.","I have standards. You are testing them."],
+    rude:["I read it.","Interesting that you'd say that.","I'll respond when I feel like it.","I'm talking to multiple capybaras right now.","Fine for someone with your score.","Try again."],
+    nice:["That actually made me happy. Thank you.","You're good at this. I hope you know that.","I wasn't expecting to feel this comfortable this quickly.","You're easy to talk to. Rare in the wetlands.","This is a good conversation. I'd like to continue it.","You're genuinely kind. The marsh doesn't make many like you."],
+    kind:["I hope your day is going well. Genuinely.","I like that you take your time with words.","There's something warm about how you write. It comes through.","You seem like a good one.","The water is calm today. I think about what makes it calm.","I'm glad we matched. I don't say that often."],
   };
-
-  // First message overrides
-  if (isFirstMsg) {
-    if (t.awkward >= 6) return pools.awkward[Math.floor(Math.random() * pools.awkward.length)];
-    if (t.nice >= 7)    return pools.kind[Math.floor(Math.random() * pools.kind.length)];
-    if (t.reserved >= 7) return pools.reserved[Math.floor(Math.random() * pools.reserved.length)];
-    if (t.flirty >= 6)  return pools.flirty[Math.floor(Math.random() * pools.flirty.length)];
+  if(isFirst){
+    if(t.awkward>=6) return pick(pools.awkward);
+    if(t.nice>=7)    return pick(pools.kind);
+    if(t.reserved>=7) return pick(pools.reserved);
+    if(t.flirty>=6)  return pick(pools.flirty);
   }
-
-  // Dominant trait drives response
-  const key = dominant[Math.floor(Math.random() * Math.min(2, dominant.length))];
-  const pool = pools[key] || pools.nice;
-  return pool[Math.floor(Math.random() * pool.length)];
+  const key = dom[Math.floor(Math.random()*Math.min(2,dom.length))];
+  return pick(pools[key]||pools.nice);
 }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
 // ── State ──────────────────────────────────────────────────────────
-let CAPYS = [], deck = [], matches = [];
-let genderPref = null, activeFilter = 'all';
-let currentChat = null, pendingMatchCapy = null, reportTargetIdx = null;
-let user = null;
+let CAPYS=[],deck=[],matches=[];
+let genderPref=null,activeFilter='all';
+let currentChat=null,pendingMatchCapy=null,reportTargetIdx=null;
+let user=null;
+let userCity=null; // {name,state,lat,lng}
+let distanceFilter=false;
+let toastTimer=null;
 
 // ── Score & grade ──────────────────────────────────────────────────
-function computeV2(capy) {
-  const s = capy.scores;
-  const biome  = BIOME_SCORES[capy.location] || 70;
-  const energy = Math.min(100, Math.max(0, 100 - Math.abs((capy.energy || 5) - 6.5) * 12));
-  return Math.min(99, Math.max(1,
-    s.fur_density  * 0.22 + s.weight_score * 0.18 + s.size_score * 0.14 +
-    s.friendliness * 0.12 + energy * 0.20 + biome * 0.14
-  ));
+function computeV2(c){
+  const s=c.scores,biome=BIOME_SCORES[c.location]||70,energy=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+  return Math.min(99,Math.max(1,s.fur_density*.22+s.weight_score*.18+s.size_score*.14+s.friendliness*.12+energy*.20+biome*.14));
 }
-function grade(v) { return v>=88?'S':v>=74?'A':v>=58?'B':v>=42?'C':'D'; }
-function gradeColor(g) { return {S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g]; }
-function gradeCtx(g, name) {
-  return {
-    S:`${name} is Grade S — the top tier. Rare, unhurried, highly selective.`,
-    A:`${name} holds Grade A. High attraction. Most of the wetland knows who they are.`,
-    B:`${name} is Grade B — solid, genuine, steady. Trusted immediately.`,
-    C:`${name} carries Grade C. Approachable and honest. Not the top of the ranking, and entirely at peace with that.`,
-    D:`${name} is Grade D. Warm, eager, and reliably present. The reeds are never empty when they're around.`,
-  }[g] || '';
+function grade(v){return v>=88?'S':v>=74?'A':v>=58?'B':v>=42?'C':'D';}
+function gradeColor(g){return{S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g];}
+function gradeCtx(g,name){
+  return{S:`${name} is Grade S — the top tier. Rare, unhurried, highly selective.`,A:`${name} holds Grade A. High attraction. Most of the wetland knows who they are.`,B:`${name} is Grade B — solid, genuine, steady. Trusted immediately.`,C:`${name} carries Grade C. Approachable and honest. Not the top of the ranking, and entirely at peace with that.`,D:`${name} is Grade D. Warm, eager, and reliably present. The reeds are never empty when they're around.`}[g]||'';
 }
 
-// ── Persona assignment per capy (deterministic via id seed) ──────
-function seededRandom(seed) {
-  let x = Math.sin(seed + 1) * 10000;
-  return x - Math.floor(x);
+// ── Persona ────────────────────────────────────────────────────────
+function sr(seed){let x=Math.sin(seed+1)*10000;return x-Math.floor(x);}
+function getPersona(c){
+  const v=computeV2(c),g=grade(v);
+  const pool=c.gender==='male'?MALE_PERSONAS:FEMALE_PERSONAS;
+  const ranges={S:[16,20],A:[12,18],B:[7,14],C:[3,10],D:[1,6]};
+  const[lo,hi]=ranges[g]||[1,10];
+  const el=pool.filter(p=>p.potency>=lo&&p.potency<=hi);
+  const wts=el.map(p=>(p.potency-lo+1)**1.6);
+  const tot=wts.reduce((a,b)=>a+b,0);
+  let r=sr(c.id)*tot;
+  for(let i=0;i<el.length;i++){r-=wts[i];if(r<=0)return el[i];}
+  return el[el.length-1];
 }
-function getPersona(capy) {
-  const v = computeV2(capy);
-  const g = grade(v);
-  const pool = capy.gender === 'male' ? MALE_PERSONAS : FEMALE_PERSONAS;
-  const ranges = { S:[16,20], A:[12,18], B:[7,14], C:[3,10], D:[1,6] };
-  const [lo, hi] = ranges[g] || [1,10];
-  const eligible = pool.filter(p => p.potency >= lo && p.potency <= hi);
-  const weights  = eligible.map(p => (p.potency - lo + 1) ** 1.6);
-  const total    = weights.reduce((a,b) => a+b, 0);
-  let r = seededRandom(capy.id) * total;
-  for (let i = 0; i < eligible.length; i++) { r -= weights[i]; if (r <= 0) return eligible[i]; }
-  return eligible[eligible.length - 1];
+
+// ── Distance ───────────────────────────────────────────────────────
+function haversine(lat1,lng1,lat2,lng2){
+  const R=3958.8,dLat=(lat2-lat1)*Math.PI/180,dLng=(lng2-lng1)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+// Assign each capy a simulated distance: seeded by capy.id + user city
+// Capys get a "virtual location" — a random US city from their biome lat offset
+const CAPY_BASE_LATS={
+  "Amazon Rainforest, Brazil":-3,"Pantanal Wetlands, Brazil":-17,"Llanos Savanna, Venezuela":7,
+  "Orinoco Delta, Venezuela":9,"Rio Paraná, Argentina":-27,"Gran Chaco, Paraguay":-22,
+  "Atlantic Forest, Brazil":-23,"Cerrado, Brazil":-15,"Pampas, Uruguay":-33,
+  "Chiquitano Forest, Bolivia":-16,"Magdalena Valley, Colombia":6,"Darién Gap, Panama":8,
+  "Cloud Forest, Ecuador":-1,"Caatinga Scrubland, Brazil":-7,"Esteros del Iberá, Argentina":-29,
+};
+function capySimLat(c){ return (CAPY_BASE_LATS[c.location]||0) + (sr(c.id*7)*4-2); }
+function capySimLng(c){ return -60 + sr(c.id*13)*20 - 10; }
+
+// Compute simulated distance for a capy from user's city
+// The distance is "as if" the capy teleported to a nearby spot — we use a
+// deterministic offset based on capy ID so it's stable per session.
+function getCapyDistance(c){
+  if(!userCity) return null;
+  // Each capy gets a seeded "apparent distance" 0–2000 miles, bell-curved around 200mi
+  const seed=sr(c.id*31+userCity.lat*7);
+  // Use a log-normal-ish distribution: most capys 5-800 miles, some farther
+  const base = Math.exp(seed * 6.9); // 1 to ~1000
+  const miles = Math.min(2500, Math.round(base * (0.5 + sr(c.id*17)*0.8)));
+  return miles;
+}
+
+function fmtDist(d){
+  if(d===null) return '';
+  if(d<1) return '<1 mi away';
+  if(d<50) return `${d} mi away`;
+  if(d<200) return `${d} mi away`;
+  return `${d} mi away`;
+}
+
+// ── Kana burst animation ───────────────────────────────────────────
+const KANA='あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
+function burstKana(){
+  const canvas=document.getElementById('kana-canvas');
+  const W=canvas.width=window.innerWidth, H=canvas.height=window.innerHeight;
+  const ctx=canvas.getContext('2d');
+  // Origin: top-center where the toast appears
+  const ox=W/2, oy=80;
+  const particles=[];
+  const colors=['#E05252','#D4A843','#4A9EFF','#2EC27E','#F4A261'];
+  for(let i=0;i<26;i++){
+    const ch=KANA[Math.floor(Math.random()*KANA.length)];
+    const angle=-Math.PI/2 + (Math.random()-0.5)*Math.PI*1.4;
+    const speed=2+Math.random()*5;
+    particles.push({
+      ch,x:ox,y:oy,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed-(1+Math.random()*2),
+      alpha:1,
+      size:14+Math.random()*18,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      rot:Math.random()*Math.PI*2,
+      vrot:(Math.random()-0.5)*0.18,
+      grav:0.12+Math.random()*0.08,
+    });
+  }
+  let frame=0;
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    let alive=false;
+    for(const p of particles){
+      p.x+=p.vx; p.y+=p.vy; p.vy+=p.grav; p.rot+=p.vrot;
+      p.alpha-=0.018;
+      if(p.alpha<=0) continue;
+      alive=true;
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha=p.alpha;
+      ctx.font=`${p.size}px serif`;
+      ctx.fillStyle=p.color;
+      ctx.fillText(p.ch,0,0);
+      ctx.restore();
+    }
+    if(alive&&frame<120){frame++;requestAnimationFrame(animate);}
+    else ctx.clearRect(0,0,W,H);
+  }
+  animate();
+}
+
+// ── Passive match toast ────────────────────────────────────────────
+function showMatchToast(capy, matchIdx){
+  const toast=document.getElementById('match-toast');
+  document.getElementById('match-toast-img').src=capy.image_url;
+  const v=computeV2(capy),g=grade(v);
+  const persona=getPersona(capy);
+  document.getElementById('match-toast-title').textContent='It\'s a Match';
+  document.getElementById('match-toast-sub').textContent=`${capy.name} · Grade ${g}${persona?' · '+persona.name:''}`;
+  toast.onclick=()=>{
+    clearTimeout(toastTimer);
+    hideMatchToast();
+    openChat(matchIdx);
+    switchView('matches');
+  };
+  toast.classList.add('show');
+  burstKana();
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>hideMatchToast(), 3200);
+}
+function hideMatchToast(){
+  const toast=document.getElementById('match-toast');
+  toast.classList.remove('show');
 }
 
 // ── Load ───────────────────────────────────────────────────────────
-async function loadCapys() {
-  try {
-    const res = await fetch('./src/data/capybaras.json');
-    CAPYS = await res.json();
-    buildDeck(); renderCards(); renderLeaderboard();
-  } catch(e) { console.error('Load failed', e); }
+async function loadCapys(){
+  try{
+    const res=await fetch('./src/data/capybaras.json');
+    CAPYS=await res.json();
+    buildDeck();renderCards();renderLeaderboard();
+  }catch(e){console.error('Load failed',e);}
 }
 
 // ── Deck ───────────────────────────────────────────────────────────
-function buildDeck() {
-  let pool = [...CAPYS];
-  if (genderPref && genderPref !== 'all') pool = pool.filter(c => c.gender === genderPref);
-  const swiped = new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
-  pool = pool.filter(c => !swiped.has(c.id));
-  if (activeFilter === '5star') pool = pool.filter(c => { const g=grade(computeV2(c)); return g==='S'||g==='A'; });
-  else if (activeFilter === 'chonk') pool = pool.filter(c => c.scores.weight_score >= 75);
-  else if (activeFilter === 'zen')   pool = pool.filter(c => c.energy_type==='Zen'||c.energy_type==='Unbothered');
-  pool.sort((a,b) => {
-    const ai = Math.abs(computeV2(a)-55), bi = Math.abs(computeV2(b)-55);
-    return ai - bi + (Math.random()-0.5)*22;
+function buildDeck(){
+  let pool=[...CAPYS];
+  if(genderPref&&genderPref!=='all') pool=pool.filter(c=>c.gender===genderPref);
+  const swiped=new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
+  pool=pool.filter(c=>!swiped.has(c.id));
+  if(activeFilter==='5star') pool=pool.filter(c=>{const g=grade(computeV2(c));return g==='S'||g==='A';});
+  else if(activeFilter==='chonk') pool=pool.filter(c=>c.scores.weight_score>=75);
+  else if(activeFilter==='zen')   pool=pool.filter(c=>c.energy_type==='Zen'||c.energy_type==='Unbothered');
+  else if(activeFilter==='distance'&&userCity){
+    pool=pool.filter(c=>{const d=getCapyDistance(c);return d!==null&&d<=50;});
+  }
+  pool.sort((a,b)=>{
+    const ai=Math.abs(computeV2(a)-55),bi=Math.abs(computeV2(b)-55);
+    return ai-bi+(Math.random()-0.5)*22;
   });
-  deck = pool; updateStats();
+  deck=pool;updateStats();
 }
 
 // ── Render cards ───────────────────────────────────────────────────
-function renderCards() {
-  const stack = document.getElementById('card-stack');
+function renderCards(){
+  const stack=document.getElementById('card-stack');
   stack.querySelectorAll('.capy-card').forEach(el=>el.remove());
-  const empty = document.getElementById('empty-state');
-  if (!deck.length) { empty.classList.add('show'); document.getElementById('capy-count').textContent=''; return; }
+  const empty=document.getElementById('empty-state');
+  if(!deck.length){empty.classList.add('show');document.getElementById('capy-count').textContent='';return;}
   empty.classList.remove('show');
-  const toRender = deck.slice(0,3);
-  [...toRender].reverse().forEach((capy,i) => {
-    const card = buildCard(capy);
-    const ri = toRender.length-1-i;
-    card.style.zIndex = ri+1;
-    if (ri>0) { card.style.transform=`scale(${1-ri*0.025}) translateY(${ri*8}px)`; card.style.pointerEvents='none'; card.style.opacity=String(1-ri*0.1); }
-    stack.insertBefore(card, empty);
+  const toRender=deck.slice(0,3);
+  [...toRender].reverse().forEach((capy,i)=>{
+    const card=buildCard(capy);
+    const ri=toRender.length-1-i;
+    card.style.zIndex=ri+1;
+    if(ri>0){card.style.transform=`scale(${1-ri*0.025}) translateY(${ri*8}px)`;card.style.pointerEvents='none';card.style.opacity=String(1-ri*0.1);}
+    stack.insertBefore(card,empty);
   });
-  setupSwipe(); updateStats();
+  setupSwipe();updateStats();
 }
 
-function metricColor(v) { return v>=75?'var(--green)':v>=50?'var(--orange)':'var(--t3)'; }
+function mc(v){return v>=75?'var(--green)':v>=50?'var(--orange)':'var(--t3)';}
 
-function buildCard(capy) {
-  const card  = document.createElement('div');
-  card.className = 'capy-card'; card.dataset.id = capy.id;
-  const v2    = computeV2(capy), g = grade(v2);
-  const bs    = BIOME_SCORES[capy.location]||70;
-  const es    = Math.min(100,Math.max(0,100-Math.abs((capy.energy||5)-6.5)*12));
-  const persona = getPersona(capy);
-  const metrics = [
-    {label:'FUR',   val:capy.scores.fur_density},
-    {label:'WEIGHT',val:capy.scores.weight_score},
-    {label:'SIZE',  val:capy.scores.size_score},
-    {label:'VIBE',  val:capy.scores.friendliness},
+function buildCard(c){
+  const card=document.createElement('div');
+  card.className='capy-card';card.dataset.id=c.id;
+  const v2=computeV2(c),g=grade(v2);
+  const bs=BIOME_SCORES[c.location]||70;
+  const es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+  const persona=getPersona(c);
+  const pc=persona?.color||'var(--t4)';
+  const dist=getCapyDistance(c);
+  const metrics=[
+    {label:'FUR',   val:c.scores.fur_density},
+    {label:'WEIGHT',val:c.scores.weight_score},
+    {label:'SIZE',  val:c.scores.size_score},
+    {label:'VIBE',  val:c.scores.friendliness},
     {label:'ENERGY',val:es},
     {label:'BIOME', val:bs},
   ];
-  const bars = metrics.map(m=>`<div class="card-metric-row">
-    <span class="metric-label">${m.label}</span>
-    <div class="metric-track"><div class="metric-fill" style="width:${m.val.toFixed(0)}%;background:${metricColor(m.val)}"></div></div>
-    <span class="metric-val" style="color:${metricColor(m.val)}">${m.val.toFixed(0)}</span>
-  </div>`).join('');
-  const hobbies = (capy.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
-  const pColor = persona?.color || 'var(--t4)';
-
-  card.innerHTML = `
-    <img class="card-img" src="${capy.image_url}" alt="${capy.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-    <div class="card-img-placeholder">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg>
-    </div>
+  const bars=metrics.map(m=>`<div class="card-metric-row"><span class="metric-label">${m.label}</span><div class="metric-track"><div class="metric-fill" style="width:${m.val.toFixed(0)}%;background:${mc(m.val)}"></div></div><span class="metric-val" style="color:${mc(m.val)}">${m.val.toFixed(0)}</span></div>`).join('');
+  const hobbies=(c.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
+  const distEl=dist!==null?`<span class="card-distance">&#128205; ${fmtDist(dist)}</span>`:'';
+  card.innerHTML=`
+    <img class="card-img" src="${c.image_url}" alt="${c.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+    <div class="card-img-placeholder"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg></div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
     <div class="stamp stamp-pass">PASS</div>
     <div class="card-info">
       <div>
         <div class="card-name-row">
-          <span class="card-name">${capy.name}</span>
-          <span class="card-age">${capy.age}</span>
-          <span class="card-gender-badge ${capy.gender}">${capy.gender==='female'?'F':'M'}</span>
-          ${persona?`<span class="card-persona-badge" style="color:${pColor};border-color:${pColor}33;background:${pColor}11">P${persona.potency}</span>`:''}
+          <span class="card-name">${c.name}</span>
+          <span class="card-age">${c.age}</span>
+          <span class="card-gender-badge ${c.gender}">${c.gender==='female'?'F':'M'}</span>
+          ${persona?`<span class="card-persona-badge" style="color:${pc};border-color:${pc}33;background:${pc}11">P${persona.potency}</span>`:''}
         </div>
-        <div class="card-location">${capy.location}</div>
+        <div class="card-location-row">
+          <span class="card-location">${c.location}</span>
+          ${distEl}
+        </div>
       </div>
       <div class="card-grade-row">
         <span class="grade-badge grade-${g}">${g}</span>
-        <span class="grade-label">${gradeCtx(g,capy.name)}</span>
+        <span class="grade-label">${gradeCtx(g,c.name)}</span>
       </div>
-      <div class="card-bio">${capy.bio}</div>
+      <div class="card-bio">${c.bio}</div>
       <div class="card-metrics">${bars}</div>
       <div class="card-tags">
-        <span class="card-tag">${capy.energy_type||''}</span>
-        <span class="card-tag">${TAX_BRACKETS[capy.tax_bracket]||''}</span>
-        ${persona?`<span class="card-tag" style="border-color:${pColor}33;color:${pColor}">${persona.name}</span>`:''}
+        <span class="card-tag">${c.energy_type||''}</span>
+        <span class="card-tag">${TAX_BRACKETS[c.tax_bracket]||''}</span>
+        ${persona?`<span class="card-tag" style="border-color:${pc}33;color:${pc}">${persona.name}</span>`:''}
         ${hobbies}
       </div>
     </div>`;
   return card;
 }
 
-// ── Swipe drag ─────────────────────────────────────────────────────
-let dragStartX=0, dragStartY=0, isDragging=false, dragCard=null;
-
-function setupSwipe() {
-  const stack = document.getElementById('card-stack');
-  const card  = stack.querySelector('.capy-card');
-  if (!card) return;
-  dragCard = card;
-
-  const getPoint = e => e.touches ? e.touches[0] : e;
-
-  const onStart = e => {
-    // Only start drag if not tapping a button/link inside the card
-    if (e.target.closest('button,a,textarea,input,select')) return;
-    isDragging = true;
-    const pt = getPoint(e);
-    dragStartX = pt.clientX; dragStartY = pt.clientY;
-    card.style.transition = 'none';
+// ── Swipe ──────────────────────────────────────────────────────────
+let dragStartX=0,dragStartY=0,isDragging=false;
+function setupSwipe(){
+  const stack=document.getElementById('card-stack');
+  const card=stack.querySelector('.capy-card');
+  if(!card) return;
+  const pt=e=>e.touches?e.touches[0]:e;
+  const onStart=e=>{
+    if(e.target.closest('button,a,textarea,input,select')) return;
+    isDragging=true;
+    const p=pt(e);dragStartX=p.clientX;dragStartY=p.clientY;
+    card.style.transition='none';
   };
-  const onMove = e => {
-    if (!isDragging) return;
-    const pt = getPoint(e);
-    const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
-    // Only hijack horizontal swipes; allow vertical scrolling inside card-info
-    if (Math.abs(dx) < Math.abs(dy) && Math.abs(dx) < 12) return;
+  const onMove=e=>{
+    if(!isDragging) return;
+    const p=pt(e);
+    const dx=p.clientX-dragStartX,dy=p.clientY-dragStartY;
+    if(Math.abs(dx)<Math.abs(dy)&&Math.abs(dx)<12) return;
     e.preventDefault();
-    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx*0.055}deg)`;
-    const pct = Math.min(1, Math.abs(dx)/80);
-    card.querySelector('.stamp-like').style.opacity = dx>20 ? pct : 0;
-    card.querySelector('.stamp-pass').style.opacity = dx<-20 ? pct : 0;
+    card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx*0.055}deg)`;
+    const pct=Math.min(1,Math.abs(dx)/80);
+    card.querySelector('.stamp-like').style.opacity=dx>20?pct:0;
+    card.querySelector('.stamp-pass').style.opacity=dx<-20?pct:0;
   };
-  const onEnd = e => {
-    if (!isDragging) return;
-    isDragging = false;
-    const pt = e.changedTouches ? e.changedTouches[0] : e;
-    const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
-    if (Math.abs(dx) > 80) flyCard(card, dx>0?'like':'pass', dx, dy);
-    else {
-      card.style.transition = 'transform .3s cubic-bezier(0.34,1.56,0.64,1)';
-      card.style.transform = '';
-      card.querySelector('.stamp-like').style.opacity = 0;
-      card.querySelector('.stamp-pass').style.opacity = 0;
-    }
+  const onEnd=e=>{
+    if(!isDragging) return;
+    isDragging=false;
+    const p=e.changedTouches?e.changedTouches[0]:e;
+    const dx=p.clientX-dragStartX,dy=p.clientY-dragStartY;
+    if(Math.abs(dx)>80) flyCard(card,dx>0?'like':'pass',dx,dy);
+    else{card.style.transition='transform .3s cubic-bezier(0.34,1.56,0.64,1)';card.style.transform='';card.querySelector('.stamp-like').style.opacity=0;card.querySelector('.stamp-pass').style.opacity=0;}
   };
-
-  card.addEventListener('mousedown',  onStart);
-  card.addEventListener('touchstart', onStart, {passive:true});
-  window.addEventListener('mousemove',  onMove);
-  window.addEventListener('touchmove',  onMove, {passive:false});
-  window.addEventListener('mouseup',   onEnd);
-  window.addEventListener('touchend',  onEnd);
+  card.addEventListener('mousedown',onStart);
+  card.addEventListener('touchstart',onStart,{passive:true});
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('mouseup',onEnd);
+  window.addEventListener('touchend',onEnd);
 }
-
-function swipe(dir) {
-  const card = document.getElementById('card-stack').querySelector('.capy-card');
-  if (!card) return;
-  flyCard(card, dir, dir==='like'?500:-500, -80);
+function swipe(dir){
+  const card=document.getElementById('card-stack').querySelector('.capy-card');
+  if(!card) return;
+  flyCard(card,dir,dir==='like'?500:-500,-80);
 }
-
-function flyCard(card, dir, dx, dy) {
-  const capyId = parseInt(card.dataset.id);
-  const capy   = CAPYS.find(c=>c.id===capyId);
+function flyCard(card,dir,dx,dy){
+  const capyId=parseInt(card.dataset.id);
+  const capy=CAPYS.find(c=>c.id===capyId);
   card.style.setProperty('--dx',(dx>0?650:-650)+'px');
   card.style.setProperty('--dy',(dy-120)+'px');
   card.style.setProperty('--rot',(dx>0?32:-32)+'deg');
-  card.style.animation = 'flyOut .38s ease-in forwards';
-  card.style.pointerEvents = 'none';
-  const swiped = JSON.parse(localStorage.getItem('cl_swiped')||'[]');
-  swiped.push(capyId); localStorage.setItem('cl_swiped', JSON.stringify(swiped));
-  if (dir==='like'||dir==='super') checkMatch(capy, dir==='super');
+  card.style.animation='flyOut .38s ease-in forwards';
+  card.style.pointerEvents='none';
+  const swiped=JSON.parse(localStorage.getItem('cl_swiped')||'[]');
+  swiped.push(capyId);localStorage.setItem('cl_swiped',JSON.stringify(swiped));
+  if(dir==='like'||dir==='super') checkMatch(capy,dir==='super');
   deck.splice(deck.findIndex(c=>c.id===capyId),1);
-  setTimeout(()=>{ card.remove(); renderCards(); }, 380);
+  setTimeout(()=>{card.remove();renderCards();},380);
 }
 
 // ── Match ──────────────────────────────────────────────────────────
-function matchProb(capy) {
-  const v=computeV2(capy);
-  return Math.max(0.04, Math.min(0.93, 0.92-(v/100)*0.84+(Math.random()-0.5)*0.07));
-}
+function matchProb(c){const v=computeV2(c);return Math.max(0.04,Math.min(0.93,0.92-(v/100)*0.84+(Math.random()-0.5)*0.07));}
+function checkMatch(capy,isSuper){const p=isSuper?Math.min(0.96,matchProb(capy)*1.8):matchProb(capy);if(Math.random()<p) triggerMatch(capy);}
+function tierFromGrade(g){return(g==='S'||g==='A')?'high':g==='B'?'mid':'low';}
 
-function checkMatch(capy, isSuper) {
-  const prob = isSuper ? Math.min(0.96, matchProb(capy)*1.8) : matchProb(capy);
-  if (Math.random() < prob) triggerMatch(capy);
-}
-
-function tierFromGrade(g) { return (g==='S'||g==='A')?'high':g==='B'?'mid':'low'; }
-
-function triggerMatch(capy) {
-  const v=computeV2(capy), g=grade(v), tier=tierFromGrade(g);
-  const persona = getPersona(capy);
-  const m = { capy, persona, messages:[], tier, grade:g, firstMsgSent:false, unread:false, matchedAt:Date.now() };
+function triggerMatch(capy){
+  const v=computeV2(capy),g=grade(v),tier=tierFromGrade(g);
+  const persona=getPersona(capy);
+  const m={capy,persona,messages:[],tier,grade:g,firstMsgSent:false,unread:false,matchedAt:Date.now()};
   matches.push(m);
-  const idx = matches.length-1;
-  pendingMatchCapy = { capy, matchIdx:idx };
-  document.getElementById('match-popup-img').src = capy.image_url;
-  document.getElementById('match-popup-text').textContent =
-    `${capy.name} (Grade ${g}${persona?', '+persona.name:''}) matched with you. ${
-      tier==='high'?'Rare. They almost never match.':
-      tier==='mid'?'Reach out and see where it goes.':
-      'They seem very happy about this.'}`;
-  document.getElementById('match-popup').classList.add('show');
+  const idx=matches.length-1;
+  pendingMatchCapy={capy,matchIdx:idx};
+  showMatchToast(capy,idx);
   updateMatchesBadge();
-  if (tier==='low' || (tier==='mid' && Math.random()<0.35)) {
-    const delay = tier==='low' ? 7000+Math.random()*5000 : 18000+Math.random()*14000;
-    setTimeout(()=>sendCapyFirst(idx), delay);
+  if(tier==='low'||(tier==='mid'&&Math.random()<0.35)){
+    const delay=tier==='low'?7000+Math.random()*5000:18000+Math.random()*14000;
+    setTimeout(()=>sendCapyFirst(idx),delay);
   }
 }
 
-function sendCapyFirst(idx) {
-  const m = matches[idx];
-  if (!m||m.firstMsgSent) return;
-  const t = m.persona?.traits || {};
-  const text = generatePersonaReply(m.persona, t, '', true);
-  const msg = { from:'capy', text, ts:Date.now() };
-  m.messages.push(msg); m.firstMsgSent=true; m.unread=true;
+function sendCapyFirst(idx){
+  const m=matches[idx];if(!m||m.firstMsgSent) return;
+  const t=m.persona?.traits||{};
+  const text=genReply(m.persona,t,true);
+  const msg={from:'capy',text,ts:Date.now()};
+  m.messages.push(msg);m.firstMsgSent=true;m.unread=true;
   updateMatchesBadge();
-  if (currentChat===idx) { appendMessage(msg); m.unread=false; }
+  if(currentChat===idx){appendMessage(msg);m.unread=false;}
   else updateMatchesView();
 }
 
 // ── Chat ───────────────────────────────────────────────────────────
-function openChat(idx) {
-  currentChat = idx;
-  const m=matches[idx]; m.unread=false;
-  const c=m.capy, persona=m.persona;
-  document.getElementById('chat-avatar').src = c.image_url;
-  document.getElementById('chat-name').textContent = c.name;
-  document.getElementById('chat-sub').textContent  = `Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} · ${c.location}`;
-  document.getElementById('chat-persona-line').textContent = persona ? `${persona.name} · Potency ${persona.potency}` : '';
-  const msgs = document.getElementById('chat-messages');
+function openChat(idx){
+  currentChat=idx;
+  const m=matches[idx];m.unread=false;
+  const c=m.capy,persona=m.persona;
+  document.getElementById('chat-avatar').src=c.image_url;
+  document.getElementById('chat-name').textContent=c.name;
+  document.getElementById('chat-sub').textContent=`Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} · ${c.location}`;
+  document.getElementById('chat-persona-line').textContent=persona?`${persona.name} · Potency ${persona.potency}`:'';
+  const msgs=document.getElementById('chat-messages');
   msgs.innerHTML='';
-  if (!m.messages.length) {
+  if(!m.messages.length){
     const h=document.createElement('div');
     h.style.cssText='text-align:center;padding:20px 0;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;';
     h.textContent=`You matched with ${c.name}. Say something.`;
     msgs.appendChild(h);
-  } else m.messages.forEach(appendMessage);
-  switchView('chat'); updateMatchesBadge();
+  }else m.messages.forEach(appendMessage);
+  switchView('chat');updateMatchesBadge();
 }
-
-function closeChat() { currentChat=null; switchView('matches'); }
-
-function appendMessage(msg) {
+function closeChat(){currentChat=null;switchView('matches');}
+function appendMessage(msg){
   const msgs=document.getElementById('chat-messages');
   const div=document.createElement('div');
   div.className=`msg ${msg.from==='capy'?'from-capy':'from-me'}`;
   div.style.animation='fadeSlideIn .2s ease';
   const time=new Date(msg.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
   div.innerHTML=`<div class="msg-bubble">${esc(msg.text)}</div><div class="msg-time">${time}</div>`;
-  msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
 }
-
-function showTyping() {
+function showTyping(){
   const msgs=document.getElementById('chat-messages');
-  const el=document.createElement('div'); el.id='typing-indicator'; el.className='typing-indicator';
+  const el=document.createElement('div');el.id='typing-indicator';el.className='typing-indicator';
   el.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight;
+  msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;
 }
-function hideTyping() { document.getElementById('typing-indicator')?.remove(); }
-
-function sendMessage() {
+function hideTyping(){document.getElementById('typing-indicator')?.remove();}
+function sendMessage(){
   const input=document.getElementById('chat-input');
   const text=input.value.trim();
-  if (!text||currentChat===null) return;
+  if(!text||currentChat===null) return;
   const m=matches[currentChat];
-  const msg={from:'me',text,ts:Date.now()};
-  m.messages.push(msg); appendMessage(msg);
-  input.value=''; input.style.height='auto';
-  // Reply chance by tier
-  const replyChance = m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
-  if (Math.random()<replyChance) {
-    const delay = m.tier==='high'?14000+Math.random()*20000:m.tier==='mid'?4000+Math.random()*7000:800+Math.random()*1800;
-    const savedIdx = currentChat;
+  m.messages.push({from:'me',text,ts:Date.now()});
+  appendMessage(m.messages[m.messages.length-1]);
+  input.value='';input.style.height='auto';
+  const rc=m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
+  if(Math.random()<rc){
+    const delay=m.tier==='high'?14000+Math.random()*20000:m.tier==='mid'?4000+Math.random()*7000:800+Math.random()*1800;
+    const si=currentChat;
     setTimeout(()=>{
       showTyping();
       setTimeout(()=>{
         hideTyping();
-        const mi=matches[savedIdx]; if(!mi) return;
-        const reply={from:'capy',text:generatePersonaReply(mi.persona,mi.persona?.traits||{},text,false),ts:Date.now()};
+        const mi=matches[si];if(!mi) return;
+        const reply={from:'capy',text:genReply(mi.persona,mi.persona?.traits||{},false),ts:Date.now()};
         mi.messages.push(reply);
-        if(currentChat===savedIdx) appendMessage(reply);
-        else { mi.unread=true; updateMatchesBadge(); updateMatchesView(); }
-      }, 1200+Math.random()*900);
-    }, delay-1200);
+        if(currentChat===si) appendMessage(reply);
+        else{mi.unread=true;updateMatchesBadge();updateMatchesView();}
+      },1200+Math.random()*900);
+    },delay-1200);
   }
 }
-
-function handleChatKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
-function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
+function handleChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px';}
 
 // ── Remove / Report ────────────────────────────────────────────────
-function removeCurrentMatch() {
+function removeCurrentMatch(){
   if(currentChat===null) return;
   if(!confirm(`Remove match with ${matches[currentChat].capy.name}?`)) return;
-  matches.splice(currentChat,1); currentChat=null; switchView('matches'); updateMatchesView(); updateMatchesBadge();
+  matches.splice(currentChat,1);currentChat=null;switchView('matches');updateMatchesView();updateMatchesBadge();
 }
-function reportCurrentMatch() { if(currentChat===null) return; reportTargetIdx=currentChat; document.getElementById('report-modal').classList.add('show'); }
-function removeMatchFromList(idx) {
+function reportCurrentMatch(){if(currentChat===null) return;reportTargetIdx=currentChat;document.getElementById('report-modal').classList.add('show');}
+function removeMatchFromList(idx){
   if(!confirm(`Remove ${matches[idx].capy.name}?`)) return;
   if(currentChat===idx) currentChat=null;
-  matches.splice(idx,1); updateMatchesView(); updateMatchesBadge();
+  matches.splice(idx,1);updateMatchesView();updateMatchesBadge();
 }
-function reportMatchFromList(idx) { reportTargetIdx=idx; document.getElementById('report-modal').classList.add('show'); }
+function reportMatchFromList(idx){reportTargetIdx=idx;document.getElementById('report-modal').classList.add('show');}
 
 // ── Matches view ───────────────────────────────────────────────────
-function updateMatchesView() {
+function updateMatchesView(){
   const strip=document.getElementById('new-matches-row');
   const list=document.getElementById('convo-list');
   document.getElementById('matches-count-badge').textContent=`${matches.length} conversation${matches.length!==1?'s':''}`;
   const newM=matches.filter(m=>m.messages.length===0);
   if(newM.length>0){
-    strip.innerHTML=newM.map(m=>{
-      const idx=matches.indexOf(m);
-      return `<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;
-    }).join('');
+    strip.innerHTML=newM.map(m=>{const idx=matches.indexOf(m);return`<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;}).join('');
     document.getElementById('new-matches-strip').style.display='';
-  } else document.getElementById('new-matches-strip').style.display='none';
+  }else document.getElementById('new-matches-strip').style.display='none';
   const convos=matches.filter(m=>m.messages.length>0);
   if(!matches.length){list.innerHTML='<div class="no-matches"><p>No matches yet. Keep swiping.</p></div>';return;}
-  if(!convos.length){list.innerHTML='<div style="padding:18px;font-size:11px;color:var(--t3);font-family:\'DM Mono\',monospace;">Matched capybaras waiting above. Send a message.</div>';return;}
+  if(!convos.length){list.innerHTML='<div style="padding:18px;font-size:11px;color:var(--t3);font-family:\'DM Mono\',monospace;">Matched capybaras above. Send a message.</div>';return;}
   list.innerHTML=convos.map(m=>{
     const idx=matches.indexOf(m);
     const last=m.messages[m.messages.length-1];
     const time=new Date(last.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="convo-item" onclick="openChat(${idx})">
+    return`<div class="convo-item" onclick="openChat(${idx})">
       <img class="convo-avatar" src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/>
       <div class="convo-info">
         <div class="convo-name">${m.capy.name} <span style="font-size:9px;color:${gradeColor(m.grade)};font-family:'DM Mono',monospace;">Grade ${m.grade}</span>${m.persona?` <span style="font-size:8px;color:${m.persona.color};font-family:'DM Mono',monospace;">P${m.persona.potency}</span>`:''}</div>
@@ -1008,75 +1056,134 @@ function updateMatchesView() {
     </div>`;
   }).join('');
 }
-
-function updateMatchesBadge() {
-  const unread=matches.filter(m=>m.unread).length;
+function updateMatchesBadge(){
+  const u=matches.filter(m=>m.unread).length;
   const b=document.getElementById('matches-badge');
-  if(unread>0){b.textContent=unread;b.style.display='inline';}else b.style.display='none';
+  if(u>0){b.textContent=u;b.style.display='inline';}else b.style.display='none';
 }
 
 // ── Leaderboard ────────────────────────────────────────────────────
-function renderLeaderboard() {
+function renderLeaderboard(){
   if(!CAPYS.length) return;
   const sorted=[...CAPYS].map(c=>({c,v2:computeV2(c)})).sort((a,b)=>b.v2-a.v2).slice(0,50);
   document.getElementById('leaderboard-list').innerHTML=sorted.map(({c,v2},i)=>{
     const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
     const rt=i<3?['01','02','03'][i]:String(i+1).padStart(2,'0');
-    const g=grade(v2), es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+    const g=grade(v2),es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
     const persona=getPersona(c);
-    return `<div class="lb-item">
+    return`<div class="lb-item">
       <div class="lb-rank ${rc}">${rt}</div>
       <img class="lb-img" src="${c.image_url}" onerror="this.style.background='var(--s4)'"/>
-      <div class="lb-info">
-        <div class="lb-name">${c.name}, ${c.age}</div>
-        <div class="lb-sub">${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} ${persona?'· '+persona.name:''}</div>
-      </div>
+      <div class="lb-info"><div class="lb-name">${c.name}, ${c.age}</div><div class="lb-sub">${c.energy_type}${persona?' · '+persona.name:''}</div></div>
       <div class="lb-mini-bars">
         <div class="lb-mini-row"><span class="lb-mini-label">FUR</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur_density}%;background:var(--orange)"></div></div></div>
         <div class="lb-mini-row"><span class="lb-mini-label">NRG</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${es}%;background:var(--blue)"></div></div></div>
         <div class="lb-mini-row"><span class="lb-mini-label">BIO</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${(BIOME_SCORES[c.location]||70)}%;background:var(--gold)"></div></div></div>
       </div>
-      <div class="lb-right">
-        <div class="lb-score">${v2.toFixed(1)}</div>
-        <div class="lb-score-sub"><span class="grade-badge grade-${g}" style="font-size:8px;padding:1px 6px;">${g}</span></div>
-      </div>
+      <div class="lb-right"><div class="lb-score">${v2.toFixed(1)}</div><div class="lb-score-sub"><span class="grade-badge grade-${g}" style="font-size:8px;padding:1px 6px;">${g}</span></div></div>
     </div>`;
   }).join('');
 }
 
 // ── Stats ──────────────────────────────────────────────────────────
-function updateStats() {
+function updateStats(){
   document.getElementById('stat-queue').textContent=deck.length;
   document.getElementById('stat-matches').textContent=matches.length;
   document.getElementById('capy-count').textContent=deck.length>0?`${deck.length} capybaras remaining`:'';
 }
 
 // ── Login ──────────────────────────────────────────────────────────
-function openLogin()  { document.getElementById('login-modal').classList.add('show'); }
-function closeLogin() { document.getElementById('login-modal').classList.remove('show'); }
-function doLogin() {
+function openLogin(){document.getElementById('login-modal').classList.add('show');}
+function closeLogin(){document.getElementById('login-modal').classList.remove('show');}
+function doLogin(){
   const name=document.getElementById('login-name').value.trim();
   if(!name){alert('Please enter your name.');return;}
   user={name,email:document.getElementById('login-email').value.trim(),gender:document.getElementById('login-gender').value};
   localStorage.setItem('cl_user',JSON.stringify(user));
   closeLogin();
   const btn=document.getElementById('login-btn');
-  btn.textContent=name; btn.classList.add('logged-in');
-  btn.onclick=()=>{ if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();} };
+  btn.textContent=name;btn.classList.add('logged-in');
+  btn.onclick=()=>{if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();}};
 }
-function restoreSession() {
+function restoreSession(){
   const saved=localStorage.getItem('cl_user');
   if(!saved) return;
-  try {
+  try{
     user=JSON.parse(saved);
     const btn=document.getElementById('login-btn');
-    btn.textContent=user.name; btn.classList.add('logged-in');
-    btn.onclick=()=>{ if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();} };
-  } catch(e){}
+    btn.textContent=user.name;btn.classList.add('logged-in');
+    btn.onclick=()=>{if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();}};
+  }catch(e){}
+}
+
+// ── Location gate ──────────────────────────────────────────────────
+let selectedCity=null;
+
+function initLocationGate(){
+  const saved=localStorage.getItem('cl_city');
+  if(saved){
+    try{
+      userCity=JSON.parse(saved);
+      document.getElementById('location-gate').classList.add('hidden');
+      document.getElementById('gender-gate').classList.remove('hidden');
+      document.getElementById('distance-filter-btn').style.display='';
+      return;
+    }catch(e){}
+  }
+  // Show location gate first
+  const input=document.getElementById('location-input');
+  const sugg=document.getElementById('location-suggestions');
+
+  input.addEventListener('input',()=>{
+    const q=input.value.trim().toLowerCase();
+    if(q.length<2){sugg.style.display='none';return;}
+    const matches=USA_CITIES.filter(c=>
+      c.name.toLowerCase().includes(q)||
+      c.state.toLowerCase().includes(q)||
+      (c.name+', '+c.state).toLowerCase().startsWith(q)
+    ).slice(0,8);
+    if(!matches.length){sugg.style.display='none';return;}
+    sugg.innerHTML=matches.map((c,i)=>`<div class="loc-suggestion" data-i="${i}" data-name="${c.name}" data-state="${c.state}" data-lat="${c.lat}" data-lng="${c.lng}"><div class="loc-name">${c.name}</div><div class="loc-state">${c.state}</div></div>`).join('');
+    sugg.style.display='block';
+    sugg.querySelectorAll('.loc-suggestion').forEach(el=>{
+      const pick=()=>{
+        selectedCity={name:el.dataset.name,state:el.dataset.state,lat:parseFloat(el.dataset.lat),lng:parseFloat(el.dataset.lng)};
+        input.value=`${selectedCity.name}, ${selectedCity.state}`;
+        sugg.style.display='none';
+        document.getElementById('location-submit').disabled=false;
+      };
+      el.addEventListener('click',pick);
+      el.addEventListener('touchend',e=>{e.preventDefault();pick();},{passive:false});
+    });
+  });
+
+  document.getElementById('location-submit').addEventListener('click',()=>{
+    if(!selectedCity) return;
+    commitCity(selectedCity);
+  });
+  document.getElementById('location-skip').addEventListener('click',()=>skipLocation());
+  document.getElementById('location-skip').addEventListener('touchend',e=>{e.preventDefault();skipLocation();},{passive:false});
+}
+
+function commitCity(city){
+  userCity=city;
+  localStorage.setItem('cl_city',JSON.stringify(city));
+  document.getElementById('location-gate').classList.add('hidden');
+  document.getElementById('gender-gate').classList.remove('hidden');
+  document.getElementById('distance-filter-btn').style.display='';
+}
+function skipLocation(){
+  document.getElementById('location-gate').classList.add('hidden');
+  document.getElementById('gender-gate').classList.remove('hidden');
+}
+function setGenderPref(pref){
+  genderPref=pref;
+  document.getElementById('gender-gate').classList.add('hidden');
+  buildDeck();renderCards();
 }
 
 // ── Tab switching ──────────────────────────────────────────────────
-function switchView(id) {
+function switchView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id+'-view').classList.add('active');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===id));
@@ -1084,63 +1191,51 @@ function switchView(id) {
 }
 
 // ── Utility ────────────────────────────────────────────────────────
-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function resetDeck() { localStorage.removeItem('cl_swiped'); buildDeck(); renderCards(); }
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function resetDeck(){localStorage.removeItem('cl_swiped');buildDeck();renderCards();}
 
-// ── Event listeners (JS-only, no inline onclick on modals) ─────────
-document.addEventListener('DOMContentLoaded', ()=>{
-  // Gender gate — use both click and touchend for mobile
+// ── Bootstrap ─────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  // Gender gate
   ['gg-female','gg-male','gg-all'].forEach(id=>{
-    const el=document.getElementById(id);
-    const pref=id.replace('gg-','');
+    const el=document.getElementById(id),pref=id.replace('gg-','');
     const fn=e=>{e.preventDefault();setGenderPref(pref);};
-    el.addEventListener('click', fn);
-    el.addEventListener('touchend', fn, {passive:false});
+    el.addEventListener('click',fn);el.addEventListener('touchend',fn,{passive:false});
   });
-  const skipEl=document.getElementById('gender-skip');
-  const skipFn=e=>{e.preventDefault();setGenderPref('all');};
-  skipEl.addEventListener('click', skipFn);
-  skipEl.addEventListener('touchend', skipFn, {passive:false});
+  const skipGender=e=>{e.preventDefault();setGenderPref('all');};
+  document.getElementById('gender-skip').addEventListener('click',skipGender);
+  document.getElementById('gender-skip').addEventListener('touchend',skipGender,{passive:false});
 
   // Login
-  document.getElementById('login-btn').addEventListener('click', openLogin);
-  document.getElementById('login-submit-btn').addEventListener('click', doLogin);
-  document.getElementById('login-close-btn').addEventListener('click', closeLogin);
-
-  // Match popup
-  document.getElementById('match-chat-btn').addEventListener('click', ()=>{
-    document.getElementById('match-popup').classList.remove('show');
-    if(pendingMatchCapy){ openChat(pendingMatchCapy.matchIdx); pendingMatchCapy=null; switchView('matches'); }
-  });
-  document.getElementById('match-skip-btn').addEventListener('click', ()=>{
-    document.getElementById('match-popup').classList.remove('show'); pendingMatchCapy=null; updateMatchesView();
-  });
+  document.getElementById('login-btn').addEventListener('click',openLogin);
+  document.getElementById('login-submit-btn').addEventListener('click',doLogin);
+  document.getElementById('login-close-btn').addEventListener('click',closeLogin);
 
   // Chat
-  document.getElementById('chat-back').addEventListener('click', closeChat);
-  document.getElementById('chat-remove-btn').addEventListener('click', removeCurrentMatch);
-  document.getElementById('chat-report-btn').addEventListener('click', reportCurrentMatch);
-  document.getElementById('chat-send').addEventListener('click', sendMessage);
-  document.getElementById('chat-input').addEventListener('keydown', handleChatKey);
-  document.getElementById('chat-input').addEventListener('input', function(){ autoResize(this); });
+  document.getElementById('chat-back').addEventListener('click',closeChat);
+  document.getElementById('chat-remove-btn').addEventListener('click',removeCurrentMatch);
+  document.getElementById('chat-report-btn').addEventListener('click',reportCurrentMatch);
+  document.getElementById('chat-send').addEventListener('click',sendMessage);
+  document.getElementById('chat-input').addEventListener('keydown',handleChatKey);
+  document.getElementById('chat-input').addEventListener('input',function(){autoResize(this);});
 
   // Report
   document.querySelectorAll('.report-option').forEach(el=>{
-    el.addEventListener('click', ()=>{
+    el.addEventListener('click',()=>{
       const m=matches[reportTargetIdx];
-      if(m) alert(`Report submitted for ${m.capy.name}: "${el.dataset.reason}". Thank you.`);
-      document.getElementById('report-modal').classList.remove('show'); reportTargetIdx=null;
+      if(m) alert(`Report submitted for ${m.capy.name}: "${el.dataset.reason}".`);
+      document.getElementById('report-modal').classList.remove('show');reportTargetIdx=null;
     });
   });
-  document.getElementById('report-cancel-btn').addEventListener('click', ()=>{
-    document.getElementById('report-modal').classList.remove('show'); reportTargetIdx=null;
+  document.getElementById('report-cancel-btn').addEventListener('click',()=>{
+    document.getElementById('report-modal').classList.remove('show');reportTargetIdx=null;
   });
 
-  // Action buttons
-  document.getElementById('btn-pass').addEventListener('click', ()=>swipe('pass'));
-  document.getElementById('btn-like').addEventListener('click', ()=>swipe('like'));
-  document.getElementById('btn-super').addEventListener('click', ()=>swipe('super'));
-  document.getElementById('reset-deck-btn').addEventListener('click', resetDeck);
+  // Action btns
+  document.getElementById('btn-pass').addEventListener('click',()=>swipe('pass'));
+  document.getElementById('btn-like').addEventListener('click',()=>swipe('like'));
+  document.getElementById('btn-super').addEventListener('click',()=>swipe('super'));
+  document.getElementById('reset-deck-btn').addEventListener('click',resetDeck);
 
   // Tabs
   document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
@@ -1149,18 +1244,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
     activeFilter=b.dataset.filter;
     document.querySelectorAll('.filter-btn').forEach(x=>x.classList.toggle('active',x===b));
-    buildDeck(); renderCards();
+    buildDeck();renderCards();
   }));
 
   restoreSession();
+  initLocationGate();
   loadCapys();
 });
-
-function setGenderPref(pref) {
-  genderPref=pref;
-  document.getElementById('gender-gate').classList.add('hidden');
-  buildDeck(); renderCards();
-}
 </script>
 </body>
 </html>
