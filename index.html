@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"/>
-  <title>CapyLove V3.0.0</title>
+  <title>CapyLove V3.1.0</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
+  <link rel="preload" href="./src/data/capybaras.json" as="fetch" crossorigin="anonymous"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -357,7 +358,7 @@
 
 <!-- HEADER -->
 <div id="header">
-  <div><div id="logo">CapyLove</div><div id="logo-sub">V3.0.0 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V3.1.0 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
   <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
   <button id="login-btn">Sign In</button>
@@ -391,7 +392,7 @@
     <div id="card-stack">
       <div id="empty-state">
         <h2>You've seen every capybara.</h2>
-        <p>All 4,000 of them. That level of commitment is statistically unprecedented.</p>
+        <p>All 3,945 of them. That level of commitment is statistically unprecedented.</p>
         <button id="reset-deck-btn">Start Over</button>
       </div>
     </div>
@@ -442,8 +443,8 @@
   <div id="about-view" class="view">
     <div class="about-section">
       <h3>About CapyLove V2.4.0</h3>
-      <p>The world's only capybara dating platform. <strong>4,000 real capybara images</strong> from the capy.lol image pool, scored across a 6-dimension V2.3 attraction algorithm with letter-grade classification (S through D).</p>
-      <p><strong>2,001 males, 1,999 females.</strong> Each assigned a unique energy type, tax bracket, biome of origin, 2–4 hobbies, a simulated distance from your location, and a persona from a pool of 40 (20 per gender) ranked by potency 1–20.</p>
+      <p>The world's only capybara dating platform. <strong>3,945 real capybara images</strong> from the capy.lol image pool, scored across a 6-dimension V2.3 attraction algorithm with letter-grade classification (S through D).</p>
+      <p><strong>1,971 males, 1,974 females.</strong> Each assigned a unique energy type, tax bracket, biome of origin, 2–4 hobbies, a simulated distance from your location, and a persona from a pool of 40 (20 per gender) ranked by potency 1–20.</p>
       <p>Higher-grade capybaras are rarer matches, reply slower, and carry higher-potency personas. Lower-grade capybaras match often, message first, and are enthusiastically available.</p>
     </div>
 
@@ -654,7 +655,7 @@ function genReply(persona, t, isFirst) {
 function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
 // ── State ──────────────────────────────────────────────────────────
-let CAPYS=[],deck=[],matches=[];
+let CAPYS=[],deck=[],matches=[],_swipedSet=new Set();
 let genderPref=null,activeFilter='all';
 let currentChat=null,pendingMatchCapy=null,reportTargetIdx=null;
 let user=null;
@@ -664,8 +665,8 @@ let toastTimer=null;
 
 // ── Score & grade ──────────────────────────────────────────────────
 function computeV2(c){
-  const s=c.scores,biome=BIOME_SCORES[c.location]||70,energy=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
-  return Math.min(99,Math.max(1,s.fur_density*.22+s.weight_score*.18+s.size_score*.14+s.friendliness*.12+energy*.20+biome*.14));
+  const s=c.scores,biome=BIOME_SCORES[c.location]||70,energy=Math.min(100,Math.max(0,100-Math.abs((5)-6.5)*12));
+  return Math.min(99,Math.max(1,(s.fur||50)*.22+(s.weight||50)*.18+(s.size||50)*.14+(s.vibe||50)*.12+energy*.20+biome*.14));
 }
 function grade(v){return v>=88?'S':v>=74?'A':v>=58?'B':v>=42?'C':'D';}
 function gradeColor(g){return{S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g];}
@@ -799,7 +800,7 @@ function burstKana(){
 // ── Passive match toast ────────────────────────────────────────────
 function showMatchToast(capy, matchIdx){
   const toast=document.getElementById('match-toast');
-  document.getElementById('match-toast-img').src=capy.image_url;
+  document.getElementById('match-toast-img').src=capy.url;
   const v=computeV2(capy),g=grade(v);
   const persona=getPersona(capy);
   document.getElementById('match-toast-title').textContent='It\'s a Match';
@@ -823,8 +824,9 @@ function hideMatchToast(){
 // ── Load ───────────────────────────────────────────────────────────
 async function loadCapys(){
   try{
-    const res=await fetch('./src/data/capybaras.json');
+    const res=await fetch('./src/data/capybaras.json',{cache:'force-cache'});
     CAPYS=await res.json();
+    _swipedSet=new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
     buildDeck();renderCards();renderLeaderboard();_lbBuilt=true;
   }catch(e){console.error('Load failed',e);}
 }
@@ -833,10 +835,9 @@ async function loadCapys(){
 function buildDeck(){
   let pool=[...CAPYS];
   if(genderPref&&genderPref!=='all') pool=pool.filter(c=>c.gender===genderPref);
-  const swiped=new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
-  pool=pool.filter(c=>!swiped.has(c.id));
+  pool=pool.filter(c=>!_swipedSet.has(c.id));
   if(activeFilter==='5star') pool=pool.filter(c=>{const g=grade(computeV2(c));return g==='S'||g==='A';});
-  else if(activeFilter==='chonk') pool=pool.filter(c=>c.scores.weight_score>=75);
+  else if(activeFilter==='chonk') pool=pool.filter(c=>c.scores.weight>=75);
   else if(activeFilter==='zen')   pool=pool.filter(c=>c.energy_type==='Zen'||c.energy_type==='Unbothered');
   else if(activeFilter==='distance'&&userCity){
     pool=pool.filter(c=>{const d=getCapyDistance(c);return d!==null&&d<=50;});
@@ -880,15 +881,15 @@ function buildCard(c){
   card.className='capy-card';card.dataset.id=c.id;
   const v2=computeV2(c),g=grade(v2);
   const bs=BIOME_SCORES[c.location]||70;
-  const es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+  const es=Math.min(100,Math.max(0,100-Math.abs((5)-6.5)*12));
   const persona=getPersona(c);
   const pc=persona?.color||'var(--t4)';
   const dist=getCapyDistance(c);
   const metrics=[
-    {label:'FUR',   val:c.scores.fur_density},
-    {label:'WEIGHT',val:c.scores.weight_score},
-    {label:'SIZE',  val:c.scores.size_score},
-    {label:'VIBE',  val:c.scores.friendliness},
+    {label:'FUR',   val:c.scores.fur},
+    {label:'WEIGHT',val:c.scores.weight},
+    {label:'SIZE',  val:c.scores.size},
+    {label:'VIBE',  val:c.scores.vibe},
     {label:'ENERGY',val:es},
     {label:'BIOME', val:bs},
   ];
@@ -896,7 +897,7 @@ function buildCard(c){
   const hobbies=(c.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
   const distEl=dist!==null?`<span class="card-distance">&#128205; ${fmtDist(dist)}</span>`:'';
   card.innerHTML=`
-    <img class="card-img" src="${c.image_url}" alt="${c.name}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='https://api.capy.lol/v1/capybara/'+c.id;this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex';}"/>
+    <img class="card-img" src="${c.url}" alt="${c.name}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='https://api.capy.lol/v1/capybara/'+c.id;this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex';}"/>
     <div class="card-img-placeholder"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg></div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
@@ -919,11 +920,11 @@ function buildCard(c){
         <span class="grade-badge grade-${g}">${g}</span>
         <span class="grade-label">${gradeCtx(g,c.name)}</span>
       </div>
-      <div class="card-bio">${c.bio.split('\n\n').map(p=>`<p style="margin-bottom:10px">${p}</p>`).join('')}</div>
+      <div class="card-bio">${c.bio}</div>
       <div class="card-metrics">${bars}</div>
       <div class="card-tags">
         <span class="card-tag">${c.energy_type||''}</span>
-        <span class="card-tag">${TAX_BRACKETS[c.tax_bracket]||''}</span>
+        <span class="card-tag">${TAX_BRACKETS[c.tax]||''}</span>
         ${persona?`<span class="card-tag" style="border-color:${pc}33;color:${pc}">${persona.name}</span>`:''}
         ${hobbies}
       </div>
@@ -1015,8 +1016,8 @@ function flyCard(card,dir,dx,dy){
   card.style.setProperty('--rot',(dx>0?32:-32)+'deg');
   card.style.animation='flyOut .38s ease-in forwards';
   card.style.pointerEvents='none';
-  const swiped=JSON.parse(localStorage.getItem('cl_swiped')||'[]');
-  swiped.push(capyId);localStorage.setItem('cl_swiped',JSON.stringify(swiped));
+  _swipedSet.add(capyId);
+  localStorage.setItem('cl_swiped',JSON.stringify([..._swipedSet]));
   if(dir==='like'||dir==='super') checkMatch(capy,dir==='super');
   deck.splice(deck.findIndex(c=>c.id===capyId),1);
   setTimeout(()=>{card.remove();renderCards();},380);
@@ -1069,9 +1070,9 @@ function openChat(idx){
   currentChat=idx;
   const m=matches[idx];m.unread=false;
   const c=m.capy,persona=m.persona;
-  document.getElementById('chat-avatar').src=c.image_url;
+  document.getElementById('chat-avatar').src=c.url;
   document.getElementById('chat-name').textContent=c.name;
-  document.getElementById('chat-sub').textContent=`Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} · ${c.location}`;
+  document.getElementById('chat-sub').textContent=`Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax]||''} · ${c.location}`;
   document.getElementById('chat-persona-line').textContent=persona?`${persona.name} · Potency ${persona.potency}`:'';
   const msgs=document.getElementById('chat-messages');
   msgs.innerHTML='';
@@ -1149,7 +1150,7 @@ function updateMatchesView(){
   document.getElementById('matches-count-badge').textContent=`${matches.length} conversation${matches.length!==1?'s':''}`;
   const newM=matches.filter(m=>m.messages.length===0);
   if(newM.length>0){
-    strip.innerHTML=newM.map(m=>{const idx=matches.indexOf(m);return`<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;}).join('');
+    strip.innerHTML=newM.map(m=>{const idx=matches.indexOf(m);return`<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;}).join('');
     document.getElementById('new-matches-strip').style.display='';
   }else document.getElementById('new-matches-strip').style.display='none';
   const convos=matches.filter(m=>m.messages.length>0);
@@ -1160,7 +1161,7 @@ function updateMatchesView(){
     const last=m.messages[m.messages.length-1];
     const time=new Date(last.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
     return`<div class="convo-item" onclick="openChat(${idx})">
-      <img class="convo-avatar" src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/>
+      <img class="convo-avatar" src="${m.capy.url}" onerror="this.style.background='var(--s4)'"/>
       <div class="convo-info">
         <div class="convo-name">${m.capy.name} <span style="font-size:9px;color:${gradeColor(m.grade)};font-family:'DM Mono',monospace;">Grade ${m.grade}</span>${m.persona?` <span style="font-size:8px;color:${m.persona.color};font-family:'DM Mono',monospace;">P${m.persona.potency}</span>`:''}</div>
         <div class="convo-preview">${esc(last.from==='me'?'You: '+last.text:last.text)}</div>
@@ -1187,14 +1188,14 @@ function renderLeaderboard(){
   document.getElementById('leaderboard-list').innerHTML=sorted.map(({c,v2},i)=>{
     const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
     const rt=i<3?['01','02','03'][i]:String(i+1).padStart(2,'0');
-    const g=grade(v2),es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+    const g=grade(v2),es=Math.min(100,Math.max(0,100-Math.abs((5)-6.5)*12));
     const persona=getPersona(c);
     return`<div class="lb-item">
       <div class="lb-rank ${rc}">${rt}</div>
-      <img class="lb-img" src="${c.image_url}" onerror="this.style.background='var(--s4)'"/>
+      <img class="lb-img" src="${c.url}" onerror="this.style.background='var(--s4)'"/>
       <div class="lb-info"><div class="lb-name">${c.name}, ${c.age}</div><div class="lb-sub">${c.energy_type}${persona?' · '+persona.name:''}</div></div>
       <div class="lb-mini-bars">
-        <div class="lb-mini-row"><span class="lb-mini-label">FUR</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur_density}%;background:var(--orange)"></div></div></div>
+        <div class="lb-mini-row"><span class="lb-mini-label">FUR</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur}%;background:var(--orange)"></div></div></div>
         <div class="lb-mini-row"><span class="lb-mini-label">NRG</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${es}%;background:var(--blue)"></div></div></div>
         <div class="lb-mini-row"><span class="lb-mini-label">BIO</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${(BIOME_SCORES[c.location]||70)}%;background:var(--gold)"></div></div></div>
       </div>
@@ -1393,7 +1394,7 @@ function switchView(id){
 
 // ── Utility ────────────────────────────────────────────────────────
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function resetDeck(){localStorage.removeItem('cl_swiped');buildDeck();renderCards();}
+function resetDeck(){localStorage.removeItem('cl_swiped');_swipedSet=new Set();buildDeck();renderCards();}
 
 // ── Bootstrap ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
