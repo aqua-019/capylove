@@ -3,361 +3,258 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapyLove V2.1</title>
+  <title>CapyLove V2.2</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8672A'/><text y='.85em' font-size='72' font-family='serif' fill='white'>C</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:     #080808;
-      --s1:     #0F0F0F;
-      --s2:     #161616;
-      --s3:     #1E1E1E;
-      --s4:     #272727;
-      --s5:     #323232;
-      --t1:     #F0F0F0;
-      --t2:     #A8A8A8;
-      --t3:     #666;
-      --t4:     #3A3A3A;
-      --orange: #E8672A;
-      --peach:  #F4A261;
-      --green:  #2EC27E;
-      --red:    #E05252;
-      --blue:   #4A9EFF;
-      --gold:   #D4A843;
-      --r:      14px;
-      --rm:     20px;
-      --rl:     28px;
+      --bg:#080808; --s1:#0F0F0F; --s2:#161616; --s3:#1E1E1E; --s4:#272727; --s5:#323232;
+      --t1:#F0F0F0; --t2:#A8A8A8; --t3:#666; --t4:#3A3A3A;
+      --orange:#E8672A; --peach:#F4A261; --green:#2EC27E; --red:#E05252; --blue:#4A9EFF; --gold:#D4A843;
+      --r:14px; --rm:20px; --rl:28px;
     }
-
-    html, body { height: 100%; overflow: hidden; background: var(--bg); }
-    body {
-      font-family: 'Sora', sans-serif;
-      color: var(--t1);
-      display: flex; flex-direction: column; height: 100dvh;
-    }
-
-    /* noise */
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-      opacity: .35;
-    }
-
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--s5); border-radius: 3px; }
+    html,body{height:100%;overflow:hidden;background:var(--bg);}
+    body{font-family:'Sora',sans-serif;color:var(--t1);display:flex;flex-direction:column;height:100dvh;}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      opacity:.35;}
+    ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:var(--s5);border-radius:3px;}
 
     /* ── Header ── */
-    #header {
-      padding: 9px 16px;
-      display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid var(--s3); flex-shrink: 0;
-      background: rgba(8,8,8,.97); backdrop-filter: blur(10px);
-    }
-    #logo { font-size: 16px; font-weight: 800; letter-spacing: -.6px; background: linear-gradient(135deg, var(--orange), var(--peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    #logo-sub { font-family: 'DM Mono', monospace; font-size: 7.5px; color: var(--t4); letter-spacing: 2px; margin-top: 1px; }
-    #header-spacer { flex: 1; }
-    #header-stats { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t3); line-height: 1.7; text-align: right; }
-    #login-btn { padding: 5px 13px; border-radius: 20px; border: 1px solid var(--s5); background: transparent; color: var(--t2); font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 500; cursor: pointer; transition: all .15s; white-space: nowrap; }
-    #login-btn:hover { border-color: var(--orange); color: var(--orange); }
-    #login-btn.logged-in { border-color: var(--green); color: var(--green); }
+    #header{padding:9px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--s3);flex-shrink:0;background:rgba(8,8,8,.97);backdrop-filter:blur(10px);}
+    #logo{font-size:16px;font-weight:800;letter-spacing:-.6px;background:linear-gradient(135deg,var(--orange),var(--peach));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    #logo-sub{font-family:'DM Mono',monospace;font-size:7.5px;color:var(--t4);letter-spacing:2px;margin-top:1px;}
+    #header-spacer{flex:1;}
+    #header-stats{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);line-height:1.7;text-align:right;}
+    #login-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--s5);background:transparent;color:var(--t2);font-family:'Sora',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;min-height:32px;-webkit-tap-highlight-color:transparent;}
+    #login-btn:hover{border-color:var(--orange);color:var(--orange);}
+    #login-btn.logged-in{border-color:var(--green);color:var(--green);}
 
     /* ── Tabs ── */
-    #tabs { display: flex; gap: 2px; padding: 7px 12px 0; border-bottom: 1px solid var(--s3); flex-shrink: 0; background: rgba(8,8,8,.95); }
-    .tab { padding: 6px 13px; border-radius: 10px 10px 0 0; font-size: 11px; font-weight: 500; cursor: pointer; background: transparent; color: var(--t3); border: none; transition: all .15s; user-select: none; letter-spacing: -.1px; }
-    .tab.active { background: var(--s2); color: var(--t1); }
-    .tab:hover:not(.active) { color: var(--t2); }
+    #tabs{display:flex;gap:2px;padding:7px 12px 0;border-bottom:1px solid var(--s3);flex-shrink:0;background:rgba(8,8,8,.95);}
+    .tab{padding:6px 13px;border-radius:10px 10px 0 0;font-size:11px;font-weight:500;cursor:pointer;background:transparent;color:var(--t3);border:none;transition:all .15s;user-select:none;letter-spacing:-.1px;-webkit-tap-highlight-color:transparent;}
+    .tab.active{background:var(--s2);color:var(--t1);}
+    .tab:hover:not(.active){color:var(--t2);}
 
     /* ── Main ── */
-    #main { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
-    .view { display: none; flex: 1; overflow: hidden; min-height: 0; }
-    .view.active { display: flex; flex-direction: column; }
+    #main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
+    .view{display:none;flex:1;overflow:hidden;min-height:0;}
+    .view.active{display:flex;flex-direction:column;}
 
-    /* ══════════════════════════════════════════
-       SWIPE VIEW — large card canvas
-    ══════════════════════════════════════════ */
-    #swipe-view {
-      align-items: center;
-      overflow-y: auto;
-      padding: 10px 12px 14px;
-      gap: 10px;
-    }
+    /* ── Swipe ── */
+    #swipe-view{align-items:center;overflow-y:auto;padding:10px 12px 14px;gap:10px;}
+    #filter-bar{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;flex-shrink:0;}
+    .filter-btn{font-size:10px;padding:4px 11px;border-radius:20px;cursor:pointer;border:1px solid var(--s4);background:transparent;color:var(--t3);transition:all .15s;font-family:'Sora',sans-serif;font-weight:500;-webkit-tap-highlight-color:transparent;}
+    .filter-btn.active{border-color:var(--orange);background:rgba(232,103,42,.1);color:var(--orange);}
+    #card-stack{position:relative;width:min(100%,520px);height:clamp(540px,78vh,820px);flex-shrink:0;}
+    .capy-card{position:absolute;inset:0;background:var(--s1);border-radius:26px;overflow:hidden;cursor:grab;user-select:none;touch-action:pan-y;box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 0 1px var(--s3);will-change:transform;transition:box-shadow .2s;display:flex;flex-direction:column;}
+    .capy-card:active{cursor:grabbing;}
+    .card-img{width:100%;height:46%;object-fit:cover;display:block;background:var(--s3);pointer-events:none;flex-shrink:0;}
+    .card-img-placeholder{width:100%;height:46%;flex-shrink:0;display:none;background:linear-gradient(135deg,var(--s3),var(--s4));align-items:center;justify-content:center;}
+    .card-img-placeholder svg{opacity:.15;}
+    .card-gradient{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent);pointer-events:none;}
+    .card-info{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;}
+    .card-info::-webkit-scrollbar{width:2px;} .card-info::-webkit-scrollbar-thumb{background:var(--s5);}
+    .card-name-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
+    .card-name{font-size:23px;font-weight:800;letter-spacing:-.6px;}
+    .card-age{font-size:16px;color:var(--t2);font-weight:400;}
+    .card-gender-badge{font-size:9px;padding:2px 7px;border-radius:7px;font-weight:600;letter-spacing:.5px;}
+    .card-gender-badge.male{background:rgba(74,158,255,.12);color:var(--blue);}
+    .card-gender-badge.female{background:rgba(244,162,97,.12);color:var(--peach);}
+    .card-persona-badge{font-size:8px;padding:2px 8px;border-radius:7px;font-weight:600;letter-spacing:.4px;font-family:'DM Mono',monospace;border:1px solid;}
+    .card-location{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:.3px;}
+    .card-bio{font-size:12.5px;color:var(--t2);line-height:1.65;}
+    .card-grade-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .grade-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;letter-spacing:.5px;}
+    .grade-S{background:rgba(212,168,67,.18);color:var(--gold);border:1px solid rgba(212,168,67,.35);}
+    .grade-A{background:rgba(46,194,126,.15);color:var(--green);border:1px solid rgba(46,194,126,.3);}
+    .grade-B{background:rgba(74,158,255,.12);color:var(--blue);border:1px solid rgba(74,158,255,.25);}
+    .grade-C{background:rgba(232,103,42,.12);color:var(--orange);border:1px solid rgba(232,103,42,.25);}
+    .grade-D{background:rgba(160,160,160,.1);color:var(--t3);border:1px solid var(--s5);}
+    .grade-label{font-size:10px;color:var(--t3);}
+    .card-metrics{display:flex;flex-direction:column;gap:5px;}
+    .card-metric-row{display:flex;align-items:center;gap:7px;}
+    .metric-label{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--t4);width:56px;flex-shrink:0;letter-spacing:.3px;}
+    .metric-track{flex:1;height:4px;background:var(--s4);border-radius:2px;overflow:hidden;}
+    .metric-fill{height:100%;border-radius:2px;transition:width .5s;}
+    .metric-val{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--t3);width:30px;text-align:right;flex-shrink:0;}
+    .card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+    .card-tag{font-size:9px;padding:2px 8px;border-radius:6px;border:1px solid var(--s5);color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:.2px;}
+    .card-tag.hobby{border-color:rgba(232,103,42,.25);color:rgba(232,103,42,.7);}
+    .stamp{position:absolute;top:20px;font-size:18px;font-weight:800;border:3px solid;border-radius:6px;padding:3px 12px;opacity:0;pointer-events:none;letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+    .stamp-like{left:14px;color:var(--green);border-color:var(--green);transform:rotate(-18deg);}
+    .stamp-pass{right:14px;color:var(--red);border-color:var(--red);transform:rotate(18deg);}
+    #action-btns{display:flex;gap:16px;align-items:center;flex-shrink:0;padding-bottom:2px;}
+    .action-btn{border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s;font-size:18px;font-family:'Sora',sans-serif;font-weight:700;-webkit-tap-highlight-color:transparent;}
+    .action-btn:active{transform:scale(.88);}
+    .btn-pass{width:54px;height:54px;background:var(--s2);border:1px solid var(--s5);color:var(--red);box-shadow:0 4px 14px rgba(0,0,0,.4);}
+    .btn-like{width:64px;height:64px;background:linear-gradient(135deg,var(--green),#2ec27ecc);box-shadow:0 6px 22px rgba(46,194,126,.3);color:#fff;}
+    .btn-super{width:46px;height:46px;background:var(--s2);border:1px solid rgba(212,168,67,.4);color:var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.4);}
+    .btn-pass:hover{box-shadow:0 6px 20px rgba(224,82,82,.25);}
+    .btn-like:hover{box-shadow:0 8px 30px rgba(46,194,126,.45);transform:scale(1.05);}
+    .btn-super:hover{box-shadow:0 6px 20px rgba(212,168,67,.3);}
+    .capy-count{font-family:'DM Mono',monospace;font-size:9px;color:var(--t4);text-align:center;}
+    #empty-state{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;height:100%;padding:24px;}
+    #empty-state.show{display:flex;}
+    #empty-state h2{font-size:20px;font-weight:700;}
+    #empty-state p{color:var(--t3);font-size:12px;max-width:240px;line-height:1.65;}
+    #empty-state button{margin-top:6px;padding:10px 26px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;font-weight:600;font-size:12px;cursor:pointer;font-family:'Sora',sans-serif;}
 
-    #filter-bar { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; flex-shrink: 0; }
-    .filter-btn { font-size: 10px; padding: 4px 11px; border-radius: 20px; cursor: pointer; border: 1px solid var(--s4); background: transparent; color: var(--t3); transition: all .15s; font-family: 'Sora', sans-serif; font-weight: 500; }
-    .filter-btn.active { border-color: var(--orange); background: rgba(232,103,42,.1); color: var(--orange); }
+    /* ── Matches ── */
+    #matches-view{flex-direction:column;overflow:hidden;}
+    #matches-header-bar{padding:12px 16px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--s3);}
+    #matches-header-bar h2{font-size:14px;font-weight:700;}
+    #matches-count-badge{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);}
+    #new-matches-strip{padding:10px 14px;border-bottom:1px solid var(--s3);flex-shrink:0;}
+    #new-matches-strip h3{font-size:8.5px;font-weight:600;color:var(--t3);letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:8px;}
+    #new-matches-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;}
+    .new-match-bubble{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;}
+    .new-match-bubble img{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);background:var(--s3);}
+    .new-match-bubble span{font-size:9px;color:var(--t2);font-family:'DM Mono',monospace;}
+    #convo-list{overflow-y:auto;flex:1;}
+    .convo-item{display:flex;align-items:center;gap:11px;padding:9px 16px;border-bottom:1px solid var(--s3);cursor:pointer;transition:background .12s;}
+    .convo-item:hover{background:var(--s2);}
+    .convo-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--s3);}
+    .convo-info{flex:1;min-width:0;}
+    .convo-name{font-size:13px;font-weight:600;letter-spacing:-.2px;margin-bottom:2px;}
+    .convo-preview{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .convo-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--t4);}
+    .convo-unread{width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+    .convo-actions{display:flex;gap:4px;flex-shrink:0;}
+    .convo-action-btn{padding:3px 7px;border-radius:7px;border:1px solid var(--s5);background:transparent;color:var(--t4);font-size:9px;cursor:pointer;font-family:'DM Mono',monospace;transition:all .12s;}
+    .convo-action-btn.remove:hover{border-color:var(--red);color:var(--red);}
+    .convo-action-btn.report:hover{border-color:var(--gold);color:var(--gold);}
+    .no-matches{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t4);gap:10px;text-align:center;padding:24px;}
+    .no-matches p{font-size:12px;color:var(--t3);line-height:1.65;max-width:220px;}
 
-    /* Card stack — large & dynamic */
-    #card-stack {
-      position: relative;
-      /* Fills available width up to 520px, taller on desktop */
-      width: min(100%, 520px);
-      /* Fluid height: tall on desktop, slightly shorter on small phones */
-      height: clamp(540px, 78vh, 820px);
-      flex-shrink: 0;
-    }
+    /* ── Chat ── */
+    #chat-view{flex-direction:column;overflow:hidden;}
+    #chat-header{padding:9px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--s3);flex-shrink:0;background:var(--s1);}
+    #chat-back{background:none;border:none;color:var(--t2);cursor:pointer;font-size:18px;padding:2px 7px 2px 0;-webkit-tap-highlight-color:transparent;}
+    #chat-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--s3);flex-shrink:0;}
+    #chat-name{font-size:13px;font-weight:700;letter-spacing:-.3px;}
+    #chat-sub{font-size:9.5px;color:var(--t3);font-family:'DM Mono',monospace;}
+    #chat-persona-line{font-size:8.5px;color:var(--t4);font-family:'DM Mono',monospace;margin-top:1px;}
+    #chat-header-actions{margin-left:auto;display:flex;gap:5px;}
+    .chat-header-btn{padding:3px 9px;border-radius:8px;border:1px solid var(--s5);background:transparent;color:var(--t4);font-size:9px;cursor:pointer;font-family:'DM Mono',monospace;transition:all .12s;}
+    .chat-header-btn.remove:hover{border-color:var(--red);color:var(--red);}
+    .chat-header-btn.report:hover{border-color:var(--gold);color:var(--gold);}
+    #chat-messages{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:7px;}
+    .msg{display:flex;flex-direction:column;max-width:74%;}
+    .msg.from-capy{align-self:flex-start;}
+    .msg.from-me{align-self:flex-end;}
+    .msg-bubble{padding:8px 12px;border-radius:16px;font-size:12.5px;line-height:1.55;}
+    .msg.from-capy .msg-bubble{background:var(--s3);color:var(--t1);border-bottom-left-radius:4px;}
+    .msg.from-me .msg-bubble{background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;border-bottom-right-radius:4px;}
+    .msg-time{font-family:'DM Mono',monospace;font-size:8px;color:var(--t4);margin-top:3px;}
+    .msg.from-capy .msg-time{align-self:flex-start;}
+    .msg.from-me .msg-time{align-self:flex-end;}
+    .typing-indicator{display:flex;gap:4px;align-items:center;padding:9px 13px;background:var(--s3);border-radius:16px;border-bottom-left-radius:4px;align-self:flex-start;}
+    .typing-dot{width:5px;height:5px;border-radius:50%;background:var(--t3);animation:typingBounce .8s infinite;}
+    .typing-dot:nth-child(2){animation-delay:.15s;}
+    .typing-dot:nth-child(3){animation-delay:.3s;}
+    @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+    #chat-input-bar{padding:9px 12px;border-top:1px solid var(--s3);display:flex;gap:7px;flex-shrink:0;background:var(--s1);}
+    #chat-input{flex:1;background:var(--s3);border:1px solid var(--s4);border-radius:18px;padding:8px 13px;color:var(--t1);font-family:'Sora',sans-serif;font-size:12px;outline:none;resize:none;max-height:90px;transition:border-color .15s;}
+    #chat-input:focus{border-color:var(--orange);}
+    #chat-send{width:34px;height:34px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s;align-self:flex-end;}
+    #chat-send:hover{transform:scale(1.08);}
+    #chat-send:disabled{background:var(--s4);cursor:default;transform:none;}
 
-    .capy-card {
-      position: absolute; inset: 0;
-      background: var(--s1); border-radius: 26px; overflow: hidden;
-      cursor: grab; user-select: none; touch-action: none;
-      box-shadow: 0 20px 60px rgba(0,0,0,.75), 0 0 0 1px var(--s3);
-      will-change: transform; transition: box-shadow .2s;
-      display: flex; flex-direction: column;
-    }
-    .capy-card:active { cursor: grabbing; }
+    /* ── Leaderboard ── */
+    #leaderboard-view{flex-direction:column;overflow:hidden;}
+    #lb-header{padding:12px 16px 8px;border-bottom:1px solid var(--s3);flex-shrink:0;}
+    #lb-header h2{font-size:14px;font-weight:700;}
+    #lb-header p{font-size:9.5px;color:var(--t3);margin-top:2px;font-family:'DM Mono',monospace;}
+    #leaderboard-list{overflow-y:auto;flex:1;padding:7px 12px 12px;}
+    .lb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r);margin-bottom:5px;background:var(--s1);border:1px solid var(--s3);transition:background .12s;}
+    .lb-item:hover{background:var(--s2);}
+    .lb-rank{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;min-width:24px;text-align:center;}
+    .lb-rank.gold{color:#D4A843;} .lb-rank.silver{color:#9E9E9E;} .lb-rank.bronze{color:#9C6E3A;}
+    .lb-img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--s3);}
+    .lb-info{flex:1;min-width:0;}
+    .lb-name{font-size:12px;font-weight:600;}
+    .lb-sub{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:2px;}
+    .lb-right{text-align:right;}
+    .lb-score{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--orange);}
+    .lb-score-sub{font-size:8px;color:var(--t4);font-family:'DM Mono',monospace;}
+    .lb-mini-bars{display:flex;flex-direction:column;gap:3px;min-width:78px;}
+    .lb-mini-row{display:flex;align-items:center;gap:4px;}
+    .lb-mini-label{font-size:8px;color:var(--t4);width:18px;font-family:'DM Mono',monospace;}
+    .lb-mini-track{flex:1;height:3px;background:var(--s4);border-radius:2px;}
+    .lb-mini-fill{height:100%;border-radius:2px;}
 
-    /* Image — 46% of card height */
-    .card-img {
-      width: 100%;
-      height: 46%;
-      object-fit: cover; display: block;
-      background: var(--s3); pointer-events: none;
-      flex-shrink: 0;
-    }
-    /* Placeholder — no "C", just a gradient */
-    .card-img-placeholder {
-      width: 100%; height: 46%; flex-shrink: 0;
-      display: none;
-      background: linear-gradient(135deg, var(--s3), var(--s4));
-      align-items: center; justify-content: center;
-    }
-    .card-img-placeholder svg { opacity: .15; }
+    /* ── About ── */
+    #about-view{overflow-y:auto;padding:16px;}
+    .about-section{margin-bottom:18px;}
+    .about-section h3{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);margin-bottom:9px;font-family:'DM Mono',monospace;}
+    .about-section p{font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:6px;}
+    .score-legend{display:flex;flex-direction:column;gap:6px;}
+    .score-row{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--s1);border-radius:12px;border:1px solid var(--s3);}
+    .score-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 7px;border-radius:5px;border:1px solid var(--s5);color:var(--t4);flex-shrink:0;}
+    .score-info{flex:1;}
+    .score-name{font-size:12px;font-weight:600;}
+    .score-desc{font-size:10px;color:var(--t3);margin-top:2px;line-height:1.5;}
+    .score-weight{margin-left:auto;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--orange);flex-shrink:0;}
 
-    .card-gradient {
-      position: absolute; top: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
-      pointer-events: none;
-    }
+    /* ── Gender Gate ── */
+    #gender-gate{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(14px);}
+    #gender-gate.hidden{display:none;}
+    #gender-gate-inner{background:var(--s1);border-radius:var(--rl);padding:34px 28px;max-width:310px;width:90%;text-align:center;border:1px solid var(--s3);box-shadow:0 32px 80px rgba(0,0,0,.8);animation:popIn .3s cubic-bezier(0.34,1.56,0.64,1);}
+    #gender-gate-inner h2{font-size:21px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+    #gender-gate-inner p{font-size:11.5px;color:var(--t3);line-height:1.65;margin-bottom:22px;}
+    .gender-option{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 13px;border-radius:var(--r);border:1px solid var(--s4);cursor:pointer;margin-bottom:7px;transition:all .15s;-webkit-tap-highlight-color:transparent;}
+    .gender-option:hover,.gender-option:active{border-color:var(--orange);background:rgba(232,103,42,.1);}
+    .gender-option .g-icon{font-size:24px;}
+    .gender-option .g-label{font-size:13px;font-weight:600;}
+    .gender-option .g-sub{font-size:10px;color:var(--t3);font-weight:400;margin-top:1px;}
+    #gender-skip{margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;text-decoration:underline;padding:8px;display:block;-webkit-tap-highlight-color:transparent;}
 
-    /* Scrollable info area */
-    .card-info {
-      flex: 1; overflow-y: auto; padding: 14px 16px 16px;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .card-info::-webkit-scrollbar { width: 2px; }
-    .card-info::-webkit-scrollbar-thumb { background: var(--s5); }
+    /* ── Login Modal ── */
+    #login-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+    #login-modal.show{display:flex;}
+    #login-modal-inner{background:var(--s1);border-radius:var(--rl);padding:28px 24px;max-width:330px;width:90%;border:1px solid var(--s3);box-shadow:0 24px 70px rgba(0,0,0,.8);animation:popIn .3s cubic-bezier(0.34,1.56,0.64,1);}
+    #login-modal-inner h2{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px;}
+    #login-modal-inner p{font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:20px;}
+    .login-form-row{margin-bottom:11px;}
+    .login-form-row label{font-size:9px;font-family:'DM Mono',monospace;color:var(--t3);letter-spacing:1.5px;display:block;margin-bottom:4px;}
+    .login-form-row input,.login-form-row select{width:100%;background:var(--s3);border:1px solid var(--s4);border-radius:10px;padding:10px 11px;color:var(--t1);font-family:'Sora',sans-serif;font-size:16px;outline:none;transition:border-color .15s;cursor:pointer;-webkit-appearance:none;appearance:none;}
+    .login-form-row input:focus,.login-form-row select:focus{border-color:var(--orange);}
+    .login-submit{width:100%;padding:12px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-top:4px;transition:opacity .15s;min-height:44px;}
+    .login-submit:hover{opacity:.9;}
+    .login-close{display:block;text-align:center;margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;padding:8px;-webkit-tap-highlight-color:transparent;}
 
-    .card-name-row { display: flex; align-items: baseline; gap: 7px; }
-    .card-name { font-size: 23px; font-weight: 800; letter-spacing: -.6px; }
-    .card-age  { font-size: 16px; color: var(--t2); font-weight: 400; }
-    .card-gender-badge { font-size: 9px; padding: 2px 7px; border-radius: 7px; font-weight: 600; letter-spacing: .5px; }
-    .card-gender-badge.male   { background: rgba(74,158,255,.12); color: var(--blue); }
-    .card-gender-badge.female { background: rgba(244,162,97,.12);  color: var(--peach); }
+    /* ── Match Popup ── */
+    #match-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+    #match-popup.show{display:flex;}
+    #match-popup-inner{background:var(--s1);border-radius:var(--rl);padding:26px 22px;text-align:center;max-width:295px;width:88%;border:1px solid rgba(232,103,42,.25);box-shadow:0 24px 60px rgba(0,0,0,.75),0 0 60px rgba(232,103,42,.08);animation:popIn .35s cubic-bezier(0.34,1.56,0.64,1);}
+    #match-popup-inner img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);margin-bottom:12px;background:var(--s3);}
+    #match-popup-inner h2{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--peach));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.4px;}
+    #match-popup-inner p{color:var(--t2);font-size:11.5px;margin:7px 0 16px;line-height:1.6;}
+    .popup-btn{padding:10px 26px;border-radius:22px;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:opacity .15s;-webkit-tap-highlight-color:transparent;}
+    .popup-btn.primary{background:linear-gradient(135deg,var(--orange),var(--peach));color:#fff;}
+    .popup-btn.secondary{background:transparent;border:1px solid var(--s5);color:var(--t3);margin-top:7px;width:100%;}
+    .popup-btn:hover{opacity:.88;}
 
-    .card-location { font-size: 10px; color: var(--t3); font-family: 'DM Mono', monospace; letter-spacing: .3px; }
+    /* ── Report Modal ── */
+    #report-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+    #report-modal.show{display:flex;}
+    #report-modal-inner{background:var(--s1);border-radius:var(--rm);padding:22px;max-width:290px;width:88%;border:1px solid var(--s3);animation:popIn .25s cubic-bezier(0.34,1.56,0.64,1);}
+    #report-modal-inner h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+    .report-option{padding:9px 11px;border-radius:10px;border:1px solid var(--s4);margin-bottom:5px;cursor:pointer;font-size:12px;color:var(--t2);transition:all .12s;}
+    .report-option:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,.07);}
+    .report-cancel{display:block;text-align:center;margin-top:10px;font-size:10px;color:var(--t4);cursor:pointer;padding:8px;}
 
-    /* Bio — full, no clamp */
-    .card-bio { font-size: 12.5px; color: var(--t2); line-height: 1.65; }
-
-    /* Attraction grade badge */
-    .card-grade-row { display: flex; align-items: center; gap: 8px; }
-    .grade-badge {
-      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: 8px; letter-spacing: .5px;
-    }
-    .grade-S  { background: rgba(212,168,67,.18); color: var(--gold);   border: 1px solid rgba(212,168,67,.35); }
-    .grade-A  { background: rgba(46,194,126,.15); color: var(--green);  border: 1px solid rgba(46,194,126,.3); }
-    .grade-B  { background: rgba(74,158,255,.12); color: var(--blue);   border: 1px solid rgba(74,158,255,.25); }
-    .grade-C  { background: rgba(232,103,42,.12); color: var(--orange); border: 1px solid rgba(232,103,42,.25); }
-    .grade-D  { background: rgba(160,160,160,.1); color: var(--t3);     border: 1px solid var(--s5); }
-    .grade-label { font-size: 10px; color: var(--t3); }
-
-    /* 6 metric bars */
-    .card-metrics { display: flex; flex-direction: column; gap: 5px; }
-    .card-metric-row { display: flex; align-items: center; gap: 7px; }
-    .metric-label { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t4); width: 56px; flex-shrink: 0; letter-spacing: .3px; }
-    .metric-track { flex: 1; height: 4px; background: var(--s4); border-radius: 2px; overflow: hidden; }
-    .metric-fill  { height: 100%; border-radius: 2px; transition: width .5s; }
-    .metric-val   { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--t3); width: 30px; text-align: right; flex-shrink: 0; }
-
-    /* Tags */
-    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-    .card-tag  { font-size: 9px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--s5); color: var(--t3); font-family: 'DM Mono', monospace; letter-spacing: .2px; }
-    .card-tag.hobby { border-color: rgba(232,103,42,.25); color: rgba(232,103,42,.7); }
-
-    /* Stamps */
-    .stamp { position: absolute; top: 20px; font-size: 18px; font-weight: 800; border: 3px solid; border-radius: 6px; padding: 3px 12px; opacity: 0; pointer-events: none; letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
-    .stamp-like { left: 14px; color: var(--green); border-color: var(--green); transform: rotate(-18deg); }
-    .stamp-pass { right: 14px; color: var(--red);   border-color: var(--red);   transform: rotate(18deg); }
-
-    /* Action buttons */
-    #action-btns { display: flex; gap: 16px; align-items: center; flex-shrink: 0; padding-bottom: 2px; }
-    .action-btn { border: none; cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform .15s, box-shadow .15s; font-size: 18px; font-family: 'Sora', sans-serif; font-weight: 700; }
-    .action-btn:active { transform: scale(.88); }
-    .btn-pass  { width: 54px; height: 54px; background: var(--s2); border: 1px solid var(--s5); color: var(--red);   box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-    .btn-like  { width: 64px; height: 64px; background: linear-gradient(135deg, var(--green), #2ec27ecc); box-shadow: 0 6px 22px rgba(46,194,126,.3); color: #fff; }
-    .btn-super { width: 46px; height: 46px; background: var(--s2); border: 1px solid rgba(212,168,67,.4); color: var(--gold); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-    .btn-pass:hover  { box-shadow: 0 6px 20px rgba(224,82,82,.25); }
-    .btn-like:hover  { box-shadow: 0 8px 30px rgba(46,194,126,.45); transform: scale(1.05); }
-    .btn-super:hover { box-shadow: 0 6px 20px rgba(212,168,67,.3); }
-    .capy-count { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t4); text-align: center; }
-
-    /* Empty state */
-    #empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; height: 100%; padding: 24px; }
-    #empty-state.show { display: flex; }
-    #empty-state h2 { font-size: 20px; font-weight: 700; }
-    #empty-state p  { color: var(--t3); font-size: 12px; max-width: 240px; line-height: 1.65; }
-    #empty-state button { margin-top: 6px; padding: 10px 26px; border-radius: 22px; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Sora', sans-serif; }
-
-    /* ══ MATCHES VIEW ══ */
-    #matches-view { flex-direction: column; overflow: hidden; }
-    #matches-header-bar { padding: 12px 16px 8px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; border-bottom: 1px solid var(--s3); }
-    #matches-header-bar h2 { font-size: 14px; font-weight: 700; }
-    #matches-count-badge { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t3); }
-    #new-matches-strip { padding: 10px 14px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
-    #new-matches-strip h3 { font-size: 8.5px; font-weight: 600; color: var(--t3); letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
-    #new-matches-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 2px; }
-    .new-match-bubble { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
-    .new-match-bubble img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); background: var(--s3); }
-    .new-match-bubble span { font-size: 9px; color: var(--t2); font-family: 'DM Mono', monospace; }
-    #convo-list { overflow-y: auto; flex: 1; }
-    .convo-item { display: flex; align-items: center; gap: 11px; padding: 9px 16px; border-bottom: 1px solid var(--s3); cursor: pointer; transition: background .12s; }
-    .convo-item:hover { background: var(--s2); }
-    .convo-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
-    .convo-info { flex: 1; min-width: 0; }
-    .convo-name { font-size: 13px; font-weight: 600; letter-spacing: -.2px; margin-bottom: 2px; }
-    .convo-preview { font-size: 11px; color: var(--t3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .convo-time { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--t4); }
-    .convo-unread { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
-    .convo-actions { display: flex; gap: 4px; flex-shrink: 0; }
-    .convo-action-btn { padding: 3px 7px; border-radius: 7px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
-    .convo-action-btn.remove:hover { border-color: var(--red);  color: var(--red); }
-    .convo-action-btn.report:hover { border-color: var(--gold); color: var(--gold); }
-    .no-matches { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--t4); gap: 10px; text-align: center; padding: 24px; }
-    .no-matches p { font-size: 12px; color: var(--t3); line-height: 1.65; max-width: 220px; }
-
-    /* ══ CHAT VIEW ══ */
-    #chat-view { flex-direction: column; overflow: hidden; }
-    #chat-header { padding: 9px 14px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--s3); flex-shrink: 0; background: var(--s1); }
-    #chat-back { background: none; border: none; color: var(--t2); cursor: pointer; font-size: 18px; padding: 2px 7px 2px 0; }
-    #chat-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--s3); flex-shrink: 0; }
-    #chat-name { font-size: 13px; font-weight: 700; letter-spacing: -.3px; }
-    #chat-sub  { font-size: 9.5px; color: var(--t3); font-family: 'DM Mono', monospace; }
-    #chat-header-actions { margin-left: auto; display: flex; gap: 5px; }
-    .chat-header-btn { padding: 3px 9px; border-radius: 8px; border: 1px solid var(--s5); background: transparent; color: var(--t4); font-size: 9px; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .12s; }
-    .chat-header-btn.remove:hover { border-color: var(--red);  color: var(--red); }
-    .chat-header-btn.report:hover { border-color: var(--gold); color: var(--gold); }
-    #chat-messages { flex: 1; overflow-y: auto; padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; }
-    .msg { display: flex; flex-direction: column; max-width: 74%; }
-    .msg.from-capy { align-self: flex-start; }
-    .msg.from-me   { align-self: flex-end; }
-    .msg-bubble { padding: 8px 12px; border-radius: 16px; font-size: 12.5px; line-height: 1.55; }
-    .msg.from-capy .msg-bubble { background: var(--s3); color: var(--t1); border-bottom-left-radius: 4px; }
-    .msg.from-me   .msg-bubble { background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; border-bottom-right-radius: 4px; }
-    .msg-time { font-family: 'DM Mono', monospace; font-size: 8px; color: var(--t4); margin-top: 3px; }
-    .msg.from-capy .msg-time { align-self: flex-start; }
-    .msg.from-me   .msg-time { align-self: flex-end; }
-    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 9px 13px; background: var(--s3); border-radius: 16px; border-bottom-left-radius: 4px; align-self: flex-start; }
-    .typing-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--t3); animation: typingBounce .8s infinite; }
-    .typing-dot:nth-child(2) { animation-delay: .15s; }
-    .typing-dot:nth-child(3) { animation-delay: .3s; }
-    @keyframes typingBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
-    #chat-input-bar { padding: 9px 12px; border-top: 1px solid var(--s3); display: flex; gap: 7px; flex-shrink: 0; background: var(--s1); }
-    #chat-input { flex: 1; background: var(--s3); border: 1px solid var(--s4); border-radius: 18px; padding: 8px 13px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px; outline: none; resize: none; max-height: 90px; transition: border-color .15s; }
-    #chat-input:focus { border-color: var(--orange); }
-    #chat-send { width: 34px; height: 34px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .15s; align-self: flex-end; }
-    #chat-send:hover { transform: scale(1.08); }
-    #chat-send:disabled { background: var(--s4); cursor: default; transform: none; }
-
-    /* ══ LEADERBOARD ══ */
-    #leaderboard-view { flex-direction: column; overflow: hidden; }
-    #lb-header { padding: 12px 16px 8px; border-bottom: 1px solid var(--s3); flex-shrink: 0; }
-    #lb-header h2 { font-size: 14px; font-weight: 700; }
-    #lb-header p  { font-size: 9.5px; color: var(--t3); margin-top: 2px; font-family: 'DM Mono', monospace; }
-    #leaderboard-list { overflow-y: auto; flex: 1; padding: 7px 12px 12px; }
-    .lb-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: var(--r); margin-bottom: 5px; background: var(--s1); border: 1px solid var(--s3); transition: background .12s; }
-    .lb-item:hover { background: var(--s2); }
-    .lb-rank { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; min-width: 24px; text-align: center; }
-    .lb-rank.gold   { color: #D4A843; }
-    .lb-rank.silver { color: #9E9E9E; }
-    .lb-rank.bronze { color: #9C6E3A; }
-    .lb-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--s3); }
-    .lb-info { flex: 1; min-width: 0; }
-    .lb-name { font-size: 12px; font-weight: 600; }
-    .lb-sub  { font-size: 9px; color: var(--t3); font-family: 'DM Mono', monospace; margin-top: 2px; }
-    .lb-right { text-align: right; }
-    .lb-score { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 700; color: var(--orange); }
-    .lb-score-sub { font-size: 8px; color: var(--t4); font-family: 'DM Mono', monospace; }
-    .lb-mini-bars { display: flex; flex-direction: column; gap: 3px; min-width: 78px; }
-    .lb-mini-row { display: flex; align-items: center; gap: 4px; }
-    .lb-mini-label { font-size: 8px; color: var(--t4); width: 18px; font-family: 'DM Mono', monospace; }
-    .lb-mini-track { flex: 1; height: 3px; background: var(--s4); border-radius: 2px; }
-    .lb-mini-fill  { height: 100%; border-radius: 2px; }
-
-    /* ══ ABOUT ══ */
-    #about-view { overflow-y: auto; padding: 16px; }
-    .about-section { margin-bottom: 18px; }
-    .about-section h3 { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--t3); margin-bottom: 9px; font-family: 'DM Mono', monospace; }
-    .about-section p  { font-size: 12px; color: var(--t2); line-height: 1.7; margin-bottom: 6px; }
-    .score-legend { display: flex; flex-direction: column; gap: 6px; }
-    .score-row { display: flex; align-items: center; gap: 10px; padding: 9px 11px; background: var(--s1); border-radius: 12px; border: 1px solid var(--s3); }
-    .score-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--s5); color: var(--t4); flex-shrink: 0; }
-    .score-info { flex: 1; }
-    .score-name { font-size: 12px; font-weight: 600; }
-    .score-desc { font-size: 10px; color: var(--t3); margin-top: 2px; line-height: 1.5; }
-    .score-weight { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; color: var(--orange); flex-shrink: 0; }
-
-    /* ══ GENDER GATE ══ */
-    #gender-gate { position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 300; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(14px); }
-    #gender-gate.hidden { display: none; }
-    #gender-gate-inner { background: var(--s1); border-radius: var(--rl); padding: 34px 28px; max-width: 310px; width: 90%; text-align: center; border: 1px solid var(--s3); box-shadow: 0 32px 80px rgba(0,0,0,.8); animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1); }
-    #gender-gate-inner h2 { font-size: 21px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 6px; }
-    #gender-gate-inner p  { font-size: 11.5px; color: var(--t3); line-height: 1.65; margin-bottom: 22px; }
-    .gender-option { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px; border-radius: var(--r); border: 1px solid var(--s4); cursor: pointer; margin-bottom: 7px; transition: all .15s; }
-    .gender-option:hover { border-color: var(--orange); background: rgba(232,103,42,.07); }
-    .gender-option .g-icon  { font-size: 24px; }
-    .gender-option .g-label { font-size: 13px; font-weight: 600; }
-    .gender-option .g-sub   { font-size: 10px; color: var(--t3); font-weight: 400; margin-top: 1px; }
-    #gender-skip { margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; text-decoration: underline; }
-
-    /* ══ LOGIN MODAL ══ */
-    #login-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 300; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-    #login-modal.show { display: flex; }
-    #login-modal-inner { background: var(--s1); border-radius: var(--rl); padding: 28px 24px; max-width: 330px; width: 90%; border: 1px solid var(--s3); box-shadow: 0 24px 70px rgba(0,0,0,.8); animation: popIn .3s cubic-bezier(0.34,1.56,0.64,1); }
-    #login-modal-inner h2 { font-size: 19px; font-weight: 800; letter-spacing: -.4px; margin-bottom: 4px; }
-    #login-modal-inner p  { font-size: 11px; color: var(--t3); line-height: 1.6; margin-bottom: 20px; }
-    .login-form-row { margin-bottom: 11px; }
-    .login-form-row label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--t3); letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
-    .login-form-row input, .login-form-row select { width: 100%; background: var(--s3); border: 1px solid var(--s4); border-radius: 10px; padding: 8px 11px; color: var(--t1); font-family: 'Sora', sans-serif; font-size: 12px; outline: none; transition: border-color .15s; cursor: pointer; }
-    .login-form-row input:focus, .login-form-row select:focus { border-color: var(--orange); }
-    .login-submit { width: 100%; padding: 10px; border-radius: 22px; border: none; background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; margin-top: 4px; transition: opacity .15s; }
-    .login-submit:hover { opacity: .9; }
-    .login-close { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; }
-
-    /* ══ MATCH POPUP ══ */
-    #match-popup { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-    #match-popup.show { display: flex; }
-    #match-popup-inner { background: var(--s1); border-radius: var(--rl); padding: 26px 22px; text-align: center; max-width: 295px; width: 88%; border: 1px solid rgba(232,103,42,.25); box-shadow: 0 24px 60px rgba(0,0,0,.75), 0 0 60px rgba(232,103,42,.08); animation: popIn .35s cubic-bezier(0.34,1.56,0.64,1); }
-    #match-popup-inner img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange); margin-bottom: 12px; background: var(--s3); }
-    #match-popup-inner h2 { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, var(--orange), var(--peach)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -.4px; }
-    #match-popup-inner p  { color: var(--t2); font-size: 11.5px; margin: 7px 0 16px; line-height: 1.6; }
-    .popup-btn { padding: 10px 26px; border-radius: 22px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; transition: opacity .15s; }
-    .popup-btn.primary   { background: linear-gradient(135deg, var(--orange), var(--peach)); color: #fff; }
-    .popup-btn.secondary { background: transparent; border: 1px solid var(--s5); color: var(--t3); margin-top: 7px; width: 100%; }
-    .popup-btn:hover { opacity: .88; }
-
-    /* ══ REPORT MODAL ══ */
-    #report-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 400; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-    #report-modal.show { display: flex; }
-    #report-modal-inner { background: var(--s1); border-radius: var(--rm); padding: 22px; max-width: 290px; width: 88%; border: 1px solid var(--s3); animation: popIn .25s cubic-bezier(0.34,1.56,0.64,1); }
-    #report-modal-inner h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
-    .report-option { padding: 9px 11px; border-radius: 10px; border: 1px solid var(--s4); margin-bottom: 5px; cursor: pointer; font-size: 12px; color: var(--t2); transition: all .12s; }
-    .report-option:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,.07); }
-    .report-cancel { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--t4); cursor: pointer; }
-
-    /* ══ Animations ══ */
-    @keyframes popIn     { from{transform:scale(.75);opacity:0} to{transform:scale(1);opacity:1} }
-    @keyframes flyOut    { to{transform:translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot));opacity:0} }
-    @keyframes shimmer   { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-    @keyframes fadeSlideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-    .shimmer { background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 50%, var(--s2) 75%); background-size:200% 100%; animation: shimmer 1.6s infinite; }
-    button { font-family: 'Sora', sans-serif; }
+    /* ── Animations ── */
+    @keyframes popIn{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes flyOut{to{transform:translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot));opacity:0}}
+    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .shimmer{background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    button{font-family:'Sora',sans-serif;}
   </style>
 </head>
 <body>
@@ -367,19 +264,19 @@
   <div id="gender-gate-inner">
     <h2>Who are you here for?</h2>
     <p>Set your preference before swiping. You can change this anytime from the filter bar.</p>
-    <div class="gender-option" onclick="setGenderPref('female')">
+    <div class="gender-option" id="gg-female">
       <span class="g-icon">&#9792;</span>
       <div><div class="g-label">Female Capybaras</div><div class="g-sub">503 available</div></div>
     </div>
-    <div class="gender-option" onclick="setGenderPref('male')">
+    <div class="gender-option" id="gg-male">
       <span class="g-icon">&#9794;</span>
       <div><div class="g-label">Male Capybaras</div><div class="g-sub">503 available</div></div>
     </div>
-    <div class="gender-option" onclick="setGenderPref('all')">
+    <div class="gender-option" id="gg-all">
       <span class="g-icon">&#9898;</span>
       <div><div class="g-label">All Capybaras</div><div class="g-sub">1,006 available</div></div>
     </div>
-    <div id="gender-skip" onclick="setGenderPref('all')">Skip — show me everyone</div>
+    <span id="gender-skip">Skip — show me everyone</span>
   </div>
 </div>
 
@@ -390,11 +287,11 @@
     <p>Save your matches and unlock the full CapyLove experience.</p>
     <div class="login-form-row">
       <label>NAME</label>
-      <input id="login-name" type="text" placeholder="How should the capys call you?"/>
+      <input id="login-name" type="text" placeholder="How should the capys call you?" autocomplete="off"/>
     </div>
     <div class="login-form-row">
       <label>EMAIL</label>
-      <input id="login-email" type="email" placeholder="your@email.com"/>
+      <input id="login-email" type="email" placeholder="your@email.com" autocomplete="email"/>
     </div>
     <div class="login-form-row">
       <label>I AM A</label>
@@ -405,8 +302,8 @@
         <option value="other">Other / Non-binary</option>
       </select>
     </div>
-    <button class="login-submit" onclick="doLogin()">Create My Profile</button>
-    <span class="login-close" onclick="closeLogin()">Cancel</span>
+    <button class="login-submit" id="login-submit-btn">Create My Profile</button>
+    <span class="login-close" id="login-close-btn">Cancel</span>
   </div>
 </div>
 
@@ -416,8 +313,8 @@
     <img id="match-popup-img" src="" alt="Match"/>
     <h2>It's a Match</h2>
     <p id="match-popup-text"></p>
-    <button class="popup-btn primary" onclick="openChatFromMatch()">Send a Message</button>
-    <button class="popup-btn secondary" onclick="closeMatchPopup()">Keep Swiping</button>
+    <button class="popup-btn primary" id="match-chat-btn">Send a Message</button>
+    <button class="popup-btn secondary" id="match-skip-btn">Keep Swiping</button>
   </div>
 </div>
 
@@ -425,25 +322,20 @@
 <div id="report-modal">
   <div id="report-modal-inner">
     <h3>Report this Capybara</h3>
-    <div class="report-option" onclick="submitReport('Suspicious behavior')">Suspicious behavior</div>
-    <div class="report-option" onclick="submitReport('Fake profile')">Fake profile</div>
-    <div class="report-option" onclick="submitReport('Inappropriate content')">Inappropriate content</div>
-    <div class="report-option" onclick="submitReport('Too dry — fur quality concerns')">Too dry (fur quality concerns)</div>
-    <span class="report-cancel" onclick="closeReport()">Cancel</span>
+    <div class="report-option" data-reason="Suspicious behavior">Suspicious behavior</div>
+    <div class="report-option" data-reason="Fake profile">Fake profile</div>
+    <div class="report-option" data-reason="Inappropriate content">Inappropriate content</div>
+    <div class="report-option" data-reason="Too dry — fur quality concerns">Too dry (fur quality concerns)</div>
+    <span class="report-cancel" id="report-cancel-btn">Cancel</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <div id="header">
-  <div>
-    <div id="logo">CapyLove</div>
-    <div id="logo-sub">V2.1 &nbsp;&middot;&nbsp; CAPYBARA DATING</div>
-  </div>
+  <div><div id="logo">CapyLove</div><div id="logo-sub">V2.2 &nbsp;&middot;&nbsp; CAPYBARA DATING</div></div>
   <div id="header-spacer"></div>
-  <div id="header-stats">
-    <span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches
-  </div>
-  <button id="login-btn" onclick="openLogin()">Sign In</button>
+  <div id="header-stats"><span id="stat-queue">&#8212;</span> in queue &nbsp;&middot;&nbsp; <span id="stat-matches">0</span> matches</div>
+  <button id="login-btn">Sign In</button>
 </div>
 
 <!-- TABS -->
@@ -469,200 +361,313 @@
       <div id="empty-state">
         <h2>You've seen every capybara.</h2>
         <p>All 1,006 of them. That level of commitment is statistically unprecedented.</p>
-        <button onclick="resetDeck()">Start Over</button>
+        <button id="reset-deck-btn">Start Over</button>
       </div>
     </div>
     <div class="capy-count" id="capy-count"></div>
     <div id="action-btns">
-      <button class="action-btn btn-pass"  onclick="swipe('pass')"  title="Pass">&#10005;</button>
-      <button class="action-btn btn-like"  onclick="swipe('like')"  title="Like">&#10003;</button>
-      <button class="action-btn btn-super" onclick="swipe('super')" title="Super Like">&#9733;</button>
+      <button class="action-btn btn-pass" id="btn-pass" title="Pass">&#10005;</button>
+      <button class="action-btn btn-like" id="btn-like" title="Like">&#10003;</button>
+      <button class="action-btn btn-super" id="btn-super" title="Super Like">&#9733;</button>
     </div>
   </div>
 
   <!-- MATCHES -->
   <div id="matches-view" class="view">
-    <div id="matches-header-bar">
-      <h2>Matches</h2>
-      <span id="matches-count-badge">0 conversations</span>
-    </div>
-    <div id="new-matches-strip">
-      <h3>New Matches</h3>
-      <div id="new-matches-row"></div>
-    </div>
+    <div id="matches-header-bar"><h2>Matches</h2><span id="matches-count-badge">0 conversations</span></div>
+    <div id="new-matches-strip"><h3>New Matches</h3><div id="new-matches-row"></div></div>
     <div id="convo-list"></div>
   </div>
 
   <!-- CHAT -->
   <div id="chat-view" class="view">
     <div id="chat-header">
-      <button id="chat-back" onclick="closeChat()">&#8592;</button>
+      <button id="chat-back">&#8592;</button>
       <img id="chat-avatar" src="" alt=""/>
       <div>
         <div id="chat-name"></div>
         <div id="chat-sub"></div>
+        <div id="chat-persona-line"></div>
       </div>
       <div id="chat-header-actions">
-        <button class="chat-header-btn remove" onclick="removeCurrentMatch()">Remove</button>
-        <button class="chat-header-btn report" onclick="reportCurrentMatch()">Report</button>
+        <button class="chat-header-btn remove" id="chat-remove-btn">Remove</button>
+        <button class="chat-header-btn report" id="chat-report-btn">Report</button>
       </div>
     </div>
     <div id="chat-messages"></div>
     <div id="chat-input-bar">
-      <textarea id="chat-input" placeholder="Message..." rows="1" onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
-      <button id="chat-send" onclick="sendMessage()">&#10148;</button>
+      <textarea id="chat-input" placeholder="Message..." rows="1"></textarea>
+      <button id="chat-send">&#10148;</button>
     </div>
   </div>
 
   <!-- LEADERBOARD -->
   <div id="leaderboard-view" class="view">
-    <div id="lb-header">
-      <h2>Most Attractive Capybaras</h2>
-      <p>Ranked by V2.1 composite attraction score — 6 dimensions</p>
-    </div>
+    <div id="lb-header"><h2>Most Attractive Capybaras</h2><p>Ranked by V2.2 composite attraction score — 6 dimensions</p></div>
     <div id="leaderboard-list"></div>
   </div>
 
   <!-- ABOUT -->
   <div id="about-view" class="view">
-    <div class="about-section">
-      <h3>About CapyLove V2.1</h3>
-      <p>The world's only capybara dating platform. 1,006 real capybara images from the <strong>capy.lol API</strong>, scored across a 6-dimension attraction algorithm with letter-grade classification.</p>
-      <p>503 males. 503 females. Each assigned a unique energy type, tax bracket, biome, and hobby profile.</p>
+    <div class="about-section"><h3>About CapyLove V2.2</h3>
+      <p>1,006 capybaras. 40 unique personas (20 male, 20 female) assigned by attraction grade with weighted randomization — higher grade capys get higher-potency personas.</p>
+      <p>503 males. 503 females. 6-dimension V2.2 scoring. Persona potency 1–20 governs chat response style across 8 behavioral axes.</p>
     </div>
-    <div class="about-section">
-      <h3>Attraction Grade System</h3>
-      <p>Each capybara receives a letter grade based on their composite V2.1 score. The grade is displayed on their card and reinforced throughout their profile.</p>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
-        <span class="grade-badge grade-S">S</span>
-        <span class="grade-badge grade-A">A</span>
-        <span class="grade-badge grade-B">B</span>
-        <span class="grade-badge grade-C">C</span>
-        <span class="grade-badge grade-D">D</span>
-      </div>
-      <p style="margin-top:8px;">S = 88+ &nbsp;&middot;&nbsp; A = 74+ &nbsp;&middot;&nbsp; B = 58+ &nbsp;&middot;&nbsp; C = 42+ &nbsp;&middot;&nbsp; D = below 42</p>
+    <div class="about-section"><h3>Persona System</h3>
+      <p>Each capybara has a persona from 1 (lowest potency) to 20 (highest). Higher-grade capys skew toward higher potency. Potency governs intensity across: <strong>Humor, Sensual, Flirty, Reserved, Awkward, Mean, Nice, Kind, Rude</strong>.</p>
+      <p>A Grade S capybara with potency 20 may be intensely reserved or highly sensual. A Grade D with potency 3 is likely awkward and eager.</p>
     </div>
-    <div class="about-section">
-      <h3>V2.1 Scoring Dimensions</h3>
+    <div class="about-section"><h3>V2.2 Scoring Dimensions</h3>
       <div class="score-legend">
-        <div class="score-row">
-          <div class="score-tag">FUR</div>
-          <div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff rating, and wetness tolerance. Dense fur signals robust genetics.</div></div>
-          <div class="score-weight">22%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">WGT</div>
-          <div class="score-info"><div class="score-name">Weight Score</div><div class="score-desc">35&#8211;65 kg range. Larger specimens signal better resource access. Chonk is virtue.</div></div>
-          <div class="score-weight">18%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">SZE</div>
-          <div class="score-info"><div class="score-name">Body Size</div><div class="score-desc">Length-to-snout proportions. A wider muzzle indicates superior grazing capability.</div></div>
-          <div class="score-weight">14%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">VBE</div>
-          <div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance. Willingness to allow terrapin cohabitation is heavily weighted.</div></div>
-          <div class="score-weight">12%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">NRG</div>
-          <div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Scale 1&#8211;10. Peak compatibility at 6&#8211;7. Both extremes reduce long-term pairing probability.</div></div>
-          <div class="score-weight">20%</div>
-        </div>
-        <div class="score-row">
-          <div class="score-tag">BIO</div>
-          <div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal and Llanos score highest. Cloud Forest specimens are rare and therefore valued.</div></div>
-          <div class="score-weight">14%</div>
-        </div>
+        <div class="score-row"><div class="score-tag">FUR</div><div class="score-info"><div class="score-name">Fur Density</div><div class="score-desc">Coat thickness, fluff rating, wetness tolerance.</div></div><div class="score-weight">22%</div></div>
+        <div class="score-row"><div class="score-tag">WGT</div><div class="score-info"><div class="score-name">Weight Score</div><div class="score-desc">35–65 kg range. Chonk is virtue.</div></div><div class="score-weight">18%</div></div>
+        <div class="score-row"><div class="score-tag">SZE</div><div class="score-info"><div class="score-name">Body Size</div><div class="score-desc">Length-to-snout proportions.</div></div><div class="score-weight">14%</div></div>
+        <div class="score-row"><div class="score-tag">VBE</div><div class="score-info"><div class="score-name">Vibe / Friendliness</div><div class="score-desc">Inter-species tolerance and terrapin cohabitation score.</div></div><div class="score-weight">12%</div></div>
+        <div class="score-row"><div class="score-tag">NRG</div><div class="score-info"><div class="score-name">Energy Level</div><div class="score-desc">Peak compatibility at 6–7. Both extremes reduce pairing probability.</div></div><div class="score-weight">20%</div></div>
+        <div class="score-row"><div class="score-tag">BIO</div><div class="score-info"><div class="score-name">Biome of Origin</div><div class="score-desc">Pantanal and Llanos highest. Cloud Forest rare and valued.</div></div><div class="score-weight">14%</div></div>
       </div>
     </div>
-    <div class="about-section">
-      <h3>Match Probability</h3>
-      <p>High-grade capybaras (S/A) match rarely and respond slowly. Low-grade capybaras (C/D) match frequently and often message first. This reflects authentic capybara social dynamics.</p>
+    <div class="about-section"><h3>Grade System</h3>
+      <p>S = 88+ &nbsp;&middot;&nbsp; A = 74+ &nbsp;&middot;&nbsp; B = 58+ &nbsp;&middot;&nbsp; C = 42+ &nbsp;&middot;&nbsp; D = below 42</p>
+      <p>S/A capys match rarely, reply slowly. C/D capys match often, message first.</p>
     </div>
   </div>
 
 </div>
 
 <script>
-// ════════════════════════════════════════════════════════
-//  CapyLove V2.1
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════════════════
+//  CapyLove V2.2 — Persona Chat System
+// ════════════════════════════════════════════════════════════════════
 
+// ── Constants ──────────────────────────────────────────────────────
+const BIOME_SCORES = {
+  "Amazon Rainforest, Brazil":88,"Pantanal Wetlands, Brazil":96,"Llanos Savanna, Venezuela":92,
+  "Orinoco Delta, Venezuela":85,"Rio Paraná, Argentina":82,"Gran Chaco, Paraguay":75,
+  "Atlantic Forest, Brazil":80,"Cerrado, Brazil":78,"Pampas, Uruguay":72,
+  "Chiquitano Forest, Bolivia":74,"Magdalena Valley, Colombia":83,"Darién Gap, Panama":70,
+  "Cloud Forest, Ecuador":91,"Caatinga Scrubland, Brazil":65,"Esteros del Iberá, Argentina":87,
+};
+
+const TAX_BRACKETS = [
+  "No Income","Forager Class","Working Grass","Middle Marsh",
+  "Upper Swamp","Riverfront Elite","Capybara 1%"
+];
+
+// ── 20 Male Personas (potency 1-20) ───────────────────────────────
+// Each has a name, dominant traits, and response flavor by context
+const MALE_PERSONAS = [
+  // 1-5: low potency — awkward, timid, eager
+  { potency:1,  name:"Muddy Nervous Guy",    traits:{humor:1,sensual:0,flirty:1,reserved:3,awkward:9,mean:0,nice:6,kind:7,rude:0}, color:"var(--t3)" },
+  { potency:2,  name:"Damp Overthinker",     traits:{humor:2,sensual:0,flirty:2,reserved:4,awkward:8,mean:0,nice:7,kind:7,rude:0}, color:"var(--t3)" },
+  { potency:3,  name:"Eager Swamp Simp",     traits:{humor:3,sensual:1,flirty:5,reserved:1,awkward:7,mean:0,nice:9,kind:8,rude:0}, color:"var(--t3)" },
+  { potency:4,  name:"Gentle Loafer",        traits:{humor:3,sensual:1,flirty:3,reserved:5,awkward:5,mean:0,nice:8,kind:9,rude:0}, color:"var(--t2)" },
+  { potency:5,  name:"Cheerful Puddle Bro",  traits:{humor:6,sensual:1,flirty:4,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0}, color:"var(--t2)" },
+  // 6-10: mid-low — friendly, slightly confident
+  { potency:6,  name:"Steady River Dude",    traits:{humor:5,sensual:2,flirty:5,reserved:4,awkward:3,mean:1,nice:7,kind:6,rude:1}, color:"var(--blue)" },
+  { potency:7,  name:"Warm Grassland Type",  traits:{humor:6,sensual:3,flirty:6,reserved:3,awkward:2,mean:1,nice:7,kind:6,rude:1}, color:"var(--blue)" },
+  { potency:8,  name:"Chill Reed Lounger",   traits:{humor:7,sensual:3,flirty:5,reserved:5,awkward:2,mean:1,nice:6,kind:5,rude:1}, color:"var(--blue)" },
+  { potency:9,  name:"Confident Wader",      traits:{humor:6,sensual:4,flirty:7,reserved:3,awkward:1,mean:2,nice:6,kind:5,rude:2}, color:"var(--blue)" },
+  { potency:10, name:"Smooth Grazer",        traits:{humor:7,sensual:5,flirty:7,reserved:4,awkward:1,mean:2,nice:5,kind:4,rude:2}, color:"var(--peach)" },
+  // 11-15: mid-high — charming, a little edge
+  { potency:11, name:"Witty Mudflat King",   traits:{humor:8,sensual:5,flirty:8,reserved:4,awkward:1,mean:3,nice:5,kind:4,rude:3}, color:"var(--peach)" },
+  { potency:12, name:"Smoldering Herbivore", traits:{humor:5,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
+  { potency:13, name:"Sardonic Wetlander",   traits:{humor:9,sensual:4,flirty:6,reserved:7,awkward:0,mean:4,nice:4,kind:3,rude:4}, color:"var(--orange)" },
+  { potency:14, name:"Cool Dominant Bull",   traits:{humor:6,sensual:6,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
+  { potency:15, name:"Laconic Alpha",        traits:{humor:5,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:3,kind:2,rude:4}, color:"var(--orange)" },
+  // 16-20: high potency — intense, unpredictable, magnetic
+  { potency:16, name:"Ice-Cold Riverine",    traits:{humor:4,sensual:7,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:2,rude:6}, color:"var(--gold)" },
+  { potency:17, name:"Dry Cruel Wit",        traits:{humor:9,sensual:5,flirty:5,reserved:8,awkward:0,mean:7,nice:2,kind:2,rude:7}, color:"var(--gold)" },
+  { potency:18, name:"Magnetic Brute",       traits:{humor:6,sensual:8,flirty:8,reserved:7,awkward:0,mean:6,nice:2,kind:2,rude:7}, color:"var(--gold)" },
+  { potency:19, name:"Untouchable Elder",    traits:{humor:7,sensual:8,flirty:6,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:6}, color:"var(--gold)" },
+  { potency:20, name:"Apex Swamp Sovereign", traits:{humor:8,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8}, color:"var(--gold)" },
+];
+
+// ── 20 Female Personas (potency 1-20) ─────────────────────────────
+const FEMALE_PERSONAS = [
+  // 1-5: low potency — sweet, nervous, open
+  { potency:1,  name:"Puddle Sweetheart",    traits:{humor:2,sensual:0,flirty:2,reserved:2,awkward:8,mean:0,nice:9,kind:9,rude:0}, color:"var(--t3)" },
+  { potency:2,  name:"Shy Riverbank Girl",   traits:{humor:2,sensual:0,flirty:3,reserved:4,awkward:8,mean:0,nice:8,kind:9,rude:0}, color:"var(--t3)" },
+  { potency:3,  name:"Hopeful Marsh Maid",   traits:{humor:3,sensual:1,flirty:4,reserved:3,awkward:6,mean:0,nice:9,kind:8,rude:0}, color:"var(--t3)" },
+  { potency:4,  name:"Warm Reed Hugger",     traits:{humor:4,sensual:1,flirty:4,reserved:3,awkward:5,mean:0,nice:9,kind:8,rude:0}, color:"var(--t2)" },
+  { potency:5,  name:"Bubbly Grass Nibbler", traits:{humor:6,sensual:2,flirty:5,reserved:2,awkward:4,mean:0,nice:8,kind:7,rude:0}, color:"var(--t2)" },
+  // 6-10: mid-low — playful, warm, flirtatious
+  { potency:6,  name:"Flirty Shallow Wader", traits:{humor:5,sensual:3,flirty:7,reserved:2,awkward:3,mean:1,nice:7,kind:7,rude:1}, color:"var(--blue)" },
+  { potency:7,  name:"Teasing Savanna Girl", traits:{humor:7,sensual:3,flirty:7,reserved:3,awkward:2,mean:1,nice:6,kind:6,rude:1}, color:"var(--blue)" },
+  { potency:8,  name:"Clever Wetland Type",  traits:{humor:7,sensual:4,flirty:6,reserved:4,awkward:1,mean:1,nice:6,kind:6,rude:1}, color:"var(--blue)" },
+  { potency:9,  name:"Bold Mud Princess",    traits:{humor:6,sensual:5,flirty:7,reserved:3,awkward:1,mean:2,nice:5,kind:5,rude:2}, color:"var(--blue)" },
+  { potency:10, name:"Charismatic Grazette", traits:{humor:7,sensual:5,flirty:8,reserved:4,awkward:0,mean:2,nice:5,kind:4,rude:2}, color:"var(--peach)" },
+  // 11-15: mid-high — confident, edged, alluring
+  { potency:11, name:"Witty River Queen",    traits:{humor:8,sensual:6,flirty:8,reserved:4,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
+  { potency:12, name:"Beguiling Herbivore",  traits:{humor:6,sensual:7,flirty:8,reserved:6,awkward:0,mean:3,nice:4,kind:3,rude:3}, color:"var(--peach)" },
+  { potency:13, name:"Sharp Wetland Wit",    traits:{humor:8,sensual:5,flirty:7,reserved:6,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
+  { potency:14, name:"Cool Dominant Doe",    traits:{humor:5,sensual:7,flirty:7,reserved:7,awkward:0,mean:4,nice:3,kind:3,rude:4}, color:"var(--orange)" },
+  { potency:15, name:"Laconic Alpha Cow",    traits:{humor:4,sensual:7,flirty:6,reserved:9,awkward:0,mean:5,nice:2,kind:2,rude:4}, color:"var(--orange)" },
+  // 16-20: high potency — intense, magnetic, dangerous
+  { potency:16, name:"Frost River Matriarch",traits:{humor:3,sensual:8,flirty:5,reserved:9,awkward:0,mean:6,nice:2,kind:1,rude:6}, color:"var(--gold)" },
+  { potency:17, name:"Cruel Dry Humor",      traits:{humor:9,sensual:6,flirty:4,reserved:8,awkward:0,mean:7,nice:1,kind:2,rude:7}, color:"var(--gold)" },
+  { potency:18, name:"Seductive Dominatrix", traits:{humor:5,sensual:9,flirty:9,reserved:7,awkward:0,mean:6,nice:2,kind:1,rude:6}, color:"var(--gold)" },
+  { potency:19, name:"Untouchable Matron",   traits:{humor:6,sensual:8,flirty:5,reserved:10,awkward:0,mean:7,nice:1,kind:1,rude:7}, color:"var(--gold)" },
+  { potency:20, name:"Apex Capybara Queen",  traits:{humor:7,sensual:10,flirty:9,reserved:10,awkward:0,mean:8,nice:1,kind:1,rude:8}, color:"var(--gold)" },
+];
+
+// ── Weighted persona picker (higher grade → higher potency) ─────────
+function pickPersona(grade, gender) {
+  const pool = gender === 'male' ? MALE_PERSONAS : FEMALE_PERSONAS;
+  // Grade weight: S→16-20, A→12-18, B→7-14, C→3-10, D→1-6
+  const ranges = { S:[16,20], A:[12,18], B:[7,14], C:[3,10], D:[1,6] };
+  const [lo, hi] = ranges[grade] || [1,10];
+  // Weighted: items closer to hi get more weight
+  const eligible = pool.filter(p => p.potency >= lo && p.potency <= hi);
+  const weights  = eligible.map(p => (p.potency - lo + 1) ** 1.6);
+  const total    = weights.reduce((a,b) => a+b, 0);
+  let r = Math.random() * total;
+  for (let i = 0; i < eligible.length; i++) { r -= weights[i]; if (r <= 0) return eligible[i]; }
+  return eligible[eligible.length - 1];
+}
+
+// ── Persona-driven response generator ─────────────────────────────
+function generatePersonaReply(persona, traits, msgText, isFirstMsg) {
+  const t = traits;
+  const dominant = Object.entries(t).sort((a,b) => b[1]-a[1]).slice(0,3).map(e=>e[0]);
+
+  const pools = {
+    humor: [
+      "I saw a bird try to land on a capybara today and miss. That is your energy right now.",
+      "You type like you're in a hurry. Where are you going. The grass is not running.",
+      "This message took you longer than it should have. I respect the effort, not the result.",
+      "I've met stagnant pools with more direction than this conversation. But I'm here.",
+      "You're funny. Not intentionally, but still.",
+      "The marsh doesn't ask this many questions. I'll make an exception.",
+    ],
+    sensual: [
+      "The water is warm today. Just thought you should know.",
+      "I've been sitting in the sun for three hours. I'm at peak temperature. You're welcome to know that.",
+      "There's a certain quality to late afternoon light on the water. I thought about you then.",
+      "My fur is particularly dense today. I'm not explaining further.",
+      "I don't say things like this often. You should sit with that.",
+      "The reeds are very close here. Very private.",
+    ],
+    flirty: [
+      "You reached out first. That tells me things.",
+      "I notice you noticed me. I'll allow it.",
+      "If you're trying to impress me, you're doing a medium job. That's better than most.",
+      "Tell me something true. Not interesting. True.",
+      "You're bolder than your profile suggested. I like that.",
+      "Most capybaras don't follow up. You did. Point to you.",
+    ],
+    reserved: [
+      "I don't respond to most messages. You should know that.",
+      "I read this twice before replying. You have my attention for now.",
+      "I'm not going to say a lot. This is a lot for me.",
+      "The marsh is quiet. So am I. This is an exception.",
+      "I don't know you. I'm aware of you. That's different.",
+      "Fine.",
+    ],
+    awkward: [
+      "I wanted to say something cool and then I just said this instead, which is this.",
+      "Hi. I wasn't expecting you to reply. I'm not sure what to do now.",
+      "I've been staring at the water for a while. Not for any reason. Just doing that.",
+      "Sorry if I'm weird. I am a little weird. The reeds know.",
+      "I typed six things and deleted them. This is the seventh. Hello.",
+      "This is going well I think? I'm not sure. How do you feel. Ignore that.",
+    ],
+    mean: [
+      "You're persistent. I haven't decided if that's good yet.",
+      "This is a low-effort message. I'm responding out of boredom.",
+      "I've seen better openers from herons and they can't even type.",
+      "Sure. If this is the level we're operating at.",
+      "Not bad. Not good. Somewhere in the water between.",
+      "I have standards. You are testing them.",
+    ],
+    rude: [
+      "I read it.",
+      "Interesting that you'd say that.",
+      "I'll respond when I feel like it.",
+      "You should know I'm talking to multiple capybaras right now.",
+      "This is a fine message for someone with your score.",
+      "Try again.",
+    ],
+    nice: [
+      "That actually made me happy. Thank you.",
+      "You're good at this. I hope you know that.",
+      "I wasn't expecting to feel this comfortable this quickly.",
+      "You're easy to talk to. That's rare in the wetlands.",
+      "This is a good conversation. I'd like to continue it.",
+      "You're genuinely kind. The marsh doesn't make many like you.",
+    ],
+    kind: [
+      "I hope your day is going well. Genuinely.",
+      "I like that you take your time with words.",
+      "There's something warm about how you write. It comes through.",
+      "I wanted to say — you seem like a good one.",
+      "The water is calm today. I think about the things that make the water calm.",
+      "I'm glad we matched. I don't say that often.",
+    ],
+  };
+
+  // First message overrides
+  if (isFirstMsg) {
+    if (t.awkward >= 6) return pools.awkward[Math.floor(Math.random() * pools.awkward.length)];
+    if (t.nice >= 7)    return pools.kind[Math.floor(Math.random() * pools.kind.length)];
+    if (t.reserved >= 7) return pools.reserved[Math.floor(Math.random() * pools.reserved.length)];
+    if (t.flirty >= 6)  return pools.flirty[Math.floor(Math.random() * pools.flirty.length)];
+  }
+
+  // Dominant trait drives response
+  const key = dominant[Math.floor(Math.random() * Math.min(2, dominant.length))];
+  const pool = pools[key] || pools.nice;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ── State ──────────────────────────────────────────────────────────
 let CAPYS = [], deck = [], matches = [];
 let genderPref = null, activeFilter = 'all';
 let currentChat = null, pendingMatchCapy = null, reportTargetIdx = null;
 let user = null;
 
-const TAX_BRACKETS = [
-  {label:"No Income"},
-  {label:"Forager Class"},
-  {label:"Working Grass"},
-  {label:"Middle Marsh"},
-  {label:"Upper Swamp"},
-  {label:"Riverfront Elite"},
-  {label:"Capybara 1%"},
-];
-
-const BIOME_SCORES = {
-  "Amazon Rainforest, Brazil":      88,
-  "Pantanal Wetlands, Brazil":      96,
-  "Llanos Savanna, Venezuela":      92,
-  "Orinoco Delta, Venezuela":       85,
-  "Rio Paraná, Argentina":          82,
-  "Gran Chaco, Paraguay":           75,
-  "Atlantic Forest, Brazil":        80,
-  "Cerrado, Brazil":                78,
-  "Pampas, Uruguay":                72,
-  "Chiquitano Forest, Bolivia":     74,
-  "Magdalena Valley, Colombia":     83,
-  "Darién Gap, Panama":             70,
-  "Cloud Forest, Ecuador":          91,
-  "Caatinga Scrubland, Brazil":     65,
-  "Esteros del Iberá, Argentina":   87,
-};
-
-// ── V2.1 Attraction formula (6 dims) ──────────────────
-function computeV2Attraction(capy) {
+// ── Score & grade ──────────────────────────────────────────────────
+function computeV2(capy) {
   const s = capy.scores;
-  const biomeScore  = BIOME_SCORES[capy.location] || 70;
-  const energyScore = 100 - Math.abs((capy.energy || 5) - 6.5) * 12;
+  const biome  = BIOME_SCORES[capy.location] || 70;
+  const energy = Math.min(100, Math.max(0, 100 - Math.abs((capy.energy || 5) - 6.5) * 12));
   return Math.min(99, Math.max(1,
-    s.fur_density  * 0.22 +
-    s.weight_score * 0.18 +
-    s.size_score   * 0.14 +
-    s.friendliness * 0.12 +
-    energyScore    * 0.20 +
-    biomeScore     * 0.14
+    s.fur_density  * 0.22 + s.weight_score * 0.18 + s.size_score * 0.14 +
+    s.friendliness * 0.12 + energy * 0.20 + biome * 0.14
   ));
 }
-
-function gradeFromScore(v) {
-  if (v >= 88) return 'S';
-  if (v >= 74) return 'A';
-  if (v >= 58) return 'B';
-  if (v >= 42) return 'C';
-  return 'D';
+function grade(v) { return v>=88?'S':v>=74?'A':v>=58?'B':v>=42?'C':'D'; }
+function gradeColor(g) { return {S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g]; }
+function gradeCtx(g, name) {
+  return {
+    S:`${name} is Grade S — the top tier. Rare, unhurried, highly selective.`,
+    A:`${name} holds Grade A. High attraction. Most of the wetland knows who they are.`,
+    B:`${name} is Grade B — solid, genuine, steady. Trusted immediately.`,
+    C:`${name} carries Grade C. Approachable and honest. Not the top of the ranking, and entirely at peace with that.`,
+    D:`${name} is Grade D. Warm, eager, and reliably present. The reeds are never empty when they're around.`,
+  }[g] || '';
 }
 
-function gradeColor(g) {
-  return {S:'var(--gold)',A:'var(--green)',B:'var(--blue)',C:'var(--orange)',D:'var(--t3)'}[g];
+// ── Persona assignment per capy (deterministic via id seed) ──────
+function seededRandom(seed) {
+  let x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+function getPersona(capy) {
+  const v = computeV2(capy);
+  const g = grade(v);
+  const pool = capy.gender === 'male' ? MALE_PERSONAS : FEMALE_PERSONAS;
+  const ranges = { S:[16,20], A:[12,18], B:[7,14], C:[3,10], D:[1,6] };
+  const [lo, hi] = ranges[g] || [1,10];
+  const eligible = pool.filter(p => p.potency >= lo && p.potency <= hi);
+  const weights  = eligible.map(p => (p.potency - lo + 1) ** 1.6);
+  const total    = weights.reduce((a,b) => a+b, 0);
+  let r = seededRandom(capy.id) * total;
+  for (let i = 0; i < eligible.length; i++) { r -= weights[i]; if (r <= 0) return eligible[i]; }
+  return eligible[eligible.length - 1];
 }
 
-// Grade descriptions woven into bio context
-function gradeContext(grade, name) {
-  const map = {
-    S: `${name} is a Grade S capybara — the top tier. Rare, unhurried, selective. They are not looking. They are being found.`,
-    A: `${name} holds a Grade A rating. High attraction, clear presence. Most capybaras in the wetland know who they are.`,
-    B: `${name} is Grade B — solid, genuine, steady. The kind of capybara you trust immediately and for good reason.`,
-    C: `${name} carries a Grade C rating. Approachable, honest, reliably present. Not the top of the ranking — and completely fine with that.`,
-    D: `${name} is a Grade D capybara. Eager, warm, and consistently available. The reeds are never empty when they're around.`,
-  };
-  return map[grade] || '';
-}
-
-// ── Load ───────────────────────────────────────────────
+// ── Load ───────────────────────────────────────────────────────────
 async function loadCapys() {
   try {
     const res = await fetch('./src/data/capybaras.json');
@@ -671,107 +676,69 @@ async function loadCapys() {
   } catch(e) { console.error('Load failed', e); }
 }
 
-// ── Gender gate ────────────────────────────────────────
-function setGenderPref(pref) {
-  genderPref = pref;
-  document.getElementById('gender-gate').classList.add('hidden');
-  buildDeck(); renderCards();
-}
-
-// ── Build deck ─────────────────────────────────────────
+// ── Deck ───────────────────────────────────────────────────────────
 function buildDeck() {
   let pool = [...CAPYS];
   if (genderPref && genderPref !== 'all') pool = pool.filter(c => c.gender === genderPref);
-  const swiped = new Set(JSON.parse(localStorage.getItem('cl_swiped') || '[]'));
+  const swiped = new Set(JSON.parse(localStorage.getItem('cl_swiped')||'[]'));
   pool = pool.filter(c => !swiped.has(c.id));
-  if (activeFilter === '5star') pool = pool.filter(c => {
-    const g = gradeFromScore(computeV2Attraction(c)); return g === 'S' || g === 'A';
-  });
+  if (activeFilter === '5star') pool = pool.filter(c => { const g=grade(computeV2(c)); return g==='S'||g==='A'; });
   else if (activeFilter === 'chonk') pool = pool.filter(c => c.scores.weight_score >= 75);
-  else if (activeFilter === 'zen')   pool = pool.filter(c => c.energy_type === 'Zen' || c.energy_type === 'Unbothered');
-  // Mix attraction levels — shuffle with mid-tier bias first
+  else if (activeFilter === 'zen')   pool = pool.filter(c => c.energy_type==='Zen'||c.energy_type==='Unbothered');
   pool.sort((a,b) => {
-    const ai = Math.abs(computeV2Attraction(a) - 55);
-    const bi = Math.abs(computeV2Attraction(b) - 55);
-    return ai - bi + (Math.random() - 0.5) * 22;
+    const ai = Math.abs(computeV2(a)-55), bi = Math.abs(computeV2(b)-55);
+    return ai - bi + (Math.random()-0.5)*22;
   });
   deck = pool; updateStats();
 }
 
-// ── Render cards ───────────────────────────────────────
+// ── Render cards ───────────────────────────────────────────────────
 function renderCards() {
   const stack = document.getElementById('card-stack');
-  stack.querySelectorAll('.capy-card').forEach(el => el.remove());
+  stack.querySelectorAll('.capy-card').forEach(el=>el.remove());
   const empty = document.getElementById('empty-state');
-  if (deck.length === 0) { empty.classList.add('show'); document.getElementById('capy-count').textContent = ''; return; }
+  if (!deck.length) { empty.classList.add('show'); document.getElementById('capy-count').textContent=''; return; }
   empty.classList.remove('show');
-  const toRender = deck.slice(0, 3);
-  [...toRender].reverse().forEach((capy, i) => {
+  const toRender = deck.slice(0,3);
+  [...toRender].reverse().forEach((capy,i) => {
     const card = buildCard(capy);
-    const realIdx = toRender.length - 1 - i;
-    card.style.zIndex = realIdx + 1;
-    if (realIdx > 0) {
-      card.style.transform = `scale(${1 - realIdx * 0.025}) translateY(${realIdx * 8}px)`;
-      card.style.pointerEvents = 'none';
-      card.style.opacity = String(1 - realIdx * 0.1);
-    }
+    const ri = toRender.length-1-i;
+    card.style.zIndex = ri+1;
+    if (ri>0) { card.style.transform=`scale(${1-ri*0.025}) translateY(${ri*8}px)`; card.style.pointerEvents='none'; card.style.opacity=String(1-ri*0.1); }
     stack.insertBefore(card, empty);
   });
   setupSwipe(); updateStats();
 }
 
-// ── Build card ─────────────────────────────────────────
-function metricColor(v) {
-  if (v >= 75) return 'var(--green)';
-  if (v >= 50) return 'var(--orange)';
-  return 'var(--t3)';
-}
+function metricColor(v) { return v>=75?'var(--green)':v>=50?'var(--orange)':'var(--t3)'; }
 
 function buildCard(capy) {
-  const card = document.createElement('div');
-  card.className = 'capy-card';
-  card.dataset.id = capy.id;
-
-  const v2       = computeV2Attraction(capy);
-  const grade    = gradeFromScore(v2);
-  const biomeScore = BIOME_SCORES[capy.location] || 70;
-  const energyScore = Math.min(100, Math.max(0, 100 - Math.abs((capy.energy || 5) - 6.5) * 12));
-  const tax      = TAX_BRACKETS[capy.tax_bracket] || TAX_BRACKETS[0];
-  const hobbies  = capy.hobbies || [];
-  const gradeCtx = gradeContext(grade, capy.name);
-
+  const card  = document.createElement('div');
+  card.className = 'capy-card'; card.dataset.id = capy.id;
+  const v2    = computeV2(capy), g = grade(v2);
+  const bs    = BIOME_SCORES[capy.location]||70;
+  const es    = Math.min(100,Math.max(0,100-Math.abs((capy.energy||5)-6.5)*12));
+  const persona = getPersona(capy);
   const metrics = [
-    { label: 'FUR',    val: capy.scores.fur_density,  color: metricColor(capy.scores.fur_density) },
-    { label: 'WEIGHT', val: capy.scores.weight_score, color: metricColor(capy.scores.weight_score) },
-    { label: 'SIZE',   val: capy.scores.size_score,   color: metricColor(capy.scores.size_score) },
-    { label: 'VIBE',   val: capy.scores.friendliness, color: metricColor(capy.scores.friendliness) },
-    { label: 'ENERGY', val: energyScore,              color: metricColor(energyScore) },
-    { label: 'BIOME',  val: biomeScore,               color: metricColor(biomeScore) },
+    {label:'FUR',   val:capy.scores.fur_density},
+    {label:'WEIGHT',val:capy.scores.weight_score},
+    {label:'SIZE',  val:capy.scores.size_score},
+    {label:'VIBE',  val:capy.scores.friendliness},
+    {label:'ENERGY',val:es},
+    {label:'BIOME', val:bs},
   ];
-
-  const metricBars = metrics.map(m =>
-    `<div class="card-metric-row">
-      <span class="metric-label">${m.label}</span>
-      <div class="metric-track"><div class="metric-fill" style="width:${m.val.toFixed(0)}%;background:${m.color}"></div></div>
-      <span class="metric-val" style="color:${m.color}">${m.val.toFixed(0)}</span>
-    </div>`
-  ).join('');
-
-  const hobbyTags = hobbies.map(h => `<span class="card-tag hobby">${h}</span>`).join('');
+  const bars = metrics.map(m=>`<div class="card-metric-row">
+    <span class="metric-label">${m.label}</span>
+    <div class="metric-track"><div class="metric-fill" style="width:${m.val.toFixed(0)}%;background:${metricColor(m.val)}"></div></div>
+    <span class="metric-val" style="color:${metricColor(m.val)}">${m.val.toFixed(0)}</span>
+  </div>`).join('');
+  const hobbies = (capy.hobbies||[]).map(h=>`<span class="card-tag hobby">${h}</span>`).join('');
+  const pColor = persona?.color || 'var(--t4)';
 
   card.innerHTML = `
-    <img class="card-img" src="${capy.image_url}" alt="${capy.name}"
-      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+    <img class="card-img" src="${capy.image_url}" alt="${capy.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
     <div class="card-img-placeholder">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/>
-        <ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/>
-        <ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/>
-        <ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/>
-        <circle cx="24" cy="30" r="3" fill="#555"/>
-        <circle cx="36" cy="30" r="3" fill="#555"/>
-        <ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/>
-      </svg>
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="32" rx="22" ry="18" fill="#333"/><ellipse cx="18" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="42" cy="20" rx="8" ry="10" fill="#333"/><ellipse cx="30" cy="33" rx="18" ry="14" fill="#3a3a3a"/><circle cx="24" cy="30" r="3" fill="#555"/><circle cx="36" cy="30" r="3" fill="#555"/><ellipse cx="30" cy="37" rx="5" ry="3" fill="#555"/></svg>
     </div>
     <div class="card-gradient"></div>
     <div class="stamp stamp-like">LIKE</div>
@@ -781,56 +748,64 @@ function buildCard(capy) {
         <div class="card-name-row">
           <span class="card-name">${capy.name}</span>
           <span class="card-age">${capy.age}</span>
-          <span class="card-gender-badge ${capy.gender}">${capy.gender === 'female' ? 'F' : 'M'}</span>
+          <span class="card-gender-badge ${capy.gender}">${capy.gender==='female'?'F':'M'}</span>
+          ${persona?`<span class="card-persona-badge" style="color:${pColor};border-color:${pColor}33;background:${pColor}11">P${persona.potency}</span>`:''}
         </div>
         <div class="card-location">${capy.location}</div>
       </div>
       <div class="card-grade-row">
-        <span class="grade-badge grade-${grade}">${grade}</span>
-        <span class="grade-label">${gradeCtx}</span>
+        <span class="grade-badge grade-${g}">${g}</span>
+        <span class="grade-label">${gradeCtx(g,capy.name)}</span>
       </div>
       <div class="card-bio">${capy.bio}</div>
-      <div class="card-metrics">${metricBars}</div>
+      <div class="card-metrics">${bars}</div>
       <div class="card-tags">
-        <span class="card-tag">${capy.energy_type || ''}</span>
-        <span class="card-tag">${tax.label}</span>
-        ${hobbyTags}
+        <span class="card-tag">${capy.energy_type||''}</span>
+        <span class="card-tag">${TAX_BRACKETS[capy.tax_bracket]||''}</span>
+        ${persona?`<span class="card-tag" style="border-color:${pColor}33;color:${pColor}">${persona.name}</span>`:''}
+        ${hobbies}
       </div>
-    </div>
-  `;
+    </div>`;
   return card;
 }
 
-// ── Swipe ──────────────────────────────────────────────
-let dragStartX = 0, dragStartY = 0, isDragging = false;
+// ── Swipe drag ─────────────────────────────────────────────────────
+let dragStartX=0, dragStartY=0, isDragging=false, dragCard=null;
 
 function setupSwipe() {
   const stack = document.getElementById('card-stack');
   const card  = stack.querySelector('.capy-card');
   if (!card) return;
+  dragCard = card;
+
+  const getPoint = e => e.touches ? e.touches[0] : e;
 
   const onStart = e => {
+    // Only start drag if not tapping a button/link inside the card
+    if (e.target.closest('button,a,textarea,input,select')) return;
     isDragging = true;
-    const pt = e.touches ? e.touches[0] : e;
+    const pt = getPoint(e);
     dragStartX = pt.clientX; dragStartY = pt.clientY;
     card.style.transition = 'none';
   };
   const onMove = e => {
     if (!isDragging) return;
-    e.preventDefault();
-    const pt = e.touches ? e.touches[0] : e;
+    const pt = getPoint(e);
     const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
-    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx * 0.055}deg)`;
-    const pct = Math.min(1, Math.abs(dx) / 80);
-    card.querySelector('.stamp-like').style.opacity = dx > 20 ? pct : 0;
-    card.querySelector('.stamp-pass').style.opacity = dx < -20 ? pct : 0;
+    // Only hijack horizontal swipes; allow vertical scrolling inside card-info
+    if (Math.abs(dx) < Math.abs(dy) && Math.abs(dx) < 12) return;
+    e.preventDefault();
+    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx*0.055}deg)`;
+    const pct = Math.min(1, Math.abs(dx)/80);
+    card.querySelector('.stamp-like').style.opacity = dx>20 ? pct : 0;
+    card.querySelector('.stamp-pass').style.opacity = dx<-20 ? pct : 0;
   };
   const onEnd = e => {
     if (!isDragging) return;
     isDragging = false;
     const pt = e.changedTouches ? e.changedTouches[0] : e;
     const dx = pt.clientX - dragStartX, dy = pt.clientY - dragStartY;
-    if (Math.abs(dx) > 80) flyCard(card, dx > 0 ? 'like' : 'pass', dx, dy);
+    if (Math.abs(dx) > 80) flyCard(card, dx>0?'like':'pass', dx, dy);
     else {
       card.style.transition = 'transform .3s cubic-bezier(0.34,1.56,0.64,1)';
       card.style.transform = '';
@@ -839,225 +814,193 @@ function setupSwipe() {
     }
   };
 
-  card.addEventListener('mousedown', onStart);
-  card.addEventListener('touchstart', onStart, { passive: true });
-  window.addEventListener('mousemove', onMove);
-  window.addEventListener('touchmove', onMove, { passive: false });
-  window.addEventListener('mouseup', onEnd);
-  window.addEventListener('touchend', onEnd);
+  card.addEventListener('mousedown',  onStart);
+  card.addEventListener('touchstart', onStart, {passive:true});
+  window.addEventListener('mousemove',  onMove);
+  window.addEventListener('touchmove',  onMove, {passive:false});
+  window.addEventListener('mouseup',   onEnd);
+  window.addEventListener('touchend',  onEnd);
 }
 
 function swipe(dir) {
   const card = document.getElementById('card-stack').querySelector('.capy-card');
   if (!card) return;
-  flyCard(card, dir, dir === 'like' ? 500 : -500, -80);
+  flyCard(card, dir, dir==='like'?500:-500, -80);
 }
 
 function flyCard(card, dir, dx, dy) {
   const capyId = parseInt(card.dataset.id);
-  const capy   = CAPYS.find(c => c.id === capyId);
-  card.style.setProperty('--dx', (dx > 0 ? 650 : -650) + 'px');
-  card.style.setProperty('--dy', (dy - 120) + 'px');
-  card.style.setProperty('--rot', (dx > 0 ? 32 : -32) + 'deg');
+  const capy   = CAPYS.find(c=>c.id===capyId);
+  card.style.setProperty('--dx',(dx>0?650:-650)+'px');
+  card.style.setProperty('--dy',(dy-120)+'px');
+  card.style.setProperty('--rot',(dx>0?32:-32)+'deg');
   card.style.animation = 'flyOut .38s ease-in forwards';
   card.style.pointerEvents = 'none';
-  const swiped = JSON.parse(localStorage.getItem('cl_swiped') || '[]');
+  const swiped = JSON.parse(localStorage.getItem('cl_swiped')||'[]');
   swiped.push(capyId); localStorage.setItem('cl_swiped', JSON.stringify(swiped));
-  if (dir === 'like' || dir === 'super') checkMatch(capy, dir === 'super');
-  deck.splice(deck.findIndex(c => c.id === capyId), 1);
-  setTimeout(() => { card.remove(); renderCards(); }, 380);
+  if (dir==='like'||dir==='super') checkMatch(capy, dir==='super');
+  deck.splice(deck.findIndex(c=>c.id===capyId),1);
+  setTimeout(()=>{ card.remove(); renderCards(); }, 380);
 }
 
-// ── Match logic ────────────────────────────────────────
-function matchProbability(capy) {
-  const v2   = computeV2Attraction(capy);
-  const base = 0.92 - (v2 / 100) * 0.84;
-  return Math.max(0.04, Math.min(0.93, base + (Math.random() - 0.5) * 0.07));
+// ── Match ──────────────────────────────────────────────────────────
+function matchProb(capy) {
+  const v=computeV2(capy);
+  return Math.max(0.04, Math.min(0.93, 0.92-(v/100)*0.84+(Math.random()-0.5)*0.07));
 }
 
 function checkMatch(capy, isSuper) {
-  const prob = isSuper ? Math.min(0.96, matchProbability(capy) * 1.8) : matchProbability(capy);
+  const prob = isSuper ? Math.min(0.96, matchProb(capy)*1.8) : matchProb(capy);
   if (Math.random() < prob) triggerMatch(capy);
 }
 
-function tierFromGrade(grade) {
-  return (grade === 'S' || grade === 'A') ? 'high' : grade === 'B' ? 'mid' : 'low';
-}
+function tierFromGrade(g) { return (g==='S'||g==='A')?'high':g==='B'?'mid':'low'; }
 
 function triggerMatch(capy) {
-  const v2    = computeV2Attraction(capy);
-  const grade = gradeFromScore(v2);
-  const tier  = tierFromGrade(grade);
-  const m = { capy, messages:[], tier, grade, firstMessageSent:false, unread:false, matchedAt:Date.now() };
+  const v=computeV2(capy), g=grade(v), tier=tierFromGrade(g);
+  const persona = getPersona(capy);
+  const m = { capy, persona, messages:[], tier, grade:g, firstMsgSent:false, unread:false, matchedAt:Date.now() };
   matches.push(m);
-  const idx = matches.length - 1;
-  pendingMatchCapy = { capy, matchIdx: idx };
+  const idx = matches.length-1;
+  pendingMatchCapy = { capy, matchIdx:idx };
   document.getElementById('match-popup-img').src = capy.image_url;
   document.getElementById('match-popup-text').textContent =
-    `${capy.name} (Grade ${grade}) from ${capy.location} matched with you. ${
-      tier === 'high' ? 'Rare. They almost never match.' :
-      tier === 'mid'  ? 'Reach out and see where it goes.' :
-                        'They seem very happy about this.'}`;
+    `${capy.name} (Grade ${g}${persona?', '+persona.name:''}) matched with you. ${
+      tier==='high'?'Rare. They almost never match.':
+      tier==='mid'?'Reach out and see where it goes.':
+      'They seem very happy about this.'}`;
   document.getElementById('match-popup').classList.add('show');
   updateMatchesBadge();
-  if (tier === 'low' || (tier === 'mid' && Math.random() < 0.35)) {
-    const delay = tier === 'low' ? 7000 + Math.random() * 5000 : 18000 + Math.random() * 14000;
-    setTimeout(() => sendCapyFirstMessage(idx), delay);
+  if (tier==='low' || (tier==='mid' && Math.random()<0.35)) {
+    const delay = tier==='low' ? 7000+Math.random()*5000 : 18000+Math.random()*14000;
+    setTimeout(()=>sendCapyFirst(idx), delay);
   }
 }
 
-function closeMatchPopup() { document.getElementById('match-popup').classList.remove('show'); pendingMatchCapy = null; updateMatchesView(); }
-function openChatFromMatch() {
-  document.getElementById('match-popup').classList.remove('show');
-  if (pendingMatchCapy) { openChat(pendingMatchCapy.matchIdx); pendingMatchCapy = null; switchView('matches'); }
-}
-
-// ── Capy first message ─────────────────────────────────
-const FIRST_MSGS = {
-  high: [],
-  mid:  ["You liked my profile. I noticed.", "I don't usually do this first. Today is different."],
-  low:  [
-    "Hi. I saw that we matched and I didn't want to wait.",
-    "I've been looking at your profile. I like you.",
-    "You matched with me. That means something. I wanted you to know.",
-    "I'm nervous but I'm sending this anyway.",
-    "I was going to wait but life is too short and the reeds are too tall and here I am.",
-  ]
-};
-const REPLIES = {
-  high: ["I appreciate the message. I'm selective about where I direct my energy.", "You're not wrong to try.", "My schedule is full most days. Today is unusual.", "The marsh is quiet. I'm choosing to share that with you."],
-  mid:  ["Hello. The water is warm today. It's a good sign.", "You reached out. I respect the directness.", "This is unexpected, but not unwelcome.", "I had a quiet morning. This is a reasonable way to end it."],
-  low:  ["I have been hoping someone would message me today.", "You found me. I am so glad.", "Tell me everything. I have nowhere to be.", "This is the best part of my day and we just started.", "I've been watching others get messages all morning. You came to me first."],
-};
-
-function sendCapyFirstMessage(idx) {
+function sendCapyFirst(idx) {
   const m = matches[idx];
-  if (!m || m.firstMessageSent) return;
-  const pool = FIRST_MSGS[m.tier] || FIRST_MSGS.low;
-  if (!pool.length) return;
-  const msg = { from: 'capy', text: pool[Math.floor(Math.random() * pool.length)], ts: Date.now() };
-  m.messages.push(msg); m.firstMessageSent = true; m.unread = true;
+  if (!m||m.firstMsgSent) return;
+  const t = m.persona?.traits || {};
+  const text = generatePersonaReply(m.persona, t, '', true);
+  const msg = { from:'capy', text, ts:Date.now() };
+  m.messages.push(msg); m.firstMsgSent=true; m.unread=true;
   updateMatchesBadge();
-  if (currentChat === idx) { appendMessage(msg); m.unread = false; } else updateMatchesView();
+  if (currentChat===idx) { appendMessage(msg); m.unread=false; }
+  else updateMatchesView();
 }
 
-// ── Chat ───────────────────────────────────────────────
+// ── Chat ───────────────────────────────────────────────────────────
 function openChat(idx) {
   currentChat = idx;
-  const m = matches[idx]; m.unread = false;
-  const c = m.capy;
+  const m=matches[idx]; m.unread=false;
+  const c=m.capy, persona=m.persona;
   document.getElementById('chat-avatar').src = c.image_url;
   document.getElementById('chat-name').textContent = c.name;
-  document.getElementById('chat-sub').textContent  = `Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]?.label || ''} · ${c.location}`;
+  document.getElementById('chat-sub').textContent  = `Grade ${m.grade} · ${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} · ${c.location}`;
+  document.getElementById('chat-persona-line').textContent = persona ? `${persona.name} · Potency ${persona.potency}` : '';
   const msgs = document.getElementById('chat-messages');
-  msgs.innerHTML = '';
-  if (m.messages.length === 0) {
-    const hint = document.createElement('div');
-    hint.style.cssText = 'text-align:center;padding:20px 0;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;';
-    hint.textContent = `You matched with ${c.name}. Say something.`;
-    msgs.appendChild(hint);
-  } else { m.messages.forEach(appendMessage); }
+  msgs.innerHTML='';
+  if (!m.messages.length) {
+    const h=document.createElement('div');
+    h.style.cssText='text-align:center;padding:20px 0;font-size:11px;color:var(--t4);font-family:"DM Mono",monospace;';
+    h.textContent=`You matched with ${c.name}. Say something.`;
+    msgs.appendChild(h);
+  } else m.messages.forEach(appendMessage);
   switchView('chat'); updateMatchesBadge();
 }
 
-function closeChat() { currentChat = null; switchView('matches'); }
+function closeChat() { currentChat=null; switchView('matches'); }
 
 function appendMessage(msg) {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = `msg ${msg.from === 'capy' ? 'from-capy' : 'from-me'}`;
-  div.style.animation = 'fadeSlideIn .2s ease';
-  const time = new Date(msg.ts).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
-  div.innerHTML = `<div class="msg-bubble">${escHtml(msg.text)}</div><div class="msg-time">${time}</div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages');
+  const div=document.createElement('div');
+  div.className=`msg ${msg.from==='capy'?'from-capy':'from-me'}`;
+  div.style.animation='fadeSlideIn .2s ease';
+  const time=new Date(msg.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  div.innerHTML=`<div class="msg-bubble">${esc(msg.text)}</div><div class="msg-time">${time}</div>`;
+  msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
 }
 
 function showTyping() {
-  const msgs = document.getElementById('chat-messages');
-  const el = document.createElement('div'); el.id = 'typing-indicator'; el.className = 'typing-indicator';
-  el.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-  msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages');
+  const el=document.createElement('div'); el.id='typing-indicator'; el.className='typing-indicator';
+  el.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight;
 }
 function hideTyping() { document.getElementById('typing-indicator')?.remove(); }
 
 function sendMessage() {
-  const input = document.getElementById('chat-input');
-  const text  = input.value.trim();
-  if (!text || currentChat === null) return;
-  const m = matches[currentChat];
-  const msg = { from: 'me', text, ts: Date.now() };
+  const input=document.getElementById('chat-input');
+  const text=input.value.trim();
+  if (!text||currentChat===null) return;
+  const m=matches[currentChat];
+  const msg={from:'me',text,ts:Date.now()};
   m.messages.push(msg); appendMessage(msg);
-  input.value = ''; input.style.height = 'auto';
-  const tier = m.tier;
-  const replyChance = tier === 'high' ? 0.42 : tier === 'mid' ? 0.76 : 0.95;
-  if (Math.random() < replyChance) {
-    const delay = tier === 'high' ? 14000 + Math.random() * 20000 : tier === 'mid' ? 4000 + Math.random() * 7000 : 1000 + Math.random() * 2000;
-    setTimeout(() => {
-      if (currentChat === null) return;
+  input.value=''; input.style.height='auto';
+  // Reply chance by tier
+  const replyChance = m.tier==='high'?0.42:m.tier==='mid'?0.76:0.95;
+  if (Math.random()<replyChance) {
+    const delay = m.tier==='high'?14000+Math.random()*20000:m.tier==='mid'?4000+Math.random()*7000:800+Math.random()*1800;
+    const savedIdx = currentChat;
+    setTimeout(()=>{
       showTyping();
-      setTimeout(() => {
+      setTimeout(()=>{
         hideTyping();
-        const pool   = REPLIES[tier];
-        const reply  = { from: 'capy', text: pool[Math.floor(Math.random() * pool.length)], ts: Date.now() };
-        m.messages.push(reply);
-        if (currentChat !== null) appendMessage(reply);
-        else { m.unread = true; updateMatchesBadge(); updateMatchesView(); }
-      }, 1400 + Math.random() * 1000);
-    }, delay - 1400);
+        const mi=matches[savedIdx]; if(!mi) return;
+        const reply={from:'capy',text:generatePersonaReply(mi.persona,mi.persona?.traits||{},text,false),ts:Date.now()};
+        mi.messages.push(reply);
+        if(currentChat===savedIdx) appendMessage(reply);
+        else { mi.unread=true; updateMatchesBadge(); updateMatchesView(); }
+      }, 1200+Math.random()*900);
+    }, delay-1200);
   }
 }
 
-function handleChatKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
-function autoResize(el)   { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
+function handleChatKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
+function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
 
-// ── Remove / Report ────────────────────────────────────
+// ── Remove / Report ────────────────────────────────────────────────
 function removeCurrentMatch() {
-  if (currentChat === null) return;
-  if (!confirm(`Remove match with ${matches[currentChat].capy.name}?`)) return;
-  matches.splice(currentChat, 1); currentChat = null; switchView('matches'); updateMatchesView(); updateMatchesBadge();
+  if(currentChat===null) return;
+  if(!confirm(`Remove match with ${matches[currentChat].capy.name}?`)) return;
+  matches.splice(currentChat,1); currentChat=null; switchView('matches'); updateMatchesView(); updateMatchesBadge();
 }
-function reportCurrentMatch() { if (currentChat === null) return; reportTargetIdx = currentChat; document.getElementById('report-modal').classList.add('show'); }
+function reportCurrentMatch() { if(currentChat===null) return; reportTargetIdx=currentChat; document.getElementById('report-modal').classList.add('show'); }
 function removeMatchFromList(idx) {
-  if (!confirm(`Remove match with ${matches[idx].capy.name}?`)) return;
-  if (currentChat === idx) currentChat = null;
-  matches.splice(idx, 1); updateMatchesView(); updateMatchesBadge();
+  if(!confirm(`Remove ${matches[idx].capy.name}?`)) return;
+  if(currentChat===idx) currentChat=null;
+  matches.splice(idx,1); updateMatchesView(); updateMatchesBadge();
 }
-function reportMatchFromList(idx) { reportTargetIdx = idx; document.getElementById('report-modal').classList.add('show'); }
-function submitReport(reason) {
-  const m = matches[reportTargetIdx];
-  if (m) alert(`Report submitted for ${m.capy.name}: "${reason}". Thank you.`);
-  document.getElementById('report-modal').classList.remove('show'); reportTargetIdx = null;
-}
-function closeReport() { document.getElementById('report-modal').classList.remove('show'); reportTargetIdx = null; }
+function reportMatchFromList(idx) { reportTargetIdx=idx; document.getElementById('report-modal').classList.add('show'); }
 
-// ── Matches view ───────────────────────────────────────
+// ── Matches view ───────────────────────────────────────────────────
 function updateMatchesView() {
-  const strip   = document.getElementById('new-matches-row');
-  const convoList = document.getElementById('convo-list');
-  document.getElementById('matches-count-badge').textContent = `${matches.length} conversation${matches.length !== 1 ? 's' : ''}`;
-  const newM = matches.filter(m => m.messages.length === 0);
-  if (newM.length > 0) {
-    strip.innerHTML = newM.map(m => {
-      const idx = matches.indexOf(m);
+  const strip=document.getElementById('new-matches-row');
+  const list=document.getElementById('convo-list');
+  document.getElementById('matches-count-badge').textContent=`${matches.length} conversation${matches.length!==1?'s':''}`;
+  const newM=matches.filter(m=>m.messages.length===0);
+  if(newM.length>0){
+    strip.innerHTML=newM.map(m=>{
+      const idx=matches.indexOf(m);
       return `<div class="new-match-bubble" onclick="openChat(${idx})"><img src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/><span>${m.capy.name}</span></div>`;
     }).join('');
-    document.getElementById('new-matches-strip').style.display = '';
-  } else { document.getElementById('new-matches-strip').style.display = 'none'; }
-  const convos = matches.filter(m => m.messages.length > 0);
-  if (matches.length === 0) { convoList.innerHTML = `<div class="no-matches"><p>No matches yet. Keep swiping.</p></div>`; return; }
-  if (convos.length === 0) { convoList.innerHTML = `<div style="padding:18px;font-size:11px;color:var(--t3);font-family:'DM Mono',monospace;">Matched capybaras waiting above. Send a message.</div>`; return; }
-  convoList.innerHTML = convos.map(m => {
-    const idx  = matches.indexOf(m);
-    const last = m.messages[m.messages.length - 1];
-    const time = new Date(last.ts).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+    document.getElementById('new-matches-strip').style.display='';
+  } else document.getElementById('new-matches-strip').style.display='none';
+  const convos=matches.filter(m=>m.messages.length>0);
+  if(!matches.length){list.innerHTML='<div class="no-matches"><p>No matches yet. Keep swiping.</p></div>';return;}
+  if(!convos.length){list.innerHTML='<div style="padding:18px;font-size:11px;color:var(--t3);font-family:\'DM Mono\',monospace;">Matched capybaras waiting above. Send a message.</div>';return;}
+  list.innerHTML=convos.map(m=>{
+    const idx=matches.indexOf(m);
+    const last=m.messages[m.messages.length-1];
+    const time=new Date(last.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
     return `<div class="convo-item" onclick="openChat(${idx})">
       <img class="convo-avatar" src="${m.capy.image_url}" onerror="this.style.background='var(--s4)'"/>
       <div class="convo-info">
-        <div class="convo-name">${m.capy.name} <span style="font-size:9px;color:${gradeColor(m.grade)};font-family:'DM Mono',monospace;">Grade ${m.grade}</span></div>
-        <div class="convo-preview">${escHtml(last.from === 'me' ? 'You: ' + last.text : last.text)}</div>
+        <div class="convo-name">${m.capy.name} <span style="font-size:9px;color:${gradeColor(m.grade)};font-family:'DM Mono',monospace;">Grade ${m.grade}</span>${m.persona?` <span style="font-size:8px;color:${m.persona.color};font-family:'DM Mono',monospace;">P${m.persona.potency}</span>`:''}</div>
+        <div class="convo-preview">${esc(last.from==='me'?'You: '+last.text:last.text)}</div>
       </div>
       <div class="convo-time">${time}</div>
-      ${m.unread ? '<div class="convo-unread"></div>' : ''}
+      ${m.unread?'<div class="convo-unread"></div>':''}
       <div class="convo-actions" onclick="event.stopPropagation()">
         <button class="convo-action-btn remove" onclick="removeMatchFromList(${idx})">Remove</button>
         <button class="convo-action-btn report" onclick="reportMatchFromList(${idx})">Report</button>
@@ -1067,100 +1010,157 @@ function updateMatchesView() {
 }
 
 function updateMatchesBadge() {
-  const unread = matches.filter(m => m.unread).length;
-  const b = document.getElementById('matches-badge');
-  if (unread > 0) { b.textContent = unread; b.style.display = 'inline'; } else { b.style.display = 'none'; }
+  const unread=matches.filter(m=>m.unread).length;
+  const b=document.getElementById('matches-badge');
+  if(unread>0){b.textContent=unread;b.style.display='inline';}else b.style.display='none';
 }
 
-// ── Leaderboard ────────────────────────────────────────
+// ── Leaderboard ────────────────────────────────────────────────────
 function renderLeaderboard() {
-  if (!CAPYS.length) return;
-  const sorted = [...CAPYS].map(c => ({ c, v2: computeV2Attraction(c) })).sort((a,b) => b.v2 - a.v2).slice(0, 50);
-  const list = document.getElementById('leaderboard-list');
-  list.innerHTML = sorted.map(({ c, v2 }, i) => {
-    const rc  = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-    const rt  = i < 3 ? ['01','02','03'][i] : String(i+1).padStart(2,'0');
-    const grade = gradeFromScore(v2);
-    const biomeScore = BIOME_SCORES[c.location] || 70;
-    const es   = Math.min(100, Math.max(0, 100 - Math.abs((c.energy||5) - 6.5) * 12));
+  if(!CAPYS.length) return;
+  const sorted=[...CAPYS].map(c=>({c,v2:computeV2(c)})).sort((a,b)=>b.v2-a.v2).slice(0,50);
+  document.getElementById('leaderboard-list').innerHTML=sorted.map(({c,v2},i)=>{
+    const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
+    const rt=i<3?['01','02','03'][i]:String(i+1).padStart(2,'0');
+    const g=grade(v2), es=Math.min(100,Math.max(0,100-Math.abs((c.energy||5)-6.5)*12));
+    const persona=getPersona(c);
     return `<div class="lb-item">
       <div class="lb-rank ${rc}">${rt}</div>
       <img class="lb-img" src="${c.image_url}" onerror="this.style.background='var(--s4)'"/>
       <div class="lb-info">
         <div class="lb-name">${c.name}, ${c.age}</div>
-        <div class="lb-sub">${c.energy_type} &middot; ${TAX_BRACKETS[c.tax_bracket]?.label || ''}</div>
+        <div class="lb-sub">${c.energy_type} · ${TAX_BRACKETS[c.tax_bracket]||''} ${persona?'· '+persona.name:''}</div>
       </div>
       <div class="lb-mini-bars">
         <div class="lb-mini-row"><span class="lb-mini-label">FUR</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${c.scores.fur_density}%;background:var(--orange)"></div></div></div>
         <div class="lb-mini-row"><span class="lb-mini-label">NRG</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${es}%;background:var(--blue)"></div></div></div>
-        <div class="lb-mini-row"><span class="lb-mini-label">BIO</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${biomeScore}%;background:var(--gold)"></div></div></div>
+        <div class="lb-mini-row"><span class="lb-mini-label">BIO</span><div class="lb-mini-track"><div class="lb-mini-fill" style="width:${(BIOME_SCORES[c.location]||70)}%;background:var(--gold)"></div></div></div>
       </div>
       <div class="lb-right">
         <div class="lb-score">${v2.toFixed(1)}</div>
-        <div class="lb-score-sub"><span class="grade-badge grade-${grade}" style="font-size:8px;padding:1px 6px;">${grade}</span></div>
+        <div class="lb-score-sub"><span class="grade-badge grade-${g}" style="font-size:8px;padding:1px 6px;">${g}</span></div>
       </div>
     </div>`;
   }).join('');
 }
 
-// ── Stats ──────────────────────────────────────────────
+// ── Stats ──────────────────────────────────────────────────────────
 function updateStats() {
-  document.getElementById('stat-queue').textContent   = deck.length;
-  document.getElementById('stat-matches').textContent = matches.length;
-  document.getElementById('capy-count').textContent   = deck.length > 0 ? `${deck.length} capybaras remaining` : '';
+  document.getElementById('stat-queue').textContent=deck.length;
+  document.getElementById('stat-matches').textContent=matches.length;
+  document.getElementById('capy-count').textContent=deck.length>0?`${deck.length} capybaras remaining`:'';
 }
 
-// ── Login ──────────────────────────────────────────────
+// ── Login ──────────────────────────────────────────────────────────
 function openLogin()  { document.getElementById('login-modal').classList.add('show'); }
 function closeLogin() { document.getElementById('login-modal').classList.remove('show'); }
 function doLogin() {
-  const name = document.getElementById('login-name').value.trim();
-  if (!name) { alert('Please enter your name.'); return; }
-  user = { name, email: document.getElementById('login-email').value.trim(), gender: document.getElementById('login-gender').value };
-  localStorage.setItem('cl_user', JSON.stringify(user));
+  const name=document.getElementById('login-name').value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  user={name,email:document.getElementById('login-email').value.trim(),gender:document.getElementById('login-gender').value};
+  localStorage.setItem('cl_user',JSON.stringify(user));
   closeLogin();
-  const btn = document.getElementById('login-btn');
-  btn.textContent = name; btn.classList.add('logged-in');
-  btn.onclick = () => { if (confirm(`Sign out, ${user.name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); } };
+  const btn=document.getElementById('login-btn');
+  btn.textContent=name; btn.classList.add('logged-in');
+  btn.onclick=()=>{ if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();} };
+}
+function restoreSession() {
+  const saved=localStorage.getItem('cl_user');
+  if(!saved) return;
+  try {
+    user=JSON.parse(saved);
+    const btn=document.getElementById('login-btn');
+    btn.textContent=user.name; btn.classList.add('logged-in');
+    btn.onclick=()=>{ if(confirm(`Sign out, ${user.name}?`)){user=null;localStorage.removeItem('cl_user');location.reload();} };
+  } catch(e){}
 }
 
-// ── Tab switching ──────────────────────────────────────
+// ── Tab switching ──────────────────────────────────────────────────
 function switchView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id + '-view').classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === id));
-  if (id === 'matches') updateMatchesView();
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id+'-view').classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===id));
+  if(id==='matches') updateMatchesView();
 }
-document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchView(t.dataset.view)));
 
-// ── Filters ────────────────────────────────────────────
-document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => {
-  activeFilter = b.dataset.filter;
-  document.querySelectorAll('.filter-btn').forEach(x => x.classList.toggle('active', x === b));
-  buildDeck(); renderCards();
-}));
-
-// ── Reset ──────────────────────────────────────────────
+// ── Utility ────────────────────────────────────────────────────────
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function resetDeck() { localStorage.removeItem('cl_swiped'); buildDeck(); renderCards(); }
 
-// ── Restore session ────────────────────────────────────
-function restoreSession() {
-  const saved = localStorage.getItem('cl_user');
-  if (!saved) return;
-  try {
-    user = JSON.parse(saved);
-    const btn = document.getElementById('login-btn');
-    btn.textContent = user.name; btn.classList.add('logged-in');
-    btn.onclick = () => { if (confirm(`Sign out, ${user.name}?`)) { user = null; localStorage.removeItem('cl_user'); location.reload(); } };
-  } catch(e) {}
+// ── Event listeners (JS-only, no inline onclick on modals) ─────────
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Gender gate — use both click and touchend for mobile
+  ['gg-female','gg-male','gg-all'].forEach(id=>{
+    const el=document.getElementById(id);
+    const pref=id.replace('gg-','');
+    const fn=e=>{e.preventDefault();setGenderPref(pref);};
+    el.addEventListener('click', fn);
+    el.addEventListener('touchend', fn, {passive:false});
+  });
+  const skipEl=document.getElementById('gender-skip');
+  const skipFn=e=>{e.preventDefault();setGenderPref('all');};
+  skipEl.addEventListener('click', skipFn);
+  skipEl.addEventListener('touchend', skipFn, {passive:false});
+
+  // Login
+  document.getElementById('login-btn').addEventListener('click', openLogin);
+  document.getElementById('login-submit-btn').addEventListener('click', doLogin);
+  document.getElementById('login-close-btn').addEventListener('click', closeLogin);
+
+  // Match popup
+  document.getElementById('match-chat-btn').addEventListener('click', ()=>{
+    document.getElementById('match-popup').classList.remove('show');
+    if(pendingMatchCapy){ openChat(pendingMatchCapy.matchIdx); pendingMatchCapy=null; switchView('matches'); }
+  });
+  document.getElementById('match-skip-btn').addEventListener('click', ()=>{
+    document.getElementById('match-popup').classList.remove('show'); pendingMatchCapy=null; updateMatchesView();
+  });
+
+  // Chat
+  document.getElementById('chat-back').addEventListener('click', closeChat);
+  document.getElementById('chat-remove-btn').addEventListener('click', removeCurrentMatch);
+  document.getElementById('chat-report-btn').addEventListener('click', reportCurrentMatch);
+  document.getElementById('chat-send').addEventListener('click', sendMessage);
+  document.getElementById('chat-input').addEventListener('keydown', handleChatKey);
+  document.getElementById('chat-input').addEventListener('input', function(){ autoResize(this); });
+
+  // Report
+  document.querySelectorAll('.report-option').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const m=matches[reportTargetIdx];
+      if(m) alert(`Report submitted for ${m.capy.name}: "${el.dataset.reason}". Thank you.`);
+      document.getElementById('report-modal').classList.remove('show'); reportTargetIdx=null;
+    });
+  });
+  document.getElementById('report-cancel-btn').addEventListener('click', ()=>{
+    document.getElementById('report-modal').classList.remove('show'); reportTargetIdx=null;
+  });
+
+  // Action buttons
+  document.getElementById('btn-pass').addEventListener('click', ()=>swipe('pass'));
+  document.getElementById('btn-like').addEventListener('click', ()=>swipe('like'));
+  document.getElementById('btn-super').addEventListener('click', ()=>swipe('super'));
+  document.getElementById('reset-deck-btn').addEventListener('click', resetDeck);
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
+
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
+    activeFilter=b.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(x=>x.classList.toggle('active',x===b));
+    buildDeck(); renderCards();
+  }));
+
+  restoreSession();
+  loadCapys();
+});
+
+function setGenderPref(pref) {
+  genderPref=pref;
+  document.getElementById('gender-gate').classList.add('hidden');
+  buildDeck(); renderCards();
 }
-
-// ── Utility ────────────────────────────────────────────
-function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-// ── Boot ───────────────────────────────────────────────
-restoreSession();
-loadCapys();
 </script>
 </body>
 </html>
