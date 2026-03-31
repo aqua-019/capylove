@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapyLove 🌿 — Find Your Capybara Soulmate</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦫</text></svg>" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #4CAF50;
+      --orange:  #FF6B35;
+      --yellow:  #FFD166;
+      --pink:    #FF6B9D;
+      --teal:    #06D6A0;
+      --bg:      #0D0D0D;
+      --s1:      #141414;
+      --s2:      #1C1C1C;
+      --s3:      #252525;
+      --s4:      #303030;
+      --t1:      #F5F5F5;
+      --t2:      #BDBDBD;
+      --t3:      #757575;
+      --t4:      #424242;
+      --r:       16px;
+      --rm:      24px;
+      --rl:      32px;
+    }
+
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--t1);
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+
+    /* ── Noise texture overlay ───────────────────────── */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .4;
+    }
+
+    /* ── Header ──────────────────────────────────────── */
+    #header {
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--s3);
+      flex-shrink: 0;
+    }
+    #logo {
+      font-size: 20px; font-weight: 700; letter-spacing: -.5px;
+      background: linear-gradient(135deg, #FF6B35, #FF6B9D);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #logo span { font-size: 22px; }
+    #header-stats {
+      font-family: 'DM Mono', monospace; font-size: 10px; color: var(--t3);
+      text-align: right; line-height: 1.6;
+    }
+
+    /* ── Tabs ────────────────────────────────────────── */
+    #tabs {
+      display: flex; gap: 2px;
+      padding: 10px 16px 0;
+      border-bottom: 1px solid var(--s3);
+      flex-shrink: 0;
+    }
+    .tab {
+      padding: 8px 16px; border-radius: 10px 10px 0 0;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      background: transparent; color: var(--t3); border: none;
+      transition: all .15s; user-select: none;
+    }
+    .tab.active { background: var(--s2); color: var(--t1); }
+    .tab:hover:not(.active) { color: var(--t2); }
+
+    /* ── Main area ───────────────────────────────────── */
+    #main {
+      flex: 1; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Views ───────────────────────────────────────── */
+    .view { display: none; flex: 1; overflow: hidden; }
+    .view.active { display: flex; flex-direction: column; }
+
+    /* ── SWIPE VIEW ──────────────────────────────────── */
+    #swipe-view {
+      align-items: center; justify-content: center;
+      padding: 12px; gap: 12px;
+      position: relative;
+    }
+
+    /* Filter bar */
+    #filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+      flex-shrink: 0;
+    }
+    .filter-btn {
+      font-size: 11px; padding: 5px 14px; border-radius: 20px;
+      cursor: pointer; border: 1px solid var(--s4);
+      background: transparent; color: var(--t3);
+      transition: all .15s; font-family: 'DM Sans', sans-serif;
+    }
+    .filter-btn.active {
+      border-color: var(--orange); background: rgba(255,107,53,.12); color: var(--orange);
+    }
+
+    /* Card stack */
+    #card-stack {
+      position: relative;
+      width: 100%; max-width: 360px;
+      height: 480px;
+      flex-shrink: 0;
+    }
+
+    .capy-card {
+      position: absolute; inset: 0;
+      background: var(--s1);
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      box-shadow: 0 12px 40px rgba(0,0,0,.6);
+      transition: box-shadow .2s;
+      will-change: transform;
+    }
+    .capy-card:active { cursor: grabbing; }
+
+    .capy-card .card-img {
+      width: 100%; height: 68%;
+      object-fit: cover;
+      display: block;
+      background: var(--s3);
+      pointer-events: none;
+    }
+    .card-img-placeholder {
+      width: 100%; height: 68%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 64px; background: var(--s3);
+    }
+
+    .card-info {
+      padding: 14px 16px 12px;
+    }
+    .card-name-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+    }
+    .card-name {
+      font-size: 22px; font-weight: 700; letter-spacing: -.4px;
+    }
+    .card-age {
+      font-size: 16px; color: var(--t2); font-weight: 400;
+    }
+    .card-gender-badge {
+      font-size: 10px; padding: 2px 8px; border-radius: 10px;
+      font-weight: 600; letter-spacing: .5px;
+    }
+    .card-gender-badge.male   { background: rgba(74,158,255,.15); color: #4A9EFF; }
+    .card-gender-badge.female { background: rgba(255,107,157,.15); color: var(--pink); }
+
+    .card-location {
+      font-size: 11px; color: var(--t3); margin-bottom: 8px;
+    }
+    .card-bio {
+      font-size: 12px; color: var(--t2); line-height: 1.5;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-stars {
+      display: flex; gap: 2px; margin-top: 8px;
+    }
+    .star { font-size: 13px; }
+
+    /* Swipe overlays */
+    .stamp {
+      position: absolute; top: 24px;
+      font-size: 32px; font-weight: 900;
+      border: 4px solid; border-radius: 8px;
+      padding: 4px 14px;
+      opacity: 0; pointer-events: none;
+      letter-spacing: 2px;
+      transition: opacity .1s;
+      text-transform: uppercase;
+    }
+    .stamp-like  { left: 16px; color: #4CAF50; border-color: #4CAF50; transform: rotate(-20deg); }
+    .stamp-pass  { right: 16px; color: #FF4444; border-color: #FF4444; transform: rotate(20deg); }
+
+    /* Action buttons */
+    #action-btns {
+      display: flex; gap: 16px; align-items: center;
+      flex-shrink: 0;
+    }
+    .action-btn {
+      border: none; cursor: pointer; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s, box-shadow .15s;
+      font-size: 22px;
+    }
+    .action-btn:active { transform: scale(.9); }
+    .btn-pass  { width: 54px; height: 54px; background: var(--s2); border: 2px solid #FF444444; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+    .btn-like  { width: 64px; height: 64px; background: linear-gradient(135deg, #4CAF50, #06D6A0); box-shadow: 0 6px 24px rgba(76,175,80,.35); }
+    .btn-super { width: 46px; height: 46px; background: var(--s2); border: 2px solid var(--yellow); box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+    .btn-pass:hover  { box-shadow: 0 6px 24px rgba(255,68,68,.25); }
+    .btn-like:hover  { box-shadow: 0 8px 32px rgba(76,175,80,.5); transform: scale(1.05); }
+    .btn-super:hover { box-shadow: 0 6px 24px rgba(255,209,102,.3); }
+
+    .capy-count {
+      font-family: 'DM Mono', monospace; font-size: 10px; color: var(--t4); text-align: center;
+    }
+
+    /* Empty state */
+    #empty-state {
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; gap: 12px;
+      height: 100%; padding: 24px;
+    }
+    #empty-state.show { display: flex; }
+    #empty-state .emoji { font-size: 64px; }
+    #empty-state h2 { font-size: 22px; font-weight: 700; }
+    #empty-state p { color: var(--t3); font-size: 13px; max-width: 260px; line-height: 1.6; }
+    #empty-state button {
+      margin-top: 8px; padding: 10px 28px; border-radius: 24px; border: none;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      color: #fff; font-weight: 600; font-size: 13px; cursor: pointer;
+    }
+
+    /* ── MATCHES VIEW ────────────────────────────────── */
+    #matches-view {
+      flex-direction: column; overflow: hidden;
+    }
+    #matches-header {
+      padding: 16px 20px 10px;
+      font-size: 11px; font-weight: 600; color: var(--t3); letter-spacing: 2px; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    #matches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px; padding: 0 14px 14px;
+      overflow-y: auto; flex: 1;
+    }
+    .match-card {
+      aspect-ratio: 1; border-radius: 16px; overflow: hidden;
+      position: relative; cursor: pointer; background: var(--s3);
+    }
+    .match-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .match-card-overlay {
+      position: absolute; inset: 0; background: linear-gradient(transparent 50%, rgba(0,0,0,.75));
+      padding: 8px; display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .match-name { font-size: 11px; font-weight: 700; }
+    .match-score { font-size: 9px; color: var(--yellow); font-family: 'DM Mono', monospace; }
+    .no-matches {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--t4); gap: 10px; text-align: center; padding: 24px;
+    }
+    .no-matches .emoji { font-size: 56px; }
+
+    /* ── LEADERBOARD VIEW ────────────────────────────── */
+    #leaderboard-view {
+      flex-direction: column; overflow: hidden;
+    }
+    #leaderboard-list {
+      overflow-y: auto; flex: 1; padding: 0 14px 14px;
+    }
+    .lb-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; border-radius: var(--r);
+      margin-bottom: 6px; background: var(--s1);
+      border: 1px solid var(--s3);
+      transition: background .15s;
+    }
+    .lb-item:hover { background: var(--s2); }
+    .lb-rank {
+      font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700;
+      min-width: 30px; text-align: center;
+    }
+    .lb-rank.gold   { color: #FFD700; }
+    .lb-rank.silver { color: #C0C0C0; }
+    .lb-rank.bronze { color: #CD7F32; }
+    .lb-img {
+      width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+      flex-shrink: 0; background: var(--s3);
+    }
+    .lb-info { flex: 1; }
+    .lb-name { font-size: 14px; font-weight: 600; }
+    .lb-sub  { font-size: 10px; color: var(--t3); font-family: 'DM Mono', monospace; margin-top: 2px; }
+    .lb-score {
+      font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 700;
+      text-align: right;
+    }
+    .lb-bars { display: flex; flex-direction: column; gap: 3px; min-width: 100px; }
+    .lb-bar-row { display: flex; align-items: center; gap: 5px; }
+    .lb-bar-label { font-size: 8px; color: var(--t4); width: 22px; font-family: 'DM Mono', monospace; }
+    .lb-bar-track { flex: 1; height: 4px; background: var(--s4); border-radius: 2px; }
+    .lb-bar-fill  { height: 100%; border-radius: 2px; transition: width .5s; }
+
+    /* ── ABOUT VIEW ──────────────────────────────────── */
+    #about-view {
+      overflow-y: auto; padding: 20px;
+    }
+    .about-section { margin-bottom: 20px; }
+    .about-section h3 {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--t3); margin-bottom: 10px; font-family: 'DM Mono', monospace;
+    }
+    .about-section p { font-size: 13px; color: var(--t2); line-height: 1.7; margin-bottom: 8px; }
+    .score-legend { display: flex; flex-direction: column; gap: 8px; }
+    .score-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; background: var(--s1); border-radius: 12px;
+      border: 1px solid var(--s3);
+    }
+    .score-icon { font-size: 22px; }
+    .score-info {}
+    .score-name { font-size: 13px; font-weight: 600; }
+    .score-desc { font-size: 11px; color: var(--t3); margin-top: 2px; }
+    .score-weight {
+      margin-left: auto; font-family: 'DM Mono', monospace;
+      font-size: 13px; font-weight: 700; color: var(--orange);
+    }
+
+    /* ── Scrollbar ───────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--s4); border-radius: 4px; }
+
+    /* ── Match popup ─────────────────────────────────── */
+    #match-popup {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.8); z-index: 200;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    #match-popup.show { display: flex; }
+    #match-popup-inner {
+      background: var(--s1); border-radius: 28px; padding: 32px 28px;
+      text-align: center; max-width: 320px; width: 90%;
+      border: 1px solid rgba(255,107,53,.3);
+      box-shadow: 0 24px 64px rgba(0,0,0,.7), 0 0 80px rgba(255,107,53,.1);
+      animation: popIn .35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #match-popup-inner img {
+      width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--orange); margin-bottom: 16px;
+    }
+    #match-popup-inner h2 {
+      font-size: 26px; font-weight: 800;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #match-popup-inner p { color: var(--t2); font-size: 13px; margin: 8px 0 20px; line-height: 1.6; }
+    #match-popup-inner .dismiss-btn {
+      padding: 12px 32px; border-radius: 24px; border: none;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(.7); opacity: 0; }
+      to   { transform: scale(1);  opacity: 1; }
+    }
+    @keyframes flyOut {
+      to { transform: translateX(var(--dx)) translateY(var(--dy)) rotate(var(--rot)); opacity: 0; }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 50%, var(--s2) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header">
+  <div id="logo"><span>🦫</span> CapyLove</div>
+  <div id="header-stats">
+    <span id="stat-queue">—</span> capys in queue<br>
+    <span id="stat-matches">0</span> matches · <span id="stat-liked">0</span> liked
+  </div>
+</div>
+
+<!-- Tabs -->
+<div id="tabs">
+  <button class="tab active" data-view="swipe">🌿 Discover</button>
+  <button class="tab" data-view="matches">💚 Matches</button>
+  <button class="tab" data-view="leaderboard">🏆 Hottest</button>
+  <button class="tab" data-view="about">🧬 Science</button>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+  <!-- ── SWIPE VIEW ──────────────────────────────── -->
+  <div id="swipe-view" class="view active">
+    <!-- Filters -->
+    <div id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All 🦫</button>
+      <button class="filter-btn" data-filter="female">♀ Female</button>
+      <button class="filter-btn" data-filter="male">♂ Male</button>
+      <button class="filter-btn" data-filter="top">⭐ Top Tier</button>
+      <button class="filter-btn" data-filter="chonk">🐋 Chonks</button>
+    </div>
+
+    <!-- Card stack -->
+    <div id="card-stack">
+      <div id="empty-state">
+        <div class="emoji">🦫💔</div>
+        <h2>You've seen all capybaras!</h2>
+        <p>You've swiped through every single capybara in the Amazon. That's commitment.</p>
+        <button onclick="resetDeck()">Reset Deck 🔄</button>
+      </div>
+    </div>
+
+    <div class="capy-count" id="capy-count"></div>
+
+    <!-- Action buttons -->
+    <div id="action-btns">
+      <button class="action-btn btn-pass"  onclick="swipe('pass')"  title="Pass">✕</button>
+      <button class="action-btn btn-like"  onclick="swipe('like')"  title="Like">🌿</button>
+      <button class="action-btn btn-super" onclick="swipe('super')" title="Super Like">⭐</button>
+    </div>
+  </div>
+
+  <!-- ── MATCHES VIEW ───────────────────────────── -->
+  <div id="matches-view" class="view">
+    <div id="matches-header">Your Matches</div>
+    <div id="matches-grid"></div>
+  </div>
+
+  <!-- ── LEADERBOARD VIEW ───────────────────────── -->
+  <div id="leaderboard-view" class="view">
+    <div id="matches-header" style="padding:16px 20px 10px;">🔥 Hottest Capybaras (by attraction score)</div>
+    <div id="leaderboard-list"></div>
+  </div>
+
+  <!-- ── ABOUT VIEW ─────────────────────────────── -->
+  <div id="about-view" class="view">
+    <div class="about-section">
+      <h3>About CapyLove</h3>
+      <p>The world's first (and only) capybara dating platform. Powered by 746 real capybara images from the <strong>capy.lol API</strong>, rigorously scored by our proprietary <strong>Capybara Attraction Algorithm™</strong>.</p>
+      <p>373 males. 373 females. All looking for love.</p>
+    </div>
+    <div class="about-section">
+      <h3>Attraction Scoring System™</h3>
+      <div class="score-legend">
+        <div class="score-row">
+          <div class="score-icon">🧸</div>
+          <div class="score-info">
+            <div class="score-name">Fur Density</div>
+            <div class="score-desc">Coat thickness, fluff level, wetness rating. Dense fur = primal attractiveness signal.</div>
+          </div>
+          <div class="score-weight">35%</div>
+        </div>
+        <div class="score-row">
+          <div class="score-icon">⚖️</div>
+          <div class="score-info">
+            <div class="score-name">Weight Score</div>
+            <div class="score-desc">Capybaras can weigh 35–65 kg. Larger = healthier. Chonk is a virtue.</div>
+          </div>
+          <div class="score-weight">30%</div>
+        </div>
+        <div class="score-row">
+          <div class="score-icon">📏</div>
+          <div class="score-info">
+            <div class="score-name">Body Size</div>
+            <div class="score-desc">Length and proportions. Big nose = big personality. Always.</div>
+          </div>
+          <div class="score-weight">20%</div>
+        </div>
+        <div class="score-row">
+          <div class="score-icon">✨</div>
+          <div class="score-info">
+            <div class="score-name">Vibe / Friendliness</div>
+            <div class="score-desc">A capybara that lets turtles sit on them is a catch. Measured by energy.</div>
+          </div>
+          <div class="score-weight">15%</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-section">
+      <h3>How it works</h3>
+      <p>Swipe right (🌿) to like, left (✕) to pass, or ⭐ to super-like. Filter by gender, rating, or chonkiness. Check your matches and the global leaderboard of hottest capybaras.</p>
+      <p style="color:var(--t4); font-size:11px;">All capybara profiles are fictional. No real capybaras were emotionally harmed in the making of this app. 🦫</p>
+    </div>
+  </div>
+</div>
+
+<!-- Match popup -->
+<div id="match-popup">
+  <div id="match-popup-inner">
+    <img id="popup-img" src="" alt="Match" />
+    <h2>It's a Match! 🎉</h2>
+    <p id="popup-name">You and <strong></strong> are vibing.</p>
+    <button class="dismiss-btn" onclick="dismissPopup()">Keep Swiping 🌿</button>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  CapyLove — Main App Logic
+// ════════════════════════════════════════════════════════
+
+let ALL_CAPYS = [];
+let DECK      = [];
+let FILTER    = 'all';
+let MATCHES   = [];
+let LIKED     = [];
+let currentIdx = 0;
+let isDragging = false;
+let startX = 0, startY = 0, currentX = 0;
+let activeCard = null;
+
+// ── Load data ──────────────────────────────────────────
+async function loadCapybaras() {
+  try {
+    const res = await fetch('./src/data/capybaras.json');
+    ALL_CAPYS = await res.json();
+    // Shuffle
+    ALL_CAPYS = ALL_CAPYS.sort(() => Math.random() - .5);
+    applyFilter(FILTER);
+    buildLeaderboard();
+  } catch(e) {
+    console.error("Failed to load capybara data:", e);
+    document.getElementById('card-stack').innerHTML = 
+      '<div style="color:#ff4444;text-align:center;padding:40px;font-size:12px;">⚠ Could not load capybara data.<br>Make sure you\'re running a local server.</div>';
+  }
+}
+
+// ── Filter ─────────────────────────────────────────────
+function applyFilter(filter) {
+  FILTER = filter;
+  let pool = [...ALL_CAPYS];
+  if (filter === 'female') pool = pool.filter(c => c.gender === 'female');
+  if (filter === 'male')   pool = pool.filter(c => c.gender === 'male');
+  if (filter === 'top')    pool = pool.filter(c => c.scores.attraction >= 70);
+  if (filter === 'chonk')  pool = pool.filter(c => c.scores.weight_score >= 75);
+  DECK = pool.filter(c => !LIKED.includes(c.id) && !MATCHES.includes(c.id));
+  currentIdx = 0;
+  renderCards();
+  updateStats();
+}
+
+// ── Render card stack ──────────────────────────────────
+function renderCards() {
+  const stack = document.getElementById('card-stack');
+  // Clear existing cards (keep empty state)
+  [...stack.querySelectorAll('.capy-card')].forEach(el => el.remove());
+
+  const empty = document.getElementById('empty-state');
+  if (DECK.length === 0 || currentIdx >= DECK.length) {
+    empty.classList.add('show');
+    document.getElementById('capy-count').textContent = '';
+    return;
+  }
+  empty.classList.remove('show');
+
+  // Render 3 cards (stack illusion)
+  const visible = 3;
+  for (let i = Math.min(visible - 1, DECK.length - currentIdx - 1); i >= 0; i--) {
+    const capy = DECK[currentIdx + i];
+    if (!capy) continue;
+    const card = buildCard(capy, i);
+    stack.appendChild(card);
+  }
+
+  // Attach drag to top card
+  const top = stack.querySelector('.capy-card:last-child');
+  if (top) attachDrag(top);
+
+  document.getElementById('capy-count').textContent =
+    `${DECK.length - currentIdx} capybaras left in queue`;
+  updateStats();
+}
+
+function buildCard(capy, offset) {
+  const card = document.createElement('div');
+  card.className = 'capy-card';
+  card.dataset.id = capy.id;
+
+  const scale = 1 - offset * 0.04;
+  const yOff  = offset * 8;
+  card.style.cssText = `
+    transform: scale(${scale}) translateY(${yOff}px);
+    z-index: ${10 - offset};
+    transition: ${offset > 0 ? 'transform .3s ease' : 'none'};
+  `;
+
+  const starsHtml = '⭐'.repeat(capy.stars) + '☆'.repeat(5 - capy.stars);
+  const genderBadge = capy.gender === 'male'
+    ? '<span class="card-gender-badge male">♂ MALE</span>'
+    : '<span class="card-gender-badge female">♀ FEMALE</span>';
+
+  card.innerHTML = `
+    <img class="card-img shimmer" src="${capy.image_url}" alt="${capy.name}" 
+         onload="this.classList.remove('shimmer')" 
+         onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>🦫</div>'" />
+    <div class="card-info">
+      <div class="card-name-row">
+        <span class="card-name">${capy.name}</span>
+        <span class="card-age">${capy.age}</span>
+        ${genderBadge}
+      </div>
+      <div class="card-location">📍 ${capy.location}</div>
+      <div class="card-bio">${capy.bio}</div>
+      <div class="card-stars">${starsHtml} <span style="font-size:10px;color:var(--t4);margin-left:4px;font-family:'DM Mono',monospace;">${capy.scores.attraction.toFixed(1)}</span></div>
+    </div>
+    <div class="stamp stamp-like">YESSS 🌿</div>
+    <div class="stamp stamp-pass">NOPE ✕</div>
+  `;
+  return card;
+}
+
+// ── Drag logic ─────────────────────────────────────────
+function attachDrag(card) {
+  const onStart = (e) => {
+    isDragging = true;
+    startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+    currentX = 0;
+    activeCard = card;
+    card.style.transition = 'none';
+  };
+  const onMove = (e) => {
+    if (!isDragging || !activeCard) return;
+    const cx = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const cy = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+    currentX = cx - startX;
+    const dy  = cy - startY;
+    const rot = currentX * 0.08;
+    activeCard.style.transform = `translate(${currentX}px, ${dy * 0.3}px) rotate(${rot}deg)`;
+
+    const like = activeCard.querySelector('.stamp-like');
+    const pass = activeCard.querySelector('.stamp-pass');
+    const ratio = Math.abs(currentX) / 120;
+    if (currentX > 20) {
+      like.style.opacity = Math.min(ratio, 1);
+      pass.style.opacity = 0;
+    } else if (currentX < -20) {
+      pass.style.opacity = Math.min(ratio, 1);
+      like.style.opacity = 0;
+    } else {
+      like.style.opacity = 0;
+      pass.style.opacity = 0;
+    }
+  };
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (Math.abs(currentX) > 90) {
+      swipe(currentX > 0 ? 'like' : 'pass', activeCard);
+    } else {
+      activeCard.style.transition = 'transform .4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      activeCard.style.transform  = 'translate(0, 0) rotate(0deg)';
+      activeCard.querySelectorAll('.stamp').forEach(s => s.style.opacity = 0);
+    }
+    activeCard = null;
+  };
+
+  card.addEventListener('mousedown',  onStart);
+  card.addEventListener('touchstart', onStart, { passive: true });
+  document.addEventListener('mousemove',  onMove);
+  document.addEventListener('touchmove',  onMove, { passive: true });
+  document.addEventListener('mouseup',   onEnd);
+  document.addEventListener('touchend',  onEnd);
+}
+
+// ── Swipe action ───────────────────────────────────────
+function swipe(action, cardEl) {
+  const capy = DECK[currentIdx];
+  if (!capy) return;
+
+  const stack = document.getElementById('card-stack');
+  const card  = cardEl || stack.querySelector('.capy-card:last-child');
+  if (!card) return;
+
+  const dx  = action === 'like' || action === 'super' ? 600 : -600;
+  const rot = action === 'like' || action === 'super' ? 25  : -25;
+
+  card.style.transition = 'transform .45s cubic-bezier(0.4, 0, 0.2, 1), opacity .45s';
+  card.style.transform  = `translateX(${dx}px) rotate(${rot}deg)`;
+  card.style.opacity    = '0';
+
+  if (action === 'like' || action === 'super') {
+    LIKED.push(capy.id);
+    // 40% match rate — weighted by attraction score
+    const matchChance = 0.20 + (capy.scores.attraction / 100) * 0.50;
+    if (Math.random() < matchChance) {
+      MATCHES.push(capy.id);
+      setTimeout(() => showMatchPopup(capy), 500);
+    }
+  }
+
+  currentIdx++;
+  setTimeout(() => {
+    card.remove();
+    renderCards();
+  }, 460);
+
+  updateStats();
+  saveState();
+}
+
+// ── Match popup ────────────────────────────────────────
+function showMatchPopup(capy) {
+  document.getElementById('popup-img').src = capy.image_url;
+  document.getElementById('popup-name').innerHTML =
+    `You and <strong>${capy.name}</strong> are vibing. ${capy.scores.attraction > 70 ? '🔥 They\'re a catch!' : '💚'}`;
+  document.getElementById('match-popup').classList.add('show');
+  renderMatchesGrid();
+}
+function dismissPopup() {
+  document.getElementById('match-popup').classList.remove('show');
+}
+
+// ── Matches grid ───────────────────────────────────────
+function renderMatchesGrid() {
+  const grid = document.getElementById('matches-grid');
+  if (MATCHES.length === 0) {
+    grid.innerHTML = '<div class="no-matches"><div class="emoji">🦫💭</div><p>No matches yet...<br>Keep swiping!</p></div>';
+    return;
+  }
+  const matched = ALL_CAPYS.filter(c => MATCHES.includes(c.id));
+  grid.innerHTML = matched.map(c => `
+    <div class="match-card">
+      <img src="${c.image_url}" alt="${c.name}" onerror="this.src=''" />
+      <div class="match-card-overlay">
+        <div class="match-name">${c.name}, ${c.age}</div>
+        <div class="match-score">⭐ ${c.scores.attraction.toFixed(1)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Leaderboard ────────────────────────────────────────
+function buildLeaderboard() {
+  const sorted = [...ALL_CAPYS].sort((a, b) => b.scores.attraction - a.scores.attraction);
+  const top50  = sorted.slice(0, 50);
+  const list   = document.getElementById('leaderboard-list');
+
+  list.innerHTML = top50.map((c, i) => {
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    const rankIcon  = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i+1}`;
+    const furColor  = `hsl(${c.scores.fur_density * 1.2}, 70%, 55%)`;
+    const wgtColor  = `hsl(${c.scores.weight_score * 0.8 + 20}, 70%, 55%)`;
+    const sizeColor = `hsl(${c.scores.size_score * 1.0 + 180}, 60%, 55%)`;
+    const vibColor  = `hsl(${c.scores.friendliness * 1.5}, 70%, 55%)`;
+
+    return `
+      <div class="lb-item">
+        <div class="lb-rank ${rankClass}">${rankIcon}</div>
+        <img class="lb-img shimmer" src="${c.image_url}" alt="${c.name}"
+             onload="this.classList.remove('shimmer')"
+             onerror="this.style.display='none'" />
+        <div class="lb-info">
+          <div class="lb-name">${c.name} ${c.gender === 'female' ? '♀' : '♂'}</div>
+          <div class="lb-sub">${c.location.split(',')[0]} · ${c.age}yr</div>
+        </div>
+        <div class="lb-bars">
+          <div class="lb-bar-row">
+            <span class="lb-bar-label">FUR</span>
+            <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${c.scores.fur_density}%;background:${furColor}"></div></div>
+          </div>
+          <div class="lb-bar-row">
+            <span class="lb-bar-label">WGT</span>
+            <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${c.scores.weight_score}%;background:${wgtColor}"></div></div>
+          </div>
+          <div class="lb-bar-row">
+            <span class="lb-bar-label">SZE</span>
+            <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${c.scores.size_score}%;background:${sizeColor}"></div></div>
+          </div>
+          <div class="lb-bar-row">
+            <span class="lb-bar-label">VIB</span>
+            <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${c.scores.friendliness}%;background:${vibColor}"></div></div>
+          </div>
+        </div>
+        <div class="lb-score" style="color:${c.scores.attraction > 75 ? '#FF6B35' : c.scores.attraction > 60 ? '#FFD166' : 'var(--t2)'}">
+          ${c.scores.attraction.toFixed(0)}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── Stats ──────────────────────────────────────────────
+function updateStats() {
+  document.getElementById('stat-queue').textContent   = Math.max(0, DECK.length - currentIdx);
+  document.getElementById('stat-matches').textContent = MATCHES.length;
+  document.getElementById('stat-liked').textContent   = LIKED.length;
+}
+
+// ── Reset ──────────────────────────────────────────────
+function resetDeck() {
+  LIKED   = [];
+  MATCHES = [];
+  applyFilter(FILTER);
+  renderMatchesGrid();
+}
+
+// ── Persist state ──────────────────────────────────────
+function saveState() {
+  try {
+    localStorage.setItem('capylove', JSON.stringify({ LIKED, MATCHES }));
+  } catch(e) {}
+}
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem('capylove') || '{}');
+    LIKED   = s.LIKED   || [];
+    MATCHES = s.MATCHES || [];
+  } catch(e) {}
+}
+
+// ── Tabs ───────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    const view = document.getElementById(`${tab.dataset.view}-view`);
+    if (view) view.classList.add('active');
+    if (tab.dataset.view === 'matches')    renderMatchesGrid();
+  });
+});
+
+// ── Filter buttons ─────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilter(btn.dataset.filter);
+  });
+});
+
+// ── Init ───────────────────────────────────────────────
+loadState();
+loadCapybaras();
+</script>
+</body>
+</html>
